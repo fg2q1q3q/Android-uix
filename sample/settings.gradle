@@ -1,0 +1,2 @@
+include ':app', ':uix'
+project(':uix').projectDir = new File('../uix')

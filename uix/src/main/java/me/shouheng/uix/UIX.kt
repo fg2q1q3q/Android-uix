@@ -13,7 +13,7 @@ object UIX {
     private var app: Application? = null
 
     fun getApp(): Application {
-        checkNotNull(app) { "Sorry, you must call UtilsApp#init() method at first!" }
+        checkNotNull(app) { "Sorry, you must call UIX#init() method at first!" }
         return app!!
     }
 

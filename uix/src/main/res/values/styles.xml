@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="FamilyDialog" parent="Theme.AppCompat.Dialog">
+    <style name="BeautyDialog" parent="Theme.AppCompat.Dialog.Alert">
         <!-- 无标题 -->
         <item name="android:windowNoTitle">true</item>
         <!-- 背景透明 -->
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style name="BeautyDialogWrap" parent="Theme.AppCompat.Dialog">
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style name="dialogTopAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/uix_dialog_translate_enter_top</item>
+        <item name="android:windowExitAnimation">@anim/uix_dialog_translate_exit_top</item>
+    </style>
+    <style name="dialogCenterAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/uix_dialog_translate_alpha_enter</item>
+        <item name="android:windowExitAnimation">@anim/uix_dialog_translate_alpha_exit</item>
+    </style>
+    <style name="dialogBottomAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/uix_dialog_translate_enter</item>
+        <item name="android:windowExitAnimation">@anim/uix_dialog_translate_exit</item>
     </style>
 </resources>

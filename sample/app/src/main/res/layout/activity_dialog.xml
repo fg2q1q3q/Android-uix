@@ -24,6 +24,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_editor_normal"
+            android:text="编辑对话框"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_editor_numeric"
+            android:text="编辑对话框（数字|单行|长度10）"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_list_normal"
+            android:text="简单的列表"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_loading"
+            android:text="加载对话框"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 </layout>

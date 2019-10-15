@@ -1,4 +1,4 @@
-package me.shouheng.uix.edittext
+package me.shouheng.uix.text
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -42,7 +42,7 @@ class ClearEditText : RegexEditText, View.OnTouchListener, View.OnFocusChangeLis
         array.recycle()
 
         // Wrap the drawable so that it can be tinted pre Lollipop
-        val clearDrawable = ContextCompat.getDrawable(context, R.drawable.ic_close_black_24dp)!!
+        val clearDrawable = ContextCompat.getDrawable(context, R.drawable.uix_close_black_24dp)!!
         mClearDrawable = DrawableCompat.wrap(
                 if (imageTintColor == -1) clearDrawable
                 else UIXUtils.tintDrawable(clearDrawable, imageTintColor)

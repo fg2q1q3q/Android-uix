@@ -1,4 +1,4 @@
-package me.shouheng.uix.recyclerview.decor
+package me.shouheng.uix.rv.decor
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView

@@ -1,4 +1,4 @@
-package me.shouheng.uix.edittext
+package me.shouheng.uix.text
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -45,8 +45,8 @@ class PasswordEditText : RegexEditText, View.OnTouchListener, View.OnFocusChange
 
         // Wrap the drawable so that it can be tinted pre Lollipop
         val dp24 = UIXUtils.dp2px(24f)
-        val visibleDrawable = ContextCompat.getDrawable(context, R.drawable.ic_eye_open_48)!!
-        val invisibleDrawable = ContextCompat.getDrawable(context, R.drawable.ic_eye_close_48)!!
+        val visibleDrawable = ContextCompat.getDrawable(context, R.drawable.uix_eye_open_48)!!
+        val invisibleDrawable = ContextCompat.getDrawable(context, R.drawable.uix_eye_close_48)!!
         mVisibleDrawable = DrawableCompat.wrap(
                 if (imageTintColor == -1) visibleDrawable
                 else UIXUtils.tintDrawable(visibleDrawable, imageTintColor)

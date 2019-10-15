@@ -1,4 +1,4 @@
-package me.shouheng.uix.edittext
+package me.shouheng.uix.text
 
 import android.annotation.SuppressLint
 import android.content.Context

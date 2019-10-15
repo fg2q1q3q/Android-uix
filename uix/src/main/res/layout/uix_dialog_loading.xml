@@ -6,7 +6,7 @@
               android:gravity="center"
               android:orientation="vertical"
               android:paddingBottom="16dp"
-              android:background="@drawable/bg_loading_dialog"
+              android:background="@drawable/uix_bg_loading_dialog"
               android:minHeight="87dp"
               android:minWidth="104dp"
               android:paddingLeft="20dp"

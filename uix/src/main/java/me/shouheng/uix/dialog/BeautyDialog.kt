@@ -10,6 +10,11 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import me.shouheng.uix.R
+import me.shouheng.uix.dialog.DialogPosition.Companion.POS_BOTTOM
+import me.shouheng.uix.dialog.DialogPosition.Companion.POS_CENTER
+import me.shouheng.uix.dialog.DialogPosition.Companion.POS_TOP
+import me.shouheng.uix.dialog.DialogStyle.Companion.STYLE_MATCH
+import me.shouheng.uix.dialog.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.dialog.content.IDialogContent
 import me.shouheng.uix.dialog.footer.IDialogFooter
 import me.shouheng.uix.dialog.listener.OnDismissListener
@@ -29,8 +34,8 @@ class BeautyDialog : DialogFragment() {
     private var iDialogContent: IDialogContent? = null
     private var iDialogFooter: IDialogFooter? = null
 
-    private var dialogPosition: Int = Constants.POS_CENTER
-    private var dialogStyle: Int = Constants.STYLE_MATCH
+    private var dialogPosition: Int = POS_CENTER
+    private var dialogStyle: Int = STYLE_MATCH
     private var dialogDarkStyle: Boolean = false
 
     private var outCancelable = false
@@ -45,7 +50,7 @@ class BeautyDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val dialog = AlertDialog.Builder(context!!,
-                if (dialogStyle == Constants.STYLE_WRAP) R.style.BeautyDialogWrap
+                if (dialogStyle == STYLE_WRAP) R.style.BeautyDialogWrap
                 else R.style.BeautyDialog
         ).create()
 
@@ -61,9 +66,15 @@ class BeautyDialog : DialogFragment() {
         iDialogTitle?.setDialog(this)
         iDialogContent?.setDialog(this)
         iDialogFooter?.setDialog(this)
+        iDialogTitle?.setDialogContent(iDialogContent)
+        iDialogTitle?.setDialogFooter(iDialogFooter)
+        iDialogContent?.setDialogTitle(iDialogTitle)
+        iDialogContent?.setDialogFooter(iDialogFooter)
+        iDialogFooter?.setDialogTitle(iDialogTitle)
+        iDialogFooter?.setDialogContent(iDialogContent)
 
         if (iDialogTitle != null) {
-            val titleView = iDialogTitle!!.getView()
+            val titleView = iDialogTitle!!.getView(context!!)
             llTitle.addView(titleView)
             val lp = titleView.layoutParams
             lp.height = WRAP_CONTENT
@@ -72,7 +83,7 @@ class BeautyDialog : DialogFragment() {
             llTitle.visibility = View.GONE
         }
         if (iDialogContent != null) {
-            val contentView = iDialogContent!!.getView()
+            val contentView = iDialogContent!!.getView(context!!)
             llContent.addView(contentView)
             val lp = contentView.layoutParams
             lp.height = MATCH_PARENT
@@ -81,7 +92,7 @@ class BeautyDialog : DialogFragment() {
             llContent.visibility = View.GONE
         }
         if (iDialogFooter != null) {
-            val footerView = iDialogFooter!!.getView()
+            val footerView = iDialogFooter!!.getView(context!!)
             llFooter.addView(footerView)
             val lp = footerView.layoutParams
             lp.height = WRAP_CONTENT
@@ -91,15 +102,15 @@ class BeautyDialog : DialogFragment() {
         }
 
         when(dialogPosition) {
-            Constants.POS_TOP -> {
+            POS_TOP -> {
                 dialog.window?.setGravity(Gravity.TOP)
                 dialog.window?.setWindowAnimations(R.style.dialogTopAnimation)
             }
-            Constants.POS_CENTER -> {
+            POS_CENTER -> {
                 dialog.window?.setGravity(Gravity.CENTER)
                 dialog.window?.setWindowAnimations(R.style.dialogCenterAnimation)
             }
-            Constants.POS_BOTTOM -> {
+            POS_BOTTOM -> {
                 dialog.window?.setGravity(Gravity.BOTTOM)
                 dialog.window?.setWindowAnimations(R.style.dialogBottomAnimation)
             }
@@ -122,8 +133,8 @@ class BeautyDialog : DialogFragment() {
         private var iDialogContent: IDialogContent? = null
         private var iDialogFooter: IDialogFooter? = null
 
-        private var dialogPosition: Int = Constants.POS_CENTER
-        private var dialogStyle: Int = Constants.STYLE_MATCH
+        private var dialogPosition: Int = POS_CENTER
+        private var dialogStyle: Int = STYLE_MATCH
         private var dialogDarkStyle: Boolean = false
 
         private var outCancelable = false

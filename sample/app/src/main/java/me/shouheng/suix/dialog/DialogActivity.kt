@@ -9,16 +9,18 @@ import me.shouheng.mvvm.base.anno.ActivityConfiguration
 import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityDialogBinding
+import me.shouheng.uix.config.AddressSelectLevel.Companion.LEVEL_AREA
 import me.shouheng.uix.dialog.BeautyDialog
-import me.shouheng.uix.dialog.BottomButtonPosition.Companion.BUTTON_POS_LEFT
-import me.shouheng.uix.dialog.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_THREE
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_TWO
-import me.shouheng.uix.dialog.DialogPosition.Companion.POS_BOTTOM
-import me.shouheng.uix.dialog.DialogPosition.Companion.POS_TOP
-import me.shouheng.uix.dialog.DialogStyle.Companion.STYLE_WRAP
+import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_LEFT
+import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_THREE
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_TWO
+import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
+import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
+import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.dialog.DialogUtils
+import me.shouheng.uix.dialog.content.AddressContent
 import me.shouheng.uix.dialog.content.IDialogContent
 import me.shouheng.uix.dialog.content.SimpleEditor
 import me.shouheng.uix.dialog.content.SimpleList
@@ -156,6 +158,23 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         }
         binding.btnLoading.setOnClickListener {
             DialogUtils.showLoading(this, "加载中...", true).show()
+        }
+        binding.btnAddress.setOnClickListener {
+            BeautyDialog.Builder()
+                    .setDialogPosition(POS_BOTTOM)
+                    .setDialogTitle(SimpleTitle.Builder()
+                            .setTitle("地址对话框")
+                            .build())
+                    .setDialogContent(AddressContent.Builder()
+                            .setMaxLevel(LEVEL_AREA)
+                            .setOnAddressSelectedListener(object: AddressContent.OnAddressSelectedListener {
+                                override fun onAddressSelected(dialog: BeautyDialog, province: String, city: String?, area: String?) {
+                                    toast("$province - $city - $area")
+                                    dialog.dismiss()
+                                }
+                            })
+                            .build())
+                    .build().show(supportFragmentManager, "list")
         }
     }
 }

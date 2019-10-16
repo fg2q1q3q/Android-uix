@@ -1,6 +1,7 @@
 package me.shouheng.uix.utils
 
 import android.content.Context
+import android.content.res.AssetManager
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
@@ -10,7 +11,14 @@ import android.support.annotation.StringRes
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import com.google.gson.Gson
+import com.google.gson.JsonParser
 import me.shouheng.uix.UIX
+import me.shouheng.uix.bean.AddressBean
+import java.io.ByteArrayOutputStream
+import java.io.Closeable
+import java.io.IOException
+import java.io.InputStream
 
 /**
  * UIX 工具类
@@ -19,6 +27,9 @@ import me.shouheng.uix.UIX
  * @version 2019-10-13 11:57
  */
 object UIXUtils {
+
+    private var sBufferSize = 8192
+    private var addresses: List<AddressBean>? = null
 
     /*------------------------------------ image region ------------------------------------*/
 
@@ -88,5 +99,63 @@ object UIXUtils {
 
     fun getString(@StringRes id: Int, vararg formatArgs: Any): String {
         return UIX.getApp().resources.getString(id, *formatArgs)
+    }
+
+    fun getAssets(): AssetManager {
+        return UIX.getApp().resources.assets
+    }
+
+    /*------------------------------------ io region ------------------------------------*/
+
+    fun is2Bytes(`is`: InputStream?): ByteArray {
+        if (`is` == null) return ByteArray(0)
+        var os: ByteArrayOutputStream? = null
+        return try {
+            os = ByteArrayOutputStream()
+            val b = ByteArray(sBufferSize)
+            var len: Int = `is`.read(b, 0, sBufferSize)
+            while (len != -1) {
+                os.write(b, 0, len)
+                len = `is`.read(b, 0, sBufferSize)
+            }
+            os.toByteArray()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            ByteArray(0)
+        } finally {
+            safeCloseAll(`is`, os)
+        }
+    }
+
+    private fun safeCloseAll(vararg closeables: Closeable?) {
+        for (closeable in closeables) {
+            try {
+                closeable?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+        }
+    }
+
+    /*------------------------------------ biz region ------------------------------------*/
+
+    fun getAddressList(): List<AddressBean> {
+        if (addresses != null) return addresses!!
+        val ins = getAssets().open("province.json")
+        val bytes = is2Bytes(ins)
+        val content = String(bytes)
+        val list = ArrayList<AddressBean>()
+        val gson = Gson()
+        try {
+            val array = JsonParser().parse(content).asJsonArray
+            for (jsonElement in array) {
+                list.add(gson.fromJson(jsonElement, AddressBean::class.java))
+            }
+            addresses = list
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return list
     }
 }

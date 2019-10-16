@@ -1,19 +1,21 @@
-package me.shouheng.uix.dialog
+package me.shouheng.uix.config
 
 import android.support.annotation.IntDef
-import me.shouheng.uix.dialog.BottomButtonPosition.Companion.BUTTON_POS_LEFT
-import me.shouheng.uix.dialog.BottomButtonPosition.Companion.BUTTON_POS_MIDDLE
-import me.shouheng.uix.dialog.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_LEFT_ONLY
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_MIDDLE_ONLY
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_THREE
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_TWO
-import me.shouheng.uix.dialog.DialogPosition.Companion.POS_BOTTOM
-import me.shouheng.uix.dialog.DialogPosition.Companion.POS_CENTER
-import me.shouheng.uix.dialog.DialogPosition.Companion.POS_TOP
-import me.shouheng.uix.dialog.DialogStyle.Companion.STYLE_MATCH
-import me.shouheng.uix.dialog.DialogStyle.Companion.STYLE_WRAP
+import me.shouheng.uix.config.AddressSelectLevel.Companion.LEVEL_AREA
+import me.shouheng.uix.config.AddressSelectLevel.Companion.LEVEL_CITY
+import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_LEFT
+import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_MIDDLE
+import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_LEFT_ONLY
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_MIDDLE_ONLY
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_THREE
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_TWO
+import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
+import me.shouheng.uix.config.DialogPosition.Companion.POS_CENTER
+import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
+import me.shouheng.uix.config.DialogStyle.Companion.STYLE_MATCH
+import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
 
 /**
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
@@ -89,3 +91,16 @@ annotation class BottomButtonPosition {
     }
 }
 
+/**
+ * 地址选择的最大等级
+ */
+@IntDef(value = [LEVEL_CITY, LEVEL_AREA])
+@Target(allowedTargets = [AnnotationTarget.FIELD,
+    AnnotationTarget.TYPE_PARAMETER,
+    AnnotationTarget.VALUE_PARAMETER])
+annotation class AddressSelectLevel {
+    companion object {
+        const val LEVEL_CITY                        = 0
+        const val LEVEL_AREA                        = 1
+    }
+}

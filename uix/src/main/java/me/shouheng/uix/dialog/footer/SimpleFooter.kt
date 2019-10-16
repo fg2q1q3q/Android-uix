@@ -6,15 +6,15 @@ import android.view.View
 import android.widget.TextView
 import me.shouheng.uix.R
 import me.shouheng.uix.dialog.BeautyDialog
-import me.shouheng.uix.dialog.BottomButtonPosition
-import me.shouheng.uix.dialog.BottomButtonPosition.Companion.BUTTON_POS_LEFT
-import me.shouheng.uix.dialog.BottomButtonPosition.Companion.BUTTON_POS_MIDDLE
-import me.shouheng.uix.dialog.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
-import me.shouheng.uix.dialog.BottomButtonStyle
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_LEFT_ONLY
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_MIDDLE_ONLY
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
-import me.shouheng.uix.dialog.BottomButtonStyle.Companion.BUTTON_TWO
+import me.shouheng.uix.config.BottomButtonPosition
+import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_LEFT
+import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_MIDDLE
+import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
+import me.shouheng.uix.config.BottomButtonStyle
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_LEFT_ONLY
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_MIDDLE_ONLY
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_TWO
 import me.shouheng.uix.dialog.content.IDialogContent
 import me.shouheng.uix.dialog.title.IDialogTitle
 

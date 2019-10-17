@@ -17,45 +17,45 @@ import me.shouheng.uix.R
  */
 class SimpleContent private constructor(): IDialogContent {
 
-    private var title: String? = null
-    @ColorInt private var titleColor: Int? = null
-    @Size private var titleSize: Float = 16f
+    private var content: String? = null
+    @ColorInt private var contentColor: Int? = null
+    @Size private var contentSize: Float = 16f
     private var typeFace: Int = Typeface.NORMAL
     private var gravity: Int = Gravity.CENTER
 
     override fun getView(ctx: Context): View {
         val tv = View.inflate(ctx, R.layout.uix_dialog_content_simple, null) as TextView
-        tv.text = title
-        tv.textSize = titleSize
+        tv.text = content
+        tv.textSize = contentSize
         tv.gravity = gravity
-        if (titleColor != null) tv.setTextColor(titleColor!!)
+        if (contentColor != null) tv.setTextColor(contentColor!!)
         tv.setTypeface(null, typeFace)
         return tv
     }
 
     class Builder {
-        private var title: String? = null
-        @ColorInt private var titleColor: Int? = null
-        @Size private var titleSize: Float = 16f
+        private var content: String? = null
+        @ColorInt private var contentColor: Int? = null
+        @Size private var contentSize: Float = 16f
         private var typeFace: Int = Typeface.NORMAL
         private var gravity: Int = Gravity.CENTER
 
-        fun setTitle(title: String): Builder {
-            this.title = title
+        fun setContent(content: String): Builder {
+            this.content = content
             return this
         }
 
-        fun setTitleColor(@ColorInt titleColor: Int): Builder {
-            this.titleColor = titleColor
+        fun setContentColor(@ColorInt contentColor: Int): Builder {
+            this.contentColor = contentColor
             return this
         }
 
-        fun setTitleSize(titleSize: Float): Builder {
-            this.titleSize = titleSize
+        fun setContentSize(contentSize: Float): Builder {
+            this.contentSize = contentSize
             return this
         }
 
-        fun setTitleTypeface(typeFace: Int): Builder {
+        fun setContentTypeface(typeFace: Int): Builder {
             this.typeFace = typeFace
             return this
         }
@@ -67,9 +67,9 @@ class SimpleContent private constructor(): IDialogContent {
 
         fun build(): SimpleContent {
             val simpleContent = SimpleContent()
-            simpleContent.title = title
-            simpleContent.titleColor = titleColor
-            simpleContent.titleSize = titleSize
+            simpleContent.content = content
+            simpleContent.contentColor = contentColor
+            simpleContent.contentSize = contentSize
             simpleContent.typeFace = typeFace
             simpleContent.gravity = gravity
             return simpleContent

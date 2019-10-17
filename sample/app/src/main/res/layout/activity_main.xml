@@ -12,6 +12,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_matisse"
+            android:text="Matisse 示例"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_web"
+            android:text="Web 示例"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 </layout>

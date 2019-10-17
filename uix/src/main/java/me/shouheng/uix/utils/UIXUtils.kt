@@ -10,6 +10,7 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.WindowManager
 import com.google.gson.Gson
 import com.google.gson.JsonParser
@@ -30,6 +31,7 @@ object UIXUtils {
 
     private var sBufferSize = 8192
     private var addresses: List<AddressBean>? = null
+    var debug: Boolean = true
 
     /*------------------------------------ image region ------------------------------------*/
 
@@ -157,5 +159,13 @@ object UIXUtils {
             e.printStackTrace()
         }
         return list
+    }
+
+    /*------------------------------------ log region ------------------------------------*/
+
+    fun d(s: String) {
+        if (debug) {
+            Log.d("UIX", s)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package me.shouheng.uix.rv
+package me.shouheng.uix.rv.listener
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log

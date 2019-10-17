@@ -13,7 +13,7 @@
         android:layout_height="40dp">
 
         <android.support.v7.widget.AppCompatTextView
-            android:text="@string/address_pick_result"
+            android:text="@string/uix_address_pick_result"
             style="@style/Dialog.City"/>
 
         <android.support.v7.widget.AppCompatTextView

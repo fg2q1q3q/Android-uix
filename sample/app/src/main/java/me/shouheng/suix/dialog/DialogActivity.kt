@@ -20,10 +20,7 @@ import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
 import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
 import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.dialog.DialogUtils
-import me.shouheng.uix.dialog.content.AddressContent
-import me.shouheng.uix.dialog.content.IDialogContent
-import me.shouheng.uix.dialog.content.SimpleEditor
-import me.shouheng.uix.dialog.content.SimpleList
+import me.shouheng.uix.dialog.content.*
 import me.shouheng.uix.dialog.footer.SimpleFooter
 import me.shouheng.uix.dialog.title.IDialogTitle
 import me.shouheng.uix.dialog.title.SimpleTitle
@@ -173,6 +170,18 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                                     dialog.dismiss()
                                 }
                             })
+                            .build())
+                    .build().show(supportFragmentManager, "list")
+        }
+        binding.btnContent.setOnClickListener {
+            BeautyDialog.Builder()
+                    .setOutCancelable(true)
+                    .setDialogPosition(POS_BOTTOM)
+                    .setDialogTitle(SimpleTitle.Builder()
+                            .setTitle("简单内容对话框")
+                            .build())
+                    .setDialogContent(SimpleContent.Builder()
+                            .setContent("简单内容对话框")
                             .build())
                     .build().show(supportFragmentManager, "list")
         }

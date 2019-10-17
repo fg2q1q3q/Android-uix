@@ -4,6 +4,7 @@ import android.os.Bundle
 import me.shouheng.mvvm.base.CommonActivity
 import me.shouheng.mvvm.base.anno.ActivityConfiguration
 import me.shouheng.mvvm.comn.EmptyViewModel
+import me.shouheng.suix.container.FragmentContainer
 import me.shouheng.suix.databinding.ActivityMainBinding
 import me.shouheng.suix.dialog.DialogActivity
 import me.shouheng.utils.app.ActivityUtils
@@ -20,6 +21,12 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnDialogs.setOnClickListener {
             ActivityUtils.start(this, DialogActivity::class.java)
+        }
+        binding.btnMatisse.setOnClickListener {
+
+        }
+        binding.btnWeb.setOnClickListener {
+            ActivityUtils.start(this, FragmentContainer::class.java)
         }
     }
 }

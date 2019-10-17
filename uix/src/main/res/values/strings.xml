@@ -1,3 +1,6 @@
 <resources>
-    <string name="address_pick_result">地址：</string>
+    <string name="uix_address_pick_result">地址：</string>
+    <string name="uix_retry">重试</string>
+    <string name="uix_offline_title">网页打开失败</string>
+    <string name="uix_offline_sub_title">请检查网络连接并重新尝试</string>
 </resources>

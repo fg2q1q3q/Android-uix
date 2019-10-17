@@ -54,6 +54,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_content"
+            android:text="简单内容对话框"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 </layout>

@@ -57,10 +57,12 @@ class BeautyDialog : DialogFragment() {
         ).create()
 
         val content = View.inflate(context, R.layout.uix_dialog_layout, null)
-        content.setBackgroundResource(
-                if (dialogDarkStyle) R.drawable.uix_bg_dialog_center_dark
-                else R.drawable.uix_bg_dialog_center
-        )
+        if (dialogStyle != DialogStyle.STYLE_WRAP_WITHOUT_BG) {
+            content.setBackgroundResource(
+                    if (dialogDarkStyle) R.drawable.uix_bg_dialog_center_dark
+                    else R.drawable.uix_bg_dialog_center
+            )
+        }
         val llTitle = content.findViewById<LinearLayout>(R.id.ll_title)
         val llContent = content.findViewById<LinearLayout>(R.id.ll_content)
         val llFooter = content.findViewById<LinearLayout>(R.id.ll_footer)

@@ -1,13 +1,14 @@
 package me.shouheng.suix.container
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import me.shouheng.mvvm.R
 import me.shouheng.mvvm.base.CommonActivity
 import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.mvvm.databinding.MvvmsActivityContainerBinding
-import me.shouheng.uix.page.FragmentKeyDown
-import me.shouheng.uix.page.WebviewFragment
+import me.shouheng.uix.page.fragment.FragmentKeyDown
+import me.shouheng.uix.page.fragment.WebviewFragment
 import me.shouheng.utils.stability.LogUtils
 
 /**
@@ -25,6 +26,7 @@ class FragmentContainer : CommonActivity<MvvmsActivityContainerBinding, EmptyVie
 
     override fun doCreateView(savedInstanceState: Bundle?) {
         val fragment = WebviewFragment.Builder()
+                .setIndicatorColor(Color.BLUE)
                 .setUrl("https://weibo.com/5401152113/profile?rightmod=1&wvr=6&mod=personinfo")
                 .build()
         supportFragmentManager.beginTransaction()
@@ -33,6 +35,9 @@ class FragmentContainer : CommonActivity<MvvmsActivityContainerBinding, EmptyVie
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        return (supportFragmentManager.findFragmentById(R.id.container) as? FragmentKeyDown)?.onFragmentKeyDown(keyCode, event)?:super.onKeyDown(keyCode, event)
+        val fragment = supportFragmentManager.findFragmentById(R.id.container)
+        return if ((fragment as? FragmentKeyDown)?.onFragmentKeyDown(keyCode, event) == true) {
+            return true
+        } else super.onKeyDown(keyCode, event)
     }
 }

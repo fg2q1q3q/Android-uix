@@ -1,4 +1,4 @@
-package me.shouheng.uix.page
+package me.shouheng.uix.page.fragment
 
 import android.graphics.Color
 import android.os.Bundle
@@ -17,7 +17,6 @@ import com.just.agentweb.DefaultWebClient
 import me.shouheng.uix.R
 import me.shouheng.uix.utils.UIXUtils
 
-
 /**
  * 网页浏览通用 fragment
  *
@@ -28,9 +27,11 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
 
     private var root: View? = null
     private lateinit var mAgentWeb: AgentWeb
-    @ColorInt
-    private var indicatorColor: Int = Color.RED
+    @ColorInt private var indicatorColor: Int = Color.RED
+    private var indicatorHeightDp: Int = 3
     private var url: String? = null
+    private var openOtherPageWays: DefaultWebClient.OpenOtherPageWays? = null
+    private var securityType: AgentWeb.SecurityType = AgentWeb.SecurityType.STRICT_CHECK
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (root == null) {
@@ -40,12 +41,12 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
         mAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(web, -1, LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
-                .useDefaultIndicator(indicatorColor, 3)
+                .useDefaultIndicator(indicatorColor, indicatorHeightDp)
                 .setWebChromeClient(mWebChromeClient)
                 .setWebViewClient(object : WebViewClient() { } )
-                .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK)
+                .setSecurityType(securityType)
                 .setMainFrameErrorView(R.layout.uix_layout_network_error_page, R.id.btn_retry)
-                .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.DISALLOW)
+                .setOpenOtherPageWays(openOtherPageWays)
                 .interceptUnkownUrl()
                 .createAgentWeb()
                 .ready()
@@ -94,10 +95,18 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     class Builder {
 
         private var indicatorColor: Int = Color.RED
+        private var indicatorHeightDp: Int = 3
         private var url: String? = null
+        private var openOtherPageWays: DefaultWebClient.OpenOtherPageWays? = null
+        private var securityType: AgentWeb.SecurityType = AgentWeb.SecurityType.STRICT_CHECK
 
         fun setIndicatorColor(@ColorInt indicatorColor: Int): Builder {
             this.indicatorColor = indicatorColor
+            return this
+        }
+
+        fun setIndicatorHeightDp(indicatorHeightDp: Int): Builder {
+            this.indicatorHeightDp = indicatorHeightDp
             return this
         }
 
@@ -106,10 +115,23 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
             return this
         }
 
+        fun setOpenOtherPageWays(openOtherPageWays: DefaultWebClient.OpenOtherPageWays): Builder {
+            this.openOtherPageWays = openOtherPageWays
+            return this
+        }
+
+        fun setSecurityType(securityType: AgentWeb.SecurityType): Builder {
+            this.securityType = securityType
+            return this
+        }
+
         fun build(): WebviewFragment {
             val fragment = WebviewFragment()
             fragment.indicatorColor = indicatorColor
+            fragment.indicatorHeightDp = indicatorHeightDp
             fragment.url = url
+            fragment.openOtherPageWays = openOtherPageWays
+            fragment.securityType = securityType
             return fragment
         }
     }

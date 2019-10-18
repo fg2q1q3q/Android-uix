@@ -8,7 +8,7 @@ import android.app.Application
  * <code>
  * class SampleApp: Application() {
  *
- * override fun onCreate() {
+ *     override fun onCreate() {
  *         super.onCreate()
  *         UIX.init(this)
  *     }

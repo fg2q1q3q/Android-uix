@@ -17,6 +17,7 @@ import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
 import me.shouheng.uix.config.DialogStyle.Companion.STYLE_MATCH
 import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
 
+
 /**
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 16:17
@@ -55,6 +56,11 @@ annotation class DialogStyle {
          * 对话框风格：对话框宽度填充屏幕
          */
         const val STYLE_MATCH                       = 1
+
+        /**
+         * 对话框风格：按照对话框内容进行延伸且无背景
+         */
+        const val STYLE_WRAP_WITHOUT_BG             = 2
     }
 }
 

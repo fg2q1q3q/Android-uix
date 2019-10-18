@@ -34,8 +34,10 @@ dependencies {
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
     api 'me.shouheng.ui:matisse:1.1.0'
     api 'com.just.agentweb:agentweb:4.0.2'
+    api 'com.github.oxoooo:pull-back-layout:1.0.1'
+    api 'com.github.chrisbanes:PhotoView:2.1.4'
 }
 
-//apply {
-//    from ('../sample/bintrayUpload.gradle')
-//}
+apply {
+    from ('../sample/bintrayUpload.gradle')
+}

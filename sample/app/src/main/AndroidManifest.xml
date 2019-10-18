@@ -33,6 +33,7 @@
         </activity>
         <activity android:name=".dialog.DialogActivity"/>
         <activity android:name=".container.FragmentContainer"/>
+        <activity android:name="me.shouheng.uix.page.GalleryActivity"/>
     </application>
 
 </manifest>

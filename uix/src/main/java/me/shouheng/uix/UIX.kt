@@ -5,6 +5,16 @@ import android.app.Application
 /**
  * 用来初始化 UI 库，主要用来初始化 application 对象
  *
+ * <code>
+ * class SampleApp: Application() {
+ *
+ *     override fun onCreate() {
+ *         super.onCreate()
+ *         UIX.init(this)
+ *     }
+ * }
+ * </code>
+ *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 12:01
  */

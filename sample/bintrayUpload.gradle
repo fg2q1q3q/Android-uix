@@ -2,10 +2,10 @@ apply plugin: 'com.novoda.bintray-release'
 
 publish {
     userOrg = 'easymark'
-    groupId = 'me.shouheng.utils'
-    artifactId = 'utils-core'
+    groupId = 'me.shouheng.ui'
+    artifactId = 'ui-core'
     repoName = 'Android'
-    publishVersion = '1.2.1'
-    desc = 'The utils for Android.'
-    website = 'https://github.com/Shouheng88/Android-Utils'
+    publishVersion = '1.0.0'
+    desc = 'The ui components for Android.'
+    website = 'https://github.com/Shouheng88/Android-uix'
 }

@@ -1,1 +1,13 @@
-<resources></resources>
+<resources>
+    <string name="uix_address_pick_result">地址：</string>
+    <string name="uix_retry">重试</string>
+    <string name="uix_offline_title">网页打开失败</string>
+    <string name="uix_offline_sub_title">请检查网络连接并重新尝试</string>
+
+    <string name="uix_not_allow_gif">不允许选择 Gif</string>
+    <string name="uix_error_gif">Gif 的长和宽至少 %1$dpx 并且不小于 %2$sM</string>
+
+    <string name="uix_share_picture">分享图片到&#8230;</string>
+    <string name="uix_open_with">用其他应用打开</string>
+    <string name="uix_download_picture">保存图片</string>
+</resources>

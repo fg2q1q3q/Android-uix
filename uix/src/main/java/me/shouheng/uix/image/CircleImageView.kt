@@ -1,4 +1,4 @@
-package me.shouheng.uix.imageview
+package me.shouheng.uix.image
 
 import android.content.Context
 import android.graphics.*

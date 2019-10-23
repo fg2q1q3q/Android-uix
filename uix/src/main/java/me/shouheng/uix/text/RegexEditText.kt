@@ -1,4 +1,4 @@
-package me.shouheng.uix.edittext
+package me.shouheng.uix.text
 
 import android.content.Context
 import android.support.v7.widget.AppCompatEditText

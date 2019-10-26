@@ -1,6 +1,7 @@
 package me.shouheng.uix.dialog
 
 import android.app.Dialog
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
@@ -42,12 +43,14 @@ class BeautyDialog : DialogFragment() {
 
     private var outCancelable = false
     private var backCancelable = true
+    private var customBackground = false
 
     private var onDismissListener: OnDismissListener? = null
     private var onShowListener: OnShowListener? = null
 
     private var fixedHeight = 0
-    private var dialogMargin = UIXUtils.dp2px(15f)
+    private var dialogMargin = UIXUtils.dp2px(20f)
+    private var dialogBackground: Drawable? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -57,7 +60,9 @@ class BeautyDialog : DialogFragment() {
         ).create()
 
         val content = View.inflate(context, R.layout.uix_dialog_layout, null)
-        if (dialogStyle != DialogStyle.STYLE_WRAP_WITHOUT_BG) {
+        if (customBackground) {
+            content.background = dialogBackground
+        } else {
             content.setBackgroundResource(
                     if (dialogDarkStyle) R.drawable.uix_bg_dialog_center_dark
                     else R.drawable.uix_bg_dialog_center
@@ -90,7 +95,7 @@ class BeautyDialog : DialogFragment() {
             val contentView = iDialogContent!!.getView(context!!)
             llContent.addView(contentView)
             val lp = contentView.layoutParams
-            lp.height = MATCH_PARENT
+            lp.height = if (fixedHeight == 0) MATCH_PARENT else fixedHeight
             contentView.layoutParams = lp
         } else {
             llContent.visibility = View.GONE
@@ -143,12 +148,14 @@ class BeautyDialog : DialogFragment() {
 
         private var outCancelable = false
         private var backCancelable = true
+        private var customBackground = false
 
         private var onDismissListener: OnDismissListener? = null
         private var onShowListener: OnShowListener? = null
 
         private var fixedHeight = 0
-        private var dialogMargin = UIXUtils.dp2px(15f)
+        private var dialogMargin = UIXUtils.dp2px(20f)
+        private var dialogBackground: Drawable? = null
 
         fun setDialogTitle(iDialogTitle: IDialogTitle): Builder {
             this.iDialogTitle = iDialogTitle
@@ -195,6 +202,9 @@ class BeautyDialog : DialogFragment() {
             return this
         }
 
+        /**
+         * 对话框"内容"的固定高度
+         */
         fun setFixedHeight(fixedHeight: Int): Builder {
             this.fixedHeight = fixedHeight
             return this
@@ -207,6 +217,17 @@ class BeautyDialog : DialogFragment() {
 
         fun setDarkDialog(darkDialog: Boolean): Builder {
             this.dialogDarkStyle = darkDialog
+            return this
+        }
+
+        /**
+         * 设置对话框的背景，如果不调用这个方法将根据主题使用默认的背景
+         * 否则将会直接使用设置的背景，即使是 null. 另外，当传入的参数
+         * 为 null 的时候对话框将不使用任何背景。
+         */
+        fun setDialogBackground(dialogBackground: Drawable?): Builder {
+            this.dialogBackground = dialogBackground
+            customBackground = true
             return this
         }
 
@@ -224,6 +245,8 @@ class BeautyDialog : DialogFragment() {
             dialog.onShowListener = onShowListener
             dialog.fixedHeight = fixedHeight
             dialog.dialogMargin = dialogMargin
+            dialog.dialogBackground = dialogBackground
+            dialog.customBackground = customBackground
             return dialog
         }
     }

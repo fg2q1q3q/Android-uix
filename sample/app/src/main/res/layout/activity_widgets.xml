@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <me.shouheng.uix.button.SwitchButton
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <HorizontalScrollView
+                android:scrollbars="none"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <me.shouheng.uix.text.VerticalTextView
+                    android:text="君不見黃河之水天上來，奔流到海不復回。
+君不見高堂明鏡悲白髮，朝如青絲暮成雪。
+人生得意須盡歡，莫使金樽空對月。
+天生我材必有用，千金散盡還復來。
+烹羊宰牛且爲樂，會須一飲三百杯。
+岑夫子，丹丘生。將進酒，杯莫停。
+與君歌一曲，請君爲我側耳聽。
+鐘鼓饌玉不足貴，但願長醉不願醒。
+古來聖賢皆寂寞，惟有飲者留其名。
+陳王昔時宴平樂，斗酒十千恣讙謔。
+主人何為言少錢？徑須沽取對君酌。
+五花馬，千金裘。呼兒將出換美酒，與爾同銷萬古愁。"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</layout>

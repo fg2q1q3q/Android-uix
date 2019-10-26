@@ -4,10 +4,11 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
+import kotlinx.android.synthetic.main.uix_dialog_content_edit_simple.view.*
 
 class EmptySupportRecyclerView : RecyclerView {
 
-    private var emptyView: View? = null
+    private var emptyView: IEmptyView? = null
 
     private val observer = object : RecyclerView.AdapterDataObserver() {
 
@@ -34,11 +35,9 @@ class EmptySupportRecyclerView : RecyclerView {
         val adapter = adapter
         if (adapter != null && emptyView != null) {
             if (adapter.itemCount == 0) {
-                emptyView!!.visibility = View.VISIBLE
-                this@EmptySupportRecyclerView.visibility = View.GONE
+                emptyView?.show()
             } else {
-                emptyView!!.visibility = View.GONE
-                this@EmptySupportRecyclerView.visibility = View.VISIBLE
+                emptyView?.hide()
             }
         }
     }
@@ -51,7 +50,7 @@ class EmptySupportRecyclerView : RecyclerView {
         }
     }
 
-    fun setEmptyView(v: View) {
-        emptyView = v
+    fun <V> setEmptyView(emptyView: V) where V: IEmptyView {
+        this.emptyView = emptyView
     }
 }

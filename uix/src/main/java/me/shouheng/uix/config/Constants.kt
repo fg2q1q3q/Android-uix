@@ -16,6 +16,10 @@ import me.shouheng.uix.config.DialogPosition.Companion.POS_CENTER
 import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
 import me.shouheng.uix.config.DialogStyle.Companion.STYLE_MATCH
 import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
+import me.shouheng.uix.config.EmptyLoadingStyle.Companion.STYLE_ANDROID
+import me.shouheng.uix.config.EmptyLoadingStyle.Companion.STYLE_IOS
+import me.shouheng.uix.config.EmptyViewState.Companion.STATE_EMPTY
+import me.shouheng.uix.config.EmptyViewState.Companion.STATE_LOADING
 
 
 /**
@@ -56,11 +60,6 @@ annotation class DialogStyle {
          * 对话框风格：对话框宽度填充屏幕
          */
         const val STYLE_MATCH                       = 1
-
-        /**
-         * 对话框风格：按照对话框内容进行延伸且无背景
-         */
-        const val STYLE_WRAP_WITHOUT_BG             = 2
     }
 }
 
@@ -108,5 +107,45 @@ annotation class AddressSelectLevel {
     companion object {
         const val LEVEL_CITY                        = 0
         const val LEVEL_AREA                        = 1
+    }
+}
+
+/**
+ * 列表为空的控件当前的状态
+ */
+@IntDef(value = [STATE_LOADING, STATE_EMPTY])
+@Target(allowedTargets = [AnnotationTarget.FIELD,
+    AnnotationTarget.TYPE_PARAMETER,
+    AnnotationTarget.VALUE_PARAMETER])
+annotation class EmptyViewState {
+    companion object {
+        /**
+         * 加载中
+         */
+        const val STATE_LOADING                     = 0
+        /**
+         * 列表为空
+         */
+        const val STATE_EMPTY                       = 1
+    }
+}
+
+/**
+ * 加载小圆圈的风格
+ */
+@IntDef(value = [STYLE_ANDROID, STYLE_IOS])
+@Target(allowedTargets = [AnnotationTarget.FIELD,
+    AnnotationTarget.TYPE_PARAMETER,
+    AnnotationTarget.VALUE_PARAMETER])
+annotation class EmptyLoadingStyle {
+    companion object {
+        /**
+         * Android 风格
+         */
+        const val STYLE_ANDROID                     = 0
+        /**
+         * iOS 风格
+         */
+        const val STYLE_IOS                         = 1
     }
 }

@@ -63,7 +63,7 @@ class ImageFragment : Fragment() {
         photoView.setOnPhotoTapListener { _, _, _ ->
             val activity = activity
             if (activity is GalleryActivity) {
-                activity.toggleSystemUI()
+                activity.onBackPressed()
             }
         }
         photoView.maximumScale = 5.0f

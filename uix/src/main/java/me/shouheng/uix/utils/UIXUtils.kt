@@ -170,6 +170,10 @@ object UIXUtils {
 
     /*------------------------------------ resource region ------------------------------------*/
 
+    fun getDrawable(@DrawableRes id: Int): Drawable {
+        return UIX.getApp().resources.getDrawable(id)
+    }
+
     fun getColor(@ColorRes id: Int): Int {
         return UIX.getApp().resources.getColor(id)
     }

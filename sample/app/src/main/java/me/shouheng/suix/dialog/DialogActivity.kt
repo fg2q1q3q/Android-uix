@@ -3,6 +3,7 @@ package me.shouheng.suix.dialog
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.view.Gravity
 import me.shouheng.mvvm.base.CommonActivity
 import me.shouheng.mvvm.base.anno.ActivityConfiguration
@@ -19,11 +20,16 @@ import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_TWO
 import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
 import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
 import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
+import me.shouheng.uix.config.EmptyLoadingStyle
+import me.shouheng.uix.config.EmptyViewState
 import me.shouheng.uix.dialog.DialogUtils
 import me.shouheng.uix.dialog.content.*
 import me.shouheng.uix.dialog.footer.SimpleFooter
 import me.shouheng.uix.dialog.title.IDialogTitle
 import me.shouheng.uix.dialog.title.SimpleTitle
+import me.shouheng.uix.rv.EmptyView
+import me.shouheng.utils.app.ResUtils
+import me.shouheng.utils.ui.ViewUtils
 
 /**
  * 对话框示例
@@ -34,7 +40,16 @@ import me.shouheng.uix.dialog.title.SimpleTitle
 @ActivityConfiguration(layoutResId = R.layout.activity_dialog)
 class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
 
+    private var customList: CustomList? = null
+
     override fun doCreateView(savedInstanceState: Bundle?) {
+        binding.btnNoBg.setOnClickListener {
+            BeautyDialog.Builder()
+                    .setDialogStyle(STYLE_WRAP)
+                    .setDialogBackground(null)
+                    .setDialogContent(SampleContent())
+                    .build().show(supportFragmentManager, "normal")
+        }
         binding.btnNormal.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogStyle(STYLE_WRAP)
@@ -140,10 +155,10 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                             .setTextColor(Color.BLACK)
                             .setShowIcon(true)
                             .setList(listOf(
-                                    SimpleList.Item(0, "第 1 项", resources.getDrawable(R.drawable.uix_eye_close_48)),
-                                    SimpleList.Item(1, "第 2 项", resources.getDrawable(R.drawable.uix_eye_open_48)),
-                                    SimpleList.Item(2, "第 3 项", resources.getDrawable(R.drawable.uix_close_black_24dp)),
-                                    SimpleList.Item(3, "第 4 项", resources.getDrawable(R.drawable.uix_loading))
+                                    SimpleList.Item(0, "第 1 项", ResUtils.getDrawable(R.drawable.uix_eye_close_48)),
+                                    SimpleList.Item(1, "第 2 项", ResUtils.getDrawable(R.drawable.uix_eye_open_48)),
+                                    SimpleList.Item(2, "第 3 项", ResUtils.getDrawable(R.drawable.uix_close_black_24dp)),
+                                    SimpleList.Item(3, "第 4 项", ResUtils.getDrawable(R.drawable.uix_loading))
                             ))
                             .setOnItemClickListener(object : SimpleList.OnItemClickListener {
                                 override fun onItemClick(item: SimpleList.Item) {
@@ -159,6 +174,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         binding.btnAddress.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogPosition(POS_BOTTOM)
+                    .setDialogMargin(0)
                     .setDialogTitle(SimpleTitle.Builder()
                             .setTitle("地址对话框")
                             .build())
@@ -184,6 +200,53 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                             .setContent("简单内容对话框")
                             .build())
                     .build().show(supportFragmentManager, "list")
+        }
+        binding.btnCustomList.setOnClickListener {
+            val adapter = SimpleList.Adapter(emptyList(), Color.BLACK)
+            customList = CustomList.Builder(this)
+                    .setEmptyView(EmptyView.Builder(this)
+                            .setEmptyLoadingTips("loading")
+                            .setEmptyLoadingTipsColor(Color.BLUE)
+                            .setLoadingStyle(EmptyLoadingStyle.STYLE_IOS)
+                            .setEmptyViewState(EmptyViewState.STATE_LOADING)
+                            .build())
+                    .setAdapter(adapter)
+                    .build()
+            adapter.setOnItemClickListener { _, _, pos ->
+                val item = adapter.data[pos]
+                toast("${item.id} : ${item.name}")
+                customList?.getDialog()?.dismiss()
+            }
+            BeautyDialog.Builder()
+                    .setFixedHeight(ViewUtils.getScreenHeight()/2)
+                    .setOutCancelable(true)
+                    .setDialogPosition(POS_BOTTOM)
+                    .setDialogTitle(SimpleTitle.Builder()
+                            .setTitle("自定义列表对话框")
+                            .build())
+                    .setDialogContent(customList!!)
+                    .build().show(supportFragmentManager, "custom-list")
+            // 先显示对话框再加载数据的情形
+            Handler().postDelayed({
+                adapter.setNewData(listOf(
+                        SimpleList.Item(0, "第 1 项", ResUtils.getDrawable(R.drawable.uix_eye_close_48)),
+                        SimpleList.Item(1, "第 2 项", ResUtils.getDrawable(R.drawable.uix_eye_open_48)),
+                        SimpleList.Item(2, "第 3 项", ResUtils.getDrawable(R.drawable.uix_close_black_24dp)),
+                        SimpleList.Item(3, "第 4 项", ResUtils.getDrawable(R.drawable.uix_loading)),
+                        SimpleList.Item(4, "第 5 项", ResUtils.getDrawable(R.drawable.uix_eye_close_48)),
+                        SimpleList.Item(5, "第 6 项", ResUtils.getDrawable(R.drawable.uix_eye_open_48)),
+                        SimpleList.Item(6, "第 7 项", ResUtils.getDrawable(R.drawable.uix_close_black_24dp)),
+                        SimpleList.Item(7, "第 8 项", ResUtils.getDrawable(R.drawable.uix_loading)),
+                        SimpleList.Item(8, "第 9 项", ResUtils.getDrawable(R.drawable.uix_eye_close_48)),
+                        SimpleList.Item(9, "第 10 项", ResUtils.getDrawable(R.drawable.uix_eye_open_48)),
+                        SimpleList.Item(10, "第 11 项", ResUtils.getDrawable(R.drawable.uix_close_black_24dp)),
+                        SimpleList.Item(11, "第 12 项", ResUtils.getDrawable(R.drawable.uix_loading)),
+                        SimpleList.Item(12, "第 13 项", ResUtils.getDrawable(R.drawable.uix_eye_close_48)),
+                        SimpleList.Item(13, "第 14 项", ResUtils.getDrawable(R.drawable.uix_eye_open_48)),
+                        SimpleList.Item(14, "第 15 项", ResUtils.getDrawable(R.drawable.uix_close_black_24dp)),
+                        SimpleList.Item(15, "第 16 项", ResUtils.getDrawable(R.drawable.uix_loading))
+                ))
+            }, 3000)
         }
     }
 }

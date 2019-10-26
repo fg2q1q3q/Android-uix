@@ -8,10 +8,13 @@ import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import me.shouheng.mvvm.base.CommonActivity
 import me.shouheng.mvvm.base.anno.ActivityConfiguration
+import me.shouheng.mvvm.comn.ContainerActivity
 import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.container.FragmentContainer
 import me.shouheng.suix.databinding.ActivityMainBinding
 import me.shouheng.suix.dialog.DialogActivity
+import me.shouheng.suix.setting.SettingFragment
+import me.shouheng.suix.widget.WidgetActivity
 import me.shouheng.uix.image.GifSizeFilter
 import me.shouheng.uix.image.Glide4Engine
 import me.shouheng.uix.page.GalleryActivity
@@ -46,6 +49,12 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
         }
         binding.btnWeb.setOnClickListener {
             ActivityUtils.start(this, FragmentContainer::class.java)
+        }
+        binding.btnWidgets.setOnClickListener {
+            ActivityUtils.start(this, WidgetActivity::class.java)
+        }
+        binding.btnSetting.setOnClickListener {
+            ContainerActivity.open(SettingFragment::class.java).launch(this)
         }
     }
 

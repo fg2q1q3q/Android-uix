@@ -35,11 +35,11 @@ class SettingItemAdapter(list: List<ISettingItem>,
         helper?.itemView?.setBackgroundColor(itemBackground)
         when(settingItem!!.itemType) {
             TYPE_DIVIDER -> {
-                settingItem as SettingDividerSettingItem
+                settingItem as SettingDividerItem
                 helper?.itemView?.setBackgroundColor(settingItem.bgColor?:Color.TRANSPARENT)
             }
             TYPE_TEXT -> {
-                settingItem as SettingTextSettingItem
+                settingItem as SettingTextItem
                 helper?.setText(R.id.tv_title, settingItem.title)
                 helper?.setText(R.id.tv_foot, settingItem.foot)
                 helper?.getView<View>(R.id.iv_more)!!.visibility =
@@ -49,7 +49,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                         ?:UIXUtils.getDrawable(R.drawable.uix_chevron_right_black_24dp))
             }
             TYPE_IMAGE -> {
-                settingItem as SettingImageSettingItem
+                settingItem as SettingImageItem
                 settingItem.imageLoader?.load(helper!!.getView(R.id.iv_image))
                 helper?.setText(R.id.tv_title, settingItem.title)
                 helper?.getView<View>(R.id.iv_more)!!.visibility =
@@ -59,7 +59,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                         ?:UIXUtils.getDrawable(R.drawable.uix_chevron_right_black_24dp))
             }
             TYPE_SWITCH -> {
-                settingItem as SettingSwitchSettingItem
+                settingItem as SettingSwitchItem
                 helper?.setText(R.id.tv_title, settingItem.title)
                 val sb = helper!!.getView(R.id.sb) as SwitchButton
                 sb.isChecked = settingItem.enable

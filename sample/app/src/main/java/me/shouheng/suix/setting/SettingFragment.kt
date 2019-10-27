@@ -42,8 +42,8 @@ class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>()
                 binding.ev.hide()
                 adapter.setNewData(
                         listOf(
-                                SettingDividerSettingItem(0, bgColor = ResUtils.getColor(R.color.settingBg)),
-                                SettingImageSettingItem(1,
+                                SettingDividerItem(0, bgColor = ResUtils.getColor(R.color.settingBg)),
+                                SettingImageItem(1,
                                         editable = false,
                                         title = "图片的标题啊",
                                         imageLoader = object : ImageLoader {
@@ -51,9 +51,9 @@ class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>()
                                                 imageView.setImageResource(R.mipmap.ic_launcher)
                                             }
                                         }),
-                                SettingDividerSettingItem(2, bgColor = ResUtils.getColor(R.color.settingBg)),
-                                SettingTextSettingItem(3, title = "文字的标题啊", foot = "末尾啊"),
-                                SettingSwitchSettingItem(4, title = "开关的标题啊", enable = true,
+                                SettingDividerItem(2, bgColor = ResUtils.getColor(R.color.settingBg)),
+                                SettingTextItem(3, title = "文字的标题啊", foot = "末尾啊"),
+                                SettingSwitchItem(4, title = "开关的标题啊", enable = true,
                                         onCheckStateChangeListener = object : OnCheckStateChangeListener {
                                             override fun onStateChange(switchButton: SwitchButton, checked: Boolean) {
                                                 toast(if (checked) "打开了开关！" else "无情地关闭了开关！")
@@ -67,7 +67,7 @@ class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>()
             toast("点击了条目$pos")
             val item = adapter.data[pos]
             if (item.itemType == ISettingItem.ItemType.TYPE_SWITCH) {
-                item as SettingSwitchSettingItem
+                item as SettingSwitchItem
                 item.enable = !item.enable
                 adapter.notifyItemChanged(pos)
             }

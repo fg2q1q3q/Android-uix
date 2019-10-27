@@ -21,7 +21,7 @@ class AboutTextItem(private val id: Int,
 
     override fun getId() = id
 
-    override fun getItemType() = ISettingItem.ItemType.TYPE_TEXT
+    override fun getItemType() = type
 }
 
 class AboutUserItem(private val id: Int,

@@ -5,9 +5,9 @@ import me.shouheng.uix.page.OnCheckStateChangeListener
 import me.shouheng.uix.page.ImageLoader
 
 
-class SettingDividerSettingItem(private val id: Int,
-                                var editable: Boolean = false,
-                                @ColorInt var bgColor: Int? = null) : ISettingItem {
+class SettingDividerItem(private val id: Int,
+                         var editable: Boolean = false,
+                         @ColorInt var bgColor: Int? = null) : ISettingItem {
 
     private val type: Int = ISettingItem.ItemType.TYPE_DIVIDER
 
@@ -18,10 +18,10 @@ class SettingDividerSettingItem(private val id: Int,
     override fun getItemType() = type
 }
 
-class SettingTextSettingItem(private val id: Int,
-                             var editable: Boolean = true,
-                             var title: String? = null,
-                             var foot: String? = null) : ISettingItem {
+class SettingTextItem(private val id: Int,
+                      var editable: Boolean = true,
+                      var title: String? = null,
+                      var foot: String? = null) : ISettingItem {
 
     private val type: Int = ISettingItem.ItemType.TYPE_TEXT
 
@@ -32,10 +32,10 @@ class SettingTextSettingItem(private val id: Int,
     override fun getItemType() = type
 }
 
-class SettingImageSettingItem(private val id: Int,
-                              var editable: Boolean = true,
-                              var title: String? = null,
-                              var imageLoader: ImageLoader? = null) : ISettingItem {
+class SettingImageItem(private val id: Int,
+                       var editable: Boolean = true,
+                       var title: String? = null,
+                       var imageLoader: ImageLoader? = null) : ISettingItem {
 
     private val type: Int = ISettingItem.ItemType.TYPE_IMAGE
 
@@ -46,11 +46,11 @@ class SettingImageSettingItem(private val id: Int,
     override fun getItemType() = type
 }
 
-class SettingSwitchSettingItem(private val id: Int,
-                               var editable: Boolean = true,
-                               var title: String? = null,
-                               var enable: Boolean = false,
-                               var onCheckStateChangeListener: OnCheckStateChangeListener? = null) : ISettingItem {
+class SettingSwitchItem(private val id: Int,
+                        var editable: Boolean = true,
+                        var title: String? = null,
+                        var enable: Boolean = false,
+                        var onCheckStateChangeListener: OnCheckStateChangeListener? = null) : ISettingItem {
 
     private val type: Int = ISettingItem.ItemType.TYPE_SWITCH
 

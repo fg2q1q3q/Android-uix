@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_share"
+    <settingItem android:id="@+id/action_share"
         android:title="@string/uix_share_picture"
         android:icon="@drawable/uix_share_white_24dp"
         app:showAsAction="always"/>
-    <item android:id="@+id/action_open"
+    <settingItem android:id="@+id/action_open"
         android:title="@string/uix_open_with"
         android:icon="@drawable/uix_collections_white_24dp"
         app:showAsAction="always"/>
-    <item android:id="@+id/action_download"
+    <settingItem android:id="@+id/action_download"
         android:title="@string/uix_download_picture"
         android:visible="false"
         android:icon="@drawable/uix_get_app_white_24dp"

@@ -10,7 +10,10 @@ import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.FragmentSettingBinding
 import me.shouheng.uix.button.SwitchButton
-import me.shouheng.uix.items.*
+import me.shouheng.uix.page.model.*
+import me.shouheng.uix.page.OnCheckStateChangeListener
+import me.shouheng.uix.page.ImageLoader
+import me.shouheng.uix.page.adapter.SettingItemAdapter
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
 
@@ -23,9 +26,9 @@ import me.shouheng.utils.ui.ImageUtils
 @FragmentConfiguration(layoutResId = R.layout.fragment_setting)
 class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>() {
 
-    private val adapter = ItemAdapter(emptyList(),
+    private val adapter = SettingItemAdapter(emptyList(),
             ResUtils.getColor(R.color.settingBg),
-            ImageUtils.tintDrawable(R.drawable.ic_chevron_right_black_24dp, Color.GRAY),
+            ImageUtils.tintDrawable(R.drawable.uix_chevron_right_black_24dp, Color.GRAY),
             itemBackground = Color.WHITE)
 
     override fun doCreateView(savedInstanceState: Bundle?) {
@@ -39,18 +42,18 @@ class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>()
                 binding.ev.hide()
                 adapter.setNewData(
                         listOf(
-                                DividerItem(0, bgColor = ResUtils.getColor(R.color.settingBg)),
-                                ImageItem(1,
+                                SettingDividerSettingItem(0, bgColor = ResUtils.getColor(R.color.settingBg)),
+                                SettingImageSettingItem(1,
                                         editable = false,
                                         title = "图片的标题啊",
-                                        imageLoader = object : Tools {
+                                        imageLoader = object : ImageLoader {
                                             override fun load(imageView: ImageView) {
                                                 imageView.setImageResource(R.mipmap.ic_launcher)
                                             }
                                         }),
-                                DividerItem(2, bgColor = ResUtils.getColor(R.color.settingBg)),
-                                TextItem(3, title = "文字的标题啊", foot = "末尾啊"),
-                                SwitchItem(4, title = "开关的标题啊", enable = true,
+                                SettingDividerSettingItem(2, bgColor = ResUtils.getColor(R.color.settingBg)),
+                                SettingTextSettingItem(3, title = "文字的标题啊", foot = "末尾啊"),
+                                SettingSwitchSettingItem(4, title = "开关的标题啊", enable = true,
                                         onCheckStateChangeListener = object : OnCheckStateChangeListener {
                                             override fun onStateChange(switchButton: SwitchButton, checked: Boolean) {
                                                 toast(if (checked) "打开了开关！" else "无情地关闭了开关！")
@@ -63,8 +66,8 @@ class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>()
         adapter.setOnItemClickListener { _, _, pos ->
             toast("点击了条目$pos")
             val item = adapter.data[pos]
-            if (item.itemType == IItem.ItemType.TYPE_SWITCH) {
-                item as SwitchItem
+            if (item.itemType == ISettingItem.ItemType.TYPE_SWITCH) {
+                item as SettingSwitchSettingItem
                 item.enable = !item.enable
                 adapter.notifyItemChanged(pos)
             }

@@ -17,20 +17,13 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import me.shouheng.uix.R
+import me.shouheng.uix.page.adapter.UriPagerAdapter
 import me.shouheng.uix.pager.HackyViewPager
 import me.shouheng.uix.pager.trans.DepthPageTransformer
 import me.shouheng.uix.utils.UIXUtils
 import ooo.oxo.library.widget.PullBackLayout
 import java.util.*
-import android.support.v4.view.PagerAdapter
-import android.view.ViewGroup
-import android.os.Parcelable
-import android.support.v4.app.Fragment
-import android.util.SparseArray
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.app.FragmentManager
-import me.shouheng.uix.R
-import me.shouheng.uix.page.fragment.ImageFragment
 
 
 class GalleryActivity : AppCompatActivity(), PullBackLayout.Callback {
@@ -43,6 +36,12 @@ class GalleryActivity : AppCompatActivity(), PullBackLayout.Callback {
     private var currentIndex: Int = 0
     private var title: String? = ""
     private var fullScreenMode: Boolean = false
+
+    companion object {
+        const val EXTRA_GALLERY_IMAGES          = "__extra_gallery_images"
+        const val EXTRA_GALLERY_TITLE           = "__extra_gallery_title"
+        const val EXTRA_GALLERY_CLICKED_IMAGE   = "__extra_gallery_current_image"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -226,45 +225,5 @@ class GalleryActivity : AppCompatActivity(), PullBackLayout.Callback {
             UIXUtils.exit(this)
         }
         fullScreenMode = !fullScreenMode
-    }
-
-    companion object {
-        const val EXTRA_GALLERY_IMAGES          = "__extra_gallery_images"
-        const val EXTRA_GALLERY_TITLE           = "__extra_gallery_title"
-        const val EXTRA_GALLERY_CLICKED_IMAGE   = "__extra_gallery_current_image"
-    }
-}
-
-class UriPagerAdapter(fragmentManager: FragmentManager, private val uris: List<Uri>)
-    : FragmentStatePagerAdapter(fragmentManager) {
-
-    private val registeredFragments = SparseArray<Fragment>()
-
-    override fun getItem(pos: Int): Fragment {
-        val uri = this.uris[pos]
-        val fragment = ImageFragment()
-        fragment.arguments = Bundle().apply {
-            putParcelable(ImageFragment.ARG_URI, uri as Parcelable)
-        }
-        return fragment
-    }
-
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val fragment = super.instantiateItem(container, position) as Fragment
-        registeredFragments.put(position, fragment)
-        return fragment
-    }
-
-    override fun destroyItem(container: ViewGroup, position: Int, o: Any) {
-        registeredFragments.remove(position)
-        super.destroyItem(container, position, o)
-    }
-
-    override fun getItemPosition(o: Any): Int {
-        return PagerAdapter.POSITION_NONE
-    }
-
-    override fun getCount(): Int {
-        return uris.size
     }
 }

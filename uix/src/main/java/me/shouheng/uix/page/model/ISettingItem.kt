@@ -1,17 +1,17 @@
-package me.shouheng.uix.items
+package me.shouheng.uix.page.model
 
 import android.support.annotation.IntDef
 import com.chad.library.adapter.base.entity.MultiItemEntity
-import me.shouheng.uix.items.IItem.ItemType.Companion.TYPE_DIVIDER
-import me.shouheng.uix.items.IItem.ItemType.Companion.TYPE_IMAGE
-import me.shouheng.uix.items.IItem.ItemType.Companion.TYPE_TEXT
-import me.shouheng.uix.items.IItem.ItemType.Companion.TYPE_SWITCH
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_DIVIDER
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_IMAGE
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_TEXT
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_SWITCH
 
 /**
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-27 18:17
  */
-interface IItem : MultiItemEntity {
+interface ISettingItem : MultiItemEntity {
 
     fun getId(): Int
 

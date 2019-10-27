@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <settingItem android:state_selected="true">
+        <color android:color="@color/about_page_card_selected"/>
+    </settingItem>
+    <settingItem>
+        <color android:color="@color/about_page_card_normal"/>
+    </settingItem>
+</selector>

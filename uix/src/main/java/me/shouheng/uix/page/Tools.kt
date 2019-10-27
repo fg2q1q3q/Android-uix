@@ -1,4 +1,4 @@
-package me.shouheng.uix.items
+package me.shouheng.uix.page
 
 import android.widget.ImageView
 import me.shouheng.uix.button.SwitchButton
@@ -9,7 +9,7 @@ import me.shouheng.uix.button.SwitchButton
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-26 21:22
  */
-interface Tools {
+interface ImageLoader {
 
     /**
      * 加载图片

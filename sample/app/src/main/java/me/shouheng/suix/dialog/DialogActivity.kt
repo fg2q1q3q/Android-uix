@@ -161,8 +161,9 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                                     SimpleList.Item(3, "第 4 项", ResUtils.getDrawable(R.drawable.uix_loading))
                             ))
                             .setOnItemClickListener(object : SimpleList.OnItemClickListener {
-                                override fun onItemClick(item: SimpleList.Item) {
+                                override fun onItemClick(dialog: BeautyDialog, item: SimpleList.Item) {
                                     toast("${item.id} : ${item.name}")
+                                    dialog.dismiss()
                                 }
                             })
                             .build())

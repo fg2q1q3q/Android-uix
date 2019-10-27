@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import me.shouheng.uix.R
+import me.shouheng.uix.dialog.BeautyDialog
 
 /**
  * 列表类型的内容
@@ -26,6 +27,7 @@ class SimpleList private constructor(): IDialogContent {
     private var gravity: Int = Gravity.START
     private var showIcon = true
     private var onItemClickListener: OnItemClickListener? = null
+    private lateinit var dialog: BeautyDialog
 
     override fun getView(ctx: Context): View {
         val layout = View.inflate(ctx, R.layout.uix_dialog_content_list_simple, null)
@@ -33,8 +35,12 @@ class SimpleList private constructor(): IDialogContent {
         val adapter = Adapter(list, textColor, textSize, gravity, showIcon)
         rv.adapter = adapter
         rv.layoutManager = LinearLayoutManager(ctx)
-        adapter.setOnItemClickListener { _, _, pos -> onItemClickListener?.onItemClick(adapter.data[pos]) }
+        adapter.setOnItemClickListener { _, _, pos -> onItemClickListener?.onItemClick(dialog, adapter.data[pos]) }
         return layout
+    }
+
+    override fun setDialog(dialog: BeautyDialog) {
+        this.dialog = dialog
     }
 
     data class Item(val id: Int, var name: String?, var icon: Drawable?)
@@ -59,7 +65,7 @@ class SimpleList private constructor(): IDialogContent {
 
     interface OnItemClickListener {
 
-        fun onItemClick(item: Item)
+        fun onItemClick(dialog: BeautyDialog, item: Item)
     }
 
     class Builder {

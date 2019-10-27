@@ -3,7 +3,7 @@ apply plugin: 'com.novoda.bintray-release'
 publish {
     userOrg = 'easymark'
     groupId = 'me.shouheng.ui'
-    artifactId = 'ui-core'
+    artifactId = 'uix-core'
     repoName = 'Android'
     publishVersion = '1.1.0'
     desc = 'The ui components for Android.'

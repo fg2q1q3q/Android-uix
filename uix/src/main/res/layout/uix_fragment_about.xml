@@ -10,7 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/about_page_header_height"
+        android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -28,23 +28,27 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
+                android:paddingTop="50dp"
+                android:paddingBottom="16dp"
                 app:layout_collapseMode="parallax">
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv_icon"
                     style="@style/AboutPage.Header.Icon"
-                    tools:src="@drawable/ic_empty_zhihu"
+                    tools:src="@android:color/holo_red_light"
                     tools:ignore="ContentDescription" />
 
                 <android.support.v7.widget.AppCompatTextView
-                    tools:text="about_slogan"
+                    tools:text="about_slogan\nabout_slogan\nabout_slogan"
+                    tools:textColor="@android:color/black"
                     style="@style/AboutPage.Header.Slogan"
                     android:id="@+id/tv_slogan"/>
 
                 <android.support.v7.widget.AppCompatTextView
                     style="@style/AboutPage.Header.Version"
+                    tools:textColor="@android:color/black"
                     android:id="@+id/tv_version"
-                    tools:text="Version 1.2.3"/>
+                    tools:text="Version 1.2.3\nVersion 1.2.3\nVersion 1.2.3"/>
 
             </LinearLayout>
 

@@ -1,10 +1,11 @@
 package me.shouheng.uix.page
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.Fragment
@@ -12,18 +13,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.uix_dialog_content_edit_simple.*
 import me.shouheng.uix.R
 import me.shouheng.uix.page.adapter.AboutItemAdapter
 import me.shouheng.uix.page.model.IAboutItem
-import me.shouheng.uix.utils.UIXUtils
 
 /**
  * 关于页面
@@ -35,18 +30,28 @@ class AboutFragment : Fragment() {
 
     @ColorInt private var pageBgColor: Int? = null
     @ColorInt private var barBgColor: Int? = null
-    @ColorInt private var contentColor: Int? = null
-    @ColorInt private var aboutItemBgColor: Int? = null
 
-    private var iconDrawableResId: Int? = null
-    private var iconRightResId: Int? = null
+    private var logo: Drawable? = null
+    private var iconRight: Drawable? = null
+    private var iconLeft: Drawable? = null
 
     private var slogan: String? = null
-    private var toolbarTitle: String? = null
+    private var sloganTextSize: Float = 16f
+    private var sloganTextColor: Int? = null
+    private var sloganTypeface: Int = Typeface.NORMAL
+    private var sloganGravity: Int = Gravity.CENTER
+
     private var version: String? = null
+    private var versionTextSize: Float = 14f
+    private var versionTextColor: Int? = null
+    private var versionTypeface: Int = Typeface.NORMAL
+    private var versionGravity: Int = Gravity.CENTER
+
+    @ColorInt private var aboutItemBgColor: Int? = null
     private var aboutItems: List<IAboutItem> = emptyList()
 
-    private var rightClickListener: OnRightClickListener? = null
+    private var onLeftClickListener: OnLeftClickListener? = null
+    private var onRightClickListener: OnRightClickListener? = null
     private var onItemClickListener: OnItemClickListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,16 +70,19 @@ class AboutFragment : Fragment() {
         val ab = (activity as AppCompatActivity).supportActionBar!!
         ab.setDisplayHomeAsUpEnabled(true)
         ab.setDisplayShowHomeEnabled(true)
+        ab.setHomeAsUpIndicator(iconLeft)
 
-        if (contentColor != null) {
-            ab.setHomeAsUpIndicator(UIXUtils.tintDrawable(R.drawable.uix_arrow_back_black_24dp, contentColor!!))
-            toolbar.setTitleTextColor(contentColor!!)
-            tvSlogan.setTextColor(contentColor!!)
-            tvVersion.setTextColor(contentColor!!)
-            ctl.setCollapsedTitleTextColor(contentColor!!)
-        } else {
-            ab.setHomeAsUpIndicator(R.drawable.uix_arrow_back_black_24dp)
-        }
+        tvSlogan.text = slogan
+        tvSlogan.textSize = sloganTextSize
+        if (sloganTextColor != null) tvSlogan.setTextColor(sloganTextColor!!)
+        tvSlogan.setTypeface(null, sloganTypeface)
+        tvSlogan.gravity = sloganGravity
+
+        tvVersion.text = version
+        tvVersion.textSize = versionTextSize
+        if (versionTextColor != null) tvVersion.setTextColor(versionTextColor!!)
+        tvVersion.setTypeface(null, versionTypeface)
+        tvVersion.gravity = versionGravity
 
         if (pageBgColor != null) cl.setBackgroundColor(pageBgColor!!)
         if (barBgColor != null) {
@@ -82,20 +90,11 @@ class AboutFragment : Fragment() {
             ctl.contentScrim = ColorDrawable(barBgColor!!)
         }
 
-        if (iconDrawableResId != null) ivIcon.setImageResource(iconDrawableResId!!)
+        ivIcon.setImageDrawable(logo)
 
-        tvSlogan.text = slogan
-
-        toolbarTitle = if (TextUtils.isEmpty(toolbarTitle)) slogan else toolbarTitle
-        ctl.title = toolbarTitle
-        ab.title = toolbarTitle
-        toolbar.title = toolbarTitle
-
-        tvVersion.text = version
-
-        if (iconRightResId != null) ivRight.setImageResource(iconRightResId!!)
+        if (iconRight != null) ivRight.setImageDrawable(iconRight!!)
         else ivRight.visibility = View.GONE
-        ivRight.setOnClickListener { rightClickListener?.onClick(ivRight) }
+        ivRight.setOnClickListener { onRightClickListener?.onClick(ivRight) }
 
         val adapter = AboutItemAdapter(aboutItems, itemBackground = aboutItemBgColor?: Color.TRANSPARENT)
         rv.adapter = adapter
@@ -111,7 +110,7 @@ class AboutFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {
-            activity?.onBackPressed()
+            onLeftClickListener?.onClick()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -119,6 +118,11 @@ class AboutFragment : Fragment() {
     interface OnRightClickListener {
 
         fun onClick(v: View)
+    }
+
+    interface OnLeftClickListener {
+
+        fun onClick()
     }
 
     interface OnItemClickListener {
@@ -129,76 +133,165 @@ class AboutFragment : Fragment() {
     class Builder {
         @ColorInt private var pageBgColor: Int? = null
         @ColorInt private var barBgColor: Int? = null
-        @ColorInt private var contentColor: Int? = null
-        @ColorInt private var aboutItemBgColor: Int? = null
 
-        private var iconDrawableResId: Int? = null
-        private var iconRightResId: Int? = null
+        private var logo: Drawable? = null
+        private var iconRight: Drawable? = null
+        private var iconLeft: Drawable? = null
 
         private var slogan: String? = null
-        private var toolbarTitle: String? = null
+        private var sloganTextSize: Float = 16f
+        private var sloganTextColor: Int? = null
+        private var sloganTypeface: Int = Typeface.NORMAL
+        private var sloganGravity: Int = Gravity.CENTER
+
         private var version: String? = null
+        private var versionTextSize: Float = 14f
+        private var versionTextColor: Int? = null
+        private var versionTypeface: Int = Typeface.NORMAL
+        private var versionGravity: Int = Gravity.CENTER
+
+        @ColorInt private var aboutItemBgColor: Int? = null
         private var aboutItems: List<IAboutItem> = emptyList()
 
-        private var rightClickListener: OnRightClickListener? = null
+        private var onRightClickListener: OnRightClickListener? = null
+        private var onLeftClickListener: OnLeftClickListener? = null
         private var onItemClickListener: OnItemClickListener? = null
 
+        /**
+         * 设置页面的背景颜色
+         */
         fun setPageBgColor(@ColorInt pageBgColor: Int): Builder {
             this.pageBgColor = pageBgColor
             return this
         }
 
-        fun setBarBgColor(@ColorInt barBgColor: Int): Builder {
+        /**
+         * 设置顶部的 AppbarLayout 的背景颜色
+         */
+        fun setAppBarBgColor(@ColorInt barBgColor: Int): Builder {
             this.barBgColor = barBgColor
             return this
         }
 
-        fun setContentColor(@ColorInt contentColor: Int): Builder {
-            this.contentColor = contentColor
+        /**
+         * 设置 logo
+         */
+        fun setLogo(logo: Drawable): Builder {
+            this.logo = logo
             return this
         }
 
-        fun setAboutItemBgColor(@ColorInt aboutItemBgColor: Int): Builder {
-            this.aboutItemBgColor = aboutItemBgColor
+        /**
+         * 设置工具栏右侧的按钮的图标和点击事件
+         */
+        fun setRightDrawable(iconRight: Drawable, onRightClickListener: OnRightClickListener): Builder {
+            this.iconRight = iconRight
+            this.onRightClickListener = onRightClickListener
             return this
         }
 
-        fun setIconResId(@DrawableRes iconDrawableResId: Int): Builder {
-            this.iconDrawableResId = iconDrawableResId
+        /**
+         * 设置工具栏左侧的按钮的图标和点击事件
+         */
+        fun setLeftDrawable(iconLeft: Drawable, onLeftClickListener: OnLeftClickListener): Builder {
+            this.iconLeft = iconLeft
+            this.onLeftClickListener = onLeftClickListener
             return this
         }
 
-        fun setIconRightResId(@DrawableRes iconRightResId: Int): Builder {
-            this.iconRightResId = iconRightResId
-            return this
-        }
-
+        /**
+         * 一级标题：文字
+         */
         fun setSlogan(slogan: String): Builder {
             this.slogan = slogan
             return this
         }
 
-        fun setToolbarTitle(toolbarTitle: String): Builder {
-            this.toolbarTitle = toolbarTitle
+        /**
+         * 一级标题：文字大小
+         */
+        fun setSloganTextSize(textSize: Float): Builder {
+            this.sloganTextSize = textSize
             return this
         }
 
+        /**
+         * 一级标题：文字颜色
+         */
+        fun setSloganTextColor(@ColorInt textColor: Int): Builder {
+            this.sloganTextColor = textColor
+            return this
+        }
+
+        /**
+         * 一级标题：字体
+         */
+        fun setSloganTypeface(typeFace: Int): Builder {
+            this.sloganTypeface = typeFace
+            return this
+        }
+
+        /**
+         * 一级标题：位置
+         */
+        fun setSloganGravity(gravity: Int): Builder {
+            this.sloganGravity = gravity
+            return this
+        }
+
+        /**
+         * 二级标题
+         */
         fun setVersion(version: String): Builder {
             this.version = version
             return this
         }
 
-        fun setAboutItems(aboutItems: List<IAboutItem>): Builder {
+        /**
+         * 二级标题：文字大小
+         */
+        fun setVersionTextSize(textSize: Float): Builder {
+            this.versionTextSize = textSize
+            return this
+        }
+
+        /**
+         * 二级标题：文字颜色
+         */
+        fun setVersionTextColor(@ColorInt textColor: Int): Builder {
+            this.versionTextColor = textColor
+            return this
+        }
+
+        /**
+         * 二级标题：字体
+         */
+        fun setVersionTypeface(typeFace: Int): Builder {
+            this.versionTypeface = typeFace
+            return this
+        }
+
+        /**
+         * 二级标题：位置
+         */
+        fun setVersionGravity(gravity: Int): Builder {
+            this.versionGravity = gravity
+            return this
+        }
+
+        /**
+         * 设置底部条目的背景颜色
+         */
+        fun setAboutItemBgColor(@ColorInt aboutItemBgColor: Int): Builder {
+            this.aboutItemBgColor = aboutItemBgColor
+            return this
+        }
+
+        /**
+         * 设置列表的内容以及单击事件
+         */
+        fun setAboutItems(aboutItems: List<IAboutItem>, onItemClickListener: OnItemClickListener): Builder {
             this.aboutItems = aboutItems
-            return this
-        }
-
-        fun setOnRightClickListener(rightClickListener: OnRightClickListener): Builder {
-            this.rightClickListener = rightClickListener
-            return this
-        }
-
-        fun setOnItemClickListener(onItemClickListener: OnItemClickListener): Builder {
             this.onItemClickListener = onItemClickListener
             return this
         }
@@ -207,16 +300,28 @@ class AboutFragment : Fragment() {
             val fragment = AboutFragment()
             fragment.pageBgColor = pageBgColor
             fragment.barBgColor = barBgColor
-            fragment.contentColor = contentColor
-            fragment.aboutItemBgColor = aboutItemBgColor
-            fragment.iconDrawableResId = iconDrawableResId
-            fragment.iconRightResId = iconRightResId
+
+            fragment.logo = logo
+            fragment.iconRight = iconRight
+            fragment.iconLeft = iconLeft
+
             fragment.slogan = slogan
-            fragment.toolbarTitle = toolbarTitle
+            fragment.sloganTextSize = sloganTextSize
+            fragment.sloganTextColor = sloganTextColor
+            fragment.sloganTypeface = sloganTypeface
+
             fragment.version = version
+            fragment.versionTextSize = versionTextSize
+            fragment.versionTextColor = versionTextColor
+            fragment.versionTypeface = versionTypeface
+
+            fragment.aboutItemBgColor = aboutItemBgColor
             fragment.aboutItems = aboutItems
-            fragment.rightClickListener = rightClickListener
+
+            fragment.onLeftClickListener = onLeftClickListener
+            fragment.onRightClickListener = onRightClickListener
             fragment.onItemClickListener = onItemClickListener
+
             return fragment
         }
     }

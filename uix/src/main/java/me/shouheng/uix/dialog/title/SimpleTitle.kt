@@ -17,7 +17,7 @@ import me.shouheng.uix.R
  */
 class SimpleTitle private constructor(): IDialogTitle {
 
-    private var title: String? = null
+    private var title: CharSequence? = null
     @ColorInt private var titleColor: Int? = null
     @Size private var titleSize: Float = 16f
     private var typeFace: Int = Typeface.NORMAL
@@ -34,13 +34,13 @@ class SimpleTitle private constructor(): IDialogTitle {
     }
 
     class Builder {
-        private var title: String? = null
+        private var title: CharSequence? = null
         @ColorInt private var titleColor: Int? = null
         @Size private var titleSize: Float = 16f
         private var typeFace: Int = Typeface.NORMAL
         private var gravity: Int = Gravity.CENTER
 
-        fun setTitle(title: String): Builder {
+        fun setTitle(title: CharSequence): Builder {
             this.title = title
             return this
         }

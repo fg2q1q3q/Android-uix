@@ -74,6 +74,24 @@ class PasswordEditText : RegexEditText, View.OnTouchListener, View.OnFocusChange
         super.addTextChangedListener(this)
     }
 
+    fun setVisibleDrawable(visibleDrawable: Drawable) {
+        val dp24 = UIXUtils.dp2px(24f)
+        val visible = mCurrentDrawable == mVisibleDrawable
+        this.mVisibleDrawable = visibleDrawable
+        mVisibleDrawable!!.setBounds(0, 0, dp24, dp24)
+        if (visible) mCurrentDrawable = mVisibleDrawable
+        setDrawableVisible(visible)
+    }
+
+    fun setInvisibleDrawable(invisibleDrawable: Drawable) {
+        val dp24 = UIXUtils.dp2px(24f)
+        val visible = mCurrentDrawable == mVisibleDrawable
+        this.mInvisibleDrawable = invisibleDrawable
+        mInvisibleDrawable!!.setBounds(0, 0, dp24, dp24)
+        if (!visible) mCurrentDrawable = mInvisibleDrawable
+        setDrawableVisible(visible)
+    }
+
     private fun setDrawableVisible(visible: Boolean) {
         if (mCurrentDrawable!!.isVisible == visible) {
             return

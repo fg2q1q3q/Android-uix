@@ -3,14 +3,15 @@ package me.shouheng.uix.layout
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 
 /**
- * 正方形的 RelativeLayout 布局
+ * 正方形的 LinearLayout 布局
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019/10/1 11:47
  */
-class SquareLinearLayout : LinearLayout {
+class SquareRelativeLayout : RelativeLayout {
 
     constructor(context: Context, attrs: AttributeSet, defStyle:Int) : super(context, attrs, defStyle)
 

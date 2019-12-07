@@ -36,6 +36,7 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_loading"
                 tools:text="loading..."
+                android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -62,6 +63,7 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_empty_title"
                 tools:text="empty title"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_marginBottom="15dp"
                 android:layout_width="wrap_content"
@@ -70,6 +72,7 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_empty_detail"
                 tools:text="empty detail"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,20 +21,20 @@
             android:layout_height="55dp" />
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_error_title"
             android:text="@string/uix_offline_title"
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:textColor="@android:color/darker_gray"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_error_tips"
             android:text="@string/uix_offline_sub_title"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:layout_width="match_parent"

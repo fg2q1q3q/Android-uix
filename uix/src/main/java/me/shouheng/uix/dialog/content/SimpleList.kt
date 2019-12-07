@@ -43,7 +43,7 @@ class SimpleList private constructor(): IDialogContent {
         this.dialog = dialog
     }
 
-    data class Item(val id: Int, var name: String?, var icon: Drawable?)
+    data class Item(val id: Int, var name: CharSequence?, var icon: Drawable?)
 
     class Adapter(list: List<Item>,
                   private var textColor: Int?,

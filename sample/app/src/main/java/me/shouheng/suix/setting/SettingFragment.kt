@@ -14,6 +14,7 @@ import me.shouheng.uix.page.model.*
 import me.shouheng.uix.page.OnCheckStateChangeListener
 import me.shouheng.uix.page.ImageLoader
 import me.shouheng.uix.page.adapter.SettingItemAdapter
+import me.shouheng.uix.rv.IEmptyView
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
 
@@ -33,10 +34,11 @@ class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>()
 
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.rv.adapter = adapter
-        binding.rv.setEmptyView(binding.ev)
+        binding.rv.setEmptyView(binding.ev as IEmptyView)
 
         binding.ev.showLoading()
         Handler().postDelayed({
+            binding.ev.emptyTitle = "【修改了下标题】"
             binding.ev.showEmpty()
             Handler().postDelayed({
                 binding.ev.hide()

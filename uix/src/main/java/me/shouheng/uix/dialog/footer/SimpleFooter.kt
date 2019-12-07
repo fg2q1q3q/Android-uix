@@ -29,9 +29,9 @@ class SimpleFooter private constructor(): IDialogFooter {
     @BottomButtonStyle
     private var bottomStyle: Int? = BUTTON_TWO
 
-    private var leftText: String? = null
-    private var middleText: String? = null
-    private var rightText: String? = null
+    private var leftText: CharSequence? = null
+    private var middleText: CharSequence? = null
+    private var rightText: CharSequence? = null
 
     private var leftTextSize: Float = 16f
     private var middleTextSize: Float = 16f
@@ -146,9 +146,9 @@ class SimpleFooter private constructor(): IDialogFooter {
         @BottomButtonStyle
         private var bottomStyle: Int? = BUTTON_TWO
 
-        private var leftText: String? = null
-        private var middleText: String? = null
-        private var rightText: String? = null
+        private var leftText: CharSequence? = null
+        private var middleText: CharSequence? = null
+        private var rightText: CharSequence? = null
 
         private var leftTextSize: Float = 16f
         private var middleTextSize: Float = 16f
@@ -166,17 +166,17 @@ class SimpleFooter private constructor(): IDialogFooter {
             return this
         }
 
-        fun setLeftText(leftText: String): Builder {
+        fun setLeftText(leftText: CharSequence): Builder {
             this.leftText = leftText
             return this
         }
 
-        fun setMiddleText(middleText: String): Builder {
+        fun setMiddleText(middleText: CharSequence): Builder {
             this.middleText = middleText
             return this
         }
 
-        fun setRightText(rightText: String): Builder {
+        fun setRightText(rightText: CharSequence): Builder {
             this.rightText = rightText
             return this
         }

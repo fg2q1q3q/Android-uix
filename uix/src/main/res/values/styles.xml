@@ -80,8 +80,8 @@
     <style name="AboutPage.Item.Card">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">12dp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
         <item name="android:background">@drawable/uix_about_page_card</item>
         <item name="android:elevation" tools:ignore="NewApi">1dp</item>
     </style>
@@ -100,6 +100,7 @@
         <item name="android:textSize">18sp</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
     </style>
     <style name="AboutPage.Header.Version">
         <item name="android:layout_width">wrap_content</item>
@@ -125,7 +126,6 @@
     <style name="AboutPage.CardContent">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingBottom">8dp</item>
         <item name="android:textColorLink">@color/about_page_link_text_color</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/about_page_card_text_color</item>

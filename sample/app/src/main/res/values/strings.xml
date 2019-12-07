@@ -1,4 +1,32 @@
 <resources>
     <string name="app_name">AndroidUIX</string>
 
+    <string name="about_app_section">美 · 言</string>
+    <string name="about_app_detail"><![CDATA[您好，感谢您使用美言！<br/><br/>
+    美言 APP 是一款<b>美观且实用的句子管理应用</b>。它可以为您的收集和阅览提供丰富和愉悦的体验。<br/><br/>
+    我们开发这款应用的<b>目的</b>在于：<br/>
+    1. 帮助人们<b>随时随地</b>记录自己的想法和体验；<br/>
+    2. 帮助人们将想法<b>分享</b>给更多的人，亦可作为<b>私人</b>的句子收集器。<br/><br/>
+    在开发过程中，我们也开发了很多<b>自研库</b>，来帮助开发者实现开发自己的应用的梦想。<br/><br/>
+    如果您在使用过程中发现了不足之处，请按照我们提供的联系方式进行<b>反馈</b>。
+    我们希望和您一起来把这个应用做得更好！<br/><br/>
+    <b>请享用！</b>]]></string>
+    <string name="about_developer_section">开发者</string>
+    <string name="about_developer_name">青彦</string>
+    <string name="about_developer_detail"><![CDATA[<b>开发者和设计者</b>，负责应用的 <b>Android 端、后端、H5 页面、产品构思以及原型设计等</b>]]></string>
+    <string name="about_sources">自研库</string>
+    <string name="about_sources_detail"><![CDATA[
+    在开发该软件的过程中，我们尝试对代码进行封装，从而积累和沉淀出来一些框架，我们已经将其开源到了 <b>Github</b> 上面。<br/><br/>
+    我们希望自己的库能够<b>帮助更多的开发者实现快速开发自己的应用的梦想</b>。希望看到的您能够为我们的开源项目贡献几行代码，即便是一个小小的 <b>Star</b> 也将是对我们工作的重要支持。<br/><br/>
+    下面是我们的库的链接地址：<br/><br/>
+    1. <b>MVVMs</b>：<a href="https://github.com/Shouheng88/Android-MVVMs">一个开源的 MVVM+Databinding 整合框架，优雅设计，基于注解设计进行抽象和封装，配合工具类库 AndroidUtils 以及 AndroidUix 一起实现快捷开发的框架。</a><br/><br/>
+    2. <b>Android-Utils</b>：<a href="https://github.com/Shouheng88/Android-utils">Android 常用的 Android 工具库合集，设备信息，运行时权限，资源获取，日志输出，编码和加解密，时间日期，字符串处理，文件读写，文件路径获取等。</a><br/><br/>
+    3. <b>Android-UIx</b>：<a href="https://github.com/Shouheng88/Android-uix">Android UI 控件，Android UI 组件化，Android 通用页面解决方案，快捷开发。</a><br/><br/>
+    4. <b>Compressor</b>：<a href="https://github.com/Shouheng88/Compressor">一款现代、高效的 Android 图片压缩框架，优雅设计，整合了多种图片压缩策略。</a><br/><br/>
+    其他的库正在整理中…… ]]></string>
+    <string name="about_other_apps">作者的其他作品</string>
+    <string name="about_other_marknote">马克笔记</string>
+    <string name="about_other_marknote_desc"><![CDATA[一个快速、质感、功能丰富的 <b>Markdown</b> 笔记应用。
+    我们计划打造一款更加强大的移动端笔记应用，通过云端同步来配合 PC 端进行协作。<br/>敬请期待！]]></string>
+
 </resources>

@@ -65,6 +65,12 @@ class ClearEditText : RegexEditText, View.OnTouchListener, View.OnFocusChangeLis
         setCompoundDrawables(drawables[0], drawables[1], if (visible) mClearDrawable else null, drawables[3])
     }
 
+    fun setClearDrawable(drawable: Drawable) {
+        this.mClearDrawable = drawable
+        mClearDrawable!!.setBounds(0, 0, mClearDrawable!!.intrinsicWidth, mClearDrawable!!.intrinsicHeight)
+        setDrawableVisible(text?.isEmpty()?:false)
+    }
+
     override fun setOnFocusChangeListener(onFocusChangeListener: OnFocusChangeListener) {
         mOnFocusChangeListener = onFocusChangeListener
     }

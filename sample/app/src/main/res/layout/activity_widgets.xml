@@ -19,6 +19,7 @@
 
             <HorizontalScrollView
                 android:scrollbars="none"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
 
@@ -39,6 +40,20 @@
                     android:layout_height="match_parent"/>
 
             </HorizontalScrollView>
+
+            <me.shouheng.uix.text.ClearEditText
+                android:id="@+id/et_clear"
+                android:layout_margin="8dp"
+                android:hint="包含清除按钮的输入框"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <me.shouheng.uix.text.PasswordEditText
+                android:id="@+id/et_psd"
+                android:layout_margin="8dp"
+                android:hint="密码输入框"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

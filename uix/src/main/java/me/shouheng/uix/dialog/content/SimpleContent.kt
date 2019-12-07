@@ -17,7 +17,7 @@ import me.shouheng.uix.R
  */
 class SimpleContent private constructor(): IDialogContent {
 
-    private var content: String? = null
+    private var content: CharSequence? = null
     @ColorInt private var contentColor: Int? = null
     @Size private var contentSize: Float = 16f
     private var typeFace: Int = Typeface.NORMAL
@@ -34,13 +34,13 @@ class SimpleContent private constructor(): IDialogContent {
     }
 
     class Builder {
-        private var content: String? = null
+        private var content: CharSequence? = null
         @ColorInt private var contentColor: Int? = null
         @Size private var contentSize: Float = 16f
         private var typeFace: Int = Typeface.NORMAL
         private var gravity: Int = Gravity.CENTER
 
-        fun setContent(content: String): Builder {
+        fun setContent(content: CharSequence): Builder {
             this.content = content
             return this
         }

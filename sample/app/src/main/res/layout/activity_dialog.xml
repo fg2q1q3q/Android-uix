@@ -55,6 +55,12 @@
             android:layout_height="wrap_content"/>
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_loading_cancelable"
+            android:text="加载对话框（可以取消的）"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_address"
             android:text="地址对话框"
             android:layout_width="match_parent"

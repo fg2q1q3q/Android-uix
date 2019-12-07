@@ -1,6 +1,7 @@
 package me.shouheng.uix.page.adapter
 
 import android.graphics.Color
+import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -47,6 +48,7 @@ class AboutItemAdapter(list: List<IAboutItem>, private val itemBackground: Int =
                 }
                 helper.getView<TextView>(R.id.content)!!.textSize = item.textSize
                 helper.getView<TextView>(R.id.content)!!.setTypeface(null, item.typeface)
+                (helper.getView(R.id.content) as TextView).movementMethod = LinkMovementMethod.getInstance()
             }
             TYPE_USER -> {
                 item as AboutUserItem

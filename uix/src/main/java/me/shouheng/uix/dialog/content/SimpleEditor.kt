@@ -1,6 +1,7 @@
 package me.shouheng.uix.dialog.content
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
@@ -34,6 +35,7 @@ class SimpleEditor private constructor(): IDialogContent, TextWatcher {
     private var maxLength: Int? = null
     private var maxLines: Int? = null
     private var showLength = true
+    private var clearDrawable: Drawable? = null
 
     private lateinit var et: ClearEditText
     private lateinit var tv: TextView
@@ -60,6 +62,7 @@ class SimpleEditor private constructor(): IDialogContent, TextWatcher {
         if (maxLength != null) et.addFilters(InputFilter.LengthFilter(maxLength!!))
         if (maxLines != null) et.maxLines = maxLines!!
         if (!showLength) tv.visibility = View.GONE
+        if (clearDrawable != null) et.setClearDrawable(clearDrawable!!)
         return layout
     }
 
@@ -102,6 +105,7 @@ class SimpleEditor private constructor(): IDialogContent, TextWatcher {
         private var maxLength: Int? = null
         private var maxLines: Int? = null
         private var showLength = true
+        private var clearDrawable: Drawable? = null
 
         fun setContent(content: String): Builder {
             this.content = content
@@ -120,6 +124,11 @@ class SimpleEditor private constructor(): IDialogContent, TextWatcher {
 
         fun setHintTextColor(hintTextColor: Int): Builder {
             this.hintTextColor = hintTextColor
+            return this
+        }
+
+        fun setClearDrawable(clearDrawable: Drawable): Builder {
+            this.clearDrawable = clearDrawable
             return this
         }
 
@@ -183,6 +192,7 @@ class SimpleEditor private constructor(): IDialogContent, TextWatcher {
             editor.maxLength = maxLength
             editor.maxLines = maxLines
             editor.showLength = showLength
+            editor.clearDrawable = clearDrawable
             return editor
         }
     }

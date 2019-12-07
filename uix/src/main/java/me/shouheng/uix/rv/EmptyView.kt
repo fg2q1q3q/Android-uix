@@ -1,6 +1,7 @@
 package me.shouheng.uix.rv
 
 import android.content.Context
+import android.support.annotation.ColorInt
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -21,52 +22,57 @@ import me.shouheng.uix.config.EmptyViewState
  */
 class EmptyView : FrameLayout, IEmptyView {
 
-    private var loadingStyle: Int = EmptyLoadingStyle.STYLE_ANDROID
+    @EmptyLoadingStyle
+    var loadingStyle: Int = EmptyLoadingStyle.STYLE_ANDROID
         set(value) {
             field = value
             isAndroidStyle = loadingStyle == EmptyLoadingStyle.STYLE_ANDROID
             ivLoading.visibility = if (isAndroidStyle) View.GONE else View.VISIBLE
             pb.visibility = if (isAndroidStyle) View.VISIBLE else View.GONE
         }
-    private var emptyViewState: Int = EmptyViewState.STATE_LOADING
+    @EmptyViewState
+    var emptyViewState: Int = EmptyViewState.STATE_LOADING
         set(value) {
             field = value
-            isAndroidStyle = loadingStyle == EmptyLoadingStyle.STYLE_ANDROID
-            ivLoading.visibility = if (isAndroidStyle) View.GONE else View.VISIBLE
-            pb.visibility = if (isAndroidStyle) View.VISIBLE else View.GONE
+            isLoading = emptyViewState == EmptyViewState.STATE_LOADING
+            loading.visibility = if (isLoading) View.VISIBLE else View.GONE
+            empty.visibility = if (isLoading) View.GONE else View.VISIBLE
         }
-    private var emptyImage: Int? = null
+    var emptyImage: Int? = null
         set(value) {
             field = value
             if (emptyImage != null) ivEmpty.setImageResource(emptyImage!!)
             else ivEmpty.visibility = View.GONE
         }
-    private var emptyTitle: String? = null
+    var emptyTitle: String? = null
         set(value) {
             field = value
             tvEmptyTitle.text = value
         }
-    private var emptyTitleColor: Int? = null
+    @ColorInt
+    var emptyTitleColor: Int? = null
         set(value) {
             field = value
             if (value != null) tvEmptyTitle.setTextColor(value)
         }
-    private var emptyDetails: String? = null
+    var emptyDetails: String? = null
         set(value) {
             field = value
             tvEmptyDetail.text = value
         }
-    private var emptyDetailsColor: Int? = null
+    @ColorInt
+    var emptyDetailsColor: Int? = null
         set(value) {
             field = value
             if (value != null) tvEmptyDetail.setTextColor(value)
         }
-    private var emptyLoadingTips: String? = null
+    var emptyLoadingTips: String? = null
         set(value) {
             field = value
             tvLoading.text = value
         }
-    private var emptyLoadingTipsColor: Int? = null
+    @ColorInt
+    var emptyLoadingTipsColor: Int? = null
         set(value) {
             field = value
             if (value != null) tvLoading.setTextColor(value)
@@ -168,15 +174,15 @@ class EmptyView : FrameLayout, IEmptyView {
     override fun getView(): View = this
 
     class Builder(private var context: Context) {
-        private var loadingStyle: Int = EmptyLoadingStyle.STYLE_ANDROID
-        private var emptyViewState: Int = EmptyViewState.STATE_LOADING
+        @EmptyLoadingStyle private var loadingStyle: Int = EmptyLoadingStyle.STYLE_ANDROID
+        @EmptyViewState private var emptyViewState: Int = EmptyViewState.STATE_LOADING
         private var emptyImage: Int? = null
         private var emptyTitle: String? = null
-        private var emptyTitleColor: Int? = null
+        @ColorInt private var emptyTitleColor: Int? = null
         private var emptyDetails: String? = null
-        private var emptyDetailsColor: Int? = null
+        @ColorInt private var emptyDetailsColor: Int? = null
         private var emptyLoadingTips: String? = null
-        private var emptyLoadingTipsColor: Int? = null
+        @ColorInt private var emptyLoadingTipsColor: Int? = null
 
         fun setLoadingStyle(@EmptyLoadingStyle loadingStyle: Int): Builder {
             this.loadingStyle = loadingStyle
@@ -198,7 +204,7 @@ class EmptyView : FrameLayout, IEmptyView {
             return this
         }
 
-        fun setEmptyTitleColor(emptyTitleColor: Int): Builder {
+        fun setEmptyTitleColor(@ColorInt emptyTitleColor: Int): Builder {
             this.emptyTitleColor = emptyTitleColor
             return this
         }
@@ -208,7 +214,7 @@ class EmptyView : FrameLayout, IEmptyView {
             return this
         }
 
-        fun setEmptyDetailsColor(emptyDetailsColor: Int): Builder {
+        fun setEmptyDetailsColor(@ColorInt emptyDetailsColor: Int): Builder {
             this.emptyDetailsColor = emptyDetailsColor
             return this
         }
@@ -218,7 +224,7 @@ class EmptyView : FrameLayout, IEmptyView {
             return this
         }
 
-        fun setEmptyLoadingTipsColor(emptyLoadingTipsColor: Int): Builder {
+        fun setEmptyLoadingTipsColor(@ColorInt emptyLoadingTipsColor: Int): Builder {
             this.emptyLoadingTipsColor = emptyLoadingTipsColor
             return this
         }

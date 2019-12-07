@@ -9,8 +9,10 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import me.shouheng.uix.R
+import me.shouheng.uix.config.EmptyLoadingStyle
 import me.shouheng.uix.utils.UIXUtils
 
 /**
@@ -22,7 +24,7 @@ import me.shouheng.uix.utils.UIXUtils
 object DialogUtils {
 
     /**
-     * 显示一个 iOS 风格的进度对话框（Android 风格太丑）
+     * 显示加载对话框
      */
     fun showLoading(context: Context,
                     @StringRes msgResId: Int,
@@ -39,11 +41,16 @@ object DialogUtils {
                     msg: String,
                     cancelable: Boolean = false,
                     isAnimation: Boolean = true,
-                    imageId: Int = 0): Dialog {
+                    imageId: Int = 0,
+                    @EmptyLoadingStyle loadingStyle: Int = EmptyLoadingStyle.STYLE_ANDROID): Dialog {
         val v = LayoutInflater.from(context).inflate(R.layout.uix_dialog_loading, null)
         val layout = v.findViewById(R.id.loading_dialog_view) as LinearLayout
         val spaceshipImage = v.findViewById(R.id.img) as ImageView
+        val pb = v.findViewById<ProgressBar>(R.id.pb)
         val tipTextView = v.findViewById(R.id.tipTextView) as TextView
+        val isAndroidStyle = loadingStyle == EmptyLoadingStyle.STYLE_ANDROID
+        pb.visibility = if (isAndroidStyle) View.VISIBLE else View.GONE
+        spaceshipImage.visibility = if (!isAndroidStyle) View.VISIBLE else View.GONE
 
         if (imageId != 0) spaceshipImage.setImageResource(imageId)
         if (isAnimation) {
@@ -53,7 +60,7 @@ object DialogUtils {
         tipTextView.text = msg
         tipTextView.visibility = if (TextUtils.isEmpty(msg)) View.GONE else View.VISIBLE
 
-        val loadingDialog = Dialog(context, R.style.Dialog_Loading)
+        val loadingDialog = Dialog(context, if (cancelable) R.style.Dialog_Loading_Cancelable else R.style.Dialog_Loading)
         loadingDialog.setCancelable(cancelable)
         val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         loadingDialog.setContentView(layout, params)

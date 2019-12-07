@@ -11,6 +11,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import me.shouheng.uix.R
+import me.shouheng.uix.config.Config
 import me.shouheng.uix.config.DialogPosition
 import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
 import me.shouheng.uix.config.DialogPosition.Companion.POS_CENTER
@@ -49,7 +50,7 @@ class BeautyDialog : DialogFragment() {
     private var onShowListener: OnShowListener? = null
 
     private var fixedHeight = 0
-    private var dialogMargin = UIXUtils.dp2px(20f)
+    private var dialogMargin = UIXUtils.dp2px(Config.DIALOG_MARGIN_SIZE_IN_DP)
     private var dialogBackground: Drawable? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -154,7 +155,7 @@ class BeautyDialog : DialogFragment() {
         private var onShowListener: OnShowListener? = null
 
         private var fixedHeight = 0
-        private var dialogMargin = UIXUtils.dp2px(20f)
+        private var dialogMargin = UIXUtils.dp2px(Config.DIALOG_MARGIN_SIZE_IN_DP)
         private var dialogBackground: Drawable? = null
 
         fun setDialogTitle(iDialogTitle: IDialogTitle): Builder {

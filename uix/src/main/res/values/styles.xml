@@ -34,6 +34,9 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+    <style name="Dialog.Loading.Cancelable" parent="Dialog.Loading">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
     <style name="Dialog.Bottom"/>
     <style name="Dialog.Bottom.Button">
         <item name="android:textSize">16sp</item>

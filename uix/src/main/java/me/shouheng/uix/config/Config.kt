@@ -22,4 +22,9 @@ object Config {
      * ViewPager 变换放缩的大小
      */
     var DEPTH_PAGE_TRANSFORMER_MIN_SCALE                = 0.75f
+
+    /**
+     * 对话的 margin 的大小，单位 dp
+     */
+    var DIALOG_MARGIN_SIZE_IN_DP                        = 20f
 }

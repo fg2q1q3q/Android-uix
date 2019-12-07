@@ -20,8 +20,8 @@ class SettingDividerItem(private val id: Int,
 
 class SettingTextItem(private val id: Int,
                       var editable: Boolean = true,
-                      var title: String? = null,
-                      var foot: String? = null) : ISettingItem {
+                      var title: CharSequence? = null,
+                      var foot: CharSequence? = null) : ISettingItem {
 
     private val type: Int = ISettingItem.ItemType.TYPE_TEXT
 
@@ -34,7 +34,7 @@ class SettingTextItem(private val id: Int,
 
 class SettingImageItem(private val id: Int,
                        var editable: Boolean = true,
-                       var title: String? = null,
+                       var title: CharSequence? = null,
                        var imageLoader: ImageLoader? = null) : ISettingItem {
 
     private val type: Int = ISettingItem.ItemType.TYPE_IMAGE
@@ -48,7 +48,7 @@ class SettingImageItem(private val id: Int,
 
 class SettingSwitchItem(private val id: Int,
                         var editable: Boolean = true,
-                        var title: String? = null,
+                        var title: CharSequence? = null,
                         var enable: Boolean = false,
                         var onCheckStateChangeListener: OnCheckStateChangeListener? = null) : ISettingItem {
 

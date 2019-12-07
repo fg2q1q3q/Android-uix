@@ -104,7 +104,9 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .setDialogTitle(SimpleTitle.Builder()
                             .setTitle("普通编辑对话框")
                             .build())
-                    .setDialogContent(SimpleEditor.Builder().build())
+                    .setDialogContent(SimpleEditor.Builder()
+                            .setClearDrawable(ResUtils.getDrawable(R.drawable.ic_cancel_black_24dp))
+                            .build())
                     .setDialogBottom(SimpleFooter.Builder()
                             .setBottomStyle(BUTTON_THREE)
                             .setLeftText("Left")
@@ -170,6 +172,11 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnLoading.setOnClickListener {
+            val dlg = DialogUtils.showLoading(this, "加载中...\n（3 秒之后关闭）", false)
+            dlg.show()
+            Handler().postDelayed({ DialogUtils.hideDialog(dlg) }, 3000)
+        }
+        binding.btnLoadingCancelable.setOnClickListener {
             DialogUtils.showLoading(this, "加载中...", true).show()
         }
         binding.btnAddress.setOnClickListener {
@@ -204,13 +211,14 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         }
         binding.btnCustomList.setOnClickListener {
             val adapter = SimpleList.Adapter(emptyList(), Color.BLACK)
+            val ev = EmptyView.Builder(this)
+                    .setEmptyLoadingTips("loading")
+                    .setEmptyLoadingTipsColor(Color.BLUE)
+                    .setLoadingStyle(EmptyLoadingStyle.STYLE_IOS)
+                    .setEmptyViewState(EmptyViewState.STATE_LOADING)
+                    .build()
             customList = CustomList.Builder(this)
-                    .setEmptyView(EmptyView.Builder(this)
-                            .setEmptyLoadingTips("loading")
-                            .setEmptyLoadingTipsColor(Color.BLUE)
-                            .setLoadingStyle(EmptyLoadingStyle.STYLE_IOS)
-                            .setEmptyViewState(EmptyViewState.STATE_LOADING)
-                            .build())
+                    .setEmptyView(ev)
                     .setAdapter(adapter)
                     .build()
             adapter.setOnItemClickListener { _, _, pos ->
@@ -229,6 +237,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .build().show(supportFragmentManager, "custom-list")
             // 先显示对话框再加载数据的情形
             Handler().postDelayed({
+                ev.hide()
                 adapter.setNewData(listOf(
                         SimpleList.Item(0, "第 1 项", ResUtils.getDrawable(R.drawable.uix_eye_close_48)),
                         SimpleList.Item(1, "第 2 项", ResUtils.getDrawable(R.drawable.uix_eye_open_48)),

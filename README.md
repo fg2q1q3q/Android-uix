@@ -3,6 +3,7 @@
 ![SLicense](https://img.shields.io/hexpm/l/plug.svg)
 ![Version](https://img.shields.io/maven-metadata/v/https/dl.bintray.com/easymark/Android/me/shouheng/ui/uix-core/maven-metadata.xml.svg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f62b5a7fe6774ed1b04bf23bcaab9d69)](https://www.codacy.com/manual/Shouheng88/Android-uix?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Shouheng88/Android-uix&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/Shouheng88/Android-uix.svg?branch=master)](https://travis-ci.org/Shouheng88/Android-uix)
 
 ## 1、关于项目
 

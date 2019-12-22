@@ -3,11 +3,13 @@ package me.shouheng.uix.page.adapter
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.TextView
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import me.shouheng.uix.R
 import me.shouheng.uix.button.SwitchButton
 import me.shouheng.uix.page.model.*
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_DESC
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_DIVIDER
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_IMAGE
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_TEXT
@@ -30,43 +32,51 @@ class SettingItemAdapter(list: List<ISettingItem>,
         addItemType(TYPE_IMAGE, R.layout.uix_item_setting_image)
         addItemType(TYPE_DIVIDER, R.layout.uix_item_setting_divider)
         addItemType(TYPE_SWITCH, R.layout.uix_item_setting_switch)
+        addItemType(TYPE_DESC, R.layout.uix_item_setting_desc)
     }
-    override fun convert(helper: BaseViewHolder?, settingItem: ISettingItem?) {
-        helper?.itemView?.setBackgroundColor(itemBackground)
-        when(settingItem!!.itemType) {
+    override fun convert(helper: BaseViewHolder, item: ISettingItem) {
+        helper.itemView.setBackgroundColor(itemBackground)
+        when(item.itemType) {
             TYPE_DIVIDER -> {
-                settingItem as SettingDividerItem
-                helper?.itemView?.setBackgroundColor(settingItem.bgColor?:Color.TRANSPARENT)
+                item as SettingDividerItem
+                helper.itemView.setBackgroundColor(item.bgColor?:Color.TRANSPARENT)
             }
             TYPE_TEXT -> {
-                settingItem as SettingTextItem
-                helper?.setText(R.id.tv_title, settingItem.title)
-                helper?.setText(R.id.tv_foot, settingItem.foot)
-                helper?.getView<View>(R.id.iv_more)!!.visibility =
-                        if (settingItem.editable) View.VISIBLE else View.GONE
-                helper.setBackgroundColor(R.id.line, lineColor)
+                item as SettingTextItem
+                helper.setText(R.id.tv_title, item.title)
+                helper.setText(R.id.tv_foot, item.foot)
+                helper.getView<View>(R.id.iv_more)!!.visibility =
+                        if (item.editable) View.VISIBLE else View.GONE
+                helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
                 helper.setImageDrawable(R.id.iv_more, moreDrawable
                         ?:UIXUtils.getDrawable(R.drawable.uix_chevron_right_black_24dp))
             }
             TYPE_IMAGE -> {
-                settingItem as SettingImageItem
-                settingItem.imageLoader?.load(helper!!.getView(R.id.iv_image))
-                helper?.setText(R.id.tv_title, settingItem.title)
-                helper?.getView<View>(R.id.iv_more)!!.visibility =
-                        if (settingItem.editable) View.VISIBLE else View.GONE
-                helper.setBackgroundColor(R.id.line, lineColor)
+                item as SettingImageItem
+                item.imageLoader?.load(helper.getView(R.id.iv_image))
+                helper.setText(R.id.tv_title, item.title)
+                helper.getView<View>(R.id.iv_more)!!.visibility =
+                        if (item.editable) View.VISIBLE else View.GONE
+                helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
                 helper.setImageDrawable(R.id.iv_more, moreDrawable
                         ?:UIXUtils.getDrawable(R.drawable.uix_chevron_right_black_24dp))
             }
             TYPE_SWITCH -> {
-                settingItem as SettingSwitchItem
-                helper?.setText(R.id.tv_title, settingItem.title)
-                val sb = helper!!.getView(R.id.sb) as SwitchButton
-                sb.isChecked = settingItem.enable
+                item as SettingSwitchItem
+                helper.setText(R.id.tv_title, item.title)
+                val sb = helper.getView(R.id.sb) as SwitchButton
+                sb.isChecked = item.enable
                 sb.setOnCheckedChangeListener { _, isChecked ->
-                    settingItem.onCheckStateChangeListener?.onStateChange(sb, isChecked)
+                    item.onCheckStateChangeListener?.onStateChange(sb, isChecked)
                 }
-                helper.setBackgroundColor(R.id.line, lineColor)
+                helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
+            }
+            TYPE_DESC -> {
+                item as SettingDescItem
+                val tv = helper.getView<TextView>(R.id.tv)
+                tv.text = item.desc
+                item.callback?.custom(tv)
+                helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
             }
         }
     }

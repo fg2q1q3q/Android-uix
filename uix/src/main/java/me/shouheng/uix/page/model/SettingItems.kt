@@ -1,6 +1,7 @@
 package me.shouheng.uix.page.model
 
 import android.support.annotation.ColorInt
+import me.shouheng.uix.page.CustomTextViewCallback
 import me.shouheng.uix.page.OnCheckStateChangeListener
 import me.shouheng.uix.page.ImageLoader
 
@@ -20,6 +21,7 @@ class SettingDividerItem(private val id: Int,
 
 class SettingTextItem(private val id: Int,
                       var editable: Boolean = true,
+                      val lineColor: Int? = null,
                       var title: CharSequence? = null,
                       var foot: CharSequence? = null) : ISettingItem {
 
@@ -34,6 +36,7 @@ class SettingTextItem(private val id: Int,
 
 class SettingImageItem(private val id: Int,
                        var editable: Boolean = true,
+                       val lineColor: Int? = null,
                        var title: CharSequence? = null,
                        var imageLoader: ImageLoader? = null) : ISettingItem {
 
@@ -48,6 +51,7 @@ class SettingImageItem(private val id: Int,
 
 class SettingSwitchItem(private val id: Int,
                         var editable: Boolean = true,
+                        val lineColor: Int? = null,
                         var title: CharSequence? = null,
                         var enable: Boolean = false,
                         var onCheckStateChangeListener: OnCheckStateChangeListener? = null) : ISettingItem {
@@ -59,4 +63,20 @@ class SettingSwitchItem(private val id: Int,
     override fun editable() = editable
 
     override fun getItemType() = type
+}
+
+class SettingDescItem(private val id: Int,
+                      var editable: Boolean = true,
+                      val lineColor: Int? = null,
+                      var desc: CharSequence? = null,
+                      var callback: CustomTextViewCallback? = null): ISettingItem {
+
+    private val type: Int = ISettingItem.ItemType.TYPE_DESC
+
+    override fun getId() = id
+
+    override fun editable() = editable
+
+    override fun getItemType() = type
+
 }

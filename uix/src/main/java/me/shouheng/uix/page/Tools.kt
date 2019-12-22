@@ -1,6 +1,7 @@
 package me.shouheng.uix.page
 
 import android.widget.ImageView
+import android.widget.TextView
 import me.shouheng.uix.button.SwitchButton
 
 /**
@@ -23,4 +24,12 @@ interface ImageLoader {
 interface OnCheckStateChangeListener {
 
     fun onStateChange(switchButton: SwitchButton, checked: Boolean)
+}
+
+/**
+ * 自定义 text view
+ */
+interface CustomTextViewCallback {
+
+    fun custom(tv: TextView)
 }

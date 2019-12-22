@@ -10,4 +10,11 @@
     <string name="uix_share_picture">分享图片到&#8230;</string>
     <string name="uix_open_with">用其他应用打开</string>
     <string name="uix_download_picture">保存图片</string>
+
+    <string name="uix_crash_restart">重启应用</string>
+    <string name="uix_crash_log">错误日志</string>
+    <string name="uix_crash_error_details">错误详情</string>
+    <string name="uix_crash_error_info">错误信息</string>
+    <string name="uix_crash_copy_log">复制日志</string>
+    <string name="uix_crash_close">关闭</string>
 </resources>

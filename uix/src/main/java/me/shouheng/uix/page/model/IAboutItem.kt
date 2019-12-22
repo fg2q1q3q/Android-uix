@@ -7,6 +7,8 @@ import me.shouheng.uix.page.model.IAboutItem.ItemType.Companion.TYPE_TEXT
 import me.shouheng.uix.page.model.IAboutItem.ItemType.Companion.TYPE_USER
 
 /**
+ * About page list item.
+ *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-27 13:20
  */

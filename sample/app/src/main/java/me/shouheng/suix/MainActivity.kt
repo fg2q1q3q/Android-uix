@@ -59,6 +59,7 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
                     .put(FragmentContainer.FRAGMENT_TYPE, FragmentContainer.FRAGMENT_TYPE_ABOUT)
                     .launch(this)
         }
+        binding.btnCrash.setOnClickListener { 1/0 }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -3,5 +3,10 @@
     package="me.shouheng.uix">
     <application>
         <activity android:name=".page.GalleryActivity" android:theme="@style/PictureViewTheme"/>
+        <activity android:name=".page.CrashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:process=":crash"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

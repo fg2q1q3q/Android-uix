@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -7,6 +8,7 @@
 
         <LinearLayout
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -53,6 +55,20 @@
                 android:layout_margin="8dp"
                 android:hint="密码输入框"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <me.shouheng.uix.button.LoadingButton
+                android:id="@+id/btn"
+                app:loading_button_text="点我试一下"
+                app:loading_button_state="normal"
+                app:loading_button_text_color="@color/white"
+                app:loading_button_disable_color="@android:color/darker_gray"
+                app:loading_button_normal_color="#008577"
+                app:loading_button_selected_color="#00574B"
+                app:loading_button_text_disable_color="@color/white"
+                app:loading_button_style="ios"
+                app:loading_button_text_size="18sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>

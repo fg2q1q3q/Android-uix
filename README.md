@@ -133,6 +133,11 @@ BeautyDialog.Builder()
 
 ## 4、更新日志
 
+- 1.1.5
+    - WebviewFragment 支持自定义，支持更多按钮
+    - 关于页面的列表项支持末尾追加自定义控件
+    - EmptySupportRecyclerView 的判断列表为空的 bug 修复
+    - 增加带加载状态的按钮
 - 1.1.4
     - 设置列表页增加说明性质的文字，可以自定义背景等
     - Crash 崩溃捕捉页面

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/bg"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bg"
+    android:orientation="vertical"
     style="@style/AboutPage.Item.Card">
 
     <android.support.v7.widget.AppCompatTextView
@@ -11,4 +12,15 @@
         android:textColorLink="?colorAccent"
         tools:text="content"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -110,4 +110,23 @@
         <!-- 宽高比例 -->
         <attr name="sizeRatio" format="float" />
     </declare-styleable>
+    <!--带记载进度条带按钮-->
+    <declare-styleable name="LoadingButton">
+        <attr name="loading_button_text" format="string"/>
+        <attr name="loading_button_text_size" format="dimension"/>
+        <attr name="loading_button_text_color" format="color"/>
+        <attr name="loading_button_text_disable_color" format="color"/>
+        <attr name="loading_button_style">
+            <enum name="android" value="0"/>
+            <enum name="ios" value="1"/>
+        </attr>
+        <attr name="loading_button_state">
+            <enum name="normal" value="0"/>
+            <enum name="loading" value="1"/>
+            <enum name="disable" value="2"/>
+        </attr>
+        <attr name="loading_button_normal_color" format="color"/>
+        <attr name="loading_button_disable_color" format="color"/>
+        <attr name="loading_button_selected_color" format="color"/>
+    </declare-styleable>
 </resources>

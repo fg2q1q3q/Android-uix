@@ -17,4 +17,7 @@
     <string name="uix_crash_error_info">错误信息</string>
     <string name="uix_crash_copy_log">复制日志</string>
     <string name="uix_crash_close">关闭</string>
+
+    <string name="uix_open_in_browser">在浏览器中打开</string>
+    <string name="uix_copy_link">复制链接</string>
 </resources>

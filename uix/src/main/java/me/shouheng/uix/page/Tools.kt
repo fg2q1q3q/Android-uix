@@ -1,5 +1,6 @@
 package me.shouheng.uix.page
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import me.shouheng.uix.button.SwitchButton
@@ -32,4 +33,15 @@ interface OnCheckStateChangeListener {
 interface CustomTextViewCallback {
 
     fun custom(tv: TextView)
+}
+
+/**
+ * 获取一个子控件，添加到正常内容到末尾
+ */
+interface GetSubViewListener {
+
+    /**
+     * 子控件
+     */
+    fun getSubView(): View
 }

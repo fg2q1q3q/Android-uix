@@ -40,7 +40,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:multidex:1.0.3"
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'me.shouheng.mvvm:mvvm-core:1.2.0'
+    implementation 'me.shouheng.mvvm:mvvm-core:1.2.11'
     // uix
     implementation project(path: ':uix')
 //    implementation 'me.shouheng.utils:utils-core:1.1.0'

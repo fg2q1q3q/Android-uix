@@ -36,7 +36,7 @@ class EmptySupportRecyclerView : RecyclerView {
 
     private fun showEmptyView() {
         val adapter = adapter
-        if (adapter != null && emptyView != null) {
+        if (adapter != null) {
             if (adapter.itemCount == emptyCount) {
                 emptyView?.visibility = View.VISIBLE
                 iEmptyView?.show()

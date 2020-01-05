@@ -2,27 +2,23 @@ package me.shouheng.suix
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import me.shouheng.mvvm.base.CommonActivity
 import me.shouheng.mvvm.base.anno.ActivityConfiguration
 import me.shouheng.mvvm.comn.ContainerActivity
 import me.shouheng.mvvm.comn.EmptyViewModel
-import me.shouheng.suix.container.FragmentContainer
 import me.shouheng.suix.databinding.ActivityMainBinding
 import me.shouheng.suix.dialog.DialogActivity
 import me.shouheng.suix.setting.SettingFragment
 import me.shouheng.suix.widget.WidgetActivity
 import me.shouheng.uix.image.GifSizeFilter
 import me.shouheng.uix.image.Glide4Engine
-import me.shouheng.uix.page.AboutFragment
 import me.shouheng.uix.page.GalleryActivity
 import me.shouheng.utils.app.ActivityUtils
-import me.shouheng.utils.app.IntentUtils
+import me.shouheng.utils.constant.ActivityDirection
 
 /**
  * Main
@@ -49,15 +45,19 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
                     .imageEngine(Glide4Engine())
                     .capture(false)
                     .forResult(0x0001)
-            ActivityUtils.overridePendingTransition(this, ActivityUtils.ANIMATE_FORWARD)
+            ActivityUtils.overridePendingTransition(this, ActivityDirection.ANIMATE_FORWARD)
         }
-        binding.btnWeb.setOnClickListener { ActivityUtils.start(this, FragmentContainer::class.java) }
-        binding.btnWidgets.setOnClickListener { ActivityUtils.start(this, WidgetActivity::class.java) }
-        binding.btnSetting.setOnClickListener { ContainerActivity.open(SettingFragment::class.java).launch(this) }
+        binding.btnWeb.setOnClickListener {
+            ContainerActivity.open(COMMAND_LAUNCH_WEBVIEW).launch(this)
+        }
+        binding.btnWidgets.setOnClickListener {
+            ActivityUtils.start(this, WidgetActivity::class.java)
+        }
+        binding.btnSetting.setOnClickListener {
+            ContainerActivity.open(SettingFragment::class.java).launch(this)
+        }
         binding.btnAbout.setOnClickListener {
-            ActivityUtils.open(FragmentContainer::class.java)
-                    .put(FragmentContainer.FRAGMENT_TYPE, FragmentContainer.FRAGMENT_TYPE_ABOUT)
-                    .launch(this)
+            ContainerActivity.open(COMMAND_LAUNCH_ABOUT).launch(this)
         }
         binding.btnCrash.setOnClickListener { 1/0 }
     }

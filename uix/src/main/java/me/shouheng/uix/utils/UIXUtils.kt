@@ -1,17 +1,13 @@
 package me.shouheng.uix.utils
 
-import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
-import android.content.ContentUris
 import android.content.Context
 import android.content.res.AssetManager
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
-import android.os.Environment
-import android.provider.DocumentsContract
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
@@ -26,8 +22,7 @@ import android.view.WindowManager
 import android.webkit.MimeTypeMap
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import com.just.agentweb.LogUtils
-import com.zhihu.matisse.internal.utils.PathUtils.*
+import com.zhihu.matisse.internal.utils.PathUtils.getPath
 import me.shouheng.uix.R
 import me.shouheng.uix.UIX
 import me.shouheng.uix.bean.AddressBean
@@ -35,7 +30,6 @@ import java.io.ByteArrayOutputStream
 import java.io.Closeable
 import java.io.IOException
 import java.io.InputStream
-import java.lang.Long.parseLong
 
 
 /**

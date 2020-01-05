@@ -2,6 +2,7 @@ package me.shouheng.uix.page.model
 
 import android.graphics.Color
 import android.graphics.Typeface
+import me.shouheng.uix.page.GetSubViewListener
 import me.shouheng.uix.page.ImageLoader
 
 class AboutSectionItem(private val id: Int,
@@ -22,7 +23,8 @@ class AboutTextItem(private val id: Int,
                     var text: CharSequence? = null,
                     var textColor: Int? = null,
                     var typeface: Int = Typeface.NORMAL,
-                    var textSize: Float = 16f): IAboutItem {
+                    var textSize: Float = 16f,
+                    var getSubViewListener: GetSubViewListener? = null): IAboutItem {
 
     private val type: Int = IAboutItem.ItemType.TYPE_TEXT
 

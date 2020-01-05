@@ -1,14 +1,15 @@
 package me.shouheng.uix.page.fragment
 
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.v4.app.Fragment
 import android.support.v7.widget.AppCompatButton
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -52,8 +53,19 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
             errorView.findViewById<TextView>(R.id.tv_error_title).setTextColor(UIXUtils.getColor(R.color.dark_theme_text_color_primary))
             errorView.findViewById<TextView>(R.id.tv_error_tips).setTextColor(UIXUtils.getColor(R.color.dark_theme_text_color_primary))
         }
-        mAgentWeb = AgentWeb.with(this)
-                .setAgentWebParent(web, -1, LinearLayout.LayoutParams(
+        mAgentWeb = getAgentWeb(web, errorView)
+        errorView.findViewById<View>(R.id.btn_retry).setOnClickListener {
+            mAgentWeb.urlLoader.reload()
+        }
+        return root
+    }
+
+    /**
+     * 获取 AgentWeb 对象，可以通过重写这个方法来实现自己的 AgentWeb
+     */
+    protected fun getAgentWeb(container: ViewGroup, errorView: View): AgentWeb {
+        return AgentWeb.with(this)
+                .setAgentWebParent(container, -1, LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
                 .useDefaultIndicator(indicatorColor, indicatorHeightDp)
                 .setWebChromeClient(mWebChromeClient)
@@ -65,10 +77,22 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
                 .createAgentWeb()
                 .ready()
                 .go(url)
-        errorView.findViewById<View>(R.id.btn_retry).setOnClickListener {
-            mAgentWeb.urlLoader.reload()
-        }
-        return root
+    }
+
+    /**
+     * 在浏览器中打开
+     */
+    protected fun openInBrowser(url: String) {
+        val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(i)
+    }
+
+    /**
+     * 复制链接
+     */
+    protected fun copyLink(url: String) {
+        val clipboardManager = (context!!.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager)
+        clipboardManager.text = url
     }
 
     private var mWebChromeClient: WebChromeClient = object : WebChromeClient() {
@@ -90,6 +114,27 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     override fun onPause() {
         mAgentWeb.webLifeCycle.onPause()
         super.onPause()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.uix_web, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (url == null) return super.onOptionsItemSelected(item)
+        if (item.itemId == R.id.uix_item_copy) {
+            copyLink(url!!)
+            return true
+        } else if (item.itemId == R.id.uix_item_open) {
+            openInBrowser(url!!)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onFragmentKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

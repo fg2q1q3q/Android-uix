@@ -5,8 +5,9 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_DESC
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_DIVIDER
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_IMAGE
-import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_TEXT
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_LONG_TEXT
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_SWITCH
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_TEXT
 
 /**
  * Setting page list item.
@@ -20,10 +21,8 @@ interface ISettingItem : MultiItemEntity {
 
     fun editable(): Boolean
 
-    @IntDef(value = [TYPE_TEXT, TYPE_IMAGE, TYPE_DIVIDER, TYPE_SWITCH, TYPE_DESC])
-    @Target(allowedTargets = [AnnotationTarget.FIELD,
-        AnnotationTarget.TYPE_PARAMETER,
-        AnnotationTarget.VALUE_PARAMETER])
+    @IntDef(value = [TYPE_TEXT, TYPE_IMAGE, TYPE_DIVIDER, TYPE_SWITCH, TYPE_DESC, TYPE_LONG_TEXT])
+    @Target(allowedTargets = [AnnotationTarget.FIELD, AnnotationTarget.TYPE_PARAMETER, AnnotationTarget.VALUE_PARAMETER])
     annotation class ItemType {
         companion object {
             /**
@@ -46,6 +45,10 @@ interface ISettingItem : MultiItemEntity {
              * 说明性质的文字
              */
             const val TYPE_DESC             = 4
+            /**
+             * 比较长的文字
+             */
+            const val TYPE_LONG_TEXT        = 5
         }
     }
 }

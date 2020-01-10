@@ -17,8 +17,7 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_marginEnd="16dp"
-        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -33,11 +32,11 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv"
-            tools:text="条目"
+            tools:text="条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目条目"
             android:textSize="16sp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="10dp"
             android:gravity="center"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"

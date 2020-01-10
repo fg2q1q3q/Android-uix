@@ -11,17 +11,17 @@ import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityDialogBinding
 import me.shouheng.uix.config.AddressSelectLevel.Companion.LEVEL_AREA
-import me.shouheng.uix.dialog.BeautyDialog
 import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_LEFT
 import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_THREE
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_TWO
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_DOUBLE
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_TRIPLE
 import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
 import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
 import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.config.EmptyLoadingStyle
 import me.shouheng.uix.config.EmptyViewState
+import me.shouheng.uix.dialog.BeautyDialog
 import me.shouheng.uix.dialog.DialogUtils
 import me.shouheng.uix.dialog.content.*
 import me.shouheng.uix.dialog.footer.SimpleFooter
@@ -60,7 +60,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                             .build())
                     .setDialogContent(SampleContent())
                     .setDialogBottom(SimpleFooter.Builder()
-                            .setBottomStyle(BUTTON_RIGHT_ONLY)
+                            .setBottomStyle(BUTTON_STYLE_SINGLE)
                             .setRightText("OK")
                             .setRightTextColor(Color.RED)
                             .setOnClickListener(object : SimpleFooter.OnClickListener {
@@ -88,7 +88,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .setDialogTitle(SimpleTitle.Builder().setTitleColor(Color.WHITE).setTitle("Title (white)").build())
                     .setDialogContent(SampleContent())
                     .setDialogBottom(SimpleFooter.Builder()
-                            .setBottomStyle(BUTTON_THREE)
+                            .setBottomStyle(BUTTON_STYLE_TRIPLE)
                             .setLeftText("Left")
                             .setLeftTextColor(Color.WHITE)
                             .setMiddleText("Middle")
@@ -101,6 +101,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         }
         binding.btnEditorNormal.setOnClickListener {
             BeautyDialog.Builder()
+                    .setDialogCornerRadius(ViewUtils.dp2px(25f))
                     .setDialogTitle(SimpleTitle.Builder()
                             .setTitle("普通编辑对话框")
                             .build())
@@ -108,7 +109,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                             .setClearDrawable(ResUtils.getDrawable(R.drawable.ic_cancel_black_24dp))
                             .build())
                     .setDialogBottom(SimpleFooter.Builder()
-                            .setBottomStyle(BUTTON_THREE)
+                            .setBottomStyle(BUTTON_STYLE_TRIPLE)
                             .setLeftText("Left")
                             .setMiddleText("Middle")
                             .setRightText("Right")
@@ -129,7 +130,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                             .setMaxLength(10)
                             .build())
                     .setDialogBottom(SimpleFooter.Builder()
-                            .setBottomStyle(BUTTON_TWO)
+                            .setBottomStyle(BUTTON_STYLE_DOUBLE)
                             .setLeftText("Cancel")
                             .setRightText("Confirm")
                             .setDividerColor(Color.LTGRAY)
@@ -157,14 +158,24 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                             .setTextColor(Color.BLACK)
                             .setShowIcon(true)
                             .setList(listOf(
-                                    SimpleList.Item(0, "第 1 项", ResUtils.getDrawable(R.drawable.uix_eye_close_48)),
-                                    SimpleList.Item(1, "第 2 项", ResUtils.getDrawable(R.drawable.uix_eye_open_48)),
-                                    SimpleList.Item(2, "第 3 项", ResUtils.getDrawable(R.drawable.uix_close_black_24dp)),
-                                    SimpleList.Item(3, "第 4 项", ResUtils.getDrawable(R.drawable.uix_loading))
+                                    SimpleList.Item(0, "秦时明月汉时关，万里长征人未还。\n" +
+                                            "但使龙城飞将在，不教胡马度阴山。",
+                                            ResUtils.getDrawable(R.drawable.uix_eye_close_48)),
+                                    SimpleList.Item(1, "春眠不觉晓，处处闻啼鸟。\n" +
+                                            "夜来风雨声，花落知多少。",
+                                            ResUtils.getDrawable(R.drawable.uix_eye_open_48)),
+                                    SimpleList.Item(2, "君自故乡来，应知故乡事。\n" +
+                                            "来日绮窗前，寒梅著花未？",
+                                            ResUtils.getDrawable(R.drawable.uix_close_black_24dp),
+                                            Gravity.START),
+                                    SimpleList.Item(3, "松下问童子，言师采药去。\n" +
+                                            "只在此山中，云深不知处。",
+                                            ResUtils.getDrawable(R.drawable.uix_loading),
+                                            Gravity.END)
                             ))
                             .setOnItemClickListener(object : SimpleList.OnItemClickListener {
                                 override fun onItemClick(dialog: BeautyDialog, item: SimpleList.Item) {
-                                    toast("${item.id} : ${item.name}")
+                                    toast("${item.id} : ${item.content}")
                                     dialog.dismiss()
                                 }
                             })
@@ -223,7 +234,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .build()
             adapter.setOnItemClickListener { _, _, pos ->
                 val item = adapter.data[pos]
-                toast("${item.id} : ${item.name}")
+                toast("${item.id} : ${item.content}")
                 customList?.getDialog()?.dismiss()
             }
             BeautyDialog.Builder()

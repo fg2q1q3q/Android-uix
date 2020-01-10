@@ -5,7 +5,9 @@ import android.app.Application
 /**
  * 用来初始化 UI 库，主要用来初始化 application 对象
  *
- * <code>
+ * @sample
+ *
+ * ```kotlin
  * class SampleApp: Application() {
  *
  *     override fun onCreate() {
@@ -13,11 +15,14 @@ import android.app.Application
  *         UIX.init(this)
  *     }
  * }
- * </code>
+ * ```
+ *
+ * @see UIXConfig 对框架整体进行个性化配置
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 12:01
  */
+
 object UIX {
 
     private var app: Application? = null

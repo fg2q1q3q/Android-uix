@@ -1,9 +1,13 @@
 package me.shouheng.suix
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
+import android.view.View
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import me.shouheng.mvvm.base.CommonActivity
@@ -28,6 +32,8 @@ import me.shouheng.utils.constant.ActivityDirection
  */
 @ActivityConfiguration(layoutResId = R.layout.activity_main)
 class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
+
+    private var dlg: AlertDialog? = null
 
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnDialogs.setOnClickListener {
@@ -59,7 +65,35 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
         binding.btnAbout.setOnClickListener {
             ContainerActivity.open(COMMAND_LAUNCH_ABOUT).launch(this)
         }
-        binding.btnCrash.setOnClickListener { 1/0 }
+        binding.btnCrash.setOnClickListener {
+            produceException2()
+        }
+    }
+
+    // 重现问题方式 1：利用反射修改字段属性
+    private fun produceException1() {
+        dlg = AlertDialog.Builder(context).create()
+        dlg?.setView(View.inflate(context, R.layout.layout_dialog_title_sample, null))
+        dlg?.show()
+        val f = Dialog::class.java.getDeclaredField("mShowing")
+        f.isAccessible = true
+        f.setBoolean(dlg, false)
+        dlg?.show()
+    }
+
+    // 重现问题方式 2：多线程中进行对话框显示操作
+    private fun produceException2() {
+        dlg = AlertDialog.Builder(context).create()
+        dlg?.setView(View.inflate(context, R.layout.layout_dialog_title_sample, null))
+        dlg?.show()
+        dlg?.dismiss()
+        for (i in 1..2) {
+            Thread(Runnable {
+                Looper.prepare()
+                dlg?.show()
+                Looper.loop()
+            }).start()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

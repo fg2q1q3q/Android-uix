@@ -7,7 +7,6 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="16dp"
-    android:background="@drawable/uix_bg_loading_dialog"
     android:minHeight="87dp"
     android:minWidth="104dp"
     android:paddingLeft="20dp"
@@ -16,27 +15,27 @@
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/img"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/uix_loading" />
 
     <ProgressBar
         android:id="@+id/pb"
-        android:layout_marginBottom="10dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"/>
+        android:layout_marginBottom="8dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tipTextView"
         android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_height="wrap_content"
         android:maxWidth="208dp"
         android:layout_gravity="center_horizontal"
         tools:text="阿斯顿大的"
         android:gravity="center"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:includeFontPadding="false"
         android:textColor="#ffffff"
         android:visibility="visible"/>

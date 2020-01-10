@@ -10,7 +10,9 @@ import me.shouheng.uix.R
 import me.shouheng.uix.utils.UIXUtils
 import java.util.*
 
-class GifSizeFilter(private val mMinWidth: Int, private val mMinHeight: Int, private val mMaxSize: Int) : Filter() {
+class GifSizeFilter(private val mMinWidth: Int,
+                    private val mMinHeight: Int,
+                    private val mMaxSize: Int /*bytes*/) : Filter() {
 
     public override fun constraintTypes(): Set<MimeType> {
         return HashSet<MimeType>().apply {

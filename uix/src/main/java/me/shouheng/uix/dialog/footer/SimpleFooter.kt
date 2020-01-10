@@ -1,22 +1,24 @@
 package me.shouheng.uix.dialog.footer
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.StateListDrawable
 import android.support.annotation.ColorInt
 import android.view.View
 import android.widget.TextView
 import me.shouheng.uix.R
-import me.shouheng.uix.dialog.BeautyDialog
+import me.shouheng.uix.UIXConfig
 import me.shouheng.uix.config.BottomButtonPosition
 import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_LEFT
 import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_MIDDLE
 import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
 import me.shouheng.uix.config.BottomButtonStyle
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_LEFT_ONLY
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_MIDDLE_ONLY
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_TWO
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_DOUBLE
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
+import me.shouheng.uix.dialog.BeautyDialog
 import me.shouheng.uix.dialog.content.IDialogContent
 import me.shouheng.uix.dialog.title.IDialogTitle
+import me.shouheng.uix.utils.UIXUtils
 
 /**
  * 两个按钮的对话框底部
@@ -27,7 +29,7 @@ import me.shouheng.uix.dialog.title.IDialogTitle
 class SimpleFooter private constructor(): IDialogFooter {
 
     @BottomButtonStyle
-    private var bottomStyle: Int? = BUTTON_TWO
+    private var bottomStyle: Int? = BUTTON_STYLE_DOUBLE
 
     private var leftText: CharSequence? = null
     private var middleText: CharSequence? = null
@@ -77,6 +79,29 @@ class SimpleFooter private constructor(): IDialogFooter {
         tvMiddle.setOnClickListener { onClickListener?.onClick(dialog, BUTTON_POS_MIDDLE, dialogTitle, dialogContent) }
         tvRight.setOnClickListener { onClickListener?.onClick(dialog, BUTTON_POS_RIGHT, dialogTitle, dialogContent) }
 
+        val cornerRadius = dialog.dialogCornerRadius
+        val normalColor = if (dialog.dialogDarkStyle) UIXConfig.Dialog.darkBGColor else UIXConfig.Dialog.lightBGColor
+        val selectedColor = UIXUtils.computeColor(normalColor, if (dialog.dialogDarkStyle) Color.WHITE else Color.BLACK, UIXConfig.Button.fraction)
+        tvLeft.background = StateListDrawable().apply {
+            val normalDrawable = UIXUtils.getGradientDrawable(normalColor, 0f, 0f, cornerRadius.toFloat(), 0f)
+            val selectedDrawable = UIXUtils.getGradientDrawable(selectedColor, 0f, 0f, cornerRadius.toFloat(), 0f)
+            addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
+            addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
+        }
+        tvMiddle.background = StateListDrawable().apply {
+            val radius = if (bottomStyle == BUTTON_STYLE_SINGLE) cornerRadius.toFloat() else 0f
+            val normalDrawable = UIXUtils.getGradientDrawable(normalColor, 0f, 0f, radius, radius)
+            val selectedDrawable = UIXUtils.getGradientDrawable(selectedColor, 0f, 0f, radius, radius)
+            addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
+            addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
+        }
+        tvRight.background = StateListDrawable().apply {
+            val normalDrawable = UIXUtils.getGradientDrawable(normalColor, 0f, 0f, 0f, cornerRadius.toFloat())
+            val selectedDrawable = UIXUtils.getGradientDrawable(selectedColor, 0f, 0f, 0f, cornerRadius.toFloat())
+            addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
+            addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
+        }
+
         if (leftTextColor != null) tvLeft.setTextColor(leftTextColor!!)
         if (middleTextColor != null) tvMiddle.setTextColor(middleTextColor!!)
         if (rightTextColor != null) tvRight.setTextColor(rightTextColor!!)
@@ -87,25 +112,13 @@ class SimpleFooter private constructor(): IDialogFooter {
         }
 
         when(bottomStyle) {
-            BUTTON_LEFT_ONLY -> {
-                tvRight.visibility = View.GONE
-                tvMiddle.visibility = View.GONE
-                v1.visibility = View.GONE
-                v2.visibility = View.GONE
-            }
-            BUTTON_MIDDLE_ONLY -> {
+            BUTTON_STYLE_SINGLE -> {
                 tvLeft.visibility = View.GONE
                 tvRight.visibility = View.GONE
                 v1.visibility = View.GONE
                 v2.visibility = View.GONE
             }
-            BUTTON_RIGHT_ONLY -> {
-                tvLeft.visibility = View.GONE
-                tvMiddle.visibility = View.GONE
-                v1.visibility = View.GONE
-                v2.visibility = View.GONE
-            }
-            BUTTON_TWO -> {
+            BUTTON_STYLE_DOUBLE -> {
                 tvMiddle.visibility = View.GONE
                 v2.visibility = View.GONE
             }
@@ -144,7 +157,7 @@ class SimpleFooter private constructor(): IDialogFooter {
     class Builder {
 
         @BottomButtonStyle
-        private var bottomStyle: Int? = BUTTON_TWO
+        private var bottomStyle: Int? = BUTTON_STYLE_DOUBLE
 
         private var leftText: CharSequence? = null
         private var middleText: CharSequence? = null

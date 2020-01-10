@@ -2,7 +2,7 @@ package me.shouheng.uix.pager.trans
 
 import android.support.v4.view.ViewPager
 import android.view.View
-import me.shouheng.uix.config.Config.DEPTH_PAGE_TRANSFORMER_MIN_SCALE
+import me.shouheng.uix.UIXConfig
 import kotlin.math.abs
 
 /**
@@ -31,8 +31,7 @@ class DepthPageTransformer : ViewPager.PageTransformer {
             view.translationX = pageWidth * -position
 
             // Scale the page down (between MIN_SCALE and 1)
-            val scaleFactor = DEPTH_PAGE_TRANSFORMER_MIN_SCALE +
-                    (1 - DEPTH_PAGE_TRANSFORMER_MIN_SCALE) * (1 - abs(position))
+            val scaleFactor = UIXConfig.depthPageTransScale + (1 - UIXConfig.depthPageTransScale) * (1 - abs(position))
             view.scaleX = scaleFactor
             view.scaleY = scaleFactor
 

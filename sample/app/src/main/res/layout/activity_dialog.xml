@@ -32,7 +32,7 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_editor_normal"
-            android:text="编辑对话框"
+            android:text="编辑对话框（边角 25dp）"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

@@ -3,6 +3,7 @@ package me.shouheng.uix.dialog
 import android.app.Dialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.annotation.Px
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.view.Gravity
@@ -11,7 +12,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import me.shouheng.uix.R
-import me.shouheng.uix.config.Config
+import me.shouheng.uix.UIXConfig
 import me.shouheng.uix.config.DialogPosition
 import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
 import me.shouheng.uix.config.DialogPosition.Companion.POS_CENTER
@@ -29,6 +30,27 @@ import me.shouheng.uix.utils.UIXUtils
 /**
  * 对话框
  *
+ * 示例程序：
+ *
+ * @sample
+ *
+ * ```java
+ *     BeautyDialog.Builder()
+ *             .setDialogTitle(SimpleTitle.Builder()
+ *                     .setTitle("普通编辑对话框")
+ *                     .build())
+ *             .setDialogContent(SimpleEditor.Builder()
+ *                     .setClearDrawable(ResUtils.getDrawable(R.drawable.ic_cancel_black_24dp))
+ *                     .build())
+ *             .setDialogBottom(SimpleFooter.Builder()
+ *                     .setBottomStyle(BUTTON_THREE)
+ *                     .setLeftText("Left")
+ *                     .setMiddleText("Middle")
+ *                     .setRightText("Right")
+ *                     .build())
+ *             .build().show(supportFragmentManager, "editor")
+ * ```
+ *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-12 18:35
  */
@@ -40,18 +62,21 @@ class BeautyDialog : DialogFragment() {
 
     private var dialogPosition: Int = POS_CENTER
     private var dialogStyle: Int = STYLE_MATCH
-    private var dialogDarkStyle: Boolean = false
+    var dialogDarkStyle: Boolean = false
+        private set
 
-    private var outCancelable = false
-    private var backCancelable = true
+    private var outCancelable = UIXConfig.Dialog.outCancelable
+    private var backCancelable = UIXConfig.Dialog.backCancelable
     private var customBackground = false
 
     private var onDismissListener: OnDismissListener? = null
     private var onShowListener: OnShowListener? = null
 
     private var fixedHeight = 0
-    private var dialogMargin = UIXUtils.dp2px(Config.DIALOG_MARGIN_SIZE_IN_DP)
+    private var dialogMargin = UIXConfig.Dialog.margin
     private var dialogBackground: Drawable? = null
+    var dialogCornerRadius = UIXConfig.Dialog.cornerRadius
+        private set
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -64,9 +89,9 @@ class BeautyDialog : DialogFragment() {
         if (customBackground) {
             content.background = dialogBackground
         } else {
-            content.setBackgroundResource(
-                    if (dialogDarkStyle) R.drawable.uix_bg_dialog_center_dark
-                    else R.drawable.uix_bg_dialog_center
+            content.background = UIXUtils.getGradientDrawable(
+                    if (dialogDarkStyle) UIXConfig.Dialog.darkBGColor else UIXConfig.Dialog.lightBGColor,
+                    dialogCornerRadius.toFloat()
             )
         }
         val llTitle = content.findViewById<LinearLayout>(R.id.ll_title)
@@ -147,16 +172,17 @@ class BeautyDialog : DialogFragment() {
         private var dialogStyle: Int = STYLE_MATCH
         private var dialogDarkStyle: Boolean = false
 
-        private var outCancelable = false
-        private var backCancelable = true
+        private var outCancelable = UIXConfig.Dialog.outCancelable
+        private var backCancelable = UIXConfig.Dialog.backCancelable
         private var customBackground = false
 
         private var onDismissListener: OnDismissListener? = null
         private var onShowListener: OnShowListener? = null
 
         private var fixedHeight = 0
-        private var dialogMargin = UIXUtils.dp2px(Config.DIALOG_MARGIN_SIZE_IN_DP)
+        private var dialogMargin: Int = UIXConfig.Dialog.margin
         private var dialogBackground: Drawable? = null
+        private var dialogCornerRadius: Int = UIXConfig.Dialog.cornerRadius
 
         fun setDialogTitle(iDialogTitle: IDialogTitle): Builder {
             this.iDialogTitle = iDialogTitle
@@ -204,14 +230,14 @@ class BeautyDialog : DialogFragment() {
         }
 
         /**
-         * 对话框"内容"的固定高度
+         * 对话框"内容"的固定高度，单位 px
          */
-        fun setFixedHeight(fixedHeight: Int): Builder {
+        fun setFixedHeight(@Px fixedHeight: Int): Builder {
             this.fixedHeight = fixedHeight
             return this
         }
 
-        fun setDialogMargin(dialogMargin: Int): Builder {
+        fun setDialogMargin(@Px dialogMargin: Int): Builder {
             this.dialogMargin = dialogMargin
             return this
         }
@@ -222,13 +248,21 @@ class BeautyDialog : DialogFragment() {
         }
 
         /**
-         * 设置对话框的背景，如果不调用这个方法将根据主题使用默认的背景
-         * 否则将会直接使用设置的背景，即使是 null. 另外，当传入的参数
-         * 为 null 的时候对话框将不使用任何背景。
+         * 设置对话框的背景：
+         * 1. 如果不调用这个方法将根据主题使用默认的背景，否则将会直接使用设置的背景，即使是 null.
+         * 2. 当传入的参数为 null 的时候对话框将不使用任何背景。
          */
         fun setDialogBackground(dialogBackground: Drawable?): Builder {
             this.dialogBackground = dialogBackground
             customBackground = true
+            return this
+        }
+
+        /**
+         * 对话框的默认背景的边角的大小，单位：px
+         */
+        fun setDialogCornerRadius(@Px dialogCornerRadius: Int): Builder {
+            this.dialogCornerRadius = dialogCornerRadius
             return this
         }
 
@@ -248,6 +282,7 @@ class BeautyDialog : DialogFragment() {
             dialog.dialogMargin = dialogMargin
             dialog.dialogBackground = dialogBackground
             dialog.customBackground = customBackground
+            dialog.dialogCornerRadius = dialogCornerRadius
             return dialog
         }
     }

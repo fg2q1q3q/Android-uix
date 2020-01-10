@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import me.shouheng.uix.R
+import me.shouheng.uix.UIXConfig
 import me.shouheng.uix.config.EmptyLoadingStyle
 import me.shouheng.uix.config.LoadingButtonState
 import me.shouheng.uix.config.LoadingButtonState.Companion.LOADING_STATE_DISABLE
@@ -55,14 +56,17 @@ class LoadingButton : LinearLayout {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingButton)
             text = typedArray.getString(R.styleable.LoadingButton_loading_button_text)
             val size = typedArray.getDimensionPixelSize(R.styleable.LoadingButton_loading_button_text_size, UIXUtils.sp2px(16f))
-            textColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_text_color, Color.BLACK)
-            textDisableColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_text_disable_color, Color.BLACK)
-            val normalColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_normal_color, Color.TRANSPARENT)
-            val disableColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_disable_color, Color.TRANSPARENT)
-            val selectedColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_selected_color, Color.TRANSPARENT)
-            normalDrawable = UIXUtils.tintDrawable(R.drawable.uix_shape_btn, normalColor)
-            disableDrawable = UIXUtils.tintDrawable(R.drawable.uix_shape_btn, disableColor)
-            val selectedDrawable = UIXUtils.tintDrawable(R.drawable.uix_shape_btn, selectedColor)
+            textColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_text_color, UIXConfig.Button.textColor)
+            textDisableColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_text_disable_color, UIXConfig.Button.textDisableColor)
+            val normalColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_normal_color, UIXConfig.Button.normalColor)
+            val disableColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_disable_color, UIXConfig.Button.disableColor)
+            val selectedColor = if (typedArray.hasValue(R.styleable.LoadingButton_loading_button_selected_color))
+                typedArray.getColor(R.styleable.LoadingButton_loading_button_selected_color, UIXConfig.Button.selectedColor)
+            else UIXUtils.computeColor(normalColor, Color.BLACK, UIXConfig.Button.fraction)
+            val cornerRadius = typedArray.getDimensionPixelSize(R.styleable.LoadingButton_loading_button_corner_radius, UIXConfig.Button.cornerRadius)
+            normalDrawable = UIXUtils.getGradientDrawable(normalColor, cornerRadius.toFloat())
+            disableDrawable = UIXUtils.getGradientDrawable(disableColor, cornerRadius.toFloat())
+            val selectedDrawable = UIXUtils.getGradientDrawable(selectedColor, cornerRadius.toFloat())
             loadingStyle = typedArray.getInt(R.styleable.LoadingButton_loading_button_style, EmptyLoadingStyle.STYLE_ANDROID)
             loadingButtonState = typedArray.getInt(R.styleable.LoadingButton_loading_button_state, LOADING_STATE_NORMAL)
             this.stateListDrawable = StateListDrawable()

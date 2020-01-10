@@ -40,7 +40,6 @@
     <style name="Dialog.Bottom"/>
     <style name="Dialog.Bottom.Button">
         <item name="android:textSize">16sp</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="Dialog.City">

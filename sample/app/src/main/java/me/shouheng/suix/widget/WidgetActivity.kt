@@ -8,6 +8,7 @@ import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityWidgetsBinding
 import me.shouheng.uix.config.LoadingButtonState
+import me.shouheng.uix.UIXConfig
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
 
@@ -19,6 +20,14 @@ import me.shouheng.utils.ui.ImageUtils
  */
 @ActivityConfiguration(layoutResId = R.layout.activity_widgets)
 class WidgetActivity : CommonActivity<ActivityWidgetsBinding, EmptyViewModel>() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        UIXConfig.Button.disableColor = Color.GRAY
+        UIXConfig.Button.textDisableColor = Color.WHITE
+        UIXConfig.Button.normalColor = ResUtils.getAttrColor(this, R.attr.colorPrimary)
+        UIXConfig.Button.selectedColor = ResUtils.getAttrColor(this, R.attr.colorPrimaryDark)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.etPsd.setVisibleDrawable(ImageUtils.tintDrawable(ResUtils.getDrawable(R.drawable.uix_eye_open_48), Color.BLUE))

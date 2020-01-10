@@ -13,10 +13,10 @@ import me.shouheng.suix.R
 import me.shouheng.suix.databinding.FragmentSettingBinding
 import me.shouheng.uix.button.SwitchButton
 import me.shouheng.uix.page.CustomTextViewCallback
-import me.shouheng.uix.page.model.*
-import me.shouheng.uix.page.OnCheckStateChangeListener
 import me.shouheng.uix.page.ImageLoader
+import me.shouheng.uix.page.OnCheckStateChangeListener
 import me.shouheng.uix.page.adapter.SettingItemAdapter
+import me.shouheng.uix.page.model.*
 import me.shouheng.uix.rv.IEmptyView
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
@@ -74,7 +74,8 @@ class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>()
                                             override fun onStateChange(switchButton: SwitchButton, checked: Boolean) {
                                                 toast(if (checked) "打开了开关！" else "无情地关闭了开关！")
                                             }
-                                        })
+                                        }),
+                                SettingLongTextItem(5, title = "长长的文案啊", subTitle = "观棋柯烂，伐木丁丁，云边谷口徐行。卖薪沽酒，狂笑自陶情。苍径秋高，对月枕松根，一觉天明。认旧林，登崖过岭，持斧断枯藤。收来成一担，行歌市上，易米三升。更无些子争竞，时价平平。不会机谋巧算，没荣辱，恬淡延生。相逢处，非仙即道，静坐讲《黄庭》。")
                         ))
             }, 1000)
         }, 1000)

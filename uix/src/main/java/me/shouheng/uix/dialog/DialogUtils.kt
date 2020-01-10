@@ -2,6 +2,7 @@ package me.shouheng.uix.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
 import android.support.annotation.StringRes
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -45,6 +46,7 @@ object DialogUtils {
                     @EmptyLoadingStyle loadingStyle: Int = EmptyLoadingStyle.STYLE_ANDROID): Dialog {
         val v = LayoutInflater.from(context).inflate(R.layout.uix_dialog_loading, null)
         val layout = v.findViewById(R.id.loading_dialog_view) as LinearLayout
+        layout.background = UIXUtils.getGradientDrawable(Color.parseColor("#90000000"), UIXUtils.dp2px(16f).toFloat())
         val spaceshipImage = v.findViewById(R.id.img) as ImageView
         val pb = v.findViewById<ProgressBar>(R.id.pb)
         val tipTextView = v.findViewById(R.id.tipTextView) as TextView

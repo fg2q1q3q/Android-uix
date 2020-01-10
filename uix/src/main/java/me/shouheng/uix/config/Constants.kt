@@ -6,11 +6,9 @@ import me.shouheng.uix.config.AddressSelectLevel.Companion.LEVEL_CITY
 import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_LEFT
 import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_MIDDLE
 import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_LEFT_ONLY
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_MIDDLE_ONLY
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_RIGHT_ONLY
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_THREE
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_TWO
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_DOUBLE
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
+import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_TRIPLE
 import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
 import me.shouheng.uix.config.DialogPosition.Companion.POS_CENTER
 import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
@@ -69,18 +67,15 @@ annotation class DialogStyle {
 /**
  * 对话框底部的按钮的风格
  */
-@IntDef(value = [BUTTON_LEFT_ONLY, BUTTON_MIDDLE_ONLY, BUTTON_RIGHT_ONLY,
-    BUTTON_TWO, BUTTON_THREE])
+@IntDef(value = [BUTTON_STYLE_SINGLE, BUTTON_STYLE_DOUBLE, BUTTON_STYLE_TRIPLE])
 @Target(allowedTargets = [AnnotationTarget.FIELD,
     AnnotationTarget.TYPE_PARAMETER,
     AnnotationTarget.VALUE_PARAMETER])
 annotation class BottomButtonStyle {
     companion object {
-        const val BUTTON_LEFT_ONLY                  = 1
-        const val BUTTON_MIDDLE_ONLY                = 2
-        const val BUTTON_RIGHT_ONLY                 = 3
-        const val BUTTON_TWO                        = 4
-        const val BUTTON_THREE                      = 5
+        const val BUTTON_STYLE_SINGLE                     = 1
+        const val BUTTON_STYLE_DOUBLE                     = 2
+        const val BUTTON_STYLE_TRIPLE                     = 3
     }
 }
 

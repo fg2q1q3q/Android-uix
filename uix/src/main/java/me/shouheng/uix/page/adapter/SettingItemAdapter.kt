@@ -12,8 +12,9 @@ import me.shouheng.uix.page.model.*
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_DESC
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_DIVIDER
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_IMAGE
-import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_TEXT
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_LONG_TEXT
 import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_SWITCH
+import me.shouheng.uix.page.model.ISettingItem.ItemType.Companion.TYPE_TEXT
 import me.shouheng.uix.utils.UIXUtils
 
 /**
@@ -33,6 +34,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
         addItemType(TYPE_DIVIDER, R.layout.uix_item_setting_divider)
         addItemType(TYPE_SWITCH, R.layout.uix_item_setting_switch)
         addItemType(TYPE_DESC, R.layout.uix_item_setting_desc)
+        addItemType(TYPE_LONG_TEXT, R.layout.uix_item_setting_long_text)
     }
     override fun convert(helper: BaseViewHolder, item: ISettingItem) {
         helper.itemView.setBackgroundColor(itemBackground)
@@ -76,6 +78,13 @@ class SettingItemAdapter(list: List<ISettingItem>,
                 val tv = helper.getView<TextView>(R.id.tv)
                 tv.text = item.desc
                 item.callback?.custom(tv)
+                helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
+            }
+            TYPE_LONG_TEXT -> {
+                item as SettingLongTextItem
+                helper.setText(R.id.tv_title, item.title)
+                helper.setText(R.id.tv_foot, item.subTitle)
+                helper.getView<TextView>(R.id.tv_foot).gravity = item.gravity
                 helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
             }
         }

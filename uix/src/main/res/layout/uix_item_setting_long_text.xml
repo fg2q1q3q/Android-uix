@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:minHeight="60dp"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
-
-    <View
-        android:background="?attr/selectableItemBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:gravity="center_vertical"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -22,25 +19,18 @@
             android:id="@+id/tv_title"
             tools:text="Title Title Title"
             android:textSize="16sp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_foot"
-            tools:text="foot foot foot"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            tools:text="java.lang.RuntimeException: Unable to start activity ComponentInfo{com.tuya.smartlife/com.tuya.smart.family.activity.RoomManageActivity}: java.lang.RuntimeException: homeId can't be 0"
             android:textSize="15sp"
             android:gravity="end"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/iv_more"
-            tools:src="@drawable/uix_chevron_right_black_24dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>

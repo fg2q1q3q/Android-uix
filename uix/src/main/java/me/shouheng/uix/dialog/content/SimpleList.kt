@@ -43,7 +43,7 @@ class SimpleList private constructor(): IDialogContent {
         this.dialog = dialog
     }
 
-    data class Item(val id: Int, var name: CharSequence?, var icon: Drawable?)
+    data class Item(val id: Int, var content: CharSequence?, var icon: Drawable?, var gravity: Int? = null)
 
     class Adapter(list: List<Item>,
                   private var textColor: Int?,
@@ -54,9 +54,9 @@ class SimpleList private constructor(): IDialogContent {
 
         override fun convert(helper: BaseViewHolder?, item: Item?) {
             val tv = helper?.getView<TextView>(R.id.tv)!!
-            tv.text = item!!.name
+            tv.text = item!!.content
             tv.textSize = textSize
-            tv.gravity = gravity
+            tv.gravity = item.gravity?:gravity
             if (textColor != null) tv.setTextColor(textColor!!)
             if (item.icon != null) helper.setImageDrawable(R.id.iv, item.icon!!)
             if (showIcon) helper.getView<View>(R.id.iv).visibility = View.VISIBLE

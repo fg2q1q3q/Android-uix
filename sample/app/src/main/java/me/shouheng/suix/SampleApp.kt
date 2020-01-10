@@ -3,7 +3,6 @@ package me.shouheng.suix
 import android.Manifest
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Typeface
@@ -17,6 +16,7 @@ import me.shouheng.beauty.comn.PalmUtils
 import me.shouheng.mvvm.MVVMs
 import me.shouheng.mvvm.comn.ContainerActivity
 import me.shouheng.uix.UIX
+import me.shouheng.uix.UIXConfig
 import me.shouheng.uix.page.AboutFragment
 import me.shouheng.uix.page.CrashActivity
 import me.shouheng.uix.page.GetSubViewListener
@@ -26,7 +26,7 @@ import me.shouheng.uix.page.model.AboutSectionItem
 import me.shouheng.uix.page.model.AboutTextItem
 import me.shouheng.uix.page.model.AboutUserItem
 import me.shouheng.uix.page.model.IAboutItem
-import me.shouheng.utils.app.ActivityUtils
+import me.shouheng.uix.utils.UIXUtils
 import me.shouheng.utils.app.IntentUtils
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.stability.CrashHelper
@@ -52,6 +52,7 @@ class SampleApp: Application() {
         super.onCreate()
         MVVMs.onCreate(this)
         UIX.init(this)
+        customUIX()
         customCrash()
         customContainer()
     }
@@ -61,13 +62,13 @@ class SampleApp: Application() {
                 == PackageManager.PERMISSION_GRANTED) {
             CrashHelper.init(this, "") { crashInfo, e ->
                 L.e(crashInfo)
-                ActivityUtils.open(CrashActivity::class.java)
-                        .put(CrashActivity.EXTRA_KEY_CRASH_INFO, crashInfo)
-                        .put(CrashActivity.EXTRA_KEY_CRASH_IMAGE, R.drawable.uix_crash_error_image)
-                        .put(CrashActivity.EXTRA_KEY_RESTART_ACTIVITY, MainActivity::class.java)
-                        .put(CrashActivity.EXTRA_KEY_CRASH_TIPS, "发生了崩溃，抱歉！")
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        .launch(this)
+                CrashActivity.Companion.Builder(this)
+                        .setCrashInfo(crashInfo)
+                        .setCrashImage(R.drawable.uix_crash_error_image)
+                        .setRestartActivity(MainActivity::class.java)
+                        .setTips("发生了崩溃，抱歉！")
+                        .setButtonColor(Color.GRAY)
+                        .launch()
                 Process.killProcess(Process.myPid())
                 exitProcess(1)
             }
@@ -180,5 +181,11 @@ class SampleApp: Application() {
                 }
             }
         }
+    }
+
+    private fun customUIX() {
+        UIXConfig.depthPageTransScale = .5f
+        UIXConfig.Dialog.margin = UIXUtils.dp2px(30f)
+        UIXConfig.Button.normalColor = Color.GRAY
     }
 }

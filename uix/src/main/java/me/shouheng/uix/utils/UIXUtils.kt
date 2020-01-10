@@ -5,13 +5,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.AssetManager
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
+import android.support.annotation.*
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.text.TextUtils
 import android.util.DisplayMetrics
@@ -87,6 +86,30 @@ object UIXUtils {
         DrawableCompat.setTintList(wrappedDrawable, ColorStateList.valueOf(color))
         return wrappedDrawable
     }
+
+    /**
+     * 获取一个背景图
+     */
+    fun getGradientDrawable(@ColorInt color: Int, radius: Float) =
+            GradientDrawable().apply {
+                setColor(color)
+                cornerRadius = radius
+            }
+
+    fun getGradientDrawable(@ColorInt color: Int,
+                            topLeftRadius: Float,
+                            topRightRadius: Float,
+                            bottomLeftRadius: Float,
+                            bottomRightRadius: Float) =
+            GradientDrawable().apply {
+                setColor(color)
+                cornerRadii = floatArrayOf(
+                        topLeftRadius, topLeftRadius,
+                        topRightRadius, topRightRadius,
+                        bottomRightRadius, bottomRightRadius,
+                        bottomLeftRadius, bottomLeftRadius
+                )
+            }
 
     /*------------------------------------ view region ------------------------------------*/
 
@@ -320,5 +343,39 @@ object UIXUtils {
         if (debug) {
             Log.d("UIX", "" + o)
         }
+    }
+
+    /*------------------------------------ color region ------------------------------------*/
+
+    /**
+     * 根据比例，在两个 color 值之间计算出一个 color 值
+     * **注意该方法是 ARGB 通道分开计算比例的**
+     *
+     * @param fromColor 开始的 color 值
+     * @param toColor   最终的 color 值
+     * @param fraction  比例，取值为 [0,1]，为 0 时返回 fromColor， 为 1 时返回 toColor
+     * @return          计算出的 color 值
+     */
+    fun computeColor(@ColorInt fromColor: Int, @ColorInt toColor: Int, @FloatRange(from = 0.0, to = 1.0) fraction: Float): Int {
+        var fraction = fraction
+        fraction = Math.max(Math.min(fraction, 1f), 0f)
+
+        val minColorA = Color.alpha(fromColor)
+        val maxColorA = Color.alpha(toColor)
+        val resultA = ((maxColorA - minColorA) * fraction).toInt() + minColorA
+
+        val minColorR = Color.red(fromColor)
+        val maxColorR = Color.red(toColor)
+        val resultR = ((maxColorR - minColorR) * fraction).toInt() + minColorR
+
+        val minColorG = Color.green(fromColor)
+        val maxColorG = Color.green(toColor)
+        val resultG = ((maxColorG - minColorG) * fraction).toInt() + minColorG
+
+        val minColorB = Color.blue(fromColor)
+        val maxColorB = Color.blue(toColor)
+        val resultB = ((maxColorB - minColorB) * fraction).toInt() + minColorB
+
+        return Color.argb(resultA, resultR, resultG, resultB)
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_crash_bg"
     android:orientation="vertical"
     android:background="@color/white"
@@ -32,17 +33,27 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
-        <Button
+        <me.shouheng.uix.button.Button
             android:id="@+id/btn_crash_restart"
             android:text="@string/uix_crash_restart"
+            android:textColor="@android:color/white"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
 
-        <Button
+        <me.shouheng.uix.button.Button
             android:id="@+id/btn_crash_log"
             android:text="@string/uix_crash_log"
+            android:textColor="@android:color/white"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

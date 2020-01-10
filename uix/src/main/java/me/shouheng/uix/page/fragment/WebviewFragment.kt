@@ -36,6 +36,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     private var url: String? = null
     private var openOtherPageWays: DefaultWebClient.OpenOtherPageWays? = null
     private var securityType: AgentWeb.SecurityType = AgentWeb.SecurityType.STRICT_CHECK
+    private var useDefaultOptionsMenu: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (root == null) {
@@ -44,7 +45,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
         val web = root!!.findViewById<View>(R.id.ll_container) as ViewGroup
         val errorView = LayoutInflater.from(context).inflate(R.layout.uix_layout_network_error_page, null, false)
         errorView.findViewById<View>(R.id.root).setBackgroundColor(
-                UIXUtils.getColor(if (isDarkTheme) R.color.dark_background_color else R.color.light_background_color))
+                UIXUtils.getColor(if (isDarkTheme) R.color.uix_default_dark_bg_color else R.color.uix_default_light_bg_color))
         errorView.findViewById<AppCompatButton>(R.id.btn_retry).setBackgroundResource(
                 if (isDarkTheme) R.drawable.uix_bg_retry_dark else R.drawable.uix_bg_retry)
         errorView.findViewById<AppCompatButton>(R.id.btn_retry).setTextColor(
@@ -122,7 +123,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.uix_web, menu)
+        if (useDefaultOptionsMenu) inflater.inflate(R.menu.uix_web, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -161,6 +162,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
         private var url: String? = null
         private var openOtherPageWays: DefaultWebClient.OpenOtherPageWays? = null
         private var securityType: AgentWeb.SecurityType = AgentWeb.SecurityType.STRICT_CHECK
+        private var useDefaultOptionsMenu: Boolean = true
 
         fun setDarkTheme(isDarkTheme: Boolean): Builder {
             this.isDarkTheme = isDarkTheme
@@ -192,6 +194,11 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
             return this
         }
 
+        fun setUseDefaultOptionsMenu(useDefaultOptionsMenu: Boolean): Builder {
+            this.useDefaultOptionsMenu = useDefaultOptionsMenu
+            return this
+        }
+
         fun build(): WebviewFragment {
             val fragment = WebviewFragment()
             fragment.isDarkTheme = isDarkTheme
@@ -200,6 +207,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
             fragment.url = url
             fragment.openOtherPageWays = openOtherPageWays
             fragment.securityType = securityType
+            fragment.useDefaultOptionsMenu = useDefaultOptionsMenu
             return fragment
         }
     }

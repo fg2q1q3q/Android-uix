@@ -128,5 +128,14 @@
         <attr name="loading_button_normal_color" format="color"/>
         <attr name="loading_button_disable_color" format="color"/>
         <attr name="loading_button_selected_color" format="color"/>
+        <attr name="loading_button_corner_radius" format="dimension"/>
+    </declare-styleable>
+    <!--普通按钮-->
+    <declare-styleable name="Button">
+        <attr name="btn_text_disable_color" format="color"/>
+        <attr name="btn_normal_color" format="color"/>
+        <attr name="btn_disable_color" format="color"/>
+        <attr name="btn_selected_color" format="color"/>
+        <attr name="btn_corner_radius" format="dimension"/>
     </declare-styleable>
 </resources>

@@ -23,15 +23,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_foot"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"
-            tools:text="java.lang.RuntimeException: Unable to start activity ComponentInfo{com.tuya.smartlife/com.tuya.smart.family.activity.RoomManageActivity}: java.lang.RuntimeException: homeId can't be 0"
-            android:textSize="15sp"
-            android:gravity="end"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+
+            <View android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"/>
+
+            <ProgressBar
+                android:id="@+id/pb"
+                android:layout_width="20dp"
+                android:layout_height="20sp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginEnd="4dp"
+                android:indeterminateDrawable="@drawable/uix_anim_loading"
+                android:indeterminateBehavior="repeat"
+                android:indeterminate="false" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_foot"
+                tools:text="java.lang.RuntimeException: Unable to start activity ComponentInfo{com.tuya.smartlife/com.tuya.smart.family.activity.RoomManageActivity}: java.lang.RuntimeException: homeId can't be 0"
+                android:textSize="15sp"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

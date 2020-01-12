@@ -22,6 +22,7 @@ class SettingDividerItem(private val id: Int,
 
 class SettingTextItem(private val id: Int,
                       var editable: Boolean = true,
+                      var loading: Boolean = false,
                       val lineColor: Int? = null,
                       var title: CharSequence? = null,
                       var foot: CharSequence? = null) : ISettingItem {
@@ -37,6 +38,7 @@ class SettingTextItem(private val id: Int,
 
 class SettingLongTextItem(private val id: Int,
                           var editable: Boolean = true,
+                          var loading: Boolean = false,
                           val lineColor: Int? = null,
                           var title: CharSequence? = null,
                           var subTitle: CharSequence? = null,
@@ -53,6 +55,7 @@ class SettingLongTextItem(private val id: Int,
 
 class SettingImageItem(private val id: Int,
                        var editable: Boolean = true,
+                       var loading: Boolean = false,
                        val lineColor: Int? = null,
                        var title: CharSequence? = null,
                        var imageLoader: ImageLoader? = null) : ISettingItem {
@@ -68,6 +71,7 @@ class SettingImageItem(private val id: Int,
 
 class SettingSwitchItem(private val id: Int,
                         var editable: Boolean = true,
+                        var loading: Boolean = false,
                         val lineColor: Int? = null,
                         var title: CharSequence? = null,
                         var enable: Boolean = false,

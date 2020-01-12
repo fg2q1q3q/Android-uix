@@ -14,13 +14,16 @@ import android.util.AttributeSet
 class CountdownView : AppCompatTextView, Runnable {
 
     /** 倒计时秒数  */
-    private var mTotalSecond = 60
+    var mTotalSecond = 60
     /** 当前秒数  */
     private var mCurrentSecond: Int = 0
-    /** 记录原有的文本  */
-    private var mRecordText: CharSequence? = null
-    /** 标记是否重置了倒计控件  */
-    private var mFlag: Boolean = false
+    /** 没有进入倒计时状态时的提示文字，比如："发送"  */
+    var mTips: CharSequence? = null
+        set(value) {
+            field = value
+            text = mTips
+        }
+    private var reset = false
 
     constructor(context: Context) : super(context)
 
@@ -29,31 +32,21 @@ class CountdownView : AppCompatTextView, Runnable {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     /**
-     * 设置倒计时总秒数
+     * 重置倒计时控件
      */
-    fun setTotalTime(totalTime: Int) {
-        this.mTotalSecond = totalTime
+    fun reset() {
+        mCurrentSecond = mTotalSecond
+        text = mTips
+        isEnabled = true
+        reset = true
     }
 
     /**
-     * 重置倒计时控件
+     * 开始倒计时，开始之后将无法再次点击
      */
-    fun resetState() {
-        mFlag = true
-    }
-
     fun start() {
-        mFlag = false
         isEnabled = false
-        mCurrentSecond = mTotalSecond
-        mRecordText = text
         post(this)
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        // 设置点击的属性
-        isClickable = true
     }
 
     override fun onDetachedFromWindow() {
@@ -62,26 +55,17 @@ class CountdownView : AppCompatTextView, Runnable {
         super.onDetachedFromWindow()
     }
 
-    override fun performClick(): Boolean {
-        val click = super.performClick()
-        mRecordText = text
-        isEnabled = false
-        mCurrentSecond = mTotalSecond
-        post(this)
-        return click
-    }
-
     @SuppressLint("SetTextI18n")
     override fun run() {
-        if (mCurrentSecond == 0 || mFlag) {
-            text = mRecordText
+        if (mCurrentSecond == 0 || reset) {
+            text = mTips
             isEnabled = true
-            mFlag = false
-        } else {
-            mCurrentSecond--
-            text = "$mCurrentSecond $TIME_UNIT"
-            postDelayed(this, 1000)
+            reset = false
+            mCurrentSecond = mTotalSecond
+            return
         }
+        text = "${mCurrentSecond--} $TIME_UNIT"
+        postDelayed(this, 1000)
     }
 
     companion object {

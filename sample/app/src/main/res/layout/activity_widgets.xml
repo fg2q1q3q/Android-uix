@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -44,6 +45,14 @@
                     android:layout_height="match_parent"/>
 
             </HorizontalScrollView>
+
+            <me.shouheng.uix.text.CountdownView
+                android:id="@+id/cv"
+                android:textSize="16sp"
+                tools:text="123"
+                android:textColor="?colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <me.shouheng.uix.text.ClearEditText
                 android:id="@+id/et_clear"
@@ -90,7 +99,7 @@
             <me.shouheng.uix.button.Button
                 android:id="@+id/btn_1"
                 android:text="默认边角 | 自定义颜色"
-                android:textColor="@color/white"
+                android:textColor="@android:color/holo_green_dark"
                 android:textSize="16sp"
                 app:btn_normal_color="#FF5722"
                 app:btn_selected_color="#D13F11"
@@ -104,6 +113,7 @@
                 android:id="@+id/btn_2"
                 android:text="边角 5dp | 禁用"
                 android:enabled="false"
+                app:btn_text_disable_color="@android:color/holo_blue_dark"
                 app:btn_corner_radius="5dp"
                 android:layout_margin="5dp"
                 android:layout_width="120dp"

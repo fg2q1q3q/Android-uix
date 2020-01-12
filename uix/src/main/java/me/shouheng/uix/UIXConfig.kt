@@ -1,12 +1,16 @@
 package me.shouheng.uix
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
 import android.support.annotation.Px
+import android.support.annotation.Size
+import android.view.Gravity
 import me.shouheng.uix.UIXConfig.Button
 import me.shouheng.uix.UIXConfig.Dialog
 import me.shouheng.uix.UIXConfig.minClickDelayTime
+import me.shouheng.uix.config.EmptyLoadingStyle
 import me.shouheng.uix.utils.UIXUtils
 
 /**
@@ -63,6 +67,40 @@ object UIXConfig {
          * 点击返回按钮是否可以取消对话框的全局配置
          */
         var backCancelable                      = true
+        /**
+         * 按钮底部的分割线的颜色
+         */
+        @ColorInt
+        var dividerColor: Int?                  = null
+
+        /**
+         * 全局自定义群组 [SimpleTitle]
+         */
+        @ColorInt var titleTextColor: Int?      = null
+        @Size var titleTextSize: Float          = 16f
+        var titleTypeFace: Int                  = Typeface.NORMAL
+        var titleGravity: Int                   = Gravity.CENTER
+
+        /**
+         * 全局自定义群组 [SimpleContent]
+         */
+        @ColorInt var contentTextColor: Int?      = null
+        @Size var contentTextSize: Float          = 16f
+        var contentTypeFace: Int                  = Typeface.NORMAL
+        var contentGravity: Int                   = Gravity.CENTER
+
+        /**
+         * 全局配置群组 [MessageDialog]
+         */
+        @Size var msgTextSize: Float            = 16F
+        @Size var msgTextColor: Int             = Color.WHITE
+        var msgTypeFace: Int                    = Typeface.NORMAL
+        @EmptyLoadingStyle
+        var msgLoadingStyle: Int                = EmptyLoadingStyle.STYLE_IOS
+        var msgCancelable: Boolean              = true
+        var msgAnimation: Boolean                = true
+        var msgBgColor: Int                     = Color.parseColor("#C0000000")
+        var msgBgBorderRadiusInDp: Float        = 8f
     }
 
     object Button {

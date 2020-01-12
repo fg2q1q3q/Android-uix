@@ -2,13 +2,14 @@ package me.shouheng.suix.widget
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import me.shouheng.mvvm.base.CommonActivity
 import me.shouheng.mvvm.base.anno.ActivityConfiguration
 import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityWidgetsBinding
-import me.shouheng.uix.config.LoadingButtonState
 import me.shouheng.uix.UIXConfig
+import me.shouheng.uix.config.LoadingButtonState
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
 
@@ -40,6 +41,20 @@ class WidgetActivity : CommonActivity<ActivityWidgetsBinding, EmptyViewModel>() 
             binding.btn.setText("已禁用")
             binding.btn.setState(LoadingButtonState.LOADING_STATE_DISABLE)
             true
+        }
+        binding.cv.mTips = "发送验证码"
+        binding.cv.mTotalSecond = 10
+        binding.cv.setOnClickListener {
+            binding.cv.start()
+            if (it.tag != null) {
+                it.tag = null
+                Handler().postDelayed({
+                    binding.cv.reset()
+                    toast("触发倒计时控件重置")
+                }, 3000)
+            } else {
+                it.tag = ""
+            }
         }
     }
 }

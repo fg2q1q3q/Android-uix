@@ -22,13 +22,14 @@ import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.config.EmptyLoadingStyle
 import me.shouheng.uix.config.EmptyViewState
 import me.shouheng.uix.dialog.BeautyDialog
-import me.shouheng.uix.dialog.DialogUtils
+import me.shouheng.uix.dialog.MessageDialog
 import me.shouheng.uix.dialog.content.*
 import me.shouheng.uix.dialog.footer.SimpleFooter
 import me.shouheng.uix.dialog.title.IDialogTitle
 import me.shouheng.uix.dialog.title.SimpleTitle
 import me.shouheng.uix.rv.EmptyView
 import me.shouheng.utils.app.ResUtils
+import me.shouheng.utils.ui.ImageUtils
 import me.shouheng.utils.ui.ViewUtils
 
 /**
@@ -85,7 +86,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         binding.btnNormalBottom.setOnClickListener {
             BeautyDialog.Builder()
                     .setDarkDialog(true)
-                    .setDialogTitle(SimpleTitle.Builder().setTitleColor(Color.WHITE).setTitle("Title (white)").build())
+                    .setDialogTitle(SimpleTitle.builder().setTitleColor(Color.WHITE).setTitle("Title (white)").build())
                     .setDialogContent(SampleContent())
                     .setDialogBottom(SimpleFooter.Builder()
                             .setBottomStyle(BUTTON_STYLE_TRIPLE)
@@ -102,9 +103,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         binding.btnEditorNormal.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogCornerRadius(ViewUtils.dp2px(25f))
-                    .setDialogTitle(SimpleTitle.Builder()
-                            .setTitle("普通编辑对话框")
-                            .build())
+                    .setDialogTitle(SimpleTitle.get("普通编辑对话框"))
                     .setDialogContent(SimpleEditor.Builder()
                             .setClearDrawable(ResUtils.getDrawable(R.drawable.ic_cancel_black_24dp))
                             .build())
@@ -118,9 +117,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         }
         binding.btnEditorNumeric.setOnClickListener {
             BeautyDialog.Builder()
-                    .setDialogTitle(SimpleTitle.Builder()
-                            .setTitle("编辑对话框（数字|单行|长度10）")
-                            .build())
+                    .setDialogTitle(SimpleTitle.get("编辑对话框（数字|单行|长度10）"))
                     .setDialogContent(SimpleEditor.Builder()
                             .setSingleLine(true)
                             .setNumeric(true)
@@ -149,9 +146,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         binding.btnListNormal.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogPosition(POS_BOTTOM)
-                    .setDialogTitle(SimpleTitle.Builder()
-                            .setTitle("简单的列表")
-                            .build())
+                    .setDialogTitle(SimpleTitle.get("简单的列表"))
                     .setDialogContent(SimpleList.Builder()
                             .setGravity(Gravity.CENTER)
                             .setTextSize(18f)
@@ -183,20 +178,48 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnLoading.setOnClickListener {
-            val dlg = DialogUtils.showLoading(this, "加载中...\n（3 秒之后关闭）", false)
-            dlg.show()
-            Handler().postDelayed({ DialogUtils.hideDialog(dlg) }, 3000)
+            if (it.tag == null) {
+                it.tag = "0"
+                val dlg = MessageDialog.showLoading(
+                        this,
+                        "【加载中...】\n2 秒之后自动关闭",
+                        false)
+                dlg.show()
+                Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
+            } else {
+                it.tag = null
+                val dlg = MessageDialog.builder(
+                        "【抱歉，出错了！】\n2 秒之后自动关闭",
+                        false,
+                        isAnimation = false,
+                        icon = ImageUtils.tintDrawable(R.drawable.uix_error_outline_black_24dp, Color.WHITE)
+                ).withTextColor(Color.BLUE).withTypeFace(Typeface.ITALIC).withBorderRadiusInDp(20f).build(context)
+                dlg.show()
+                Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
+            }
         }
         binding.btnLoadingCancelable.setOnClickListener {
-            DialogUtils.showLoading(this, "加载中...", true).show()
+            if (it.tag == null) {
+                it.tag = "0"
+                MessageDialog.showLoading(
+                        this,
+                        "加载中...",
+                        true
+                ).show()
+            } else {
+                it.tag = null
+                MessageDialog.builder(
+                        "君不見黃河之水天上來，奔流到海不復回。 君不見高堂明鏡悲白髮，朝如青絲暮成雪。 人生得意須盡歡，莫使金樽空對月。 天生我材必有用，千金散盡還復來。 烹羊宰牛且爲樂，會須一飲三百杯。 岑夫子，丹丘生。將進酒，杯莫停。 與君歌一曲，請君爲我側耳聽。 鐘鼓饌玉不足貴，但願長醉不願醒。 古來聖賢皆寂寞，惟有飲者留其名。 陳王昔時宴平樂，斗酒十千恣讙謔。 主人何為言少錢？徑須沽取對君酌。 五花馬，千金裘。呼兒將出換美酒，與爾同銷萬古愁。",
+                        true,
+                        loadingStyle = EmptyLoadingStyle.STYLE_ANDROID
+                ).withTextSize(12f).build(context).show()
+            }
         }
         binding.btnAddress.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogPosition(POS_BOTTOM)
                     .setDialogMargin(0)
-                    .setDialogTitle(SimpleTitle.Builder()
-                            .setTitle("地址对话框")
-                            .build())
+                    .setDialogTitle(SimpleTitle.get("地址对话框"))
                     .setDialogContent(AddressContent.Builder()
                             .setMaxLevel(LEVEL_AREA)
                             .setOnAddressSelectedListener(object: AddressContent.OnAddressSelectedListener {
@@ -212,12 +235,8 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
             BeautyDialog.Builder()
                     .setOutCancelable(true)
                     .setDialogPosition(POS_BOTTOM)
-                    .setDialogTitle(SimpleTitle.Builder()
-                            .setTitle("简单内容对话框")
-                            .build())
-                    .setDialogContent(SimpleContent.Builder()
-                            .setContent("简单内容对话框")
-                            .build())
+                    .setDialogTitle(SimpleTitle.get("简单内容对话框"))
+                    .setDialogContent(SimpleContent.get("简单内容对话框"))
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnCustomList.setOnClickListener {
@@ -241,9 +260,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .setFixedHeight(ViewUtils.getScreenHeight()/2)
                     .setOutCancelable(true)
                     .setDialogPosition(POS_BOTTOM)
-                    .setDialogTitle(SimpleTitle.Builder()
-                            .setTitle("自定义列表对话框")
-                            .build())
+                    .setDialogTitle(SimpleTitle.get("自定义列表对话框"))
                     .setDialogContent(customList!!)
                     .build().show(supportFragmentManager, "custom-list")
             // 先显示对话框再加载数据的情形

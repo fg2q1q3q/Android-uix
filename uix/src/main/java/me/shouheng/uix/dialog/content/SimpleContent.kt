@@ -1,13 +1,12 @@
 package me.shouheng.uix.dialog.content
 
 import android.content.Context
-import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.support.annotation.Size
-import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import me.shouheng.uix.R
+import me.shouheng.uix.UIXConfig
 
 /**
  * 对话框内容的基类
@@ -18,10 +17,10 @@ import me.shouheng.uix.R
 class SimpleContent private constructor(): IDialogContent {
 
     private var content: CharSequence? = null
-    @ColorInt private var contentColor: Int? = null
-    @Size private var contentSize: Float = 16f
-    private var typeFace: Int = Typeface.NORMAL
-    private var gravity: Int = Gravity.CENTER
+    @ColorInt private var contentColor: Int? = UIXConfig.Dialog.contentTextColor
+    @Size private var contentSize: Float = UIXConfig.Dialog.contentTextSize
+    private var typeFace: Int = UIXConfig.Dialog.contentTypeFace
+    private var gravity: Int = UIXConfig.Dialog.contentGravity
 
     override fun getView(ctx: Context): View {
         val tv = View.inflate(ctx, R.layout.uix_dialog_content_simple, null) as TextView
@@ -35,10 +34,10 @@ class SimpleContent private constructor(): IDialogContent {
 
     class Builder {
         private var content: CharSequence? = null
-        @ColorInt private var contentColor: Int? = null
-        @Size private var contentSize: Float = 16f
-        private var typeFace: Int = Typeface.NORMAL
-        private var gravity: Int = Gravity.CENTER
+        @ColorInt private var contentColor: Int? = UIXConfig.Dialog.contentTextColor
+        @Size private var contentSize: Float = UIXConfig.Dialog.contentTextSize
+        private var typeFace: Int = UIXConfig.Dialog.contentTypeFace
+        private var gravity: Int = UIXConfig.Dialog.contentGravity
 
         fun setContent(content: CharSequence): Builder {
             this.content = content
@@ -74,5 +73,12 @@ class SimpleContent private constructor(): IDialogContent {
             simpleContent.gravity = gravity
             return simpleContent
         }
+    }
+
+    companion object {
+
+        fun get(title: CharSequence): SimpleContent = Builder().setContent(title).build()
+
+        fun builder(): Builder = Builder()
     }
 }

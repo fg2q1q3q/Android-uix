@@ -33,7 +33,7 @@ class Button : AppCompatButton {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         if (attrs != null) {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.Button)
-            textDisableColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_text_disable_color, textDisableColor)
+            textDisableColor = typedArray.getColor(R.styleable.Button_btn_text_disable_color, textDisableColor)
             val normalColor = typedArray.getColor(R.styleable.Button_btn_normal_color, normalColor)
             val selectedColor = if (typedArray.hasValue(R.styleable.Button_btn_selected_color))
                 typedArray.getColor(R.styleable.Button_btn_selected_color, selectedColor)

@@ -85,8 +85,44 @@ class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>()
             val item = adapter.data[pos]
             if (item.itemType == ISettingItem.ItemType.TYPE_SWITCH) {
                 item as SettingSwitchItem
+                if (item.loading) return@setOnItemClickListener
                 item.enable = !item.enable
+                item.loading = true
                 adapter.notifyItemChanged(pos)
+                Handler().postDelayed({
+                    item.loading = false
+                    adapter.notifyItemChanged(pos)
+                }, 2000)
+            }
+            if (item.itemType == ISettingItem.ItemType.TYPE_TEXT) {
+                item as SettingTextItem
+                if (item.loading) return@setOnItemClickListener
+                item.loading = true
+                adapter.notifyItemChanged(pos)
+                Handler().postDelayed({
+                    item.loading = false
+                    adapter.notifyItemChanged(pos)
+                }, 2000)
+            }
+            if (item.itemType == ISettingItem.ItemType.TYPE_IMAGE) {
+                item as SettingImageItem
+                if (item.loading) return@setOnItemClickListener
+                item.loading = true
+                adapter.notifyItemChanged(pos)
+                Handler().postDelayed({
+                    item.loading = false
+                    adapter.notifyItemChanged(pos)
+                }, 2000)
+            }
+            if (item.itemType == ISettingItem.ItemType.TYPE_LONG_TEXT) {
+                item as SettingLongTextItem
+                if (item.loading) return@setOnItemClickListener
+                item.loading = true
+                adapter.notifyItemChanged(pos)
+                Handler().postDelayed({
+                    item.loading = false
+                    adapter.notifyItemChanged(pos)
+                }, 2000)
             }
         }
     }

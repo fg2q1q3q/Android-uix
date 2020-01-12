@@ -187,5 +187,9 @@ class SampleApp: Application() {
         UIXConfig.depthPageTransScale = .5f
         UIXConfig.Dialog.margin = UIXUtils.dp2px(30f)
         UIXConfig.Button.normalColor = Color.GRAY
+
+        UIXConfig.Dialog.titleTypeFace = Typeface.BOLD
+        UIXConfig.Dialog.titleTextColor = Color.BLACK
+        UIXConfig.Dialog.contentTextSize = 14f
     }
 }

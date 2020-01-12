@@ -1,13 +1,12 @@
 package me.shouheng.uix.dialog.title
 
 import android.content.Context
-import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.support.annotation.Size
-import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import me.shouheng.uix.R
+import me.shouheng.uix.UIXConfig
 
 /**
  * 对话框标题的基类
@@ -18,10 +17,10 @@ import me.shouheng.uix.R
 class SimpleTitle private constructor(): IDialogTitle {
 
     private var title: CharSequence? = null
-    @ColorInt private var titleColor: Int? = null
-    @Size private var titleSize: Float = 16f
-    private var typeFace: Int = Typeface.NORMAL
-    private var gravity: Int = Gravity.CENTER
+    @ColorInt private var titleColor: Int? = UIXConfig.Dialog.titleTextColor
+    @Size private var titleSize: Float = UIXConfig.Dialog.titleTextSize
+    private var typeFace: Int = UIXConfig.Dialog.titleTypeFace
+    private var gravity: Int = UIXConfig.Dialog.titleGravity
 
     override fun getView(ctx: Context): View {
         val tv = View.inflate(ctx, R.layout.uix_dialog_title_simple, null) as TextView
@@ -35,10 +34,10 @@ class SimpleTitle private constructor(): IDialogTitle {
 
     class Builder {
         private var title: CharSequence? = null
-        @ColorInt private var titleColor: Int? = null
-        @Size private var titleSize: Float = 16f
-        private var typeFace: Int = Typeface.NORMAL
-        private var gravity: Int = Gravity.CENTER
+        @ColorInt private var titleColor: Int? = UIXConfig.Dialog.titleTextColor
+        @Size private var titleSize: Float = UIXConfig.Dialog.titleTextSize
+        private var typeFace: Int = UIXConfig.Dialog.titleTypeFace
+        private var gravity: Int = UIXConfig.Dialog.titleGravity
 
         fun setTitle(title: CharSequence): Builder {
             this.title = title
@@ -74,5 +73,12 @@ class SimpleTitle private constructor(): IDialogTitle {
             simpleTitle.gravity = gravity
             return simpleTitle
         }
+    }
+
+    companion object {
+
+        fun get(title: CharSequence): SimpleTitle = Builder().setTitle(title).build()
+
+        fun builder(): Builder = Builder()
     }
 }

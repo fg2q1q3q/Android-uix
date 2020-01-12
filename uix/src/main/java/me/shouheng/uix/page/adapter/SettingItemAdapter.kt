@@ -52,6 +52,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                 helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
                 helper.setImageDrawable(R.id.iv_more, moreDrawable
                         ?:UIXUtils.getDrawable(R.drawable.uix_chevron_right_black_24dp))
+                helper.getView<View>(R.id.pb).visibility = if (item.loading) View.VISIBLE else View.GONE
             }
             TYPE_IMAGE -> {
                 item as SettingImageItem
@@ -62,6 +63,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                 helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
                 helper.setImageDrawable(R.id.iv_more, moreDrawable
                         ?:UIXUtils.getDrawable(R.drawable.uix_chevron_right_black_24dp))
+                helper.getView<View>(R.id.pb).visibility = if (item.loading) View.VISIBLE else View.GONE
             }
             TYPE_SWITCH -> {
                 item as SettingSwitchItem
@@ -72,6 +74,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                     item.onCheckStateChangeListener?.onStateChange(sb, isChecked)
                 }
                 helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
+                helper.getView<View>(R.id.pb).visibility = if (item.loading) View.VISIBLE else View.GONE
             }
             TYPE_DESC -> {
                 item as SettingDescItem
@@ -86,6 +89,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                 helper.setText(R.id.tv_foot, item.subTitle)
                 helper.getView<TextView>(R.id.tv_foot).gravity = item.gravity
                 helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
+                helper.getView<View>(R.id.pb).visibility = if (item.loading) View.VISIBLE else View.GONE
             }
         }
     }

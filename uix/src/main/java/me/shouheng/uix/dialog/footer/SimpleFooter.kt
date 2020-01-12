@@ -105,11 +105,17 @@ class SimpleFooter private constructor(): IDialogFooter {
         if (leftTextColor != null) tvLeft.setTextColor(leftTextColor!!)
         if (middleTextColor != null) tvMiddle.setTextColor(middleTextColor!!)
         if (rightTextColor != null) tvRight.setTextColor(rightTextColor!!)
-        if (dividerColor != null) {
-            v1.setBackgroundColor(dividerColor!!)
-            v2.setBackgroundColor(dividerColor!!)
-            h.setBackgroundColor(dividerColor!!)
-        }
+
+        // 优先使用构建者模式中传入的颜色，如果没有再使用全局配置的颜色，还是没有就使用默认颜色
+        val finalDividerColor =
+                if (dividerColor == null) {
+                    if (UIXConfig.Dialog.dividerColor == null)
+                        selectedColor
+                    else UIXConfig.Dialog.dividerColor!!
+                } else dividerColor!!
+        v1.setBackgroundColor(finalDividerColor)
+        v2.setBackgroundColor(finalDividerColor)
+        h.setBackgroundColor(finalDividerColor)
 
         when(bottomStyle) {
             BUTTON_STYLE_SINGLE -> {

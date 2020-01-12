@@ -117,4 +117,11 @@ class SimpleList private constructor(): IDialogContent {
             return simpleList
         }
     }
+
+    companion object {
+
+        fun get(items: List<Item>): SimpleList = Builder().setList(items).build()
+
+        fun builder(): Builder = Builder()
+    }
 }

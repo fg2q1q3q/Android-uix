@@ -19,7 +19,14 @@ import me.shouheng.uix.widget.text.NormalTextView
 import kotlin.system.exitProcess
 
 /**
- * Crash report page.
+ * Crash report page. To custom the theme, you can override theme in your
+ * AndroidManifest.xml like below:
+ *
+ * ```xml
+ *  <activity android:name="me.shouheng.uix.pages.CrashReportActivity"
+ *       android:theme="@style/CrashReportTheme"
+ *       tools:replace="android:theme"/>
+ * ```
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-12-22 11:46

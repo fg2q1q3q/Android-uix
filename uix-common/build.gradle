@@ -34,7 +34,3 @@ dependencies {
     compileOnly 'com.github.bumptech.glide:glide:4.8.0'
     compileOnly 'com.google.code.gson:gson:2.8.5'
 }
-
-apply {
-    from ('../sample/bintrayUpload.gradle')
-}

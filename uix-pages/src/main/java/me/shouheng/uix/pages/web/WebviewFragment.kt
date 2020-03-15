@@ -22,7 +22,11 @@ import me.shouheng.uix.common.utils.UIXResUtils
 import me.shouheng.uix.pages.R
 
 /**
- * 网页浏览通用 fragment
+ * 网页浏览通用 fragment. To use this fragment, you must add
+ * ```
+ * implementation 'com.just.agentweb:agentweb:4.0.2'
+ * ```
+ * to your gradle dependencies. For latest version, see https://github.com/Justson/AgentWeb
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-17 22:38

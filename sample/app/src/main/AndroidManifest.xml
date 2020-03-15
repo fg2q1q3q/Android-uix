@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="me.shouheng.suix">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -34,13 +35,9 @@
         <activity android:name=".dialog.DialogActivity"/>
 <!--        <activity android:name="me.shouheng.uix.pages.image.GalleryActivity"/>-->
 <!--        <activity android:name="me.shouheng.uix.pages.about.AboutFragment"/>-->
-        <activity android:name="me.shouheng.uix.pages.image.GalleryActivity"
-            android:theme="@style/PictureViewTheme"/>
         <activity android:name="me.shouheng.uix.pages.CrashReportActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:process=":crash"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/CrashReportTheme"
+            tools:replace="android:theme"/>
         <activity android:name=".image.MatisseSampleActivity"/>
         <activity android:name=".widget.WidgetActivity"/>
         <activity android:name=".widget.LayoutActivity"/>

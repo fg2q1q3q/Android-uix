@@ -44,7 +44,7 @@ publish {
     groupId = 'me.shouheng.ui'
     artifactId = 'uix-widget'
     repoName = 'Android'
-    publishVersion = '1.0.1'
+    publishVersion = rootProject.ext.releaseVersion
     desc = 'The ui widgets for Android.'
     website = 'https://github.com/Shouheng88/Android-uix'
 }

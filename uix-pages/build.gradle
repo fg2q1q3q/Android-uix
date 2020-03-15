@@ -42,9 +42,9 @@ dependencies {
 publish {
     userOrg = 'easymark'
     groupId = 'me.shouheng.ui'
-    artifactId = 'uix-pages'
+    artifactId = 'uix-core'
     repoName = 'Android'
-    publishVersion = '1.0.1'
+    publishVersion = rootProject.ext.releaseVersion
     desc = 'The ui components for Android.'
     website = 'https://github.com/Shouheng88/Android-uix'
 }

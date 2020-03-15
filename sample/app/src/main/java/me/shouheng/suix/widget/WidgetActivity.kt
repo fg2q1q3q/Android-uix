@@ -8,8 +8,8 @@ import me.shouheng.mvvm.base.anno.ActivityConfiguration
 import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityWidgetsBinding
-import me.shouheng.uix.UIXConfig
-import me.shouheng.uix.config.LoadingButtonState
+import me.shouheng.uix.common.anno.LoadingButtonState
+import me.shouheng.uix.widget.button.NormalButton
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
 
@@ -23,10 +23,11 @@ import me.shouheng.utils.ui.ImageUtils
 class WidgetActivity : CommonActivity<ActivityWidgetsBinding, EmptyViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        UIXConfig.Button.disableColor = Color.GRAY
-        UIXConfig.Button.textDisableColor = Color.WHITE
-        UIXConfig.Button.normalColor = ResUtils.getAttrColor(this, R.attr.colorPrimary)
-        UIXConfig.Button.selectedColor = ResUtils.getAttrColor(this, R.attr.colorPrimaryDark)
+        // 全局设置
+        NormalButton.GlobalConfig.disableColor = Color.GRAY
+        NormalButton.GlobalConfig.textDisableColor = Color.WHITE
+        NormalButton.GlobalConfig.normalColor = ResUtils.getAttrColor(this, R.attr.colorPrimary)
+        NormalButton.GlobalConfig.selectedColor = ResUtils.getAttrColor(this, R.attr.colorPrimaryDark)
         super.onCreate(savedInstanceState)
     }
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="me.shouheng.uix.pages" xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity android:name=".image.GalleryActivity" android:theme="@style/PictureViewTheme"/>
+    </application>
+</manifest>

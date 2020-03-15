@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_day"
+                android:text="Matisse 日间主题"
+                style="@style/MenuItemButton"/>
+
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_night"
+                android:text="Matisse 夜间主题"
+                style="@style/MenuItemButton"/>
+
+        </LinearLayout>
+
+        <me.shouheng.uix.widget.text.NormalTextView
+            android:text="图片选择和浏览控件示例：图片选择库基于知乎开源 Matisse 进行了 UI 定制，图片浏览属于自己开发\n点击上方按钮进入图片选择界面，选择之后自动进入图片浏览界面"
+            android:textSize="@dimen/sp_12"
+            android:padding="8dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+</layout>

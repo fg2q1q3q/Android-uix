@@ -1,83 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_no_bg"
-            android:text="无背景对话框"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_normal"
-            android:text="普通的对话框（中间，WRAP）"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_no_bg"
+                android:text="无背景对话框"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_normal_top"
-            android:text="普通的对话框（上方）"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_normal"
+                android:text="普通的对话框 [中间|WRAP|自定义标题|自定义底部]"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_normal_bottom"
-            android:text="普通的对话框（下方，夜间主题）"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_normal_top"
+                android:text="普通的对话框 [上方]"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_editor_normal"
-            android:text="编辑对话框（边角 25dp）"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_normal_bottom"
+                android:text="普通的对话框 [下方|黑色主题]"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_editor_numeric"
-            android:text="编辑对话框（数字|单行|长度10）"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_editor_normal"
+                android:text="编辑对话框 [边角4dp|内容无限制]"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_list_normal"
-            android:text="简单的列表"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_editor_numeric"
+                android:text="编辑对话框 [数字|单行|长度10]"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_loading"
-            android:text="加载对话框"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_list_normal"
+                android:text="简单的列表"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_loading_cancelable"
-            android:text="加载对话框（可以取消的）"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_loading"
+                android:text="加载对话框 [不可取消|iOS风格]"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_address"
-            android:text="地址对话框"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_loading_custom"
+                android:text="加载对话框 [不可取消|自定义]"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_content"
-            android:text="简单内容对话框"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_loading_cancelable"
+                android:text="加载对话框 [可取消|iOS风格]"
+                style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_custom_list"
-            android:text="自定义列表对话框"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_loading_cancelable_long"
+                android:text="加载对话框 [可取消|长文本|安卓风格]"
+                style="@style/MenuItemButton"/>
 
-    </LinearLayout>
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_address"
+                android:text="地址选择对话框"
+                style="@style/MenuItemButton"/>
+
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_content"
+                android:text="简单内容对话框"
+                style="@style/MenuItemButton"/>
+
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_custom_list"
+                android:text="自定义列表对话框 [带加载状态|支持异步加载]"
+                style="@style/MenuItemButton"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </layout>

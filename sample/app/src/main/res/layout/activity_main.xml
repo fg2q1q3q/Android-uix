@@ -6,46 +6,64 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_dialogs"
-            android:text="对话框示例"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_matisse"
-            android:text="Matisse 示例"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_web"
-            android:text="Web 示例"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_dialogs"
+                    android:text="对话框示例"
+                    style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_widgets"
-            android:text="各种控件示例"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_matisse"
+                    android:text="图片选择|浏览|展示"
+                    style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_setting"
-            android:text="设置列表控件示例"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_web"
+                    android:text="Web 示例"
+                    style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_about"
-            android:text="关于页面"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_widgets"
+                    android:text="各种控件示例"
+                    style="@style/MenuItemButton"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_crash"
-            android:text="崩一个"
-            android:layout_width="match_parent"
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_setting"
+                    android:text="设置列表控件示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_about"
+                    android:text="关于页面"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_crash"
+                    android:text="崩一个 | 展示崩溃报告界面"
+                    style="@style/MenuItemButton"/>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <me.shouheng.uix.widget.text.NormalTextView
+            android:text="UI 标准化项目，提供了丰富且高可定制的功能\n作者 WngShhng, 欢迎 Star 和 Fork 该项目"
+            android:textSize="@dimen/sp_12"
+            android:padding="8dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>

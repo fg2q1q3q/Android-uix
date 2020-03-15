@@ -32,9 +32,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".dialog.DialogActivity"/>
-<!--        <activity android:name="me.shouheng.uix.page.GalleryActivity"/>-->
-<!--        <activity android:name="me.shouheng.uix.page.AboutFragment"/>-->
+<!--        <activity android:name="me.shouheng.uix.pages.image.GalleryActivity"/>-->
+<!--        <activity android:name="me.shouheng.uix.pages.about.AboutFragment"/>-->
+        <activity android:name="me.shouheng.uix.pages.image.GalleryActivity"
+            android:theme="@style/PictureViewTheme"/>
+        <activity android:name="me.shouheng.uix.pages.CrashReportActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:process=":crash"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".image.MatisseSampleActivity"/>
         <activity android:name=".widget.WidgetActivity"/>
+        <activity android:name=".widget.LayoutActivity"/>
+        <activity android:name=".comn.ContainerActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
     </application>
 
 </manifest>

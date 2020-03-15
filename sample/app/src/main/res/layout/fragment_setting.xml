@@ -2,27 +2,50 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:background="@color/settingBg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-        <me.shouheng.uix.rv.EmptySupportRecyclerView
-            android:id="@+id/rv"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+       <android.support.v7.widget.Toolbar
+           android:id="@+id/toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="?attr/actionBarSize"/>
 
-        <me.shouheng.uix.rv.EmptyView
-            android:id="@+id/ev"
-            app:empty_title="empty title ..."
-            app:empty_detail="莫激动，测试一下为空的界面，不是 Bug！"
-            app:empty_loading_style="android"
-            app:empty_loading_tips="loading..."
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+       <FrameLayout
+           android:background="@color/settingBg"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
 
-    </FrameLayout>
+           <me.shouheng.uix.widget.rv.EmptySupportRecyclerView
+               android:id="@+id/rv"
+               app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+
+           <me.shouheng.uix.widget.rv.EmptyView
+               android:id="@+id/ev"
+               app:empty_title="测试 EmptyView 控件"
+               app:empty_detail="先展示一个加载页面，设置页面马上呈现"
+               app:empty_loading_style="android"
+               app:empty_loading_tips="数据加载中…"
+               android:layout_gravity="center"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"/>
+
+           <me.shouheng.uix.widget.text.NormalTextView
+               android:text="设置列表功能展示，支持以上展示的几种类型条目，点击条目时条目可以设置加载状态"
+               android:textSize="@dimen/sp_12"
+               android:padding="8dp"
+               android:layout_marginStart="40dp"
+               android:layout_marginEnd="40dp"
+               android:gravity="center"
+               android:layout_gravity="bottom|center_horizontal"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"/>
+
+       </FrameLayout>
+
+   </LinearLayout>
 
 </layout>

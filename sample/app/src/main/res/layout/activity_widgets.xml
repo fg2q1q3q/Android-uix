@@ -15,12 +15,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <me.shouheng.uix.button.SwitchButton
+            <me.shouheng.uix.widget.layout.FlowLayout
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sw"
+                    android:layout_margin="2dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sb_default_measure_4"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="80dp"
+                    android:layout_margin="2dp"
+                    android:layout_height="wrap_content"
+                    android:background="#E0E0E0"
+                    app:kswThumbMargin="-5dp" />
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sb_default_measure_8"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="#E0E0E0"
+                    app:kswTextExtra="10dp"
+                    app:kswTextOff="OFF"
+                    app:kswTextOn="ON"
+                    app:kswThumbMargin="-5dp"
+                    app:kswThumbWidth="20dp" />
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sb_ios"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:kswAnimationDuration="300"
+                    app:kswBackDrawable="@drawable/ios_back_drawable"
+                    app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                    app:kswThumbMarginBottom="-8dp"
+                    app:kswThumbMarginLeft="-5dp"
+                    app:kswThumbMarginRight="-5dp"
+                    app:kswThumbMarginTop="-2.5dp"
+                    app:kswThumbRangeRatio="1.4"/>
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sb_disable"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"/>
+
+            </me.shouheng.uix.widget.layout.FlowLayout>
 
             <HorizontalScrollView
                 android:scrollbars="none"
@@ -28,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
 
-                <me.shouheng.uix.text.VerticalTextView
+                <me.shouheng.uix.widget.text.VerticalTextView
                     android:text="君不見黃河之水天上來，奔流到海不復回。
 君不見高堂明鏡悲白髮，朝如青絲暮成雪。
 人生得意須盡歡，莫使金樽空對月。
@@ -46,49 +98,51 @@
 
             </HorizontalScrollView>
 
-            <me.shouheng.uix.text.CountdownView
+            <me.shouheng.uix.widget.text.CountdownView
                 android:id="@+id/cv"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:text="123"
-                android:textColor="?colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="?colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <me.shouheng.uix.text.ClearEditText
+            <me.shouheng.uix.widget.text.ClearEditText
                 android:id="@+id/et_clear"
                 android:layout_margin="8dp"
                 android:hint="包含清除按钮的输入框"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <me.shouheng.uix.text.PasswordEditText
+            <me.shouheng.uix.widget.text.PasswordEditText
                 android:id="@+id/et_psd"
                 android:layout_margin="8dp"
                 android:hint="密码输入框"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <me.shouheng.uix.button.LoadingButton
+            <me.shouheng.uix.widget.button.LoadingButton
                 android:id="@+id/btn"
                 app:loading_button_text="点我试一下"
                 app:loading_button_state="normal"
-                app:loading_button_text_color="@color/white"
+                app:loading_button_text_color="@android:color/white"
                 app:loading_button_disable_color="@android:color/darker_gray"
                 app:loading_button_normal_color="#008577"
                 app:loading_button_selected_color="#00574B"
-                app:loading_button_text_disable_color="@color/white"
+                app:loading_button_text_disable_color="@android:color/white"
                 app:loading_button_style="ios"
                 app:loading_button_text_size="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <me.shouheng.uix.button.LoadingButton
+            <me.shouheng.uix.widget.button.LoadingButton
                 app:loading_button_text="加载按钮 | 边角 5dp | 使用 fraction 计算按下时的颜色"
                 app:loading_button_state="normal"
-                app:loading_button_text_color="@color/white"
+                app:loading_button_text_color="@android:color/white"
                 app:loading_button_disable_color="@android:color/darker_gray"
                 app:loading_button_normal_color="#008577"
-                app:loading_button_text_disable_color="@color/white"
+                app:loading_button_text_disable_color="@android:color/white"
                 app:loading_button_style="ios"
                 app:loading_button_text_size="14sp"
                 app:loading_button_corner_radius="5dp"
@@ -96,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <me.shouheng.uix.button.Button
+            <me.shouheng.uix.widget.button.NormalButton
                 android:id="@+id/btn_1"
                 android:text="默认边角 | 自定义颜色"
                 android:textColor="@android:color/holo_green_dark"
@@ -107,9 +161,9 @@
                 app:btn_disable_color="#E4DFDE"
                 app:btn_text_disable_color="#1A1818"
                 android:layout_width="200dp"
-                android:layout_height="40dp"/>
+                android:layout_height="50dp"/>
 
-            <me.shouheng.uix.button.Button
+            <me.shouheng.uix.widget.button.NormalButton
                 android:id="@+id/btn_2"
                 android:text="边角 5dp | 禁用"
                 android:enabled="false"
@@ -119,7 +173,7 @@
                 android:layout_width="120dp"
                 android:layout_height="35dp"/>
 
-            <me.shouheng.uix.image.CircleImageView
+            <me.shouheng.uix.widget.image.CircleImageView
                 android:src="@drawable/fat_ass"
                 app:border_width="1dp"
                 app:border_overlay="true"
@@ -127,37 +181,6 @@
                 app:border_color="@color/colorAccent"
                 android:layout_width="80dp"
                 android:layout_height="80dp"/>
-
-            <me.shouheng.uix.layout.RatioFrameLayout
-                app:sizeRatio="5"
-                android:layout_margin="8dp"
-                android:background="#123456"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:text="宽高比 5:1"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </me.shouheng.uix.layout.RatioFrameLayout>
-
-            <me.shouheng.uix.layout.SquareFrameLayout
-                android:background="#123456"
-                android:layout_margin="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:text="正方形"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </me.shouheng.uix.layout.SquareFrameLayout>
 
         </LinearLayout>
 

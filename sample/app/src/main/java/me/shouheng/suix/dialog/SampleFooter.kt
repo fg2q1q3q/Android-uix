@@ -3,10 +3,7 @@ package me.shouheng.suix.dialog
 import android.content.Context
 import android.view.View
 import me.shouheng.suix.R
-import me.shouheng.uix.dialog.BeautyDialog
-import me.shouheng.uix.dialog.content.IDialogContent
-import me.shouheng.uix.dialog.footer.IDialogFooter
-import me.shouheng.uix.dialog.title.IDialogTitle
+import me.shouheng.uix.widget.dialog.footer.IDialogFooter
 
 /**
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>

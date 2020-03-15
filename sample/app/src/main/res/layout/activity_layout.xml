@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <me.shouheng.uix.widget.layout.RatioFrameLayout
+                app:sizeRatio="3"
+                android:layout_margin="8dp"
+                android:background="#123456"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:text="宽高比 3:1 布局"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </me.shouheng.uix.widget.layout.RatioFrameLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <me.shouheng.uix.widget.layout.SquareFrameLayout
+                    android:background="#123456"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:text="正方形 FrameLayout"
+                        android:textColor="@android:color/white"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </me.shouheng.uix.widget.layout.SquareFrameLayout>
+
+                <me.shouheng.uix.widget.layout.SquareLinearLayout
+                    android:background="#123456"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:text="正方形 LinearLayout"
+                        android:textColor="@android:color/white"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </me.shouheng.uix.widget.layout.SquareLinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <me.shouheng.uix.widget.layout.SquareRelativeLayout
+                    android:background="#123456"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:text="正方形 RelativeLayout"
+                        android:textColor="@android:color/white"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </me.shouheng.uix.widget.layout.SquareRelativeLayout>
+
+                <me.shouheng.uix.widget.layout.SquareRelativeLayout
+                    android:layout_margin="8dp"
+                    android:scaleType="centerCrop"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <me.shouheng.uix.widget.layout.FlowLayout
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:text="流式布局示例:"
+                    app:btn_corner_radius="30dp"
+                    app:btn_normal_color="@color/colorAccent"
+                    style="@style/CheckItem"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:text="按钮 0002"
+                    app:btn_corner_radius="30dp"
+                    app:btn_normal_color="@color/colorAccent"
+                    style="@style/CheckItem"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:text="按钮 0003"
+                    app:btn_corner_radius="30dp"
+                    app:btn_normal_color="@color/colorAccent"
+                    style="@style/CheckItem"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:text="按钮 0004"
+                    app:btn_corner_radius="30dp"
+                    app:btn_normal_color="@color/colorAccent"
+                    style="@style/CheckItem"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:text="按钮 0005"
+                    app:btn_corner_radius="30dp"
+                    app:btn_normal_color="@color/colorAccent"
+                    style="@style/CheckItem"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:text="按钮 0006"
+                    app:btn_corner_radius="30dp"
+                    app:btn_normal_color="@color/colorAccent"
+                    style="@style/CheckItem"/>
+
+            </me.shouheng.uix.widget.layout.FlowLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</layout>

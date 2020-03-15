@@ -10,24 +10,25 @@ import me.shouheng.mvvm.base.anno.ActivityConfiguration
 import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityDialogBinding
-import me.shouheng.uix.config.AddressSelectLevel.Companion.LEVEL_AREA
-import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_LEFT
-import me.shouheng.uix.config.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_DOUBLE
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
-import me.shouheng.uix.config.BottomButtonStyle.Companion.BUTTON_STYLE_TRIPLE
-import me.shouheng.uix.config.DialogPosition.Companion.POS_BOTTOM
-import me.shouheng.uix.config.DialogPosition.Companion.POS_TOP
-import me.shouheng.uix.config.DialogStyle.Companion.STYLE_WRAP
-import me.shouheng.uix.config.EmptyLoadingStyle
-import me.shouheng.uix.config.EmptyViewState
-import me.shouheng.uix.dialog.BeautyDialog
-import me.shouheng.uix.dialog.MessageDialog
-import me.shouheng.uix.dialog.content.*
-import me.shouheng.uix.dialog.footer.SimpleFooter
-import me.shouheng.uix.dialog.title.IDialogTitle
-import me.shouheng.uix.dialog.title.SimpleTitle
-import me.shouheng.uix.rv.EmptyView
+import me.shouheng.uix.common.anno.AddressSelectLevel.Companion.LEVEL_AREA
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.BUTTON_POS_LEFT
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
+import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_DOUBLE
+import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
+import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_TRIPLE
+import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_BOTTOM
+import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_TOP
+import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
+import me.shouheng.uix.common.anno.EmptyViewState
+import me.shouheng.uix.common.anno.LoadingStyle
+import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.widget.dialog.BeautyDialog
+import me.shouheng.uix.widget.dialog.MessageDialog
+import me.shouheng.uix.widget.dialog.content.*
+import me.shouheng.uix.widget.dialog.footer.SimpleFooter
+import me.shouheng.uix.widget.dialog.title.IDialogTitle
+import me.shouheng.uix.widget.dialog.title.SimpleTitle
+import me.shouheng.uix.widget.rv.EmptyView
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
 import me.shouheng.utils.ui.ViewUtils
@@ -48,22 +49,27 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
             BeautyDialog.Builder()
                     .setDialogStyle(STYLE_WRAP)
                     .setDialogBackground(null)
-                    .setDialogContent(SampleContent())
+                    .setDialogContent(UpgradeContent())
                     .build().show(supportFragmentManager, "normal")
         }
         binding.btnNormal.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogStyle(STYLE_WRAP)
                     .setDialogTitle(SimpleTitle.Builder()
-                            .setTitle("Title (red/18)")
-                            .setTitleSize(18f)
-                            .setTitleColor(Color.RED)
+                            .setTitle("测试标题 [RED|18f]")
+                            .setTitleStyle(TextStyleBean().apply {
+                                textSize = 18f
+                                textColor = Color.RED
+                            })
                             .build())
-                    .setDialogContent(SampleContent())
+                    .setDialogContent(MultipleContent())
                     .setDialogBottom(SimpleFooter.Builder()
                             .setBottomStyle(BUTTON_STYLE_SINGLE)
-                            .setRightText("OK")
-                            .setRightTextColor(Color.RED)
+                            .setMiddleText("OK")
+                            .setMiddleTextStyle(TextStyleBean().apply {
+                                textColor = Color.RED
+                                typeFace = Typeface.BOLD
+                            })
                             .setOnClickListener(object : SimpleFooter.OnClickListener {
                                 override fun onClick(dialog: BeautyDialog, buttonPos: Int, dialogTitle: IDialogTitle?, dialogContent: IDialogContent?) {
                                     dialog.dismiss()
@@ -74,11 +80,13 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         binding.btnNormalTop.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogTitle(SimpleTitle.Builder()
-                            .setTitle("Title (bold|left)")
-                            .setGravity(Gravity.START)
-                            .setTitleTypeface(Typeface.BOLD)
+                            .setTitle("测试标题 [BOLD|LEFT]")
+                            .setTitleStyle(TextStyleBean().apply {
+                                gravity = Gravity.START
+                                typeFace = Typeface.BOLD
+                            })
                             .build())
-                    .setDialogContent(SampleContent())
+                    .setDialogContent(MultipleContent())
                     .setDialogBottom(SampleFooter())
                     .setDialogPosition(POS_TOP)
                     .build().show(supportFragmentManager, "normal_top")
@@ -86,24 +94,38 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         binding.btnNormalBottom.setOnClickListener {
             BeautyDialog.Builder()
                     .setDarkDialog(true)
-                    .setDialogTitle(SimpleTitle.builder().setTitleColor(Color.WHITE).setTitle("Title (white)").build())
-                    .setDialogContent(SampleContent())
+                    .setDialogTitle(SimpleTitle.builder()
+                            .setTitle("测试标题 [WHITE]")
+                            .setTitleStyle(TextStyleBean().apply {
+                                textColor = Color.WHITE
+                            })
+                            .build())
+                    .setDialogContent(MultipleContent())
                     .setDialogBottom(SimpleFooter.Builder()
                             .setBottomStyle(BUTTON_STYLE_TRIPLE)
-                            .setLeftText("Left")
-                            .setLeftTextColor(Color.WHITE)
-                            .setMiddleText("Middle")
-                            .setMiddleTextColor(Color.WHITE)
-                            .setRightText("Right")
-                            .setRightTextColor(Color.WHITE)
+                            .setLeftText("左")
+                            .setLeftTextStyle(TextStyleBean().apply {
+                                textColor = Color.WHITE
+                                textSize = 14f
+                            })
+                            .setMiddleText("中")
+                            .setMiddleTextStyle(TextStyleBean().apply {
+                                textColor = Color.WHITE
+                                textSize = 15f
+                            })
+                            .setRightText("右")
+                            .setRightTextStyle(TextStyleBean().apply {
+                                textColor = Color.WHITE
+                                textSize = 16f
+                            })
                             .build())
                     .setDialogPosition(POS_BOTTOM)
                     .build().show(supportFragmentManager, "normal_bottom")
         }
         binding.btnEditorNormal.setOnClickListener {
             BeautyDialog.Builder()
-                    .setDialogCornerRadius(ViewUtils.dp2px(25f))
-                    .setDialogTitle(SimpleTitle.get("普通编辑对话框"))
+                    .setDialogCornerRadius(4f)
+                    .setDialogTitle(SimpleTitle.get("普通编辑对话框 [无限制]"))
                     .setDialogContent(SimpleEditor.Builder()
                             .setClearDrawable(ResUtils.getDrawable(R.drawable.ic_cancel_black_24dp))
                             .build())
@@ -128,11 +150,15 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                             .build())
                     .setDialogBottom(SimpleFooter.Builder()
                             .setBottomStyle(BUTTON_STYLE_DOUBLE)
-                            .setLeftText("Cancel")
-                            .setRightText("Confirm")
+                            .setLeftText("取消")
+                            .setRightText("确定")
                             .setDividerColor(Color.LTGRAY)
-                            .setLeftTextColor(Color.GRAY)
-                            .setRightTextColor(Color.BLACK)
+                            .setRightTextStyle(TextStyleBean().apply {
+                                textColor = Color.GRAY
+                            })
+                            .setRightTextStyle(TextStyleBean().apply {
+                                textColor = Color.RED
+                            })
                             .setOnClickListener(object : SimpleFooter.OnClickListener {
                                 override fun onClick(dialog: BeautyDialog, buttonPos: Int, dialogTitle: IDialogTitle?, dialogContent: IDialogContent?) {
                                     if (buttonPos == BUTTON_POS_LEFT) dialog.dismiss()
@@ -148,9 +174,12 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .setDialogPosition(POS_BOTTOM)
                     .setDialogTitle(SimpleTitle.get("简单的列表"))
                     .setDialogContent(SimpleList.Builder()
-                            .setGravity(Gravity.CENTER)
-                            .setTextSize(18f)
-                            .setTextColor(Color.BLACK)
+                            .setTextStyle(TextStyleBean().apply {
+                                gravity = Gravity.CENTER
+                                textSize = 14f
+                                textColor = Color.BLACK
+                                typeFace = Typeface.BOLD
+                            })
                             .setShowIcon(true)
                             .setList(listOf(
                                     SimpleList.Item(0, "秦时明月汉时关，万里长征人未还。\n" +
@@ -178,47 +207,42 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnLoading.setOnClickListener {
-            if (it.tag == null) {
-                it.tag = "0"
-                val dlg = MessageDialog.showLoading(
-                        this,
-                        "【加载中...】\n2 秒之后自动关闭",
-                        false)
-                dlg.show()
-                Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
-            } else {
-                it.tag = null
-                val dlg = MessageDialog.builder(
-                        "【抱歉，出错了！】\n2 秒之后自动关闭",
-                        false,
-                        isAnimation = false,
-                        icon = ImageUtils.tintDrawable(R.drawable.uix_error_outline_black_24dp, Color.WHITE)
-                ).withTextColor(Color.BLUE).withTypeFace(Typeface.ITALIC).withBorderRadiusInDp(20f).build(context)
-                dlg.show()
-                Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
-            }
+            val dlg = MessageDialog.showLoading(
+                    this,
+                    "加载中...\n[2秒之后自动关闭]",
+                    false)
+            dlg.show()
+            Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
+        }
+        binding.btnLoadingCustom.setOnClickListener {
+            val dlg = MessageDialog.builder(
+                    "抱歉，出错了!\n[2秒之后自动关闭]",
+                    cancelable = false,
+                    loading = false,
+                    icon = ImageUtils.tintDrawable(R.drawable.uix_error_outline_black_24dp, Color.WHITE)
+            ).withMessageStyle(TextStyleBean().apply {
+                textColor = Color.WHITE
+                typeFace = Typeface.BOLD
+            }).withBorderRadius(20f).build(context)
+            dlg.show()
+            Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
         }
         binding.btnLoadingCancelable.setOnClickListener {
-            if (it.tag == null) {
-                it.tag = "0"
-                MessageDialog.showLoading(
-                        this,
-                        "加载中...",
-                        true
-                ).show()
-            } else {
-                it.tag = null
-                MessageDialog.builder(
-                        "君不見黃河之水天上來，奔流到海不復回。 君不見高堂明鏡悲白髮，朝如青絲暮成雪。 人生得意須盡歡，莫使金樽空對月。 天生我材必有用，千金散盡還復來。 烹羊宰牛且爲樂，會須一飲三百杯。 岑夫子，丹丘生。將進酒，杯莫停。 與君歌一曲，請君爲我側耳聽。 鐘鼓饌玉不足貴，但願長醉不願醒。 古來聖賢皆寂寞，惟有飲者留其名。 陳王昔時宴平樂，斗酒十千恣讙謔。 主人何為言少錢？徑須沽取對君酌。 五花馬，千金裘。呼兒將出換美酒，與爾同銷萬古愁。",
-                        true,
-                        loadingStyle = EmptyLoadingStyle.STYLE_ANDROID
-                ).withTextSize(12f).build(context).show()
-            }
+            MessageDialog.showLoading(this, "加载中...", true).show()
+        }
+        binding.btnLoadingCancelableLong.setOnClickListener {
+            MessageDialog.builder(
+                    "君不見黃河之水天上來，奔流到海不復回。 君不見高堂明鏡悲白髮，朝如青絲暮成雪。 人生得意須盡歡，莫使金樽空對月。 天生我材必有用，千金散盡還復來。 烹羊宰牛且爲樂，會須一飲三百杯。 岑夫子，丹丘生。將進酒，杯莫停。 與君歌一曲，請君爲我側耳聽。 鐘鼓饌玉不足貴，但願長醉不願醒。 古來聖賢皆寂寞，惟有飲者留其名。 陳王昔時宴平樂，斗酒十千恣讙謔。 主人何為言少錢？徑須沽取對君酌。 五花馬，千金裘。呼兒將出換美酒，與爾同銷萬古愁。",
+                    true,
+                    loadingStyle = LoadingStyle.STYLE_ANDROID
+            ).withMessageStyle(TextStyleBean().apply {
+                textSize = 14f
+            }).build(context).show()
         }
         binding.btnAddress.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogPosition(POS_BOTTOM)
-                    .setDialogMargin(0)
+                    .setDialogMargin(8f)
                     .setDialogTitle(SimpleTitle.get("地址对话框"))
                     .setDialogContent(AddressContent.Builder()
                             .setMaxLevel(LEVEL_AREA)
@@ -236,15 +260,15 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                     .setOutCancelable(true)
                     .setDialogPosition(POS_BOTTOM)
                     .setDialogTitle(SimpleTitle.get("简单内容对话框"))
-                    .setDialogContent(SimpleContent.get("简单内容对话框"))
+                    .setDialogContent(SimpleContent.get("君不見黃河之水天上來，奔流到海不復回。 君不見高堂明鏡悲白髮，朝如青絲暮成雪。 人生得意須盡歡，莫使金樽空對月。 天生我材必有用，千金散盡還復來。 烹羊宰牛且爲樂，會須一飲三百杯。 岑夫子，丹丘生。將進酒，杯莫停。 與君歌一曲，請君爲我側耳聽。 鐘鼓饌玉不足貴，但願長醉不願醒。 古來聖賢皆寂寞，惟有飲者留其名。 陳王昔時宴平樂，斗酒十千恣讙謔。 主人何為言少錢？徑須沽取對君酌。 五花馬，千金裘。呼兒將出換美酒，與爾同銷萬古愁。"))
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnCustomList.setOnClickListener {
-            val adapter = SimpleList.Adapter(emptyList(), Color.BLACK)
+            val adapter = SimpleList.Adapter(emptyList(), TextStyleBean().apply { textColor=Color.BLACK })
             val ev = EmptyView.Builder(this)
                     .setEmptyLoadingTips("loading")
                     .setEmptyLoadingTipsColor(Color.BLUE)
-                    .setLoadingStyle(EmptyLoadingStyle.STYLE_IOS)
+                    .setLoadingStyle(LoadingStyle.STYLE_IOS)
                     .setEmptyViewState(EmptyViewState.STATE_LOADING)
                     .build()
             customList = CustomList.Builder(this)

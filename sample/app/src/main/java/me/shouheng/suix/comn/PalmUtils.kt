@@ -1,4 +1,4 @@
-package me.shouheng.beauty.comn
+package me.shouheng.suix.comn
 
 import android.os.Build
 import android.text.Html

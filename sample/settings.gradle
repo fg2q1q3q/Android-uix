@@ -1,2 +1,4 @@
-include ':app', ':uix'
-project(':uix').projectDir = new File('../uix')
+include ':app', ':uix-widget', ':uix-common', ':uix-widget', ':uix-pages'
+project(':uix-common').projectDir = new File('../uix-common')
+project(':uix-widget').projectDir = new File('../uix-widget')
+project(':uix-pages').projectDir = new File('../uix-pages')

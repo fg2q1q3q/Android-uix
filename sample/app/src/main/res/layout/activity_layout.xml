@@ -102,47 +102,40 @@
                 android:layout_height="wrap_content">
 
                 <me.shouheng.uix.widget.button.NormalButton
-                    android:text="按钮 0001"
-                    app:btn_corner_radius="12dp"
+                    android:text="流式布局示例:"
+                    app:btn_corner_radius="30dp"
                     app:btn_normal_color="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    style="@style/CheckItem"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:text="按钮 0002"
-                    app:btn_corner_radius="12dp"
+                    app:btn_corner_radius="30dp"
                     app:btn_normal_color="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
+                    style="@style/CheckItem"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:text="按钮 0003"
-                    app:btn_corner_radius="12dp"
+                    app:btn_corner_radius="30dp"
                     app:btn_normal_color="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    style="@style/CheckItem"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:text="按钮 0004"
-                    app:btn_corner_radius="12dp"
+                    app:btn_corner_radius="30dp"
                     app:btn_normal_color="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    style="@style/CheckItem"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:text="按钮 0005"
-                    app:btn_corner_radius="12dp"
+                    app:btn_corner_radius="30dp"
                     app:btn_normal_color="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    style="@style/CheckItem"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:text="按钮 0006"
-                    app:btn_corner_radius="12dp"
+                    app:btn_corner_radius="30dp"
                     app:btn_normal_color="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    style="@style/CheckItem"/>
 
             </me.shouheng.uix.widget.layout.FlowLayout>
 

@@ -33,7 +33,12 @@
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:id="@+id/btn_widgets"
-                    android:text="各种控件示例"
+                    android:text="控件示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_layout"
+                    android:text="布局控件示例"
                     style="@style/MenuItemButton"/>
 
                 <me.shouheng.uix.widget.button.NormalButton

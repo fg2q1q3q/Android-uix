@@ -15,12 +15,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <me.shouheng.uix.widget.button.SwitchButton
+            <me.shouheng.uix.widget.layout.FlowLayout
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sw"
+                    android:layout_margin="2dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sb_default_measure_4"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="80dp"
+                    android:layout_margin="2dp"
+                    android:layout_height="wrap_content"
+                    android:background="#E0E0E0"
+                    app:kswThumbMargin="-5dp" />
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sb_default_measure_8"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="#E0E0E0"
+                    app:kswTextExtra="10dp"
+                    app:kswTextOff="OFF"
+                    app:kswTextOn="ON"
+                    app:kswThumbMargin="-5dp"
+                    app:kswThumbWidth="20dp" />
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sb_ios"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:kswAnimationDuration="300"
+                    app:kswBackDrawable="@drawable/ios_back_drawable"
+                    app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                    app:kswThumbMarginBottom="-8dp"
+                    app:kswThumbMarginLeft="-5dp"
+                    app:kswThumbMarginRight="-5dp"
+                    app:kswThumbMarginTop="-2.5dp"
+                    app:kswThumbRangeRatio="1.4"/>
+
+                <me.shouheng.uix.widget.button.SwitchButton
+                    android:id="@+id/sb_disable"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"/>
+
+            </me.shouheng.uix.widget.layout.FlowLayout>
 
             <HorizontalScrollView
                 android:scrollbars="none"
@@ -48,10 +100,11 @@
 
             <me.shouheng.uix.widget.text.CountdownView
                 android:id="@+id/cv"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:text="123"
-                android:background="?attr/selectableItemBackground"
-                android:textColor="?colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="?colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

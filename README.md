@@ -123,14 +123,14 @@ class SampleApp: Application() {
 
 ### 3.2 页面组件
 
-<div style="display:flex;" id="target">
-<img  src="image/Screenshot_20200412-152706.jpg" width="14%" >
-<img style="margin-left:5px;" src="image/Screenshot_20200412-152711.jpg" width="14%" >
-<img style="margin-left:5px;" src="image/Screenshot_20200412-152719.jpg" width="14%" >
-<img style="margin-left:5px;" src="image/Screenshot_20200412-153028.jpg" width="14%" >
-<img style="margin-left:5px;" src="image/Screenshot_20200412-153034.jpg" width="14%" >
-<img style="margin-left:5px;" src="image/Screenshot_20200412-153045.jpg" width="14%" >
-<img style="margin-left:5px;" src="image/Screenshot_20200412-153055.jpg" width="14%" >
+<div style="display:flex" id="target">
+<img  src="image/Screenshot_20200412-152706.jpg" width="13%" >
+<img style="margin-left:5px;" src="image/Screenshot_20200412-152711.jpg" width="13%" >
+<img style="margin-left:5px;" src="image/Screenshot_20200412-152719.jpg" width="13%" >
+<img style="margin-left:5px;" src="image/Screenshot_20200412-153028.jpg" width="13%" >
+<img style="margin-left:5px;" src="image/Screenshot_20200412-153034.jpg" width="13%" >
+<img style="margin-left:5px;" src="image/Screenshot_20200412-153045.jpg" width="13%" >
+<img style="margin-left:5px;" src="image/Screenshot_20200412-153055.jpg" width="13%" >
 </div>
 
 - 图片选择：我们直接基于知乎开源的图片选择控件 [Matisse](https://github.com/Shouheng88/Matisse) 进行了封装，在原有的功能之上提供了夜间和白天两种主题；

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingTop="60dp"
+    android:paddingBottom="16dp"
+    app:layout_scrollFlags="scroll|enterAlways">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_icon"
+        style="@style/AboutPage.Header.Icon"
+        tools:src="@android:color/holo_red_light"
+        tools:ignore="ContentDescription" />
+
+    <me.shouheng.uix.widget.text.NormalTextView
+        tools:text="about_slogan\nabout_slogan\nabout_slogan"
+        tools:textColor="@android:color/black"
+        style="@style/AboutPage.Header.Slogan"
+        android:id="@+id/tv_slogan"/>
+
+    <me.shouheng.uix.widget.text.NormalTextView
+        style="@style/AboutPage.Header.Version"
+        tools:textColor="@android:color/black"
+        android:id="@+id/tv_version"
+        tools:text="Version 1.2.3\nVersion 1.2.3\nVersion 1.2.3"/>
+
+</LinearLayout>

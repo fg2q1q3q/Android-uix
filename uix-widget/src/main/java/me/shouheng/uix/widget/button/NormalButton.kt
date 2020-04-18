@@ -15,9 +15,11 @@ import me.shouheng.uix.common.utils.UIXColorUtils
 import me.shouheng.uix.common.utils.UIXImageUtils
 import me.shouheng.uix.common.utils.UIXViewUtils
 import me.shouheng.uix.widget.R
+import me.shouheng.uix.widget.button.NormalButton.GlobalConfig
 
 /**
- * 普通的点击按钮
+ * 普通的点击按钮 可通过 [GlobalConfig] 设置按钮的全局属性，通过各个 setter 方法设置
+ * 某个按钮的属性。使用 setter 方法设置的属性会覆盖掉全局的属性。
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2020-01-05 10:11

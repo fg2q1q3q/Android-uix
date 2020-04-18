@@ -14,6 +14,7 @@ import me.shouheng.suix.dialog.DialogActivity
 import me.shouheng.suix.image.MatisseSampleActivity
 import me.shouheng.suix.setting.SettingFragment
 import me.shouheng.suix.widget.LayoutActivity
+import me.shouheng.suix.widget.LayoutActivity2
 import me.shouheng.suix.widget.WidgetActivity
 import me.shouheng.utils.app.ActivityUtils
 
@@ -43,6 +44,9 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
         }
         binding.btnLayout.setOnClickListener {
             ActivityUtils.start(this, LayoutActivity::class.java)
+        }
+        binding.btnLayout2.setOnClickListener {
+            ActivityUtils.start(this, LayoutActivity2::class.java)
         }
         binding.btnSetting.setOnClickListener {
             ContainerActivity.open(SettingFragment::class.java).launch(this)

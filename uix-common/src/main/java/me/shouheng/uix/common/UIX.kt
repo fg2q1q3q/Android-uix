@@ -27,16 +27,6 @@ object UIX {
 
     private var app: Application? = null
 
-//    private val resolvers: MutableList<UIXConfigurationResolver> = mutableListOf()
-
-//    init {
-//        val loader = ServiceLoader.load<UIXConfigurationResolver>(UIXConfigurationResolver::class.java!!)
-//        val iterator = loader.iterator()
-//        while (iterator.hasNext()) {
-//           resolvers.add(iterator.next())
-//        }
-//    }
-
     fun getApp(): Application {
         checkNotNull(app) { "Sorry, you must call UIX#init() method at first!" }
         return app!!
@@ -44,12 +34,6 @@ object UIX {
 
     fun init(app: Application) {
         UIX.app = app
-//        if (app.javaClass.isAnnotationPresent(UIXConfiguration::class.java)) {
-//            val configuration = app.javaClass.getAnnotation(UIXConfiguration::class.java)
-//            resolvers.forEach { it.onGetConfiguration(configuration!!) }
-//        } else {
-//            throw IllegalStateException("Your application should use @UIXConfiguration")
-//        }
     }
 
     fun setDebug(debug: Boolean) {

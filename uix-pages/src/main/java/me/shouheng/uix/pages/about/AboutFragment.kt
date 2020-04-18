@@ -9,14 +9,19 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.common.utils.UIXColorUtils
+import me.shouheng.uix.common.utils.UIXViewUtils
 import me.shouheng.uix.pages.R
+import me.shouheng.uix.pages.about.AboutFragment.FragmentInteraction
 import me.shouheng.uix.widget.text.NormalTextView
 
 /**
- * 关于页面
+ * 关于页面：作为该 Fragment 容器的 Activity 应该实现 [FragmentInteraction] 接口
+ * 来完成该 Fragment 内部的各种点击和加载等交互性事件。
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-27 18:09
@@ -60,11 +65,13 @@ class AboutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.uix_fragment_about, null, false)
 
-        val ll = root.findViewById<LinearLayout>(R.id.ll)
-        val llHeader = root.findViewById<LinearLayout>(R.id.ll_header)
-        val ivIcon = root.findViewById<AppCompatImageView>(R.id.iv_icon)
-        val tvSlogan = root.findViewById<NormalTextView>(R.id.tv_slogan)
-        val tvVersion = root.findViewById<NormalTextView>(R.id.tv_version)
+        val header = LayoutInflater.from(context).inflate(R.layout.uix_layout_about_header, null, false)
+        val ivIcon = header.findViewById<AppCompatImageView>(R.id.iv_icon)
+        val tvSlogan = header.findViewById<NormalTextView>(R.id.tv_slogan)
+        val tvVersion = header.findViewById<NormalTextView>(R.id.tv_version)
+        val llHeader = header.findViewById<LinearLayout>(R.id.ll_header)
+
+        val ll = root.findViewById<FrameLayout>(R.id.ll)
         val toolbar = root.findViewById<Toolbar>(R.id.toolbar)
         val ivRight = root.findViewById<ImageView>(R.id.iv_right)
         val ivLeft = root.findViewById<ImageView>(R.id.iv_left)
@@ -89,26 +96,53 @@ class AboutFragment : Fragment() {
         if (backgroundColor != null) ll.setBackgroundColor(backgroundColor!!)
         if (foregroundColor != null) {
             toolbar.setBackgroundColor(foregroundColor!!)
-            llHeader.setBackgroundColor(foregroundColor!!)
+//            llHeader.setBackgroundColor(foregroundColor!!)
         }
 
         val adapter = AboutItemAdapter(aboutItems, backgroundColor, foregroundColor, activity as? FragmentInteraction)
         rv.adapter = adapter
+        adapter.setHeaderView(header)
         adapter.setOnItemClickListener { _, _, p -> (activity as? FragmentInteraction)?.onItemClick(adapter.data[p], p) }
+
+        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            private var toolbarHeight = UIXViewUtils.dp2px(60f)
+            private var offHeight = 0
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                offHeight += dy
+                toolbar.setBackgroundColor(UIXColorUtils.setColorAlpha(foregroundColor!!, (offHeight * 1f / toolbarHeight).coerceAtMost(1f), true))
+            }
+        })
 
         return root
     }
 
     interface FragmentInteraction {
 
+        /**
+         * 页面顶部左侧按钮被点击的事件
+         */
         fun onLeftClick(v: View)
 
+        /**
+         * 页面顶部右侧按钮被点击的事件
+         */
         fun onRightClick(v: View)
 
+        /**
+         * 关于列表条目被点击的回调
+         */
         fun onItemClick(item: IAboutItem, pos: Int)
 
+        /**
+         * 为列表条目加载子控件
+         */
         fun loadSubViews(id: Int): View?
 
+        /**
+         * 图片加载事件
+         */
         fun loadImage(id: Int, iv: ImageView)
     }
 

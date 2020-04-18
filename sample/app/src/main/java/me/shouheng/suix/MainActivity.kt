@@ -13,10 +13,10 @@ import me.shouheng.suix.databinding.ActivityMainBinding
 import me.shouheng.suix.dialog.DialogActivity
 import me.shouheng.suix.image.MatisseSampleActivity
 import me.shouheng.suix.setting.SettingFragment
+import me.shouheng.suix.tools.ToolsActivity
 import me.shouheng.suix.widget.LayoutActivity
 import me.shouheng.suix.widget.LayoutActivity2
 import me.shouheng.suix.widget.WidgetActivity
-import me.shouheng.utils.app.ActivityUtils
 
 /**
  * Main page.
@@ -30,29 +30,32 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
     private var dlg: AlertDialog? = null
 
     override fun doCreateView(savedInstanceState: Bundle?) {
+        binding.btnTools.setOnClickListener {
+            startActivity(ToolsActivity::class.java)
+        }
         binding.btnDialogs.setOnClickListener {
-            ActivityUtils.start(this, DialogActivity::class.java)
+            startActivity(DialogActivity::class.java)
         }
         binding.btnMatisse.setOnClickListener {
-            ActivityUtils.start(this, MatisseSampleActivity::class.java)
+            startActivity(MatisseSampleActivity::class.java)
         }
         binding.btnWeb.setOnClickListener {
             ContainerActivity.open(COMMAND_LAUNCH_WEBVIEW).launch(this)
         }
         binding.btnWidgets.setOnClickListener {
-            ActivityUtils.start(this, WidgetActivity::class.java)
+            startActivity(WidgetActivity::class.java)
         }
         binding.btnLayout.setOnClickListener {
-            ActivityUtils.start(this, LayoutActivity::class.java)
+            startActivity(LayoutActivity::class.java)
         }
         binding.btnLayout2.setOnClickListener {
-            ActivityUtils.start(this, LayoutActivity2::class.java)
+            startActivity(LayoutActivity2::class.java)
         }
         binding.btnSetting.setOnClickListener {
             ContainerActivity.open(SettingFragment::class.java).launch(this)
         }
         binding.btnAbout.setOnClickListener {
-            ActivityUtils.start(this, me.shouheng.suix.comn.ContainerActivity::class.java)
+            startActivity(me.shouheng.suix.comn.ContainerActivity::class.java)
         }
         binding.btnCrash.setOnClickListener {
             produceException2()

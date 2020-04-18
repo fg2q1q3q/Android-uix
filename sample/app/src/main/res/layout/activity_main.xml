@@ -17,6 +17,11 @@
                 android:layout_height="wrap_content">
 
                 <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_tools"
+                    android:text="各种工具示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
                     android:id="@+id/btn_dialogs"
                     android:text="对话框示例"
                     style="@style/MenuItemButton"/>

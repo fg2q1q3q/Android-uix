@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <me.shouheng.uix.widget.button.NormalButton
+            android:id="@+id/btn_no_double_click"
+            android:text="防止连续点击示例"
+            style="@style/MenuItemButton"/>
+
+        <me.shouheng.uix.widget.button.NormalButton
+            android:id="@+id/btn_continuous_click"
+            android:text="连续点击示例"
+            style="@style/MenuItemButton"/>
+
+    </LinearLayout>
+
+</layout>

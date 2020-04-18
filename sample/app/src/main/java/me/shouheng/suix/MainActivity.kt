@@ -11,7 +11,9 @@ import me.shouheng.mvvm.comn.ContainerActivity
 import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.databinding.ActivityMainBinding
 import me.shouheng.suix.dialog.DialogActivity
+import me.shouheng.suix.dialog.TipsActivity
 import me.shouheng.suix.image.MatisseSampleActivity
+import me.shouheng.suix.pop.PopActivity
 import me.shouheng.suix.setting.SettingFragment
 import me.shouheng.suix.tools.ToolsActivity
 import me.shouheng.suix.widget.LayoutActivity
@@ -30,36 +32,22 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
     private var dlg: AlertDialog? = null
 
     override fun doCreateView(savedInstanceState: Bundle?) {
-        binding.btnTools.setOnClickListener {
-            startActivity(ToolsActivity::class.java)
-        }
-        binding.btnDialogs.setOnClickListener {
-            startActivity(DialogActivity::class.java)
-        }
-        binding.btnMatisse.setOnClickListener {
-            startActivity(MatisseSampleActivity::class.java)
-        }
+        binding.btnTools.setOnClickListener { startActivity(ToolsActivity::class.java) }
+        binding.btnDialogs.setOnClickListener { startActivity(DialogActivity::class.java) }
+        binding.btnTips.setOnClickListener { startActivity(TipsActivity::class.java) }
+        binding.btnPops.setOnClickListener { startActivity(PopActivity::class.java) }
+        binding.btnMatisse.setOnClickListener { startActivity(MatisseSampleActivity::class.java) }
         binding.btnWeb.setOnClickListener {
             ContainerActivity.open(COMMAND_LAUNCH_WEBVIEW).launch(this)
         }
-        binding.btnWidgets.setOnClickListener {
-            startActivity(WidgetActivity::class.java)
-        }
-        binding.btnLayout.setOnClickListener {
-            startActivity(LayoutActivity::class.java)
-        }
-        binding.btnLayout2.setOnClickListener {
-            startActivity(LayoutActivity2::class.java)
-        }
+        binding.btnWidgets.setOnClickListener { startActivity(WidgetActivity::class.java) }
+        binding.btnLayout.setOnClickListener { startActivity(LayoutActivity::class.java) }
+        binding.btnLayout2.setOnClickListener { startActivity(LayoutActivity2::class.java) }
         binding.btnSetting.setOnClickListener {
             ContainerActivity.open(SettingFragment::class.java).launch(this)
         }
-        binding.btnAbout.setOnClickListener {
-            startActivity(me.shouheng.suix.comn.ContainerActivity::class.java)
-        }
-        binding.btnCrash.setOnClickListener {
-            produceException2()
-        }
+        binding.btnAbout.setOnClickListener { startActivity(me.shouheng.suix.comn.ContainerActivity::class.java) }
+        binding.btnCrash.setOnClickListener { produceException2() }
     }
 
     // 重现问题方式 1：利用反射修改字段属性

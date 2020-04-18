@@ -46,26 +46,6 @@
                 style="@style/MenuItemButton"/>
 
             <me.shouheng.uix.widget.button.NormalButton
-                android:id="@+id/btn_loading"
-                android:text="加载对话框 [不可取消|iOS风格]"
-                style="@style/MenuItemButton"/>
-
-            <me.shouheng.uix.widget.button.NormalButton
-                android:id="@+id/btn_loading_custom"
-                android:text="加载对话框 [不可取消|自定义]"
-                style="@style/MenuItemButton"/>
-
-            <me.shouheng.uix.widget.button.NormalButton
-                android:id="@+id/btn_loading_cancelable"
-                android:text="加载对话框 [可取消|iOS风格]"
-                style="@style/MenuItemButton"/>
-
-            <me.shouheng.uix.widget.button.NormalButton
-                android:id="@+id/btn_loading_cancelable_long"
-                android:text="加载对话框 [可取消|长文本|安卓风格]"
-                style="@style/MenuItemButton"/>
-
-            <me.shouheng.uix.widget.button.NormalButton
                 android:id="@+id/btn_address"
                 android:text="地址选择对话框"
                 style="@style/MenuItemButton"/>

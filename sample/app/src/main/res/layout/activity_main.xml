@@ -27,6 +27,16 @@
                     style="@style/MenuItemButton"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_tips"
+                    android:text="进度和状态提示框示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_pops"
+                    android:text="弹出框示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
                     android:id="@+id/btn_matisse"
                     android:text="图片选择|浏览|展示"
                     style="@style/MenuItemButton"/>

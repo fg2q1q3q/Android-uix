@@ -38,6 +38,8 @@
         <activity android:name="me.shouheng.uix.pages.CrashReportActivity"
             android:theme="@style/CrashReportTheme"
             tools:replace="android:theme"/>
+        <activity android:name=".pop.PopActivity"/>
+        <activity android:name=".dialog.TipsActivity"/>
         <activity android:name=".tools.ToolsActivity"/>
         <activity android:name=".image.MatisseSampleActivity"/>
         <activity android:name=".widget.WidgetActivity"/>

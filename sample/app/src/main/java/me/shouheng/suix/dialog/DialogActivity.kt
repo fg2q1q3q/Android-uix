@@ -23,14 +23,12 @@ import me.shouheng.uix.common.anno.EmptyViewState
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
 import me.shouheng.uix.widget.dialog.BeautyDialog
-import me.shouheng.uix.widget.dialog.MessageDialog
 import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
 import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.rv.EmptyView
 import me.shouheng.utils.app.ResUtils
-import me.shouheng.utils.ui.ImageUtils
 import me.shouheng.utils.ui.ViewUtils
 
 /**
@@ -205,39 +203,6 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                             })
                             .build())
                     .build().show(supportFragmentManager, "list")
-        }
-        binding.btnLoading.setOnClickListener {
-            val dlg = MessageDialog.showLoading(
-                    this,
-                    "加载中...\n[2秒之后自动关闭]",
-                    false)
-            dlg.show()
-            Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
-        }
-        binding.btnLoadingCustom.setOnClickListener {
-            val dlg = MessageDialog.builder(
-                    "抱歉，出错了!\n[2秒之后自动关闭]",
-                    cancelable = false,
-                    loading = false,
-                    icon = ImageUtils.tintDrawable(R.drawable.uix_error_outline_black_24dp, Color.WHITE)
-            ).withMessageStyle(TextStyleBean().apply {
-                textColor = Color.WHITE
-                typeFace = Typeface.BOLD
-            }).withBorderRadius(20f).build(context)
-            dlg.show()
-            Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
-        }
-        binding.btnLoadingCancelable.setOnClickListener {
-            MessageDialog.showLoading(this, "加载中...", true).show()
-        }
-        binding.btnLoadingCancelableLong.setOnClickListener {
-            MessageDialog.builder(
-                    "君不見黃河之水天上來，奔流到海不復回。 君不見高堂明鏡悲白髮，朝如青絲暮成雪。 人生得意須盡歡，莫使金樽空對月。 天生我材必有用，千金散盡還復來。 烹羊宰牛且爲樂，會須一飲三百杯。 岑夫子，丹丘生。將進酒，杯莫停。 與君歌一曲，請君爲我側耳聽。 鐘鼓饌玉不足貴，但願長醉不願醒。 古來聖賢皆寂寞，惟有飲者留其名。 陳王昔時宴平樂，斗酒十千恣讙謔。 主人何為言少錢？徑須沽取對君酌。 五花馬，千金裘。呼兒將出換美酒，與爾同銷萬古愁。",
-                    true,
-                    loadingStyle = LoadingStyle.STYLE_ANDROID
-            ).withMessageStyle(TextStyleBean().apply {
-                textSize = 14f
-            }).build(context).show()
         }
         binding.btnAddress.setOnClickListener {
             BeautyDialog.Builder()

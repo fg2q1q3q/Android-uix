@@ -17,8 +17,23 @@
                 android:layout_height="wrap_content">
 
                 <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_tools"
+                    android:text="各种工具示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
                     android:id="@+id/btn_dialogs"
                     android:text="对话框示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_tips"
+                    android:text="进度和状态提示框示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_pops"
+                    android:text="弹出框示例"
                     style="@style/MenuItemButton"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
@@ -38,7 +53,12 @@
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:id="@+id/btn_layout"
-                    android:text="布局控件示例"
+                    android:text="常规布局控件示例"
+                    style="@style/MenuItemButton"/>
+
+                <me.shouheng.uix.widget.button.NormalButton
+                    android:id="@+id/btn_layout2"
+                    android:text="其它布局控件示例"
                     style="@style/MenuItemButton"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
@@ -61,12 +81,13 @@
         </android.support.v4.widget.NestedScrollView>
 
         <me.shouheng.uix.widget.text.NormalTextView
-            android:text="UI 标准化项目，提供了丰富且高可定制的功能\n作者 WngShhng, 欢迎 Star 和 Fork 该项目"
-            android:textSize="@dimen/sp_12"
+            android:text="UI 标准化项目，提供了丰富且高可定制的功能\n作者，搜索公众号 CodeBrick，欢迎 Star 和 Fork 该项目"
+            android:textSize="11sp"
             android:padding="8dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:gravity="center"
+            android:background="#a0ffffff"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

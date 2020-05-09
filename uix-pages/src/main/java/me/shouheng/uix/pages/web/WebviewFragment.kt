@@ -22,11 +22,14 @@ import me.shouheng.uix.common.utils.UIXResUtils
 import me.shouheng.uix.pages.R
 
 /**
- * 网页浏览通用 fragment. To use this fragment, you must add
- * ```
+ * 网页浏览通用 Fragment. 该 Fragment 是对 AgentWeb 的一个封装，如果需要在项目
+ * 中使用这个 Fragment，你需要在你的项目依赖中添加 AgentWeb 的依赖：
+ *
+ * ```groovy
  * implementation 'com.just.agentweb:agentweb:4.0.2'
  * ```
- * to your gradle dependencies. For latest version, see https://github.com/Justson/AgentWeb
+ *
+ * 获取 AgentWeb 的最新版本可以参考 [Agent Web](https://github.com/Justson/AgentWeb)
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-17 22:38

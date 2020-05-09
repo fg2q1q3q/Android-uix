@@ -49,6 +49,11 @@ object UIXColorUtils {
         return Color.argb(resultA, resultR, resultG, resultB)
     }
 
+    fun setColorAlpha(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) alpha: Float, override: Boolean): Int {
+        val origin = if (override) 0xff else color shr 24 and 0xff
+        return color and 0x00ffffff or ((alpha * origin).toInt() shl 24)
+    }
+
     fun generateThumbColorWithTintColor(tintColor: Int): ColorStateList {
         val states = arrayOf(intArrayOf(-ENABLE_ATTR, CHECKED_ATTR), intArrayOf(-ENABLE_ATTR), intArrayOf(PRESSED_ATTR, -CHECKED_ATTR), intArrayOf(PRESSED_ATTR, CHECKED_ATTR), intArrayOf(CHECKED_ATTR), intArrayOf(-CHECKED_ATTR))
 

@@ -1,16 +1,21 @@
 package me.shouheng.suix.widget
 
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import me.shouheng.mvvm.base.CommonActivity
 import me.shouheng.mvvm.base.anno.ActivityConfiguration
 import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityWidgetsBinding
 import me.shouheng.uix.common.anno.LoadingButtonState
+import me.shouheng.uix.common.glide.CornersTransformation
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
+import me.shouheng.utils.ui.ViewUtils
 
 /**
  * 控件
@@ -46,6 +51,19 @@ class WidgetActivity : CommonActivity<ActivityWidgetsBinding, EmptyViewModel>() 
             } else {
                 it.tag = ""
             }
+        }
+        val transformation = CornersTransformation(ViewUtils.dp2px(8f), 0)
+        Glide.with(this)
+                .load(R.drawable.ic_bg_sample)
+                .apply(RequestOptions.centerCropTransform().transform(transformation))
+                .into(binding.card.bg)
+        try {
+            binding.card.viewColor.setBackgroundColor(Color.parseColor("#D81B60"))
+            val colors = intArrayOf(Color.parseColor("#D81B60"), Color.TRANSPARENT)
+            val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors)
+            binding.card.viewGradient.background = gradientDrawable
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

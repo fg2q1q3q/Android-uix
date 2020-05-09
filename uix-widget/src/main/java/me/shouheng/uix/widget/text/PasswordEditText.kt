@@ -16,7 +16,7 @@ import me.shouheng.uix.common.utils.UIXViewUtils
 import me.shouheng.uix.widget.R
 
 /**
- * 密码编辑器
+ * 密码编辑器 可以显示和隐藏用户输入的密码
  *
  * @author [WngShhng](mailto:shouheng2015@gmail.com)
  * @version 2019-10-03 23:42

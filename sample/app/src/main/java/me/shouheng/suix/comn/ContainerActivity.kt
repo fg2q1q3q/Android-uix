@@ -69,14 +69,14 @@ class ContainerActivity : CommonActivity<MvvmsActivityContainerBinding, EmptyVie
                     textColor = Color.BLACK
                     typeFace = Typeface.BOLD
                 })
-                .setLogo(R.drawable.ic_empty_zhihu)
+                .setLogo(R.mipmap.ic_launcher)
                 .setIconRight(R.drawable.ic_favorite_border_black_24dp)
                 .setIconLeft(R.drawable.uix_arrow_back_black_24dp)
                 .setAboutItems(
                         arrayListOf(
-                                AboutSectionItem(
-                                        id = 0,
-                                        title = ResUtils.getString(R.string.about_app_section)),
+//                                AboutSectionItem(
+//                                        id = 0,
+//                                        title = ResUtils.getString(R.string.about_app_section)),
                                 AboutTextItem(
                                         id = 1,
                                         text = PalmUtils.getTextFromHtml(ResUtils.getString(R.string.about_app_detail)),

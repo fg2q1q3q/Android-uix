@@ -64,10 +64,11 @@ class ContainerActivity : CommonActivity<MvvmsActivityContainerBinding, EmptyVie
                     textSize = 12f
                     gravity = Gravity.CENTER
                 })
-                .setTitle("关于")
+                .setTitle("安卓 UI 组件化")
                 .setTitleStyle(TextStyleBean().apply {
                     textColor = Color.BLACK
                     typeFace = Typeface.BOLD
+                    textSize = 20f
                 })
                 .setLogo(R.mipmap.ic_launcher)
                 .setIconRight(R.drawable.ic_favorite_border_black_24dp)

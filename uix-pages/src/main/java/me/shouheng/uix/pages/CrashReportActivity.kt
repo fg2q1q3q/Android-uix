@@ -10,12 +10,10 @@ import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.util.TypedValue
-import android.widget.ImageView
+import android.view.LayoutInflater
 import android.widget.TextView
+import kotlinx.android.synthetic.main.uix_activity_crash_report.*
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.widget.button.NormalButton
-import me.shouheng.uix.widget.text.NormalTextView
 import kotlin.system.exitProcess
 
 /**
@@ -32,12 +30,6 @@ import kotlin.system.exitProcess
  * @version 2019-12-22 11:46
  */
 class CrashReportActivity : AppCompatActivity() {
-
-    private lateinit var ivImage: ImageView
-    private lateinit var tvTitle: NormalTextView
-    private lateinit var tvContent: NormalTextView
-    private lateinit var btnRestart: NormalButton
-    private lateinit var btnLog: NormalButton
 
     companion object {
         private const val EXTRA_KEY_CRASH_IMAGE         = "__extra_crash_image"
@@ -113,34 +105,28 @@ class CrashReportActivity : AppCompatActivity() {
         val image = intent.getIntExtra(EXTRA_KEY_CRASH_IMAGE, R.drawable.uix_crash_error_image)
         val cls = intent.getSerializableExtra(EXTRA_KEY_RESTART_ACTIVITY) as? Class<Activity>
 
-        ivImage = findViewById(R.id.iv_image)
-        tvTitle = findViewById(R.id.tv_title)
-        tvContent = findViewById(R.id.tv_content)
-        btnRestart = findViewById(R.id.btn_restart)
-        btnLog = findViewById(R.id.btn_log)
-
-        tvTitle.text = title
-        tvContent.text = content
-        ivImage.setImageResource(image)
-        if (titleStyle != null) tvTitle.setStyle(titleStyle)
-        if (contentStyle != null) tvTitle.setStyle(contentStyle)
+        tvReportTitle.text = title
+        tvReportContent.text = content
+        ivReportImage.setImageResource(image)
+        if (titleStyle != null) tvReportTitle.setStyle(titleStyle)
+        if (contentStyle != null) tvReportTitle.setStyle(contentStyle)
         if (buttonStyle != null) {
-            btnRestart.setStyle(buttonStyle)
-            btnLog.setStyle(buttonStyle)
+            btnReportRestart.setStyle(buttonStyle)
+            btnReportLog.setStyle(buttonStyle)
         }
 
-        btnLog.setOnClickListener {
-            val dialog = AlertDialog.Builder(this@CrashReportActivity)
+        btnReportLog.setOnClickListener {
+            val root = LayoutInflater.from(this).inflate(R.layout.uix_layout_crash_report_message, null, false)
+            root.findViewById<TextView>(R.id.tv_report_message).text = message
+            AlertDialog.Builder(this@CrashReportActivity)
                     .setTitle(R.string.uix_crash_error_details)
-                    .setMessage(message)
+                    .setView(root)
                     .setPositiveButton(R.string.uix_crash_close, null)
                     .setNeutralButton(R.string.uix_crash_copy_log) { _, _ -> copyErrorToClipboard(message.toString()) }
                     .show()
-            val textView = dialog.findViewById<TextView>(android.R.id.message)
-            textView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
         }
 
-        btnRestart.setOnClickListener {
+        btnReportRestart.setOnClickListener {
             if (cls != null) {
                 val i = Intent(this, cls)
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)

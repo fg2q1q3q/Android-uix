@@ -85,7 +85,7 @@ class AboutFragment : Fragment() {
         ivLeft.setOnClickListener { (activity as? FragmentInteraction)?.onLeftClick(it) }
         ivRight.setOnClickListener { (activity as? FragmentInteraction)?.onRightClick(it) }
 
-        tvTitle.text = title
+        tvTitle.text = ""
         tvSlogan.text = slogan
         tvVersion.text = version
         if (logo != null) ivIcon.setImageResource(logo!!)
@@ -106,12 +106,26 @@ class AboutFragment : Fragment() {
 
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-            private var toolbarHeight = UIXViewUtils.dp2px(60f)
+            private var toolbarHeight = UIXViewUtils.dp2px(80f)
+            private var titleHeight = UIXViewUtils.dp2px(130f)
             private var offHeight = 0
+            private var titleShowed = false
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 offHeight += dy
-                toolbar.setBackgroundColor(UIXColorUtils.setColorAlpha(foregroundColor!!, (offHeight * 1f / toolbarHeight).coerceAtMost(1f), true))
+                toolbar.setBackgroundColor(UIXColorUtils.setColorAlpha(foregroundColor!!,
+                        (offHeight * 1f / toolbarHeight).coerceAtMost(1f), true))
+                if (offHeight > titleHeight) {
+                    if (!titleShowed) {
+                        titleShowed = true
+                        tvTitle.text = title
+                    }
+                } else {
+                    if (titleShowed) {
+                        titleShowed = false
+                        tvTitle.text = ""
+                    }
+                }
             }
         })
 

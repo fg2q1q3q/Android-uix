@@ -11,6 +11,7 @@ import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityTipsBinding
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.common.utils.UIXViewUtils
 import me.shouheng.uix.widget.dialog.MessageDialog
 import me.shouheng.utils.ui.ImageUtils
 
@@ -40,7 +41,7 @@ class TipsActivity : CommonActivity<ActivityTipsBinding, EmptyViewModel>() {
             ).withMessageStyle(TextStyleBean().apply {
                 textColor = Color.WHITE
                 typeFace = Typeface.BOLD
-            }).withBorderRadius(20f).build(context)
+            }).withBorderRadius(UIXViewUtils.dp2px(20f)).build(context)
             dlg.show()
             Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
         }

@@ -37,7 +37,7 @@ class MessageDialog private constructor(builder: Builder) {
     private val icon: Drawable?
     @ColorInt
     private val bgColor: Int
-    private val borderRadius: Float
+    private val borderRadius: Int
 
     init {
         message = builder.message
@@ -56,7 +56,7 @@ class MessageDialog private constructor(builder: Builder) {
         val pb = v.findViewById(R.id.pb) as ProgressBar
         val tv = v.findViewById(R.id.tipTextView) as NormalTextView
 
-        ll.background = UIXImageUtils.getGradientDrawable(bgColor, UIXViewUtils.dp2px(borderRadius).toFloat())
+        ll.background = UIXImageUtils.getGradientDrawable(bgColor, borderRadius.toFloat())
 
         if (icon != null) img.setImageDrawable(icon)
         else img.visibility = View.GONE
@@ -84,7 +84,7 @@ class MessageDialog private constructor(builder: Builder) {
         var icon: Drawable?             = null
         var bgColor: Int                = GlobalConfig.bgColor
         var loading: Boolean            = GlobalConfig.loading
-        var borderRadius: Float         = GlobalConfig.bgBorderRadius
+        var borderRadius: Int         = GlobalConfig.bgBorderRadius
 
         fun withMessage(param: CharSequence): Builder {
             message = param
@@ -121,7 +121,7 @@ class MessageDialog private constructor(builder: Builder) {
             return this
         }
 
-        fun withBorderRadius(param: Float): Builder {
+        fun withBorderRadius(param: Int): Builder {
             borderRadius = param
             return this
         }
@@ -207,7 +207,6 @@ class MessageDialog private constructor(builder: Builder) {
         var cancelable: Boolean              = true
         var loading: Boolean                 = true
         var bgColor: Int                     = Color.parseColor("#C0000000")
-        // dp
-        var bgBorderRadius: Float            = 8f
+        var bgBorderRadius: Int            = UIXViewUtils.dp2px(8f)
     }
 }

@@ -1,6 +1,7 @@
 package me.shouheng.uix.widget.dialog
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.ColorInt
@@ -8,6 +9,7 @@ import android.support.annotation.Px
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -22,7 +24,6 @@ import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.utils.UIXImageUtils
 import me.shouheng.uix.common.utils.UIXResUtils
 import me.shouheng.uix.common.utils.UIXViewUtils
-import me.shouheng.uix.widget.R
 import me.shouheng.uix.widget.dialog.content.IDialogContent
 import me.shouheng.uix.widget.dialog.footer.IDialogFooter
 import me.shouheng.uix.widget.dialog.listener.OnDismissListener
@@ -83,22 +84,22 @@ class BeautyDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val dialog = AlertDialog.Builder(context!!,
-                if (dialogStyle == STYLE_WRAP) R.style.BeautyDialogWrap
-                else R.style.BeautyDialog
+                if (dialogStyle == STYLE_WRAP) me.shouheng.uix.widget.R.style.BeautyDialogWrap
+                else me.shouheng.uix.widget.R.style.BeautyDialog
         ).create()
 
-        val content = View.inflate(context, R.layout.uix_dialog_layout, null)
+        val content = View.inflate(context, me.shouheng.uix.widget.R.layout.uix_dialog_layout, null)
         if (customBackground) {
             content.background = dialogBackground
         } else {
             content.background = UIXImageUtils.getGradientDrawable(
                     if (dialogDarkStyle) GlobalConfig.darkBGColor else GlobalConfig.lightBGColor,
-                    UIXViewUtils.dp2px(dialogCornerRadius.toFloat()).toFloat()
+                    dialogCornerRadius.toFloat()
             )
         }
-        val llTitle = content.findViewById<LinearLayout>(R.id.ll_title)
-        val llContent = content.findViewById<LinearLayout>(R.id.ll_content)
-        val llFooter = content.findViewById<LinearLayout>(R.id.ll_footer)
+        val llTitle = content.findViewById<LinearLayout>(me.shouheng.uix.widget.R.id.ll_title)
+        val llContent = content.findViewById<LinearLayout>(me.shouheng.uix.widget.R.id.ll_content)
+        val llFooter = content.findViewById<LinearLayout>(me.shouheng.uix.widget.R.id.ll_footer)
 
         iDialogTitle?.setDialog(this)
         iDialogContent?.setDialog(this)
@@ -141,28 +142,39 @@ class BeautyDialog : DialogFragment() {
         when(dialogPosition) {
             POS_TOP -> {
                 dialog.window?.setGravity(Gravity.TOP)
-                dialog.window?.setWindowAnimations(R.style.DialogTopAnimation)
+                dialog.window?.setWindowAnimations(me.shouheng.uix.widget.R.style.DialogTopAnimation)
             }
             POS_CENTER -> {
                 dialog.window?.setGravity(Gravity.CENTER)
-                dialog.window?.setWindowAnimations(R.style.DialogCenterAnimation)
+                dialog.window?.setWindowAnimations(me.shouheng.uix.widget.R.style.DialogCenterAnimation)
             }
             POS_BOTTOM -> {
                 dialog.window?.setGravity(Gravity.BOTTOM)
-                dialog.window?.setWindowAnimations(R.style.DialogBottomAnimation)
+                dialog.window?.setWindowAnimations(me.shouheng.uix.widget.R.style.DialogBottomAnimation)
             }
         }
 
-        dialog.setOnDismissListener { onDismissListener?.onOnDismiss(this) }
+        // fix 2020-07-05 : invalid
+        // dialog.setOnDismissListener { onDismissListener?.onOnDismiss(this) }
         dialog.setOnShowListener { onShowListener?.onShow(this) }
 
         dialog.setCanceledOnTouchOutside(outCancelable)
         dialog.setCancelable(backCancelable)
+        dialog.setOnKeyListener { _, keyCode, _ ->
+            if (!backCancelable && keyCode == KeyEvent.KEYCODE_BACK) {
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
+        }
 
-        val margin = UIXViewUtils.dp2px(dialogMargin.toFloat())
-        dialog.setView(content, margin, margin, margin, margin)
+        dialog.setView(content, dialogMargin, dialogMargin, dialogMargin, dialogMargin)
 
         return dialog
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        super.onDismiss(dialog)
+        onDismissListener?.onOnDismiss(this)
     }
 
     class Builder {
@@ -183,9 +195,9 @@ class BeautyDialog : DialogFragment() {
         private var onShowListener: OnShowListener? = null
 
         private var fixedHeight = 0
-        private var dialogMargin: Float = GlobalConfig.margin
+        private var dialogMargin: Int = GlobalConfig.margin
         private var dialogBackground: Drawable? = null
-        private var dialogCornerRadius: Float = GlobalConfig.cornerRadius
+        private var dialogCornerRadius: Int = GlobalConfig.cornerRadius
 
         fun setDialogTitle(iDialogTitle: IDialogTitle): Builder {
             this.iDialogTitle = iDialogTitle
@@ -241,9 +253,9 @@ class BeautyDialog : DialogFragment() {
         }
 
         /**
-         * 对话框边距，单位 dp
+         * 对话框边距，单位 px
          */
-        fun setDialogMargin(dialogMargin: Float): Builder {
+        fun setDialogMargin(dialogMargin: Int): Builder {
             this.dialogMargin = dialogMargin
             return this
         }
@@ -265,9 +277,9 @@ class BeautyDialog : DialogFragment() {
         }
 
         /**
-         * 对话框的默认背景的边角的大小，单位：dp
+         * 对话框的默认背景的边角的大小，单位：px
          */
-        fun setDialogCornerRadius(dialogCornerRadius: Float): Builder {
+        fun setDialogCornerRadius(dialogCornerRadius: Int): Builder {
             this.dialogCornerRadius = dialogCornerRadius
             return this
         }
@@ -294,18 +306,18 @@ class BeautyDialog : DialogFragment() {
     }
 
     object GlobalConfig {
-        /** 对话框边距，单位 dp */
+        /** 对话框边距，单位 px */
         @Px
-        var margin: Float                       = 20f
-        /** 对话框圆角，单位 dp */
+        var margin: Int                       = UIXViewUtils.dp2px(20f)
+        /** 对话框圆角，单位 px */
         @Px
-        var cornerRadius: Float                 = 15f
+        var cornerRadius: Int                 = UIXViewUtils.dp2px(15f)
         /** 对话框明主题背景色 */
         @ColorInt
-        var lightBGColor: Int                   = UIXResUtils.getColor(R.color.uix_default_light_bg_color)
+        var lightBGColor: Int                   = UIXResUtils.getColor(me.shouheng.uix.widget.R.color.uix_default_light_bg_color)
         /** 对话框暗主题背景色 */
         @ColorInt
-        var darkBGColor: Int                    = UIXResUtils.getColor(R.color.uix_default_dark_bg_color)
+        var darkBGColor: Int                    = UIXResUtils.getColor(me.shouheng.uix.widget.R.color.uix_default_dark_bg_color)
         /** 点击对话框外部是否可以取消对话框的全局配置 */
         var outCancelable                       = true
         /** 点击返回按钮是否可以取消对话框的全局配置 */

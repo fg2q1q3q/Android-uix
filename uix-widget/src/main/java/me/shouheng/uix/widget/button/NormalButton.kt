@@ -43,8 +43,7 @@ class NormalButton : AppCompatButton {
                 typedArray.getColor(R.styleable.NormalButton_btn_selected_color, GlobalConfig.selectedColor)
             else UIXColorUtils.computeColor(normalColor, Color.BLACK, GlobalConfig.fraction)
             val disableColor = typedArray.getColor(R.styleable.NormalButton_btn_disable_color, GlobalConfig.disableColor)
-            val cornerRadius = typedArray.getDimensionPixelSize(R.styleable.NormalButton_btn_corner_radius,
-                    UIXViewUtils.dp2px(GlobalConfig.cornerRadius))
+            val cornerRadius = typedArray.getDimensionPixelSize(R.styleable.NormalButton_btn_corner_radius, GlobalConfig.cornerRadius)
             normalDrawable = UIXImageUtils.getGradientDrawable(normalColor, cornerRadius.toFloat())
             disableDrawable = UIXImageUtils.getGradientDrawable(disableColor, cornerRadius.toFloat())
             val selectedDrawable = UIXImageUtils.getGradientDrawable(selectedColor, cornerRadius.toFloat())
@@ -116,7 +115,7 @@ class NormalButton : AppCompatButton {
         @ColorInt var selectedColor: Int                        = Color.TRANSPARENT
         /** 按钮禁用时的颜色 */
         @ColorInt var disableColor: Int                         = Color.TRANSPARENT
-        /** 按钮的圆角，单位 dp */
-        @Px var cornerRadius: Float                             = 30f
+        /** 按钮的圆角，单位 px */
+        @Px var cornerRadius: Int                             = UIXViewUtils.dp2px(30f)
     }
 }

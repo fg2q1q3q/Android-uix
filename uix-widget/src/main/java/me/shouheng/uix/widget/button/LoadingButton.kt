@@ -68,8 +68,7 @@ class LoadingButton : LinearLayout {
             val selectedColor = if (typedArray.hasValue(R.styleable.LoadingButton_loading_button_selected_color))
                 typedArray.getColor(R.styleable.LoadingButton_loading_button_selected_color, GlobalConfig.selectedColor)
             else UIXColorUtils.computeColor(normalColor, Color.BLACK, GlobalConfig.fraction)
-            val cornerRadius = typedArray.getDimensionPixelSize(R.styleable.LoadingButton_loading_button_corner_radius,
-                    UIXViewUtils.dp2px(GlobalConfig.cornerRadius.toFloat()))
+            val cornerRadius = typedArray.getDimensionPixelSize(R.styleable.LoadingButton_loading_button_corner_radius, GlobalConfig.cornerRadius)
             normalDrawable = UIXImageUtils.getGradientDrawable(normalColor, cornerRadius.toFloat())
             disableDrawable = UIXImageUtils.getGradientDrawable(disableColor, cornerRadius.toFloat())
             val selectedDrawable = UIXImageUtils.getGradientDrawable(selectedColor, cornerRadius.toFloat())
@@ -158,8 +157,8 @@ class LoadingButton : LinearLayout {
         /** 按钮禁用时的颜色 */
         @ColorInt
         var disableColor: Int                   = Color.TRANSPARENT
-        /** 按钮的圆角，单位 dp */
+        /** 按钮的圆角，单位 px */
         @Px
-        var cornerRadius: Int                   = 30
+        var cornerRadius: Int                   = UIXViewUtils.dp2px(30f)
     }
 }

@@ -60,6 +60,11 @@
                 android:text="自定义列表对话框 [带加载状态|支持异步加载]"
                 style="@style/MenuItemButton"/>
 
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_not_cancelable"
+                android:text="无法取消的对话框 [慎重点击]"
+                style="@style/MenuItemButton"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

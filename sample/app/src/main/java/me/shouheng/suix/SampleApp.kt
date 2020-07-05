@@ -13,6 +13,7 @@ import me.shouheng.mvvm.comn.ContainerActivity
 import me.shouheng.uix.common.UIX
 import me.shouheng.uix.common.anno.UIXConfiguration
 import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.common.utils.UIXViewUtils
 import me.shouheng.uix.pages.CrashReportActivity
 import me.shouheng.uix.pages.web.WebviewFragment
 import me.shouheng.uix.widget.button.NormalButton
@@ -90,6 +91,6 @@ class SampleApp: Application() {
     private fun customUIX() {
         NormalButton.GlobalConfig.textColor = Color.WHITE
         NormalButton.GlobalConfig.normalColor = ResUtils.getColor(R.color.green)
-        NormalButton.GlobalConfig.cornerRadius = 5f
+        NormalButton.GlobalConfig.cornerRadius = UIXViewUtils.dp2px(5f)
     }
 }

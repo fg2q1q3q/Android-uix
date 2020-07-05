@@ -22,9 +22,12 @@ import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.anno.EmptyViewState
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.common.utils.UIXViewUtils
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
+import me.shouheng.uix.widget.dialog.listener.OnDismissListener
+import me.shouheng.uix.widget.dialog.listener.OnShowListener
 import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.rv.EmptyView
@@ -45,6 +48,16 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnNoBg.setOnClickListener {
             BeautyDialog.Builder()
+                    .setOnDismissListener(object : OnDismissListener {
+                        override fun onOnDismiss(dialog: BeautyDialog) {
+                            toast("Dismissed")
+                        }
+                    })
+                    .setOnShowListener(object : OnShowListener {
+                        override fun onShow(dialog: BeautyDialog) {
+                            toast("Showed")
+                        }
+                    })
                     .setDialogStyle(STYLE_WRAP)
                     .setDialogBackground(null)
                     .setDialogContent(UpgradeContent())
@@ -122,7 +135,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         }
         binding.btnEditorNormal.setOnClickListener {
             BeautyDialog.Builder()
-                    .setDialogCornerRadius(4f)
+                    .setDialogCornerRadius(UIXViewUtils.dp2px(4f))
                     .setDialogTitle(SimpleTitle.get("普通编辑对话框 [无限制]"))
                     .setDialogContent(SimpleEditor.Builder()
                             .setClearDrawable(ResUtils.getDrawable(R.drawable.ic_cancel_black_24dp))
@@ -207,7 +220,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         binding.btnAddress.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogPosition(POS_BOTTOM)
-                    .setDialogMargin(8f)
+                    .setDialogMargin(UIXViewUtils.dp2px(8f))
                     .setDialogTitle(SimpleTitle.get("地址对话框"))
                     .setDialogContent(AddressContent.Builder()
                             .setMaxLevel(LEVEL_AREA)
@@ -274,6 +287,15 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
                         SimpleList.Item(15, "第 16 项", ResUtils.getDrawable(R.drawable.uix_loading))
                 ))
             }, 3000)
+        }
+        binding.btnNotCancelable.setOnClickListener {
+            BeautyDialog.Builder()
+                    .setBackCancelable(false)
+                    .setOutCancelable(false)
+                    .setDialogStyle(STYLE_WRAP)
+                    .setDialogBackground(null)
+                    .setDialogContent(UpgradeContent())
+                    .build().show(supportFragmentManager, "not cancelable")
         }
     }
 }

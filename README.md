@@ -1,5 +1,4 @@
-![Banner](https://github.com/CostCost/Resources/blob/master/github/banner.jpg?raw=true)
-![Offical](https://github.com/CostCost/Resources/blob/master/github/offical.png?raw=true)
+![Banner](https://github.com/CostCost/Resources/blob/master/github/xbanner.jpg?raw=true)
 
 <h1 align="center">Android-UIX：Android UI 解决方案</h1>
 

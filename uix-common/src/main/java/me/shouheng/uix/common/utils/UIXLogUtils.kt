@@ -23,4 +23,16 @@ object UIXLogUtils {
             Log.d("UIX", "" + o)
         }
     }
+
+    fun e(s: String) {
+        if (debug) {
+            Log.e("UIX", s)
+        }
+    }
+
+    fun e(o: Any) {
+        if (debug) {
+            Log.e("UIX", "" + o)
+        }
+    }
 }

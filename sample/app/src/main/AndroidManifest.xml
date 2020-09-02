@@ -33,21 +33,32 @@
             </intent-filter>
         </activity>
         <activity android:name=".dialog.DialogActivity"/>
-<!--        <activity android:name="me.shouheng.uix.pages.image.GalleryActivity"/>-->
-<!--        <activity android:name="me.shouheng.uix.pages.about.AboutFragment"/>-->
-        <activity android:name="me.shouheng.uix.pages.CrashReportActivity"
-            android:theme="@style/CrashReportTheme"
-            tools:replace="android:theme"/>
+        <!--<activity android:name="me.shouheng.uix.pages.image.GalleryActivity"/>-->
+        <!--<activity android:name="me.shouheng.uix.pages.about.AboutFragment"/>-->
+        <!--declare in manifest to override theme style-->
+<!--        <activity android:name="me.shouheng.uix.pages.CrashReportActivity"-->
+<!--            android:theme="@style/CrashReportTheme"-->
+<!--            tools:replace="android:theme"/>-->
         <activity android:name=".pop.PopActivity"/>
         <activity android:name=".dialog.TipsActivity"/>
         <activity android:name=".tools.ToolsActivity"/>
-        <activity android:name=".image.MatisseSampleActivity"/>
+        <activity android:name=".image.ImageSampleActivity"/>
         <activity android:name=".widget.WidgetActivity"/>
         <activity android:name=".widget.LayoutActivity"/>
         <activity android:name=".widget.LayoutActivity2"/>
         <activity android:name=".layout.SlidingActivity"/>
         <activity android:name=".comn.ContainerActivity"
             android:theme="@style/AppThemeNoActionBar"/>
+        <!-- provider -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="me.shouheng.suix.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

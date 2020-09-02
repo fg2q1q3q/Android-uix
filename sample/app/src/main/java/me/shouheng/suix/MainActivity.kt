@@ -12,7 +12,7 @@ import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.databinding.ActivityMainBinding
 import me.shouheng.suix.dialog.DialogActivity
 import me.shouheng.suix.dialog.TipsActivity
-import me.shouheng.suix.image.MatisseSampleActivity
+import me.shouheng.suix.image.ImageSampleActivity
 import me.shouheng.suix.pop.PopActivity
 import me.shouheng.suix.setting.SettingFragment
 import me.shouheng.suix.tools.ToolsActivity
@@ -36,7 +36,7 @@ class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
         binding.btnDialogs.setOnClickListener { startActivity(DialogActivity::class.java) }
         binding.btnTips.setOnClickListener { startActivity(TipsActivity::class.java) }
         binding.btnPops.setOnClickListener { startActivity(PopActivity::class.java) }
-        binding.btnMatisse.setOnClickListener { startActivity(MatisseSampleActivity::class.java) }
+        binding.btnMatisse.setOnClickListener { startActivity(ImageSampleActivity::class.java) }
         binding.btnWeb.setOnClickListener {
             ContainerActivity.open(COMMAND_LAUNCH_WEBVIEW).launch(this)
         }

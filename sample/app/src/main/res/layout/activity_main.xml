@@ -18,7 +18,7 @@
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:id="@+id/btn_tools"
-                    android:text="各种工具示例"
+                    android:text="各种 UI 工具示例"
                     style="@style/MenuItemButton"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
@@ -38,7 +38,7 @@
 
                 <me.shouheng.uix.widget.button.NormalButton
                     android:id="@+id/btn_matisse"
-                    android:text="图片选择|浏览|展示"
+                    android:text="图片 · 选择 · 浏览 · 拍摄 · 处理"
                     style="@style/MenuItemButton"/>
 
                 <me.shouheng.uix.widget.button.NormalButton
@@ -81,7 +81,7 @@
         </android.support.v4.widget.NestedScrollView>
 
         <me.shouheng.uix.widget.text.NormalTextView
-            android:text="UI 标准化项目，提供了丰富且高可定制的功能\n作者，搜索公众号 CodeBrick，欢迎 Star 和 Fork 该项目"
+            android:text="UI 标准化项目，提供了丰富且高可定制的功能\n作者：搜索公众号\'Hello 开发者\'，欢迎 Star 和 Fork 该项目"
             android:textSize="11sp"
             android:padding="8dp"
             android:layout_marginStart="40dp"

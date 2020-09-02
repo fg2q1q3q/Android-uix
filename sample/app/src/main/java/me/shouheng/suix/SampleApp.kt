@@ -66,6 +66,7 @@ class SampleApp: Application() {
                             textColor = Color.WHITE
                         })
                         .setContent("错误的提示信息等等……")
+                        .setThemeStyle(R.style.CrashReportTheme)
                         .launch()
                 Process.killProcess(Process.myPid())
                 exitProcess(1)
@@ -91,6 +92,6 @@ class SampleApp: Application() {
     private fun customUIX() {
         NormalButton.GlobalConfig.textColor = Color.WHITE
         NormalButton.GlobalConfig.normalColor = ResUtils.getColor(R.color.green)
-        NormalButton.GlobalConfig.cornerRadius = UIXViewUtils.dp2px(5f)
+        NormalButton.GlobalConfig.cornerRadius = UIXViewUtils.dp2px(20f)
     }
 }

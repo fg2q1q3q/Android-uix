@@ -33,6 +33,7 @@ add_library(tegra_hal STATIC IMPORTED)
 #    add_library(tbb STATIC IMPORTED)
 #endif()
 
+# OpenCV 基础库
 set_target_properties(opencv_calib3d PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/opencv/libs/${ANDROID_ABI}/libopencv_calib3d.a)
 set_target_properties(opencv_core PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/opencv/libs/${ANDROID_ABI}/libopencv_core.a)
 set_target_properties(opencv_features2d PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/opencv/libs/${ANDROID_ABI}/libopencv_features2d.a)
@@ -42,6 +43,7 @@ set_target_properties(opencv_imgproc PROPERTIES IMPORTED_LOCATION ${PROJECT_SOUR
 set_target_properties(opencv_stitching PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/opencv/libs/${ANDROID_ABI}/libopencv_stitching.a)
 set_target_properties(opencv_ximgproc PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/opencv/libs/${ANDROID_ABI}/libopencv_ximgproc.a)
 
+# OpenCV 拓展库
 set_target_properties(cpufeatures PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/opencv/3rdparty/libs/${ANDROID_ABI}/libcpufeatures.a)
 set_target_properties(IlmImf PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/opencv/3rdparty/libs/${ANDROID_ABI}/libIlmImf.a)
 set_target_properties(libjasper PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/opencv/3rdparty/libs/${ANDROID_ABI}/liblibjasper.a)

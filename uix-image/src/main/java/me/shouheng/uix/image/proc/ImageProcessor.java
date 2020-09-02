@@ -10,23 +10,48 @@ import android.graphics.Bitmap;
  */
 public final class ImageProcessor {
 
+    /**
+     * 对指定的 bitmap 进行二值化处理
+     *
+     * @param bitmap bitmap
+     * @return       处理结果
+     */
     public static Bitmap binarization(Bitmap bitmap) {
         Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-//        nativeBinarization(bitmap, outBitmap, 5);
+        nativeBinaryzation(bitmap, outBitmap, 5);
         return outBitmap;
     }
 
-    public static Bitmap grerify(Bitmap bitmap) {
+    /**
+     * 对指定的 bitmap 进行灰度处理
+     *
+     * @param bitmap bitmap
+     * @return       处理结果
+     */
+    public static Bitmap greyProcess(Bitmap bitmap) {
         Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-//        nativeGrerify(bitmap, outBitmap);
+        nativeGreyProcess(bitmap, outBitmap);
         return outBitmap;
     }
 
-//    public static native void nativeBinarization(Bitmap srcBitmap, Bitmap outBitmap, int d);
-//
-//    public static native void nativeGrerify(Bitmap srcBitmap, Bitmap outBitmap);
-//
-//    static {
-//        System.loadLibrary("img_cropper");
-//    }
+    /**
+     * 在 native 层做二值化处理
+     *
+     * @param srcBitmap source bitmap
+     * @param outBitmap output bitmap
+     * @param d         sigma color
+     */
+    public static native void nativeBinaryzation(Bitmap srcBitmap, Bitmap outBitmap, int d);
+
+    /**
+     * 在 native 层做灰度处理
+     *
+     * @param srcBitmap source bitmap
+     * @param outBitmap output bitmap
+     */
+    public static native void nativeGreyProcess(Bitmap srcBitmap, Bitmap outBitmap);
+
+    static {
+        System.loadLibrary("img_cropper");
+    }
 }

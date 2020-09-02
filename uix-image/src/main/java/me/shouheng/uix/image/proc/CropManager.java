@@ -12,14 +12,21 @@ import me.shouheng.uix.image.utils.CropUtils;
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @since 2020/09/01 23:12
  */
-public class CropManager {
+public final class CropManager {
 
+    /**
+     * 对传入的 bitmap 进行裁剪
+     *
+     * @param srcBmp     源 bitmap
+     * @param cropPoints 要裁剪的点
+     * @return           裁剪结果
+     */
     public static Bitmap crop(Bitmap srcBmp, Point[] cropPoints) {
         if (srcBmp == null || cropPoints == null) {
             throw new IllegalArgumentException("srcBmp and cropPoints cannot be null");
         }
         if (cropPoints.length != 4) {
-            throw new IllegalArgumentException("The length of cropPoints must be 4 , and sort by leftTop, rightTop, rightBottom, leftBottom");
+            throw new IllegalArgumentException("The length of cropPoints must be 4 and sort by leftTop, rightTop, rightBottom, leftBottom");
         }
         Point leftTop = cropPoints[0];
         Point rightTop = cropPoints[1];
@@ -31,18 +38,25 @@ public class CropManager {
         int cropHeight = (int) ((CropUtils.getDistance(leftTop, leftBottom)
                 + CropUtils.getDistance(rightTop, rightBottom)) / 2);
 
-        ULog.INSTANCE.d("srcBitmap: (" + srcBmp.getWidth() + ", " + srcBmp.getHeight() + ")");
-        ULog.INSTANCE.d("leftTop:" + leftTop + " rightTop:" + rightTop + " leftBottom:" + leftBottom + " rightBottom:" + rightBottom);
-        ULog.INSTANCE.d("Bitmap size to crop (" + cropWidth + "," + cropHeight + ")");
+        ULog.INSTANCE.d("Source : (" + srcBmp.getWidth() + ", " + srcBmp.getHeight() + ")");
+        ULog.INSTANCE.d("Expect : (" + leftTop + ", " + rightTop + ", " + leftBottom + ", " + rightBottom + ")");
+        ULog.INSTANCE.d("Expect : (" + cropWidth + ", " + cropHeight + ")");
         Bitmap cropBitmap = Bitmap.createBitmap(cropWidth, cropHeight, Bitmap.Config.ARGB_8888);
-//        BeautyCropper.nativeCrop(srcBmp, cropPoints, cropBitmap);
+        CropManager.nativeCrop(srcBmp, cropPoints, cropBitmap);
         ULog.INSTANCE.d("Bitmap size to crop (" + cropBitmap.getWidth() + "," + cropBitmap.getHeight() + ")");
         return cropBitmap;
     }
 
-//    private static native void nativeCrop(Bitmap srcBitmap, Point[] points, Bitmap outBitmap);
-//
-//    static {
-//        System.loadLibrary("img_cropper");
-//    }
+    /**
+     * 对指定的 bitmap 进行裁剪
+     *
+     * @param srcBitmap 源 bitmap
+     * @param points    裁剪的点位
+     * @param outBitmap 输出的结果
+     */
+    private static native void nativeCrop(Bitmap srcBitmap, Point[] points, Bitmap outBitmap);
+
+    static {
+        System.loadLibrary("img_cropper");
+    }
 }

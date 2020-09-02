@@ -8,7 +8,7 @@ import android.util.Log
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 11:57
  */
-object UIXLogUtils {
+object ULog {
 
     var debug: Boolean = true
 

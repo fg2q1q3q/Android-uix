@@ -14,7 +14,7 @@ import android.view.Surface
 import android.view.View
 import android.view.WindowManager
 import com.bumptech.glide.Glide
-import me.shouheng.uix.common.utils.UIXLogUtils
+import me.shouheng.uix.common.utils.ULog
 import me.shouheng.uix.common.utils.UIXViewUtils
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.widget.layout.PullBackLayout
@@ -55,8 +55,8 @@ class GalleryActivity : AppCompatActivity(), PullBackLayout.Callback {
             title = savedInstanceState.getString(EXTRA_GALLERY_TITLE)
             currentIndex = savedInstanceState.getInt(EXTRA_GALLERY_CLICKED_IMAGE, 0)
         }
-        UIXLogUtils.d(uris!!)
-        UIXLogUtils.d(currentIndex)
+        ULog.d(uris!!)
+        ULog.d(currentIndex)
     }
 
     private fun configViews() {

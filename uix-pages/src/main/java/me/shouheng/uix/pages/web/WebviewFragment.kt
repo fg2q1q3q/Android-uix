@@ -17,7 +17,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.DefaultWebClient
-import me.shouheng.uix.common.utils.UIXLogUtils
+import me.shouheng.uix.common.utils.ULog
 import me.shouheng.uix.common.utils.UIXResUtils
 import me.shouheng.uix.pages.R
 
@@ -108,7 +108,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     private var mWebChromeClient: WebChromeClient = object : WebChromeClient() {
 
         override fun onProgressChanged(view: WebView, newProgress: Int) {
-            UIXLogUtils.d("onProgressChanged:$newProgress  view:$view")
+            ULog.d("onProgressChanged:$newProgress  view:$view")
         }
 
         override fun onReceivedTitle(view: WebView, title: String) {

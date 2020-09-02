@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.text.TextUtils
 import com.zhihu.matisse.internal.utils.PathUtils.getPath
-import me.shouheng.uix.common.utils.UIXLogUtils
+import me.shouheng.uix.common.utils.ULog
 import me.shouheng.uix.common.utils.UIXResUtils
 import me.shouheng.uix.pages.R
 
@@ -15,7 +15,7 @@ object UIXPageUtils {
         if (!TextUtils.isEmpty(mimeType)) {
             val type = mimeType!!.split("/")[0]
             val subtype = mimeType.split("/")[1]
-            UIXLogUtils.d(mimeType)
+            ULog.d(mimeType)
             return when (type) {
                 "image", "video" -> {
                     uri

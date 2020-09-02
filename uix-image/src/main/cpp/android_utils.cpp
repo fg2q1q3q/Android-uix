@@ -6,8 +6,15 @@
 #include <android/bitmap.h>
 #include "android_utils.h"
 
+/**
+ * cover image from bitmap to mat
+ *
+ * @param env       the env
+ * @param srcBitmap the bitmap
+ * @param srcMat    the result
+ */
 void bitmap_to_mat(JNIEnv *env, jobject &srcBitmap, Mat &srcMat) {
-    void *srcPixels = 0;
+    void *srcPixels = nullptr;
     AndroidBitmapInfo srcBitmapInfo;
     try {
         AndroidBitmap_getInfo(env, srcBitmap, &srcBitmapInfo);
@@ -37,8 +44,15 @@ void bitmap_to_mat(JNIEnv *env, jobject &srcBitmap, Mat &srcMat) {
     }
 }
 
+/**
+ * convert from mat to bitmap
+ *
+ * @param env       the env
+ * @param srcMat    the source mat
+ * @param dstBitmap the result
+ */
 void mat_to_bitmap(JNIEnv *env, Mat &srcMat, jobject &dstBitmap) {
-    void *dstPixels = 0;
+    void *dstPixels = nullptr;
     AndroidBitmapInfo dstBitmapInfo;
     try {
         AndroidBitmap_getInfo(env, dstBitmap, &dstBitmapInfo);
@@ -77,6 +91,3 @@ void mat_to_bitmap(JNIEnv *env, Mat &srcMat, jobject &dstBitmap) {
         return;
     }
 }
-
-
-

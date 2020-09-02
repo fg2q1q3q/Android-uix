@@ -1,4 +1,4 @@
-package me.shouheng.image.widget;
+package me.shouheng.uix.image.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,11 +11,14 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import me.shouheng.image.R;
-import me.shouheng.image.proc.BeautyCropper;
-import me.shouheng.image.utils.CropUtils;
+
+import me.shouheng.uix.image.R;
+import me.shouheng.uix.image.proc.CropManager;
+import me.shouheng.uix.image.utils.CropUtils;
 
 /**
+ * 用来选择和拖动点位的控件
+ *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-02 10:01
  */
@@ -357,7 +360,7 @@ public class CropImageView extends android.support.v7.widget.AppCompatImageView 
                     point.x = point.x * bitmap.getWidth() / width;
                     point.y = point.y * bitmap.getHeight() / height;
                 }
-                return BeautyCropper.crop(bitmap, points);
+                return CropManager.crop(bitmap, points);
             }
         }
         return null;
@@ -517,7 +520,7 @@ public class CropImageView extends android.support.v7.widget.AppCompatImageView 
             float cx = radius;
             int lineOffset = (int) dp2px(MAGNIFIER_BORDER_WIDTH);
             mMagnifierDrawable.setBounds(lineOffset, lineOffset, (int)radius * 2 - lineOffset, (int)radius * 2 - lineOffset);
-            double pointsDistance = CropUtils.getPointsDistance(draggingX, draggingY, 0, 0);
+            double pointsDistance = CropUtils.getDistance(draggingX, draggingY, 0, 0);
             if (pointsDistance < (radius * 2.5)) {
                 mMagnifierDrawable.setBounds(getWidth() - (int)radius * 2 + lineOffset, lineOffset, getWidth() - lineOffset, (int)radius * 2 - lineOffset);
                 cx = getWidth() - radius;

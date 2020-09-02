@@ -15,7 +15,7 @@ import me.shouheng.icamera.enums.MediaType
 import me.shouheng.icamera.listener.CameraOpenListener
 import me.shouheng.icamera.listener.CameraPhotoListener
 import me.shouheng.icamera.listener.CameraVideoListener
-import me.shouheng.uix.common.utils.UIXLogUtils
+import me.shouheng.uix.common.utils.ULog
 import me.shouheng.uix.pages.R
 import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
@@ -57,7 +57,7 @@ class TakePhotoActivity : AppCompatActivity() {
         if (cv.mediaType == MediaType.TYPE_PICTURE) {
             cv.takePicture(File(filePath!!), object : CameraPhotoListener {
                 override fun onCaptureFailed(throwable: Throwable?) {
-                    UIXLogUtils.e("" + throwable)
+                    ULog.e("" + throwable)
                 }
 
                 override fun onPictureTaken(data: ByteArray?, picture: File) {
@@ -79,7 +79,7 @@ class TakePhotoActivity : AppCompatActivity() {
 
                 override fun onVideoRecordError(throwable: Throwable?) {
                     recording.set(false)
-                    UIXLogUtils.e("" + throwable)
+                    ULog.e("" + throwable)
                 }
             })
         }
@@ -128,11 +128,11 @@ class TakePhotoActivity : AppCompatActivity() {
         if (!cv.isCameraOpened) {
             cv.openCamera(object : CameraOpenListener {
                 override fun onCameraOpened(cameraFace: Int) {
-                    UIXLogUtils.d("onCameraOpened")
+                    ULog.d("onCameraOpened")
                 }
 
                 override fun onCameraOpenError(throwable: Throwable?) {
-                    UIXLogUtils.e("" + throwable)
+                    ULog.e("" + throwable)
                 }
             })
         }
@@ -141,7 +141,7 @@ class TakePhotoActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         cv.closeCamera {
-            UIXLogUtils.d("closeCamera : $it")
+            ULog.d("closeCamera : $it")
         }
     }
 

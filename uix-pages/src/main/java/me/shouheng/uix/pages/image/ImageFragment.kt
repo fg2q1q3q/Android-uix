@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.github.chrisbanes.photoview.PhotoView
 import com.zhihu.matisse.internal.utils.PathUtils.getPath
-import me.shouheng.uix.common.utils.UIXLogUtils
+import me.shouheng.uix.common.utils.ULog
 import me.shouheng.uix.common.utils.UIXResUtils
 import me.shouheng.uix.common.utils.UIXViewUtils
 import me.shouheng.uix.pages.R
@@ -114,7 +114,7 @@ class ImageFragment : Fragment() {
         try {
             path = getPath(context!!, uri)
         } catch (ex: Exception) {
-            UIXLogUtils.e(ex)
+            ULog.e(ex)
         }
         return path
     }

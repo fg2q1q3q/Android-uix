@@ -5,10 +5,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.os.Looper
 import android.view.View
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.ContainerActivity
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.databinding.ActivityMainBinding
 import me.shouheng.suix.dialog.DialogActivity
 import me.shouheng.suix.dialog.TipsActivity
@@ -19,6 +15,9 @@ import me.shouheng.suix.tools.ToolsActivity
 import me.shouheng.suix.widget.LayoutActivity
 import me.shouheng.suix.widget.LayoutActivity2
 import me.shouheng.suix.widget.WidgetActivity
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.ContainerActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 
 /**
  * Main page.
@@ -26,10 +25,11 @@ import me.shouheng.suix.widget.WidgetActivity
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-12 15:40
  */
-@ActivityConfiguration(layoutResId = R.layout.activity_main)
-class MainActivity : CommonActivity<ActivityMainBinding, EmptyViewModel>() {
+class MainActivity : CommonActivity<EmptyViewModel, ActivityMainBinding>() {
 
     private var dlg: AlertDialog? = null
+
+    override fun getLayoutResId(): Int = R.layout.activity_main
 
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnTools.setOnClickListener { startActivity(ToolsActivity::class.java) }

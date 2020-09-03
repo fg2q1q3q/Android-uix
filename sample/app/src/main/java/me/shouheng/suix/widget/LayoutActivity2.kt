@@ -1,15 +1,16 @@
 package me.shouheng.suix.widget
 
 import android.os.Bundle
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityLayout2Binding
 import me.shouheng.suix.layout.SlidingActivity
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 
-@ActivityConfiguration(layoutResId = R.layout.activity_layout2)
-class LayoutActivity2 : CommonActivity<ActivityLayout2Binding, EmptyViewModel>() {
+class LayoutActivity2 : CommonActivity<EmptyViewModel, ActivityLayout2Binding>() {
+
+    override fun getLayoutResId(): Int = R.layout.activity_layout2
+
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnSpl.setOnClickListener {
             startActivity(SlidingActivity::class.java)

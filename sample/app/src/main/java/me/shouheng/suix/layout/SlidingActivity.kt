@@ -1,14 +1,15 @@
 package me.shouheng.suix.layout
 
 import android.os.Bundle
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivitySlidingBinding
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 
-@ActivityConfiguration(layoutResId = R.layout.activity_sliding)
-class SlidingActivity : CommonActivity<ActivitySlidingBinding, EmptyViewModel>() {
+class SlidingActivity : CommonActivity<EmptyViewModel, ActivitySlidingBinding>() {
+
+    override fun getLayoutResId(): Int = R.layout.activity_sliding
+
     override fun doCreateView(savedInstanceState: Bundle?) {
     }
 }

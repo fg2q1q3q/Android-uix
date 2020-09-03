@@ -11,9 +11,6 @@ import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.filter.Filter
 import com.zhihu.matisse.internal.entity.CaptureStrategy
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.comn.PalmUtils
 import me.shouheng.suix.databinding.ActivityMatisseSampleBinding
@@ -28,10 +25,13 @@ import me.shouheng.utils.permission.callback.OnGetPermissionCallback
 import me.shouheng.utils.stability.L
 import me.shouheng.utils.store.FileUtils
 import me.shouheng.utils.store.PathUtils
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 import java.io.File
 
-@ActivityConfiguration(layoutResId = R.layout.activity_matisse_sample)
-class ImageSampleActivity : CommonActivity<ActivityMatisseSampleBinding, EmptyViewModel>() {
+class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSampleBinding>() {
+
+    override fun getLayoutResId(): Int = R.layout.activity_matisse_sample
 
     override fun doCreateView(savedInstanceState: Bundle?) { /* noop */ }
 
@@ -48,6 +48,9 @@ class ImageSampleActivity : CommonActivity<ActivityMatisseSampleBinding, EmptyVi
             ActivityUtils.open(GalleryActivity::class.java)
                     .put(GalleryActivity.EXTRA_GALLERY_IMAGES, ArrayList<Uri>(listOf(url)))
                     .launch(this)
+        } else if (requestCode == 0x0003 && resultCode == Activity.RESULT_OK) {
+            val url = Matisse.obtainResult(data)[0]
+            startActivity(Intent(this, CropActivity::class.java).putExtra("image", url))
         }
     }
 
@@ -109,5 +112,19 @@ class ImageSampleActivity : CommonActivity<ActivityMatisseSampleBinding, EmptyVi
         PermissionUtils.checkPermissions(this, OnGetPermissionCallback {
             TakePhotoActivity.launch(this@ImageSampleActivity, filePath, 0x0002)
         }, Permission.STORAGE, Permission.CAMERA)
+    }
+
+    fun onCrop(v: View) {
+        Matisse.from(this@ImageSampleActivity)
+                .choose(MimeType.ofImage())
+                .countable(true)
+                .theme(R.style.Matisse_Dracula)
+                .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+                .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
+                .maxSelectable(1)
+                .originalEnable(true)
+                .maxOriginalSize(10)
+                .imageEngine(Glide4Engine())
+                .forResult(0x0003)
     }
 }

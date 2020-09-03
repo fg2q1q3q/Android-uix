@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityWidgetsBinding
 import me.shouheng.uix.common.anno.LoadingButtonState
@@ -16,6 +13,8 @@ import me.shouheng.uix.common.glide.CornersTransformation
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
 import me.shouheng.utils.ui.ViewUtils
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 
 /**
  * 控件
@@ -23,8 +22,9 @@ import me.shouheng.utils.ui.ViewUtils
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-26 14:51
  */
-@ActivityConfiguration(layoutResId = R.layout.activity_widgets)
-class WidgetActivity : CommonActivity<ActivityWidgetsBinding, EmptyViewModel>() {
+class WidgetActivity : CommonActivity<EmptyViewModel, ActivityWidgetsBinding>() {
+
+    override fun getLayoutResId(): Int = R.layout.activity_widgets
 
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.etPsd.setVisibleDrawable(ImageUtils.tintDrawable(ResUtils.getDrawable(R.drawable.uix_eye_open_48), Color.BLUE))

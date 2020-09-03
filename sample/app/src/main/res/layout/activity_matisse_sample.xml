@@ -76,6 +76,19 @@
                 android:onClick="onPhoto"
                 style="@style/MenuItemButton"/>
 
+            <me.shouheng.uix.widget.text.NormalTextView
+                android:text="4. 图片裁剪"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <me.shouheng.uix.widget.button.NormalButton
+                android:text="去裁剪"
+                android:onClick="onCrop"
+                style="@style/MenuItemButton"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

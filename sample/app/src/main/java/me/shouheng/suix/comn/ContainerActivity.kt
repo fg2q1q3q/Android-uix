@@ -7,17 +7,17 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
-import me.shouheng.mvvm.databinding.MvvmsActivityContainerBinding
 import me.shouheng.suix.R
+import me.shouheng.suix.databinding.ActivityContainerBinding
 import me.shouheng.uix.common.bean.TextStyleBean
 import me.shouheng.uix.pages.about.*
 import me.shouheng.utils.app.ResUtils
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 
-@ActivityConfiguration(layoutResId = R.layout.mvvms_activity_container)
-class ContainerActivity : CommonActivity<MvvmsActivityContainerBinding, EmptyViewModel>(), AboutFragment.FragmentInteraction {
+class ContainerActivity : CommonActivity<EmptyViewModel, ActivityContainerBinding>(), AboutFragment.FragmentInteraction {
+
+    override fun getLayoutResId(): Int = R.layout.vmlib_activity_container
 
     override fun onLeftClick(v: View) {
         finish()

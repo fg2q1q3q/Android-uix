@@ -2,14 +2,11 @@ package me.shouheng.suix
 
 import android.Manifest
 import android.app.Application
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Process
 import android.support.v4.content.ContextCompat
-import me.shouheng.mvvm.MVVMs
-import me.shouheng.mvvm.comn.ContainerActivity
 import me.shouheng.uix.common.UIX
 import me.shouheng.uix.common.anno.UIXConfiguration
 import me.shouheng.uix.common.bean.TextStyleBean
@@ -20,6 +17,8 @@ import me.shouheng.uix.widget.button.NormalButton
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.stability.CrashHelper
 import me.shouheng.utils.stability.L
+import me.shouheng.vmlib.VMLib
+import me.shouheng.vmlib.comn.ContainerActivity
 import kotlin.system.exitProcess
 
 const val COMMAND_LAUNCH_WEBVIEW = 0x00001
@@ -31,14 +30,9 @@ const val COMMAND_LAUNCH_WEBVIEW = 0x00001
 @UIXConfiguration
 class SampleApp: Application() {
 
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        MVVMs.attachBaseContext(base)
-    }
-
     override fun onCreate() {
         super.onCreate()
-        MVVMs.onCreate(this)
+        VMLib.onCreate(this)
         UIX.init(this)
         customUIX()
         customCrash()

@@ -47,4 +47,5 @@ dependencies {
     implementation project(path: ':uix-widget')
     implementation project(path: ':uix-pages')
     implementation project(path: ':uix-image')
+//    implementation 'me.shouheng.ui:uix-image:1.4.1'
 }

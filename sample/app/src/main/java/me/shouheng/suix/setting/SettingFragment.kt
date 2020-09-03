@@ -7,9 +7,6 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.widget.ImageView
-import me.shouheng.mvvm.base.CommonFragment
-import me.shouheng.mvvm.base.anno.FragmentConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.FragmentSettingBinding
 import me.shouheng.uix.common.bean.TextStyleBean
@@ -18,6 +15,8 @@ import me.shouheng.uix.widget.button.SwitchButton
 import me.shouheng.uix.widget.rv.IEmptyView
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ImageUtils
+import me.shouheng.vmlib.base.CommonFragment
+import me.shouheng.vmlib.comn.EmptyViewModel
 
 /**
  * 设置界面
@@ -25,8 +24,9 @@ import me.shouheng.utils.ui.ImageUtils
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-26 21:37
  */
-@FragmentConfiguration(layoutResId = R.layout.fragment_setting)
-class SettingFragment : CommonFragment<FragmentSettingBinding, EmptyViewModel>() {
+class SettingFragment : CommonFragment<EmptyViewModel, FragmentSettingBinding>() {
+
+    override fun getLayoutResId(): Int = R.layout.fragment_setting
 
     private val adapter = SettingItemAdapter(emptyList(),
             ResUtils.getColor(R.color.settingBg),

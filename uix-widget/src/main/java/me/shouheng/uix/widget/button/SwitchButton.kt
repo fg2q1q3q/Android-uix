@@ -23,7 +23,7 @@ import android.view.View
 import android.view.ViewConfiguration
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.CompoundButton
-import me.shouheng.uix.common.utils.UIXColorUtils
+import me.shouheng.uix.common.utils.UColor
 import me.shouheng.uix.widget.R
 
 /**
@@ -213,8 +213,8 @@ class SwitchButton : CompoundButton {
         get() = mTintColor
         set(tintColor) {
             mTintColor = tintColor
-            mThumbColor = UIXColorUtils.generateThumbColorWithTintColor(mTintColor)
-            mBackColor = UIXColorUtils.generateBackColorWithTintColor(mTintColor)
+            mThumbColor = UColor.generateThumbColorWithTintColor(mTintColor)
+            mBackColor = UColor.generateBackColorWithTintColor(mTintColor)
             mIsBackUseDrawable = false
             mIsThumbUseDrawable = false
             refreshDrawableState()
@@ -346,7 +346,7 @@ class SwitchButton : CompoundButton {
             }
         }
         if (!mIsThumbUseDrawable && mThumbColor == null) {
-            mThumbColor = UIXColorUtils.generateThumbColorWithTintColor(mTintColor)
+            mThumbColor = UColor.generateThumbColorWithTintColor(mTintColor)
             mCurrThumbColor = mThumbColor!!.defaultColor
         }
 
@@ -359,7 +359,7 @@ class SwitchButton : CompoundButton {
         mBackColor = backColor
         mIsBackUseDrawable = mBackDrawable != null
         if (!mIsBackUseDrawable && mBackColor == null) {
-            mBackColor = UIXColorUtils.generateBackColorWithTintColor(mTintColor)
+            mBackColor = UColor.generateBackColorWithTintColor(mTintColor)
             mCurrBackColor = mBackColor!!.defaultColor
             mNextBackColor = mBackColor!!.getColorForState(CHECKED_PRESSED_STATE, mCurrBackColor)
         }

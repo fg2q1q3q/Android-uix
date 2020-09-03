@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="me.shouheng.uix.pages" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.shouheng.uix.pages">
+
     <application>
-        <activity android:name=".image.GalleryActivity" android:theme="@style/PictureViewTheme"/>
-        <activity android:name="me.shouheng.uix.pages.CrashReportActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+        <activity android:name=".image.TakePhotoActivity"
+            android:theme="@style/PictureViewTheme" />
+        <activity
+            android:name=".image.GalleryActivity"
+            android:theme="@style/PictureViewTheme" />
+        <activity
+            android:name=".CrashReportActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:process=":crash"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
+
 </manifest>

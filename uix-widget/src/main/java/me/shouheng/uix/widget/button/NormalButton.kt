@@ -11,9 +11,9 @@ import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
 import android.view.Gravity
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.common.utils.UIXColorUtils
-import me.shouheng.uix.common.utils.UIXImageUtils
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UColor
+import me.shouheng.uix.common.utils.UImage
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.R
 import me.shouheng.uix.widget.button.NormalButton.GlobalConfig
 
@@ -41,12 +41,12 @@ class NormalButton : AppCompatButton {
             val normalColor = typedArray.getColor(R.styleable.NormalButton_btn_normal_color, GlobalConfig.normalColor)
             val selectedColor = if (typedArray.hasValue(R.styleable.NormalButton_btn_selected_color))
                 typedArray.getColor(R.styleable.NormalButton_btn_selected_color, GlobalConfig.selectedColor)
-            else UIXColorUtils.computeColor(normalColor, Color.BLACK, GlobalConfig.fraction)
+            else UColor.computeColor(normalColor, Color.BLACK, GlobalConfig.fraction)
             val disableColor = typedArray.getColor(R.styleable.NormalButton_btn_disable_color, GlobalConfig.disableColor)
             val cornerRadius = typedArray.getDimensionPixelSize(R.styleable.NormalButton_btn_corner_radius, GlobalConfig.cornerRadius)
-            normalDrawable = UIXImageUtils.getGradientDrawable(normalColor, cornerRadius.toFloat())
-            disableDrawable = UIXImageUtils.getGradientDrawable(disableColor, cornerRadius.toFloat())
-            val selectedDrawable = UIXImageUtils.getGradientDrawable(selectedColor, cornerRadius.toFloat())
+            normalDrawable = UImage.getGradientDrawable(normalColor, cornerRadius.toFloat())
+            disableDrawable = UImage.getGradientDrawable(disableColor, cornerRadius.toFloat())
+            val selectedDrawable = UImage.getGradientDrawable(selectedColor, cornerRadius.toFloat())
             this.stateListDrawable = StateListDrawable()
             this.stateListDrawable!!.addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
             this.stateListDrawable!!.addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
@@ -116,6 +116,6 @@ class NormalButton : AppCompatButton {
         /** 按钮禁用时的颜色 */
         @ColorInt var disableColor: Int                         = Color.TRANSPARENT
         /** 按钮的圆角，单位 px */
-        @Px var cornerRadius: Int                             = UIXViewUtils.dp2px(30f)
+        @Px var cornerRadius: Int                             = UView.dp2px(30f)
     }
 }

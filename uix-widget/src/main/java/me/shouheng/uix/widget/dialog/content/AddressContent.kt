@@ -10,7 +10,7 @@ import me.shouheng.uix.common.anno.AddressSelectLevel
 import me.shouheng.uix.common.anno.AddressSelectLevel.Companion.LEVEL_AREA
 import me.shouheng.uix.common.anno.AddressSelectLevel.Companion.LEVEL_CITY
 import me.shouheng.uix.common.bean.AddressBean
-import me.shouheng.uix.common.utils.UIXBizUtils
+import me.shouheng.uix.common.utils.UBiz
 import me.shouheng.uix.widget.R
 import me.shouheng.uix.widget.dialog.BeautyDialog
 
@@ -42,7 +42,7 @@ class AddressContent: IDialogContent {
         tvCity = layout.findViewById(R.id.tv_city)
         tvArea = layout.findViewById(R.id.tv_area)
 
-        val list = UIXBizUtils.getAddressList()
+        val list = UBiz.getAddressList()
         val adapterProvince = ProvinceAdapter(list)
         rvProvince.adapter = adapterProvince
         rvProvince.visibility = View.VISIBLE

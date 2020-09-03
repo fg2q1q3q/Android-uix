@@ -17,8 +17,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.DefaultWebClient
-import me.shouheng.uix.common.utils.UIXLogUtils
-import me.shouheng.uix.common.utils.UIXResUtils
+import me.shouheng.uix.common.utils.ULog
+import me.shouheng.uix.common.utils.URes
 import me.shouheng.uix.pages.R
 
 /**
@@ -51,7 +51,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
         val web = root!!.findViewById<View>(R.id.ll_container) as ViewGroup
         val errorView = LayoutInflater.from(context).inflate(
                 R.layout.uix_layout_network_error_page, null, false)
-        errorView.findViewById<View>(R.id.root).setBackgroundColor(UIXResUtils.getColor(
+        errorView.findViewById<View>(R.id.root).setBackgroundColor(URes.getColor(
                 if (isDarkTheme) R.color.uix_default_dark_bg_color else R.color.uix_default_light_bg_color))
         errorView.findViewById<AppCompatButton>(R.id.btn_retry).setBackgroundResource(
                 if (isDarkTheme) R.drawable.uix_bg_retry_dark else R.drawable.uix_bg_retry)
@@ -59,9 +59,9 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
                 if (isDarkTheme) Color.WHITE else Color.BLACK)
         if (isDarkTheme) {
             errorView.findViewById<TextView>(R.id.tv_error_title)
-                    .setTextColor(UIXResUtils.getColor(R.color.dark_theme_text_color_primary))
+                    .setTextColor(URes.getColor(R.color.dark_theme_text_color_primary))
             errorView.findViewById<TextView>(R.id.tv_error_tips)
-                    .setTextColor(UIXResUtils.getColor(R.color.dark_theme_text_color_primary))
+                    .setTextColor(URes.getColor(R.color.dark_theme_text_color_primary))
         }
         mAgentWeb = getAgentWeb(web, errorView)
         errorView.findViewById<View>(R.id.btn_retry).setOnClickListener {
@@ -108,7 +108,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     private var mWebChromeClient: WebChromeClient = object : WebChromeClient() {
 
         override fun onProgressChanged(view: WebView, newProgress: Int) {
-            UIXLogUtils.d("onProgressChanged:$newProgress  view:$view")
+            ULog.d("onProgressChanged:$newProgress  view:$view")
         }
 
         override fun onReceivedTitle(view: WebView, title: String) {

@@ -4,16 +4,15 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityTipsBinding
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.dialog.MessageDialog
 import me.shouheng.utils.ui.ImageUtils
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 
 /**
  * Tips 示例
@@ -21,8 +20,10 @@ import me.shouheng.utils.ui.ImageUtils
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2020-04-18 22:45
  */
-@ActivityConfiguration(layoutResId = R.layout.activity_tips)
-class TipsActivity : CommonActivity<ActivityTipsBinding, EmptyViewModel>() {
+class TipsActivity : CommonActivity<EmptyViewModel, ActivityTipsBinding>() {
+
+    override fun getLayoutResId(): Int = R.layout.activity_tips
+
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnLoading.setOnClickListener {
             val dlg = MessageDialog.showLoading(
@@ -41,7 +42,7 @@ class TipsActivity : CommonActivity<ActivityTipsBinding, EmptyViewModel>() {
             ).withMessageStyle(TextStyleBean().apply {
                 textColor = Color.WHITE
                 typeFace = Typeface.BOLD
-            }).withBorderRadius(UIXViewUtils.dp2px(20f)).build(context)
+            }).withBorderRadius(UView.dp2px(20f)).build(context)
             dlg.show()
             Handler().postDelayed({ MessageDialog.hide(dlg) }, 2000)
         }

@@ -13,8 +13,8 @@ import me.shouheng.uix.common.anno.BottomButtonStyle
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_DOUBLE
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.common.utils.UIXColorUtils
-import me.shouheng.uix.common.utils.UIXImageUtils
+import me.shouheng.uix.common.utils.UColor
+import me.shouheng.uix.common.utils.UImage
 import me.shouheng.uix.widget.R
 import me.shouheng.uix.widget.button.NormalButton
 import me.shouheng.uix.widget.dialog.BeautyDialog
@@ -78,23 +78,23 @@ class SimpleFooter private constructor(): IDialogFooter {
 
         val cornerRadius = dialog.dialogCornerRadius.toFloat()
         val normalColor = if (dialog.dialogDarkStyle) BeautyDialog.GlobalConfig.darkBGColor else BeautyDialog.GlobalConfig.lightBGColor
-        val selectedColor = UIXColorUtils.computeColor(normalColor, if (dialog.dialogDarkStyle) Color.WHITE else Color.BLACK, NormalButton.GlobalConfig.fraction)
+        val selectedColor = UColor.computeColor(normalColor, if (dialog.dialogDarkStyle) Color.WHITE else Color.BLACK, NormalButton.GlobalConfig.fraction)
         tvLeft.background = StateListDrawable().apply {
-            val normalDrawable = UIXImageUtils.getGradientDrawable(normalColor, 0f, 0f, cornerRadius, 0f)
-            val selectedDrawable = UIXImageUtils.getGradientDrawable(selectedColor, 0f, 0f, cornerRadius, 0f)
+            val normalDrawable = UImage.getGradientDrawable(normalColor, 0f, 0f, cornerRadius, 0f)
+            val selectedDrawable = UImage.getGradientDrawable(selectedColor, 0f, 0f, cornerRadius, 0f)
             addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
             addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
         }
         tvMiddle.background = StateListDrawable().apply {
             val radius = if (bottomStyle == BUTTON_STYLE_SINGLE) cornerRadius else 0f
-            val normalDrawable = UIXImageUtils.getGradientDrawable(normalColor, 0f, 0f, radius, radius)
-            val selectedDrawable = UIXImageUtils.getGradientDrawable(selectedColor, 0f, 0f, radius, radius)
+            val normalDrawable = UImage.getGradientDrawable(normalColor, 0f, 0f, radius, radius)
+            val selectedDrawable = UImage.getGradientDrawable(selectedColor, 0f, 0f, radius, radius)
             addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
             addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
         }
         tvRight.background = StateListDrawable().apply {
-            val normalDrawable = UIXImageUtils.getGradientDrawable(normalColor, 0f, 0f, 0f, cornerRadius)
-            val selectedDrawable = UIXImageUtils.getGradientDrawable(selectedColor, 0f, 0f, 0f, cornerRadius)
+            val normalDrawable = UImage.getGradientDrawable(normalColor, 0f, 0f, 0f, cornerRadius)
+            val selectedDrawable = UImage.getGradientDrawable(selectedColor, 0f, 0f, 0f, cornerRadius)
             addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
             addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
         }

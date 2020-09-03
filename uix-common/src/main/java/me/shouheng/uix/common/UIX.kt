@@ -1,7 +1,7 @@
 package me.shouheng.uix.common
 
 import android.app.Application
-import me.shouheng.uix.common.utils.UIXLogUtils
+import me.shouheng.uix.common.utils.ULog
 
 /**
  * 用来初始化 UI 库，主要用来初始化 application 对象
@@ -37,6 +37,6 @@ object UIX {
     }
 
     fun setDebug(debug: Boolean) {
-        UIXLogUtils.debug = debug
+        ULog.debug = debug
     }
 }

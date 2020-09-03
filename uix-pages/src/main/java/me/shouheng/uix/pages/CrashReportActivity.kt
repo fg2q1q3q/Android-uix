@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.DrawableRes
+import android.support.annotation.StyleRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -14,6 +15,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import kotlinx.android.synthetic.main.uix_activity_crash_report.*
 import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.pages.CrashReportActivity.Companion.Builder
 import kotlin.system.exitProcess
 
 /**
@@ -25,6 +27,8 @@ import kotlin.system.exitProcess
  *       android:theme="@style/CrashReportTheme"
  *       tools:replace="android:theme"/>
  * ```
+ *
+ * or custom theme by calling [Builder.setThemeStyle] method of launcher builder.
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-12-22 11:46
@@ -40,6 +44,7 @@ class CrashReportActivity : AppCompatActivity() {
         private const val EXTRA_KEY_BUTTON_STYLE        = "__extra_crash_button_style"
         private const val EXTRA_KEY_MESSAGE             = "__extra_crash_message"
         private const val EXTRA_KEY_RESTART_ACTIVITY    = "__extra_restart_activity"
+        private const val EXTRA_KEY_THEME_STYLE         = "__extra_theme_style"
 
         class Builder(private val ctx: Context) {
 
@@ -85,6 +90,14 @@ class CrashReportActivity : AppCompatActivity() {
                 return this
             }
 
+            /**
+             * custom the crash page style in code
+             */
+            fun setThemeStyle(@StyleRes resId: Int): Builder {
+                i.putExtra(EXTRA_KEY_THEME_STYLE, resId)
+                return this
+            }
+
             fun launch() {
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 ctx.startActivity(i)
@@ -94,7 +107,6 @@ class CrashReportActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.uix_activity_crash_report)
 
         val title = intent.getCharSequenceExtra(EXTRA_KEY_TITLE)
         val titleStyle = intent.getSerializableExtra(EXTRA_KEY_TITLE_STYLE) as? TextStyleBean
@@ -104,6 +116,11 @@ class CrashReportActivity : AppCompatActivity() {
         val message = intent.getCharSequenceExtra(EXTRA_KEY_MESSAGE)
         val image = intent.getIntExtra(EXTRA_KEY_CRASH_IMAGE, R.drawable.uix_crash_error_image)
         val cls = intent.getSerializableExtra(EXTRA_KEY_RESTART_ACTIVITY) as? Class<Activity>
+        val resId = intent.getIntExtra(EXTRA_KEY_THEME_STYLE, 0)
+
+        if (resId != 0) setTheme(resId)
+
+        setContentView(R.layout.uix_activity_crash_report)
 
         tvReportTitle.text = title
         tvReportContent.text = content

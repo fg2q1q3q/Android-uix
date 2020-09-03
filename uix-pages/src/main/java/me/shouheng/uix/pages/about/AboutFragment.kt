@@ -13,8 +13,8 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.common.utils.UIXColorUtils
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UColor
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.pages.about.AboutFragment.FragmentInteraction
 import me.shouheng.uix.widget.text.NormalTextView
@@ -106,14 +106,14 @@ class AboutFragment : Fragment() {
 
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-            private var toolbarHeight = UIXViewUtils.dp2px(80f)
-            private var titleHeight = UIXViewUtils.dp2px(130f)
+            private var toolbarHeight = UView.dp2px(80f)
+            private var titleHeight = UView.dp2px(130f)
             private var offHeight = 0
             private var titleShowed = false
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 offHeight += dy
-                toolbar.setBackgroundColor(UIXColorUtils.setColorAlpha(foregroundColor!!,
+                toolbar.setBackgroundColor(UColor.setColorAlpha(foregroundColor!!,
                         (offHeight * 1f / toolbarHeight).coerceAtMost(1f), true))
                 if (offHeight > titleHeight) {
                     if (!titleShowed) {

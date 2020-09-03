@@ -20,10 +20,10 @@ import me.shouheng.uix.common.anno.LoadingButtonState.Companion.LOADING_STATE_DI
 import me.shouheng.uix.common.anno.LoadingButtonState.Companion.LOADING_STATE_LOADING
 import me.shouheng.uix.common.anno.LoadingButtonState.Companion.LOADING_STATE_NORMAL
 import me.shouheng.uix.common.anno.LoadingStyle
-import me.shouheng.uix.common.utils.UIXColorUtils
-import me.shouheng.uix.common.utils.UIXImageUtils
-import me.shouheng.uix.common.utils.UIXResUtils
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UColor
+import me.shouheng.uix.common.utils.UImage
+import me.shouheng.uix.common.utils.URes
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.R
 
 /**
@@ -60,18 +60,18 @@ class LoadingButton : LinearLayout {
         if (attrs != null) {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingButton)
             text = typedArray.getString(R.styleable.LoadingButton_loading_button_text)
-            val size = typedArray.getDimensionPixelSize(R.styleable.LoadingButton_loading_button_text_size, UIXViewUtils.sp2px(16f))
+            val size = typedArray.getDimensionPixelSize(R.styleable.LoadingButton_loading_button_text_size, UView.sp2px(16f))
             textColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_text_color, GlobalConfig.textColor)
             textDisableColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_text_disable_color, GlobalConfig.textDisableColor)
             val normalColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_normal_color, GlobalConfig.normalColor)
             val disableColor = typedArray.getColor(R.styleable.LoadingButton_loading_button_disable_color, GlobalConfig.disableColor)
             val selectedColor = if (typedArray.hasValue(R.styleable.LoadingButton_loading_button_selected_color))
                 typedArray.getColor(R.styleable.LoadingButton_loading_button_selected_color, GlobalConfig.selectedColor)
-            else UIXColorUtils.computeColor(normalColor, Color.BLACK, GlobalConfig.fraction)
+            else UColor.computeColor(normalColor, Color.BLACK, GlobalConfig.fraction)
             val cornerRadius = typedArray.getDimensionPixelSize(R.styleable.LoadingButton_loading_button_corner_radius, GlobalConfig.cornerRadius)
-            normalDrawable = UIXImageUtils.getGradientDrawable(normalColor, cornerRadius.toFloat())
-            disableDrawable = UIXImageUtils.getGradientDrawable(disableColor, cornerRadius.toFloat())
-            val selectedDrawable = UIXImageUtils.getGradientDrawable(selectedColor, cornerRadius.toFloat())
+            normalDrawable = UImage.getGradientDrawable(normalColor, cornerRadius.toFloat())
+            disableDrawable = UImage.getGradientDrawable(disableColor, cornerRadius.toFloat())
+            val selectedDrawable = UImage.getGradientDrawable(selectedColor, cornerRadius.toFloat())
             loadingStyle = typedArray.getInt(R.styleable.LoadingButton_loading_button_style, LoadingStyle.STYLE_ANDROID)
             loadingButtonState = typedArray.getInt(R.styleable.LoadingButton_loading_button_state, LOADING_STATE_NORMAL)
             this.stateListDrawable = StateListDrawable()
@@ -82,7 +82,7 @@ class LoadingButton : LinearLayout {
             tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, size.toFloat())
             tv.setTextColor(textColor)
             if (loadingStyle == LoadingStyle.STYLE_IOS) {
-                pb.indeterminateDrawable = UIXResUtils.getDrawable(R.drawable.uix_anim_loading)
+                pb.indeterminateDrawable = URes.getDrawable(R.drawable.uix_anim_loading)
             }
             typedArray.recycle()
         }
@@ -159,6 +159,6 @@ class LoadingButton : LinearLayout {
         var disableColor: Int                   = Color.TRANSPARENT
         /** 按钮的圆角，单位 px */
         @Px
-        var cornerRadius: Int                   = UIXViewUtils.dp2px(30f)
+        var cornerRadius: Int                   = UView.dp2px(30f)
     }
 }

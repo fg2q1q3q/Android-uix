@@ -1,16 +1,15 @@
 package me.shouheng.suix.widget
 
 import android.os.Bundle
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityLayoutBinding
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 
-@ActivityConfiguration(layoutResId = R.layout.activity_layout)
-class LayoutActivity : CommonActivity<ActivityLayoutBinding, EmptyViewModel>() {
-    override fun doCreateView(savedInstanceState: Bundle?) {
+class LayoutActivity : CommonActivity<EmptyViewModel, ActivityLayoutBinding>() {
 
-    }
+    override fun getLayoutResId(): Int = R.layout.activity_layout
+
+    override fun doCreateView(savedInstanceState: Bundle?) {}
 }
 

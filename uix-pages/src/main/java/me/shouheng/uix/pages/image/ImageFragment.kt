@@ -13,15 +13,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.github.chrisbanes.photoview.PhotoView
 import com.zhihu.matisse.internal.utils.PathUtils.getPath
-import me.shouheng.uix.common.utils.UIXResUtils
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.ULog
+import me.shouheng.uix.common.utils.URes
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.pages.utils.UIXPageUtils
 
 /**
  * The image fragment to display the image, video preview image etc.
  *
- * Created by WngShhng (shouheng2015@gmail.com) on 2017/4/9.
+ * @author Created by WngShhng (shouheng2015@gmail.com)
+ * @since 2017/4/9.
  */
 class ImageFragment : Fragment() {
 
@@ -38,7 +40,8 @@ class ImageFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (uri != null && MIME_TYPE_VIDEO == UIXResUtils.getMimeType(context!!, uri!!)) {
+        val mimeType = URes.getMimeType(context!!, uri!!)
+        if (uri != null && mimeType != null && mimeType.contains("video", true)) {
             val layout = RelativeLayout(context)
             val imageView = ImageView(context)
             imageView.layoutParams = RelativeLayout.LayoutParams(
@@ -47,27 +50,23 @@ class ImageFragment : Fragment() {
             layout.addView(imageView)
             val videoTip = ImageView(context)
             videoTip.setImageResource(R.drawable.uix_play_circle_outline_white_24dp)
-            val dp50 = UIXViewUtils.dp2px(50f)
-            val params = RelativeLayout.LayoutParams(dp50, dp50)
-            params.addRule(RelativeLayout.CENTER_IN_PARENT)
-            videoTip.layoutParams = params
+            val dp50 = UView.dp2px(50f)
+            videoTip.layoutParams = RelativeLayout.LayoutParams(dp50, dp50).apply {
+                addRule(RelativeLayout.CENTER_IN_PARENT)
+            }
             layout.addView(videoTip)
             displayMedia(imageView)
             return layout
         }
 
         val photoView = PhotoView(context)
-        if (uri != null && getPath(context!!, uri).endsWith("gif", true)) {
+        val path = getRealPath()
+        if (uri != null && path?.endsWith("gif", true) == true) {
             Glide.with(activity!!).load(uri).into(photoView)
         } else {
             displayMedia(photoView)
         }
-        photoView.setOnPhotoTapListener { _, _, _ ->
-            val activity = activity
-            if (activity is GalleryActivity) {
-                activity.onBackPressed()
-            }
-        }
+        photoView.setOnPhotoTapListener { _, _, _ -> (activity as? GalleryActivity)?.onBackPressed() }
         photoView.maximumScale = 5.0f
         photoView.mediumScale = 3.0f
         return photoView
@@ -80,17 +79,18 @@ class ImageFragment : Fragment() {
                 .transition(withCrossFade())
                 .into(photoView as ImageView)
         photoView.setOnClickListener {
-            if (uri != null && MIME_TYPE_VIDEO == UIXResUtils.getMimeType(context!!, uri!!)) {
+            if (uri != null && MIME_TYPE_VIDEO == URes.getMimeType(context!!, uri!!)) {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                intent.setDataAndType(uri!!, UIXResUtils.getMimeType(context!!, uri!!))
+                intent.setDataAndType(uri!!, URes.getMimeType(context!!, uri!!))
                 startActivity(intent)
             }
         }
     }
 
     /**
-     * Note that you shouldn't set diskCacheStrategy of Glide, and you should use ImageView instead of PhotoView
+     * Note that you shouldn't set diskCacheStrategy of Glide,
+     * and you should use ImageView instead of PhotoView
      *
      * @param imageView view to show
      */
@@ -100,13 +100,23 @@ class ImageFragment : Fragment() {
                 .transition(withCrossFade())
                 .into(imageView)
         imageView.setOnClickListener {
-            if (uri != null && MIME_TYPE_VIDEO == UIXResUtils.getMimeType(context!!, uri!!)) {
+            if (uri != null && MIME_TYPE_VIDEO == URes.getMimeType(context!!, uri!!)) {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                intent.setDataAndType(uri!!, UIXResUtils.getMimeType(context!!, uri!!))
+                intent.setDataAndType(uri!!, URes.getMimeType(context!!, uri!!))
                 startActivity(intent)
             }
         }
+    }
+
+    private fun getRealPath(): String? {
+        var path: String? = null
+        try {
+            path = getPath(context!!, uri)
+        } catch (ex: Exception) {
+            ULog.e(ex)
+        }
+        return path
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

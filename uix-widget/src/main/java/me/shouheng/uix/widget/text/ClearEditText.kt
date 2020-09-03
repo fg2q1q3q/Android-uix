@@ -10,7 +10,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import me.shouheng.uix.common.utils.UIXImageUtils
+import me.shouheng.uix.common.utils.UImage
 import me.shouheng.uix.widget.R
 
 /**
@@ -45,7 +45,7 @@ class ClearEditText : RegexEditText, View.OnTouchListener, View.OnFocusChangeLis
         val clearDrawable = ContextCompat.getDrawable(context, R.drawable.uix_close_black_24dp)!!
         mClearDrawable = DrawableCompat.wrap(
                 if (imageTintColor == -1) clearDrawable
-                else UIXImageUtils.tintDrawable(clearDrawable, imageTintColor)
+                else UImage.tintDrawable(clearDrawable, imageTintColor)
         )
         mClearDrawable!!.setBounds(0, 0, mClearDrawable!!.intrinsicWidth, mClearDrawable!!.intrinsicHeight)
         setDrawableVisible(false)

@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++1z -frtti -fexceptions -lz"
+                abiFilters 'armeabi-v7a', "arm64-v8a"/*, 'x86'*/
+                arguments '-DANDROID_STL=gnustl_shared'
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+
+    api project(path: ':uix-common')
+}
+
+publish {
+    userOrg = 'easymark'
+    groupId = 'me.shouheng.ui'
+    artifactId = 'uix-image'
+    repoName = 'Android'
+    publishVersion = rootProject.ext.releaseVersion
+    desc = 'Ui component, the image process subset for Android.'
+    website = 'https://github.com/Shouheng88/Android-uix'
+}

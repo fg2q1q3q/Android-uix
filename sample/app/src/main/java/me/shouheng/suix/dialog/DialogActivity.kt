@@ -5,9 +5,6 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
-import me.shouheng.mvvm.base.CommonActivity
-import me.shouheng.mvvm.base.anno.ActivityConfiguration
-import me.shouheng.mvvm.comn.EmptyViewModel
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityDialogBinding
 import me.shouheng.uix.common.anno.AddressSelectLevel.Companion.LEVEL_AREA
@@ -22,7 +19,7 @@ import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.anno.EmptyViewState
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
@@ -33,6 +30,8 @@ import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.rv.EmptyView
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ViewUtils
+import me.shouheng.vmlib.base.CommonActivity
+import me.shouheng.vmlib.comn.EmptyViewModel
 
 /**
  * 对话框示例
@@ -40,8 +39,9 @@ import me.shouheng.utils.ui.ViewUtils
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 15:21
  */
-@ActivityConfiguration(layoutResId = R.layout.activity_dialog)
-class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
+class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
+
+    override fun getLayoutResId(): Int = R.layout.activity_dialog
 
     private var customList: CustomList? = null
 
@@ -135,7 +135,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         }
         binding.btnEditorNormal.setOnClickListener {
             BeautyDialog.Builder()
-                    .setDialogCornerRadius(UIXViewUtils.dp2px(4f))
+                    .setDialogCornerRadius(UView.dp2px(4f))
                     .setDialogTitle(SimpleTitle.get("普通编辑对话框 [无限制]"))
                     .setDialogContent(SimpleEditor.Builder()
                             .setClearDrawable(ResUtils.getDrawable(R.drawable.ic_cancel_black_24dp))
@@ -220,7 +220,7 @@ class DialogActivity : CommonActivity<ActivityDialogBinding, EmptyViewModel>() {
         binding.btnAddress.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogPosition(POS_BOTTOM)
-                    .setDialogMargin(UIXViewUtils.dp2px(8f))
+                    .setDialogMargin(UView.dp2px(8f))
                     .setDialogTitle(SimpleTitle.get("地址对话框"))
                     .setDialogContent(AddressContent.Builder()
                             .setMaxLevel(LEVEL_AREA)

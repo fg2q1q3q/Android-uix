@@ -49,6 +49,7 @@
         <activity android:name=".widget.LayoutActivity2" />
         <activity android:name=".layout.SlidingActivity" />
         <activity android:name=".image.CropActivity"/>
+        <activity android:name=".image.ImageProcessActivity"/>
         <activity
             android:name=".comn.ContainerActivity"
             android:theme="@style/AppThemeNoActionBar" /> <!-- provider -->

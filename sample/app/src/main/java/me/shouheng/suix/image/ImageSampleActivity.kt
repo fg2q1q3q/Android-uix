@@ -51,6 +51,9 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
         } else if (requestCode == 0x0003 && resultCode == Activity.RESULT_OK) {
             val url = Matisse.obtainResult(data)[0]
             startActivity(Intent(this, CropActivity::class.java).putExtra("image", url))
+        } else if (requestCode == 0x0004 && resultCode == Activity.RESULT_OK) {
+            val url = Matisse.obtainResult(data)[0]
+            startActivity(Intent(this, ImageProcessActivity::class.java).putExtra("image", url))
         }
     }
 
@@ -126,5 +129,19 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
                 .maxOriginalSize(10)
                 .imageEngine(Glide4Engine())
                 .forResult(0x0003)
+    }
+
+    fun onProcess(v: View) {
+        Matisse.from(this@ImageSampleActivity)
+                .choose(MimeType.ofImage())
+                .countable(true)
+                .theme(R.style.Matisse_Dracula)
+                .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+                .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
+                .maxSelectable(1)
+                .originalEnable(true)
+                .maxOriginalSize(10)
+                .imageEngine(Glide4Engine())
+                .forResult(0x0004)
     }
 }

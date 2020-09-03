@@ -16,7 +16,7 @@ public final class ImageProcessor {
      * @param bitmap bitmap
      * @return       处理结果
      */
-    public static Bitmap binarization(Bitmap bitmap) {
+    public static Bitmap binarizationProcess(Bitmap bitmap) {
         Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         nativeBinaryzation(bitmap, outBitmap, 5);
         return outBitmap;

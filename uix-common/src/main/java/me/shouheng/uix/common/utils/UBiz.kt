@@ -10,7 +10,7 @@ import me.shouheng.uix.common.bean.AddressBean
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 11:57
  */
-object UIXBizUtils {
+object UBiz {
 
     private var addresses: List<AddressBean>? = null
 
@@ -19,8 +19,8 @@ object UIXBizUtils {
      */
     fun getAddressList(): List<AddressBean> {
         if (addresses != null) return addresses!!
-        val ins = UIXResUtils.getAssets().open("province.json")
-        val bytes = UIXIOUtils.is2Bytes(ins)
+        val ins = URes.getAssets().open("province.json")
+        val bytes = UIO.is2Bytes(ins)
         val content = String(bytes)
         val list = ArrayList<AddressBean>()
         val gson = Gson()

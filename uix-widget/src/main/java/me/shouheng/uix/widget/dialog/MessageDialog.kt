@@ -14,9 +14,9 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.common.utils.UIXImageUtils
-import me.shouheng.uix.common.utils.UIXResUtils
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UImage
+import me.shouheng.uix.common.utils.URes
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.R
 import me.shouheng.uix.widget.text.NormalTextView
 
@@ -56,14 +56,14 @@ class MessageDialog private constructor(builder: Builder) {
         val pb = v.findViewById(R.id.pb) as ProgressBar
         val tv = v.findViewById(R.id.tipTextView) as NormalTextView
 
-        ll.background = UIXImageUtils.getGradientDrawable(bgColor, borderRadius.toFloat())
+        ll.background = UImage.getGradientDrawable(bgColor, borderRadius.toFloat())
 
         if (icon != null) img.setImageDrawable(icon)
         else img.visibility = View.GONE
 
         pb.visibility = if (loading) View.VISIBLE else View.GONE
         if (loadingStyle == LoadingStyle.STYLE_IOS) {
-            pb.indeterminateDrawable = UIXResUtils.getDrawable(R.drawable.uix_anim_loading)
+            pb.indeterminateDrawable = URes.getDrawable(R.drawable.uix_anim_loading)
         }
 
         tv.text = message
@@ -154,13 +154,13 @@ class MessageDialog private constructor(builder: Builder) {
                         @DrawableRes iconResId: Int? = null,
                         @LoadingStyle loadingStyle: Int = GlobalConfig.loadingStyle
         ): Dialog = Builder()
-                .withMessage(UIXResUtils.getString(msgResId))
+                .withMessage(URes.getString(msgResId))
                 .withCancelable(cancelable)
                 .withLoading(isAnimation)
                 .withLoadingStyle(loadingStyle)
                 .apply {
                     if (iconResId != null) {
-                        this.withIcon(UIXResUtils.getDrawable(iconResId))
+                        this.withIcon(URes.getDrawable(iconResId))
                     }
                 }
                 .build(context)
@@ -185,13 +185,13 @@ class MessageDialog private constructor(builder: Builder) {
                     @DrawableRes iconResId: Int? = null,
                     @LoadingStyle loadingStyle: Int = GlobalConfig.loadingStyle): Builder =
                 Builder()
-                        .withMessage(UIXResUtils.getString(msgResId))
+                        .withMessage(URes.getString(msgResId))
                         .withCancelable(cancelable)
                         .withLoading(loading)
                         .withLoadingStyle(loadingStyle)
                         .apply {
                             if (iconResId != null) {
-                                this.withIcon(UIXResUtils.getDrawable(iconResId))
+                                this.withIcon(URes.getDrawable(iconResId))
                             }
                         }
 
@@ -207,6 +207,6 @@ class MessageDialog private constructor(builder: Builder) {
         var cancelable: Boolean              = true
         var loading: Boolean                 = true
         var bgColor: Int                     = Color.parseColor("#C0000000")
-        var bgBorderRadius: Int            = UIXViewUtils.dp2px(8f)
+        var bgBorderRadius: Int            = UView.dp2px(8f)
     }
 }

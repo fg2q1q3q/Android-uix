@@ -11,7 +11,7 @@ import android.support.annotation.FloatRange
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 11:57
  */
-object UIXColorUtils {
+object UColor {
 
     private const val ENABLE_ATTR = android.R.attr.state_enabled
     private const val CHECKED_ATTR = android.R.attr.state_checked

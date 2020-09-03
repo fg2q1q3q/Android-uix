@@ -14,7 +14,7 @@ import me.shouheng.uix.common.UIX
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 11:57
  */
-object UIXImageUtils {
+object UImage {
 
     /**
      * 对 Drawable 进行着色

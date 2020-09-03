@@ -16,7 +16,7 @@ import me.shouheng.uix.common.UIX
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 11:57
  */
-object UIXViewUtils {
+object UView {
 
     private const val FLAG_IMMERSIVE = (View.SYSTEM_UI_FLAG_IMMERSIVE // 与SYSTEM_UI_FLAG_HIDE_NAVIGATION组合使用，没有设置的话在隐藏导航栏后将没有交互
             or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // 隐藏虚拟按键(导航栏)

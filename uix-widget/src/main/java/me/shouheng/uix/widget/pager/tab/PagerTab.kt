@@ -14,7 +14,7 @@ import android.view.ViewTreeObserver
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.R
 
 /**
@@ -76,24 +76,24 @@ class PagerTab : LinearLayout, ViewPager.OnPageChangeListener {
     private fun initPagerTab(context: Context, attrs: AttributeSet?) {
         this.mContext = context
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PagerTab)
-        selectTextSize = typedArray.getDimension(R.styleable.PagerTab_ptSelectTextSize, UIXViewUtils.sp2px(16f).toFloat())
+        selectTextSize = typedArray.getDimension(R.styleable.PagerTab_ptSelectTextSize, UView.sp2px(16f).toFloat())
         selectTextColor = typedArray.getColor(R.styleable.PagerTab_ptSelectTextColor, Color.BLACK)
         selectTextStyle = typedArray.getInt(R.styleable.PagerTab_ptSelectTextStyle, Typeface.BOLD)
 
-        unSelectTextSize = typedArray.getDimension(R.styleable.PagerTab_ptUnSelectTextSize, UIXViewUtils.sp2px(16f).toFloat())
+        unSelectTextSize = typedArray.getDimension(R.styleable.PagerTab_ptUnSelectTextSize, UView.sp2px(16f).toFloat())
         unSelectTextColor = typedArray.getColor(R.styleable.PagerTab_ptUnSelectTextColor, Color.GRAY)
         unSelectTextStyle = typedArray.getInt(R.styleable.PagerTab_ptUnSelectTextStyle, Typeface.NORMAL)
 
-        indicatorToBottom = typedArray.getDimension(R.styleable.PagerTab_ptIndicatorToBottom, UIXViewUtils.dp2px(6f).toFloat()).toInt()
-        tabToIndicator = typedArray.getDimension(R.styleable.PagerTab_ptTabToIndicator, UIXViewUtils.dp2px(2f).toFloat()).toInt()
-        tabToTab = typedArray.getDimension(R.styleable.PagerTab_ptTabToTab, UIXViewUtils.dp2px(12f).toFloat()).toInt()
+        indicatorToBottom = typedArray.getDimension(R.styleable.PagerTab_ptIndicatorToBottom, UView.dp2px(6f).toFloat()).toInt()
+        tabToIndicator = typedArray.getDimension(R.styleable.PagerTab_ptTabToIndicator, UView.dp2px(2f).toFloat()).toInt()
+        tabToTab = typedArray.getDimension(R.styleable.PagerTab_ptTabToTab, UView.dp2px(12f).toFloat()).toInt()
 
         mIndicatorMode = typedArray.getInt(R.styleable.PagerTab_ptIndicatorMode, INDICATOR_MODE_LEFT)
         mIndicatorLineScrollMode = typedArray.getInt(R.styleable.PagerTab_ptIndicatorLineScrollMode, INDICATOR_SCROLL_MODE_DYNAMIC)
 
-        mIndicatorLineWidth = typedArray.getDimension(R.styleable.PagerTab_ptIndicatorLineWidth, UIXViewUtils.dp2px(10f).toFloat()).toInt()
-        mIndicatorLineHeight = typedArray.getDimension(R.styleable.PagerTab_ptIndicatorLineHeight, UIXViewUtils.dp2px(3f).toFloat()).toInt()
-        mIndicatorLineRadius = typedArray.getDimension(R.styleable.PagerTab_ptIndicatorLineRadius, UIXViewUtils.dp2px(2f).toFloat()).toInt()
+        mIndicatorLineWidth = typedArray.getDimension(R.styleable.PagerTab_ptIndicatorLineWidth, UView.dp2px(10f).toFloat()).toInt()
+        mIndicatorLineHeight = typedArray.getDimension(R.styleable.PagerTab_ptIndicatorLineHeight, UView.dp2px(3f).toFloat()).toInt()
+        mIndicatorLineRadius = typedArray.getDimension(R.styleable.PagerTab_ptIndicatorLineRadius, UView.dp2px(2f).toFloat()).toInt()
         mIndicatorLineColor = typedArray.getColor(R.styleable.PagerTab_ptIndicatorLineColor, Color.RED)
 
         typedArray.recycle()
@@ -154,7 +154,7 @@ class PagerTab : LinearLayout, ViewPager.OnPageChangeListener {
             if (afterView != null) {
                 afterViewWidth = afterView.width
             }
-            val halfScreenWidth = UIXViewUtils.getScreenWidth() / 2
+            val halfScreenWidth = UView.getScreenWidth() / 2
             val offsetStart = positionRight - positionWidth / 2 - halfScreenWidth
             val scrollX = ((afterViewWidth / 2 + positionWidth / 2) * positionOffset).toInt() + offsetStart
             if (mAutoScrollHorizontalScrollView != null) {

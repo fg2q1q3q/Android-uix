@@ -11,7 +11,7 @@ import java.io.InputStream
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 11:57
  */
-object UIXIOUtils {
+object UIO {
 
     private var sBufferSize = 8192
 

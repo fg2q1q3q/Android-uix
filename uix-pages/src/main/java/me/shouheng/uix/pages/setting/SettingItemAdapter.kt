@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import me.shouheng.uix.common.utils.UIXResUtils
+import me.shouheng.uix.common.utils.URes
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.pages.setting.ISettingItem.ItemType.Companion.TYPE_DESC
 import me.shouheng.uix.pages.setting.ISettingItem.ItemType.Companion.TYPE_DIVIDER
@@ -30,7 +30,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                          /** 用来统一更换所有条目的背景颜色 */
                          private val itemBackground: Int = Color.TRANSPARENT)
     : BaseMultiItemQuickAdapter<ISettingItem, BaseViewHolder>(list) {
-    private val defaultMoreDrawable = UIXResUtils.getDrawable(R.drawable.uix_right_black_24dp)
+    private val defaultMoreDrawable = URes.getDrawable(R.drawable.uix_right_black_24dp)
     init {
         addItemType(TYPE_TEXT, R.layout.uix_item_setting_text)
         addItemType(TYPE_IMAGE, R.layout.uix_item_setting_image)

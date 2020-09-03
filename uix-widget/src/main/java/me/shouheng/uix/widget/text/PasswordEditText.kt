@@ -11,8 +11,8 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import me.shouheng.uix.common.utils.UIXImageUtils
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UImage
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.R
 
 /**
@@ -45,18 +45,18 @@ class PasswordEditText : RegexEditText, View.OnTouchListener, View.OnFocusChange
         array.recycle()
 
         // Wrap the drawable so that it can be tinted pre Lollipop
-        val dp24 = UIXViewUtils.dp2px(24f)
+        val dp24 = UView.dp2px(24f)
         val visibleDrawable = ContextCompat.getDrawable(context, R.drawable.uix_eye_open_48)!!
         val invisibleDrawable = ContextCompat.getDrawable(context, R.drawable.uix_eye_close_48)!!
         mVisibleDrawable = DrawableCompat.wrap(
                 if (imageTintColor == -1) visibleDrawable
-                else UIXImageUtils.tintDrawable(visibleDrawable, imageTintColor)
+                else UImage.tintDrawable(visibleDrawable, imageTintColor)
         )
         mVisibleDrawable!!.setBounds(0, 0, dp24, dp24)
 
         mInvisibleDrawable = DrawableCompat.wrap(
                 if (imageTintColor == -1) invisibleDrawable
-                else UIXImageUtils.tintDrawable(invisibleDrawable, imageTintColor)
+                else UImage.tintDrawable(invisibleDrawable, imageTintColor)
         )
         mInvisibleDrawable!!.setBounds(0, 0, dp24, dp24)
 
@@ -76,7 +76,7 @@ class PasswordEditText : RegexEditText, View.OnTouchListener, View.OnFocusChange
     }
 
     fun setVisibleDrawable(visibleDrawable: Drawable) {
-        val dp24 = UIXViewUtils.dp2px(24f)
+        val dp24 = UView.dp2px(24f)
         val visible = mCurrentDrawable == mVisibleDrawable
         this.mVisibleDrawable = visibleDrawable
         mVisibleDrawable!!.setBounds(0, 0, dp24, dp24)
@@ -85,7 +85,7 @@ class PasswordEditText : RegexEditText, View.OnTouchListener, View.OnFocusChange
     }
 
     fun setInvisibleDrawable(invisibleDrawable: Drawable) {
-        val dp24 = UIXViewUtils.dp2px(24f)
+        val dp24 = UView.dp2px(24f)
         val visible = mCurrentDrawable == mVisibleDrawable
         this.mInvisibleDrawable = invisibleDrawable
         mInvisibleDrawable!!.setBounds(0, 0, dp24, dp24)

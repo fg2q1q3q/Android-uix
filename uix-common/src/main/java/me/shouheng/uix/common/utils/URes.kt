@@ -17,7 +17,7 @@ import me.shouheng.uix.common.UIX
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 11:57
  */
-object UIXResUtils {
+object URes {
 
     fun getDrawable(@DrawableRes id: Int): Drawable {
         return UIX.getApp().resources.getDrawable(id)

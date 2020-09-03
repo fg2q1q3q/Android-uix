@@ -15,7 +15,7 @@ import android.view.View
 import android.view.WindowManager
 import com.bumptech.glide.Glide
 import me.shouheng.uix.common.utils.ULog
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.widget.layout.PullBackLayout
 import me.shouheng.uix.widget.pager.HackyViewPager
@@ -106,7 +106,7 @@ class GalleryActivity : AppCompatActivity(), PullBackLayout.Callback {
         }
 
         mBackground = ColorDrawable(Color.BLACK)
-        UIXViewUtils.getRootView(this).setBackgroundDrawable(mBackground)
+        UView.getRootView(this).setBackgroundDrawable(mBackground)
         hideSystemUI()
     }
 
@@ -143,7 +143,7 @@ class GalleryActivity : AppCompatActivity(), PullBackLayout.Callback {
 
     private fun hideSystemUI() {
         runOnUiThread {
-            window.decorView.systemUiVisibility = UIXViewUtils.getSystemVisibility()
+            window.decorView.systemUiVisibility = UView.getSystemVisibility()
             fullScreenMode = true
         }
     }
@@ -159,9 +159,9 @@ class GalleryActivity : AppCompatActivity(), PullBackLayout.Callback {
 
     private fun hideOrShowStatusBar() {
         if (fullScreenMode) {
-            UIXViewUtils.enter(this)
+            UView.enter(this)
         } else {
-            UIXViewUtils.exit(this)
+            UView.exit(this)
         }
         fullScreenMode = !fullScreenMode
     }

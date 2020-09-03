@@ -19,7 +19,7 @@ import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.anno.EmptyViewState
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
@@ -135,7 +135,7 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
         }
         binding.btnEditorNormal.setOnClickListener {
             BeautyDialog.Builder()
-                    .setDialogCornerRadius(UIXViewUtils.dp2px(4f))
+                    .setDialogCornerRadius(UView.dp2px(4f))
                     .setDialogTitle(SimpleTitle.get("普通编辑对话框 [无限制]"))
                     .setDialogContent(SimpleEditor.Builder()
                             .setClearDrawable(ResUtils.getDrawable(R.drawable.ic_cancel_black_24dp))
@@ -220,7 +220,7 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
         binding.btnAddress.setOnClickListener {
             BeautyDialog.Builder()
                     .setDialogPosition(POS_BOTTOM)
-                    .setDialogMargin(UIXViewUtils.dp2px(8f))
+                    .setDialogMargin(UView.dp2px(8f))
                     .setDialogTitle(SimpleTitle.get("地址对话框"))
                     .setDialogContent(AddressContent.Builder()
                             .setMaxLevel(LEVEL_AREA)

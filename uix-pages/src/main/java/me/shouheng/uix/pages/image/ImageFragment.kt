@@ -14,8 +14,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.github.chrisbanes.photoview.PhotoView
 import com.zhihu.matisse.internal.utils.PathUtils.getPath
 import me.shouheng.uix.common.utils.ULog
-import me.shouheng.uix.common.utils.UIXResUtils
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.URes
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.pages.utils.UIXPageUtils
 
@@ -40,7 +40,7 @@ class ImageFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val mimeType = UIXResUtils.getMimeType(context!!, uri!!)
+        val mimeType = URes.getMimeType(context!!, uri!!)
         if (uri != null && mimeType != null && mimeType.contains("video", true)) {
             val layout = RelativeLayout(context)
             val imageView = ImageView(context)
@@ -50,7 +50,7 @@ class ImageFragment : Fragment() {
             layout.addView(imageView)
             val videoTip = ImageView(context)
             videoTip.setImageResource(R.drawable.uix_play_circle_outline_white_24dp)
-            val dp50 = UIXViewUtils.dp2px(50f)
+            val dp50 = UView.dp2px(50f)
             videoTip.layoutParams = RelativeLayout.LayoutParams(dp50, dp50).apply {
                 addRule(RelativeLayout.CENTER_IN_PARENT)
             }
@@ -79,10 +79,10 @@ class ImageFragment : Fragment() {
                 .transition(withCrossFade())
                 .into(photoView as ImageView)
         photoView.setOnClickListener {
-            if (uri != null && MIME_TYPE_VIDEO == UIXResUtils.getMimeType(context!!, uri!!)) {
+            if (uri != null && MIME_TYPE_VIDEO == URes.getMimeType(context!!, uri!!)) {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                intent.setDataAndType(uri!!, UIXResUtils.getMimeType(context!!, uri!!))
+                intent.setDataAndType(uri!!, URes.getMimeType(context!!, uri!!))
                 startActivity(intent)
             }
         }
@@ -100,10 +100,10 @@ class ImageFragment : Fragment() {
                 .transition(withCrossFade())
                 .into(imageView)
         imageView.setOnClickListener {
-            if (uri != null && MIME_TYPE_VIDEO == UIXResUtils.getMimeType(context!!, uri!!)) {
+            if (uri != null && MIME_TYPE_VIDEO == URes.getMimeType(context!!, uri!!)) {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                intent.setDataAndType(uri!!, UIXResUtils.getMimeType(context!!, uri!!))
+                intent.setDataAndType(uri!!, URes.getMimeType(context!!, uri!!))
                 startActivity(intent)
             }
         }

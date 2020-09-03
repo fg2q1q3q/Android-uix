@@ -21,9 +21,9 @@ import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_TOP
 import me.shouheng.uix.common.anno.DialogStyle
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_MATCH
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
-import me.shouheng.uix.common.utils.UIXImageUtils
-import me.shouheng.uix.common.utils.UIXResUtils
-import me.shouheng.uix.common.utils.UIXViewUtils
+import me.shouheng.uix.common.utils.UImage
+import me.shouheng.uix.common.utils.URes
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.dialog.content.IDialogContent
 import me.shouheng.uix.widget.dialog.footer.IDialogFooter
 import me.shouheng.uix.widget.dialog.listener.OnDismissListener
@@ -92,7 +92,7 @@ class BeautyDialog : DialogFragment() {
         if (customBackground) {
             content.background = dialogBackground
         } else {
-            content.background = UIXImageUtils.getGradientDrawable(
+            content.background = UImage.getGradientDrawable(
                     if (dialogDarkStyle) GlobalConfig.darkBGColor else GlobalConfig.lightBGColor,
                     dialogCornerRadius.toFloat()
             )
@@ -308,16 +308,16 @@ class BeautyDialog : DialogFragment() {
     object GlobalConfig {
         /** 对话框边距，单位 px */
         @Px
-        var margin: Int                       = UIXViewUtils.dp2px(20f)
+        var margin: Int                       = UView.dp2px(20f)
         /** 对话框圆角，单位 px */
         @Px
-        var cornerRadius: Int                 = UIXViewUtils.dp2px(15f)
+        var cornerRadius: Int                 = UView.dp2px(15f)
         /** 对话框明主题背景色 */
         @ColorInt
-        var lightBGColor: Int                   = UIXResUtils.getColor(me.shouheng.uix.widget.R.color.uix_default_light_bg_color)
+        var lightBGColor: Int                   = URes.getColor(me.shouheng.uix.widget.R.color.uix_default_light_bg_color)
         /** 对话框暗主题背景色 */
         @ColorInt
-        var darkBGColor: Int                    = UIXResUtils.getColor(me.shouheng.uix.widget.R.color.uix_default_dark_bg_color)
+        var darkBGColor: Int                    = URes.getColor(me.shouheng.uix.widget.R.color.uix_default_dark_bg_color)
         /** 点击对话框外部是否可以取消对话框的全局配置 */
         var outCancelable                       = true
         /** 点击返回按钮是否可以取消对话框的全局配置 */

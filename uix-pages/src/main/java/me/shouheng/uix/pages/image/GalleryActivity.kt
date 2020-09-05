@@ -2,6 +2,7 @@ package me.shouheng.uix.pages.image
 
 import android.content.ComponentCallbacks2
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -33,9 +34,17 @@ class GalleryActivity : AppCompatActivity(), PullBackLayout.Callback {
     private var fullScreenMode: Boolean = false
 
     companion object {
-        const val EXTRA_GALLERY_IMAGES          = "__extra_gallery_images"
         const val EXTRA_GALLERY_TITLE           = "__extra_gallery_title"
+        const val EXTRA_GALLERY_IMAGES          = "__extra_gallery_images"
         const val EXTRA_GALLERY_CLICKED_IMAGE   = "__extra_gallery_current_image"
+
+        fun launch(context: Context, title: String, uris: ArrayList<Uri>, currentIndex: Int) {
+            val intent = Intent(context, GalleryActivity::class.java)
+            intent.putExtra(EXTRA_GALLERY_TITLE, title)
+            intent.putExtra(EXTRA_GALLERY_IMAGES, uris)
+            intent.putExtra(EXTRA_GALLERY_CLICKED_IMAGE, currentIndex)
+            context.startActivity(intent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

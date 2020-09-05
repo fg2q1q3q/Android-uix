@@ -39,9 +39,9 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0x0001 && resultCode == Activity.RESULT_OK) {
             val urls = Matisse.obtainResult(data)
-            ActivityUtils.open(GalleryActivity::class.java)
-                    .put(GalleryActivity.EXTRA_GALLERY_IMAGES, ArrayList<Uri>(urls))
-                    .launch(this)
+            // 增加一个网络图片显示实例
+            urls.add(Uri.parse("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"))
+            GalleryActivity.launch(context, "Gallery", ArrayList(urls), 0)
         } else if (requestCode == 0x0002 && resultCode == Activity.RESULT_OK) {
             val path = data!!.getStringExtra(TakePhotoActivity.EXTRA_FILE_PATH)
             val url = PalmUtils.getUriFromFile(this, File(path))
@@ -88,7 +88,7 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
 
     fun onMatisseDark(v: View) {
         Matisse.from(this@ImageSampleActivity)
-                .choose(MimeType.ofImage())
+                .choose(MimeType.ofAll())
                 .countable(true)
                 .theme(R.style.Matisse_Dracula)
                 .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))

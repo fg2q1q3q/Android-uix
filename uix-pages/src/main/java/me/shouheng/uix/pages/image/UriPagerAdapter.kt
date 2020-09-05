@@ -1,8 +1,6 @@
 package me.shouheng.uix.pages.image
 
 import android.net.Uri
-import android.os.Bundle
-import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -23,11 +21,7 @@ class UriPagerAdapter(fragmentManager: FragmentManager, private val uris: List<U
 
     override fun getItem(pos: Int): Fragment {
         val uri = this.uris[pos]
-        val fragment = ImageFragment()
-        fragment.arguments = Bundle().apply {
-            putParcelable(ImageFragment.ARG_URI, uri as Parcelable)
-        }
-        return fragment
+        return ImageFragment.getInstance(uri)
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {

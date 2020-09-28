@@ -25,3 +25,14 @@ abstract class NoDoubleClickListener : View.OnClickListener {
         var MIN_CLICK_DELAY_TIME                       = 500L
     }
 }
+
+/**
+ * Add function to View to avoid click twice
+ */
+fun View.onDebouncedClick(click: (view: View) -> Unit) {
+    setOnClickListener(object : NoDoubleClickListener() {
+        override fun onNoDoubleClick(v: View) {
+            click(v)
+        }
+    })
+}

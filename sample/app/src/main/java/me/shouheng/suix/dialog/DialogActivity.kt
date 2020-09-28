@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
+import com.chad.library.adapter.base.BaseViewHolder
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityDialogBinding
 import me.shouheng.uix.common.anno.AddressSelectLevel.Companion.LEVEL_AREA
@@ -19,7 +20,9 @@ import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.anno.EmptyViewState
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.common.listener.onDebouncedClick
 import me.shouheng.uix.common.utils.UView
+import me.shouheng.uix.pages.rate.RatingManager
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
@@ -27,6 +30,7 @@ import me.shouheng.uix.widget.dialog.listener.OnDismissListener
 import me.shouheng.uix.widget.dialog.listener.OnShowListener
 import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.uix.widget.dialog.title.SimpleTitle
+import me.shouheng.uix.widget.image.CircleImageView
 import me.shouheng.uix.widget.rv.EmptyView
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ui.ViewUtils
@@ -296,6 +300,40 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .setDialogBackground(null)
                     .setDialogContent(UpgradeContent())
                     .build().show(supportFragmentManager, "not cancelable")
+        }
+        binding.btnRateIntro.onDebouncedClick {
+            RatingManager.marketTitle = "测试修改标题"
+            RatingManager.rateApp({ toast("跳转到反馈页") }, { toast("跳转到应用市场评分") }, supportFragmentManager)
+        }
+        binding.btnSimpleGrid.onDebouncedClick {
+            BeautyDialog.Builder()
+                    .setDialogMargin(0)
+                    .setDialogPosition(POS_BOTTOM)
+                    .setDialogTitle(SimpleTitle.get("简单的网格"))
+                    .setDialogContent(
+                            SimpleGrid.Builder(R.layout.item_tool_color, object : SimpleGrid.ViewHolderConverter<Int> {
+                                override fun convert(helper: BaseViewHolder, item: Int) {
+                                    helper.getView<CircleImageView>(R.id.iv).setFillingCircleColor(item)
+                                }
+                            }).setList(listOf(
+                                    ResUtils.getColor(R.color.tool_item_color_1),
+                                    ResUtils.getColor(R.color.tool_item_color_2),
+                                    ResUtils.getColor(R.color.tool_item_color_3),
+                                    ResUtils.getColor(R.color.tool_item_color_4),
+                                    ResUtils.getColor(R.color.tool_item_color_5),
+                                    ResUtils.getColor(R.color.tool_item_color_6),
+                                    ResUtils.getColor(R.color.tool_item_color_7),
+                                    ResUtils.getColor(R.color.tool_item_color_8),
+                                    ResUtils.getColor(R.color.tool_item_color_9),
+                                    ResUtils.getColor(R.color.tool_item_color_10),
+                                    ResUtils.getColor(R.color.tool_item_color_11),
+                                    ResUtils.getColor(R.color.tool_item_color_12)
+                            )).setOnItemClickListener(object : SimpleGrid.OnItemClickListener<Int> {
+                                override fun onItemClick(dialog: BeautyDialog, item: Int) {
+                                    toast("$item")
+                                }
+                            }).setSpanCount(5).build()
+                    ).build().show(supportFragmentManager, "grid")
         }
     }
 }

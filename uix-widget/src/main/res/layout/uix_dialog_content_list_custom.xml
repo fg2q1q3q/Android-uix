@@ -8,6 +8,7 @@
 
     <me.shouheng.uix.widget.rv.EmptySupportRecyclerView
         android:id="@+id/rv"
+        android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

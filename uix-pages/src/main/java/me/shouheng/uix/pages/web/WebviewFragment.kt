@@ -1,7 +1,7 @@
 package me.shouheng.uix.pages.web
 
 import android.content.ClipboardManager
-import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -10,14 +10,10 @@ import android.support.annotation.ColorInt
 import android.support.v4.app.Fragment
 import android.support.v7.widget.AppCompatButton
 import android.view.*
-import android.webkit.WebChromeClient
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.just.agentweb.AgentWeb
-import com.just.agentweb.DefaultWebClient
-import me.shouheng.uix.common.utils.ULog
+import com.just.agentweb.*
 import me.shouheng.uix.common.utils.URes
 import me.shouheng.uix.pages.R
 
@@ -44,43 +40,39 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     private var url: String? = null
     private var openOtherPageWays: DefaultWebClient.OpenOtherPageWays? = null
     private var securityType: AgentWeb.SecurityType = AgentWeb.SecurityType.STRICT_CHECK
-    private var useDefaultOptionsMenu: Boolean = true
+    private var showOptionsMenu: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (root == null) root = inflater.inflate(R.layout.uix_fragment_web, null, false)
         val web = root!!.findViewById<View>(R.id.ll_container) as ViewGroup
-        val errorView = LayoutInflater.from(context).inflate(
-                R.layout.uix_layout_network_error_page, null, false)
-        errorView.findViewById<View>(R.id.root).setBackgroundColor(URes.getColor(
+        val ev = LayoutInflater.from(context).inflate(R.layout.uix_layout_network_error_page, null, false)
+        ev.findViewById<View>(R.id.root).setBackgroundColor(URes.getColor(
                 if (isDarkTheme) R.color.uix_default_dark_bg_color else R.color.uix_default_light_bg_color))
-        errorView.findViewById<AppCompatButton>(R.id.btn_retry).setBackgroundResource(
+        ev.findViewById<AppCompatButton>(R.id.btn_retry).setBackgroundResource(
                 if (isDarkTheme) R.drawable.uix_bg_retry_dark else R.drawable.uix_bg_retry)
-        errorView.findViewById<AppCompatButton>(R.id.btn_retry).setTextColor(
-                if (isDarkTheme) Color.WHITE else Color.BLACK)
+        ev.findViewById<AppCompatButton>(R.id.btn_retry).setTextColor(if (isDarkTheme) Color.WHITE else Color.BLACK)
         if (isDarkTheme) {
-            errorView.findViewById<TextView>(R.id.tv_error_title)
-                    .setTextColor(URes.getColor(R.color.dark_theme_text_color_primary))
-            errorView.findViewById<TextView>(R.id.tv_error_tips)
-                    .setTextColor(URes.getColor(R.color.dark_theme_text_color_primary))
+            ev.findViewById<TextView>(R.id.tv_error_title).setTextColor(URes.getColor(R.color.dark_theme_text_color_primary))
+            ev.findViewById<TextView>(R.id.tv_error_tips).setTextColor(URes.getColor(R.color.dark_theme_text_color_primary))
         }
-        mAgentWeb = getAgentWeb(web, errorView)
-        errorView.findViewById<View>(R.id.btn_retry).setOnClickListener {
-            mAgentWeb.urlLoader.reload()
-        }
+        mAgentWeb = getAgentWeb(web, ev)
+        ev.findViewById<View>(R.id.btn_retry).setOnClickListener { mAgentWeb.urlLoader.reload() }
         return root
     }
 
     /**
      * 获取 AgentWeb 对象，可以通过重写这个方法来实现自己的 AgentWeb
      */
-    protected fun getAgentWeb(container: ViewGroup, errorView: View): AgentWeb {
+    protected open fun getAgentWeb(container: ViewGroup, errorView: View): AgentWeb {
+        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         return AgentWeb.with(this)
-                .setAgentWebParent(container, -1, LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+                .setAgentWebParent(container, -1, params)
                 .useDefaultIndicator(indicatorColor, indicatorHeightDp)
-                .setWebChromeClient(mWebChromeClient)
-                .setWebViewClient(object : WebViewClient() { } )
+                .setWebChromeClient(getWebChromeClient())
+                .setWebViewClient(getWebViewClient())
                 .setSecurityType(securityType)
+                .useMiddlewareWebChrome(getMiddlewareWebChrome())
+                .useMiddlewareWebClient(getMiddlewareWebClient())
                 .setMainFrameErrorView(errorView)
                 .setOpenOtherPageWays(openOtherPageWays)
                 .interceptUnkownUrl()
@@ -89,31 +81,24 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
                 .go(url)
     }
 
-    /**
-     * 在浏览器中打开
-     */
-    protected fun openInBrowser(url: String) {
-        val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(i)
+    protected open fun getWebChromeClient() : WebChromeClient {
+        return object : WebChromeClient() {
+            override fun onReceivedTitle(view: WebView?, title: String) {
+                (activity as? Interaction)?.onReceivedTitle(title)
+            }
+        }
     }
 
-    /**
-     * 复制链接
-     */
-    protected fun copyLink(url: String) {
-        val clipboardManager = (context!!.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager)
-        clipboardManager.text = url
+    protected open fun getWebViewClient() : WebViewClient {
+        return object : WebViewClient() {}
     }
 
-    private var mWebChromeClient: WebChromeClient = object : WebChromeClient() {
+    protected open fun getMiddlewareWebClient(): MiddlewareWebClientBase {
+        return object : MiddlewareWebClientBase() {}
+    }
 
-        override fun onProgressChanged(view: WebView, newProgress: Int) {
-            ULog.d("onProgressChanged:$newProgress  view:$view")
-        }
-
-        override fun onReceivedTitle(view: WebView, title: String) {
-            (activity as? OnReceivedTitleListener)?.onReceivedTitle(title)
-        }
+    protected open fun getMiddlewareWebChrome(): MiddlewareWebChromeBase {
+        return object : MiddlewareWebChromeBase() { }
     }
 
     override fun onResume() {
@@ -132,16 +117,20 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (useDefaultOptionsMenu) inflater.inflate(R.menu.uix_web, menu)
+        if (showOptionsMenu) inflater.inflate(R.menu.uix_web, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (url == null) return super.onOptionsItemSelected(item)
         if (item.itemId == R.id.uix_item_copy) {
-            copyLink(url!!)
+            val interaction = activity as? Interaction
+            if (interaction != null) interaction.onCopyLink(url!!)
+            else (context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).text = url
             return true
         } else if (item.itemId == R.id.uix_item_open) {
-            openInBrowser(url!!)
+            val interaction = activity as? Interaction
+            if (interaction != null) interaction.onOpenInBrowser(url!!)
+            else startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -156,12 +145,10 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
         super.onDestroyView()
     }
 
-    interface OnReceivedTitleListener {
-
-        /**
-         * callback when receive page title
-         */
+    interface Interaction {
         fun onReceivedTitle(title: String)
+        fun onCopyLink(link: String)
+        fun onOpenInBrowser(link: String)
     }
 
     class Builder {
@@ -171,7 +158,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
         private var url: String? = null
         private var openOtherPageWays: DefaultWebClient.OpenOtherPageWays? = null
         private var securityType: AgentWeb.SecurityType = AgentWeb.SecurityType.STRICT_CHECK
-        private var useDefaultOptionsMenu: Boolean = true
+        private var showOptionsMenu: Boolean = true
 
         fun setDarkTheme(isDarkTheme: Boolean): Builder {
             this.isDarkTheme = isDarkTheme
@@ -204,7 +191,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
         }
 
         fun setUseDefaultOptionsMenu(useDefaultOptionsMenu: Boolean): Builder {
-            this.useDefaultOptionsMenu = useDefaultOptionsMenu
+            this.showOptionsMenu = useDefaultOptionsMenu
             return this
         }
 
@@ -216,7 +203,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
             fragment.url = url
             fragment.openOtherPageWays = openOtherPageWays
             fragment.securityType = securityType
-            fragment.useDefaultOptionsMenu = useDefaultOptionsMenu
+            fragment.showOptionsMenu = showOptionsMenu
             return fragment
         }
     }

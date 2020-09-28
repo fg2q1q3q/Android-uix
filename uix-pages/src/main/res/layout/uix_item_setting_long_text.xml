@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:minHeight="60dp"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_gravity="center_vertical"
+        android:id="@+id/ll"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:orientation="vertical"
         android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
@@ -19,15 +20,13 @@
             android:id="@+id/tv_title"
             tools:text="Title Title Title"
             android:textSize="16sp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -48,10 +47,10 @@
 
             <me.shouheng.uix.widget.text.NormalTextView
                 android:id="@+id/tv_foot"
-                tools:text="java.lang.RuntimeException: Unable to start activity ComponentInfo{com.tuya.smartlife/com.tuya.smart.family.activity.RoomManageActivity}: java.lang.RuntimeException: homeId can't be 0"
+                tools:text="java.lang.RuntimeE"
                 android:textSize="15sp"
                 android:gravity="end"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
@@ -65,4 +64,4 @@
         tools:background="@android:color/darker_gray"
         android:layout_height="1dp"/>
 
-</FrameLayout>
+</LinearLayout>

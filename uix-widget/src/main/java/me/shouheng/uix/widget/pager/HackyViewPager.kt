@@ -14,7 +14,6 @@ import android.view.MotionEvent
  * ViewGroups which make use of onInterceptTouchEvent throw a lot of
  * IllegalArgumentException: pointerIndex out of range.
  *
- *
  * There's not much I can do in my code for now, but we can mask the result by
  * just catching the problem and ignoring it.
  * @author Chris Banes

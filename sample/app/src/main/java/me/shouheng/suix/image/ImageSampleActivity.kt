@@ -41,7 +41,7 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
             val urls = Matisse.obtainResult(data)
             // 增加一个网络图片显示实例
             urls.add(Uri.parse("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"))
-            GalleryActivity.launch(context, "Gallery", ArrayList(urls), 0)
+            GalleryActivity.launch(context, ArrayList(urls), 0)
         } else if (requestCode == 0x0002 && resultCode == Activity.RESULT_OK) {
             val path = data!!.getStringExtra(TakePhotoActivity.EXTRA_FILE_PATH)
             val url = PalmUtils.getUriFromFile(this, File(path))

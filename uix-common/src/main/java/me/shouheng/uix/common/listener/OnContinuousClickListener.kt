@@ -27,3 +27,14 @@ abstract class OnContinuousClickListener : View.OnClickListener {
 
     protected abstract fun onContinuousClick(continuousClickCount: Int)
 }
+
+/**
+ * Add function to View for continuous click.
+ */
+fun View.onContinuousClick(click: (continuousClickCount: Int) -> Unit) {
+    setOnClickListener(object : OnContinuousClickListener() {
+        override fun onContinuousClick(continuousClickCount: Int) {
+            click(continuousClickCount)
+        }
+    })
+}

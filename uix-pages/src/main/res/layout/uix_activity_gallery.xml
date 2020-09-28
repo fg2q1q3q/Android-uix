@@ -19,15 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-    </me.shouheng.uix.widget.layout.PullBackLayout>
+        <com.rd.PageIndicatorView
+            android:id="@+id/piv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
+            app:piv_animationType="scale"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_padding="5dp"
+            app:piv_radius="5dp" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:background="@drawable/uix_bg_toolbar_shade"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:windowActionBarOverlay="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:titleTextColor="@android:color/white" />
+    </me.shouheng.uix.widget.layout.PullBackLayout>
 
 </RelativeLayout>

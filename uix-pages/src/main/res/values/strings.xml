@@ -15,4 +15,17 @@
 
     <string name="uix_open_in_browser">在浏览器中打开</string>
     <string name="uix_copy_link">复制链接</string>
+
+    <string name="uix_rating_dialog_title">为应用打分</string>
+    <string name="uix_rating_confirm">确定</string>
+    <string name="uix_rating_cancel">取消</string>
+    <string name="uix_rating_feedback_title">很抱歉，没能让你满意</string>
+    <string name="uix_rating_feedback_content">你愿意为我们提供一些反馈来帮助我们优化应用吗？</string>
+    <string name="uix_rating_feedback_confirm">去反馈</string>
+    <string name="uix_rating_feedback_cancel">狠心拒绝</string>
+    <string name="uix_rating_market_title">很高兴你喜欢我们的应用</string>
+    <string name="uix_rating_market_content">你愿意到应用商店来评分来鼓励开发者吗？</string>
+    <string name="uix_rating_market_confirm">去评分</string>
+    <string name="uix_rating_market_cancel">狠心拒绝</string>
+    <string name="uix_rating_feedback_page_title">意见反馈</string>
 </resources>

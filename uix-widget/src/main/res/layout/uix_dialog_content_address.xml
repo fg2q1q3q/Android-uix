@@ -42,12 +42,14 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_province"
+            android:overScrollMode="never"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_city"
+            android:overScrollMode="never"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             android:visibility="gone"
             android:layout_width="match_parent"
@@ -55,6 +57,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_area"
+            android:overScrollMode="never"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             android:visibility="gone"
             android:layout_width="match_parent"

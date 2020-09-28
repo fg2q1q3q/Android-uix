@@ -7,7 +7,10 @@
             android:theme="@style/PictureViewTheme" />
         <activity
             android:name=".image.GalleryActivity"
-            android:theme="@style/PictureViewTheme" />
+            android:theme="@style/PictureViewTheme"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CrashReportActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

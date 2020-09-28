@@ -78,8 +78,8 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
                 .setAgentWebParent(container, -1, LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
                 .useDefaultIndicator(indicatorColor, indicatorHeightDp)
-                .setWebChromeClient(mWebChromeClient)
-                .setWebViewClient(object : WebViewClient() { } )
+//                .setWebChromeClient(mWebChromeClient)
+//                .setWebViewClient(object : WebViewClient() { } )
                 .setSecurityType(securityType)
                 .setMainFrameErrorView(errorView)
                 .setOpenOtherPageWays(openOtherPageWays)

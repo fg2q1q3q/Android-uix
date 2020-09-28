@@ -70,6 +70,11 @@
                 android:text="应用评分引导对话框"
                 style="@style/MenuItemButton"/>
 
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_simple_grid"
+                android:text="网格对话框"
+                style="@style/MenuItemButton"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

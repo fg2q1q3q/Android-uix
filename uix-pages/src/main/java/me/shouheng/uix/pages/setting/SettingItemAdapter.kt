@@ -1,11 +1,14 @@
 package me.shouheng.uix.pages.setting
 
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.LinearLayout
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import me.shouheng.uix.common.utils.URes
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.pages.setting.ISettingItem.ItemType.Companion.TYPE_DESC
 import me.shouheng.uix.pages.setting.ISettingItem.ItemType.Companion.TYPE_DIVIDER
@@ -30,7 +33,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                          /** 用来统一更换所有条目的背景颜色 */
                          private val itemBackground: Int = Color.TRANSPARENT)
     : BaseMultiItemQuickAdapter<ISettingItem, BaseViewHolder>(list) {
-    private val defaultMoreDrawable = URes.getDrawable(R.drawable.uix_right_black_24dp)
+    private val defaultMoreDrawable = URes.getDrawable(R.drawable.ic_more)
     init {
         addItemType(TYPE_TEXT, R.layout.uix_item_setting_text)
         addItemType(TYPE_IMAGE, R.layout.uix_item_setting_image)
@@ -39,6 +42,8 @@ class SettingItemAdapter(list: List<ISettingItem>,
         addItemType(TYPE_DESC, R.layout.uix_item_setting_desc)
         addItemType(TYPE_LONG_TEXT, R.layout.uix_item_setting_long_text)
     }
+    private val screenWidth = UView.getScreenWidth()
+    private val dp20 = UView.dp2px(20f)
     override fun convert(helper: BaseViewHolder, item: ISettingItem) {
         helper.itemView.setBackgroundColor(itemBackground)
         when(item.itemType) {
@@ -89,8 +94,16 @@ class SettingItemAdapter(list: List<ISettingItem>,
                 item as SettingLongTextItem
                 helper.setText(R.id.tv_title, item.title)
                 helper.setText(R.id.tv_foot, item.subTitle)
-                helper.getView<NormalTextView>(R.id.tv_title).setStyle(item.titleStyle)
-                helper.getView<NormalTextView>(R.id.tv_foot).setStyle(item.subTitleStyle)
+                val ll = helper.getView<LinearLayout>(R.id.ll)
+                val tvTitle = helper.getView<NormalTextView>(R.id.tv_title)
+                tvTitle.setStyle(item.titleStyle)
+                val tvFoot = helper.getView<NormalTextView>(R.id.tv_foot)
+                tvFoot.setStyle(item.subTitleStyle)
+                if (tvTitle.width + tvFoot.width + dp20 < screenWidth) {
+                    ll.orientation = LinearLayout.HORIZONTAL
+                } else {
+                    ll.orientation = LinearLayout.VERTICAL
+                }
                 helper.setBackgroundColor(R.id.line, item.lineColor?:lineColor)
                 helper.getView<View>(R.id.pb).visibility = if (item.loading) View.VISIBLE else View.GONE
             }

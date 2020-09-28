@@ -65,6 +65,11 @@
                 android:text="无法取消的对话框 [慎重点击]"
                 style="@style/MenuItemButton"/>
 
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_rate_intro"
+                android:text="应用评分引导对话框"
+                style="@style/MenuItemButton"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

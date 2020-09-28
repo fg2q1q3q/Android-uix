@@ -30,7 +30,7 @@ class SettingFragment : CommonFragment<EmptyViewModel, FragmentSettingBinding>()
 
     private val adapter = SettingItemAdapter(emptyList(),
             ResUtils.getColor(R.color.settingBg),
-            ImageUtils.tintDrawable(R.drawable.ic_more, Color.GRAY),
+            ImageUtils.tintDrawable(R.drawable.uix_ic_more, Color.GRAY),
             itemBackground = Color.WHITE)
 
     override fun doCreateView(savedInstanceState: Bundle?) {

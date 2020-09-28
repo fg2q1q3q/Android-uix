@@ -1,7 +1,6 @@
 package me.shouheng.uix.pages.setting
 
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.LinearLayout
@@ -33,7 +32,7 @@ class SettingItemAdapter(list: List<ISettingItem>,
                          /** 用来统一更换所有条目的背景颜色 */
                          private val itemBackground: Int = Color.TRANSPARENT)
     : BaseMultiItemQuickAdapter<ISettingItem, BaseViewHolder>(list) {
-    private val defaultMoreDrawable = URes.getDrawable(R.drawable.ic_more)
+    private val defaultMoreDrawable = URes.getDrawable(R.drawable.uix_ic_more)
     init {
         addItemType(TYPE_TEXT, R.layout.uix_item_setting_text)
         addItemType(TYPE_IMAGE, R.layout.uix_item_setting_image)

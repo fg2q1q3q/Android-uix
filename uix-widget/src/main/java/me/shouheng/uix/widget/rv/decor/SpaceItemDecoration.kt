@@ -4,6 +4,11 @@ import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.View
 
+/**
+ * Recycler item decoration.
+ *
+ * @see android.support.v7.widget.DividerItemDecoration
+ */
 class SpaceItemDecoration : RecyclerView.ItemDecoration {
 
     private var leftDp: Int = 0

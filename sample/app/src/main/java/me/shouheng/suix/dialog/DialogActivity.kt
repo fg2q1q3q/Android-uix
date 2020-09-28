@@ -19,7 +19,9 @@ import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.anno.EmptyViewState
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.common.listener.onDebouncedClick
 import me.shouheng.uix.common.utils.UView
+import me.shouheng.uix.pages.rate.RatingManager
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
@@ -296,6 +298,10 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .setDialogBackground(null)
                     .setDialogContent(UpgradeContent())
                     .build().show(supportFragmentManager, "not cancelable")
+        }
+        binding.btnRateIntro.onDebouncedClick {
+            RatingManager.marketTitle = "测试修改标题"
+            RatingManager.rateApp({ toast("跳转到反馈页") }, { toast("跳转到应用市场评分") }, supportFragmentManager)
         }
     }
 }

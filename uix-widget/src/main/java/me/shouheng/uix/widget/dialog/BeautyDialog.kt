@@ -24,6 +24,7 @@ import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.utils.UImage
 import me.shouheng.uix.common.utils.URes
 import me.shouheng.uix.common.utils.UView
+import me.shouheng.uix.widget.R
 import me.shouheng.uix.widget.dialog.content.IDialogContent
 import me.shouheng.uix.widget.dialog.footer.IDialogFooter
 import me.shouheng.uix.widget.dialog.listener.OnDismissListener
@@ -82,24 +83,19 @@ class BeautyDialog : DialogFragment() {
         private set
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val theme = if (dialogStyle == STYLE_WRAP) R.style.BeautyDialogWrap else R.style.BeautyDialog
+        val dialog = AlertDialog.Builder(context!!, theme).create()
 
-        val dialog = AlertDialog.Builder(context!!,
-                if (dialogStyle == STYLE_WRAP) me.shouheng.uix.widget.R.style.BeautyDialogWrap
-                else me.shouheng.uix.widget.R.style.BeautyDialog
-        ).create()
-
-        val content = View.inflate(context, me.shouheng.uix.widget.R.layout.uix_dialog_layout, null)
+        val content = View.inflate(context, R.layout.uix_dialog_layout, null)
         if (customBackground) {
             content.background = dialogBackground
         } else {
-            content.background = UImage.getGradientDrawable(
-                    if (dialogDarkStyle) GlobalConfig.darkBGColor else GlobalConfig.lightBGColor,
-                    dialogCornerRadius.toFloat()
-            )
+            val dialogColor = if (dialogDarkStyle) GlobalConfig.darkBGColor else GlobalConfig.lightBGColor
+            content.background = UImage.getGradientDrawable(dialogColor, dialogCornerRadius.toFloat())
         }
-        val llTitle = content.findViewById<LinearLayout>(me.shouheng.uix.widget.R.id.ll_title)
-        val llContent = content.findViewById<LinearLayout>(me.shouheng.uix.widget.R.id.ll_content)
-        val llFooter = content.findViewById<LinearLayout>(me.shouheng.uix.widget.R.id.ll_footer)
+        val llTitle = content.findViewById<LinearLayout>(R.id.ll_title)
+        val llContent = content.findViewById<LinearLayout>(R.id.ll_content)
+        val llFooter = content.findViewById<LinearLayout>(R.id.ll_footer)
 
         iDialogTitle?.setDialog(this)
         iDialogContent?.setDialog(this)
@@ -142,15 +138,15 @@ class BeautyDialog : DialogFragment() {
         when(dialogPosition) {
             POS_TOP -> {
                 dialog.window?.setGravity(Gravity.TOP)
-                dialog.window?.setWindowAnimations(me.shouheng.uix.widget.R.style.DialogTopAnimation)
+                dialog.window?.setWindowAnimations(R.style.DialogTopAnimation)
             }
             POS_CENTER -> {
                 dialog.window?.setGravity(Gravity.CENTER)
-                dialog.window?.setWindowAnimations(me.shouheng.uix.widget.R.style.DialogCenterAnimation)
+                dialog.window?.setWindowAnimations(R.style.DialogCenterAnimation)
             }
             POS_BOTTOM -> {
                 dialog.window?.setGravity(Gravity.BOTTOM)
-                dialog.window?.setWindowAnimations(me.shouheng.uix.widget.R.style.DialogBottomAnimation)
+                dialog.window?.setWindowAnimations(R.style.DialogBottomAnimation)
             }
         }
 
@@ -178,7 +174,6 @@ class BeautyDialog : DialogFragment() {
     }
 
     class Builder {
-
         private var iDialogTitle: IDialogTitle? = null
         private var iDialogContent: IDialogContent? = null
         private var iDialogFooter: IDialogFooter? = null
@@ -307,17 +302,13 @@ class BeautyDialog : DialogFragment() {
 
     object GlobalConfig {
         /** 对话框边距，单位 px */
-        @Px
-        var margin: Int                       = UView.dp2px(20f)
+        @Px var margin: Int                     = UView.dp2px(20f)
         /** 对话框圆角，单位 px */
-        @Px
-        var cornerRadius: Int                 = UView.dp2px(15f)
+        @Px var cornerRadius: Int               = UView.dp2px(15f)
         /** 对话框明主题背景色 */
-        @ColorInt
-        var lightBGColor: Int                   = URes.getColor(me.shouheng.uix.widget.R.color.uix_default_light_bg_color)
+        @ColorInt var lightBGColor: Int         = URes.getColor(R.color.uix_default_light_bg_color)
         /** 对话框暗主题背景色 */
-        @ColorInt
-        var darkBGColor: Int                    = URes.getColor(me.shouheng.uix.widget.R.color.uix_default_dark_bg_color)
+        @ColorInt var darkBGColor: Int          = URes.getColor(R.color.uix_default_dark_bg_color)
         /** 点击对话框外部是否可以取消对话框的全局配置 */
         var outCancelable                       = true
         /** 点击返回按钮是否可以取消对话框的全局配置 */

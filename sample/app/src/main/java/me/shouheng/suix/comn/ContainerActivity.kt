@@ -17,7 +17,7 @@ import me.shouheng.vmlib.comn.EmptyViewModel
 
 class ContainerActivity : CommonActivity<EmptyViewModel, ActivityContainerBinding>(), AboutFragment.FragmentInteraction {
 
-    override fun getLayoutResId(): Int = R.layout.vmlib_activity_container
+    override fun getLayoutResId(): Int = R.layout.activity_container
 
     override fun onLeftClick(v: View) {
         finish()

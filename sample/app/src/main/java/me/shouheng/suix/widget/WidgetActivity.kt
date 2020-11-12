@@ -10,7 +10,11 @@ import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityWidgetsBinding
 import me.shouheng.uix.common.anno.LoadingButtonState
 import me.shouheng.uix.common.glide.CornersTransformation
+import me.shouheng.uix.common.listener.onDebouncedClick
 import me.shouheng.utils.app.ResUtils
+import me.shouheng.utils.ktx.drawableOf
+import me.shouheng.utils.ktx.logd
+import me.shouheng.utils.ktx.tint
 import me.shouheng.utils.ui.ImageUtils
 import me.shouheng.utils.ui.ViewUtils
 import me.shouheng.vmlib.base.CommonActivity
@@ -27,20 +31,20 @@ class WidgetActivity : CommonActivity<EmptyViewModel, ActivityWidgetsBinding>() 
     override fun getLayoutResId(): Int = R.layout.activity_widgets
 
     override fun doCreateView(savedInstanceState: Bundle?) {
-        binding.etPsd.setVisibleDrawable(ImageUtils.tintDrawable(ResUtils.getDrawable(R.drawable.uix_eye_open_48), Color.BLUE))
-        binding.etPsd.setInvisibleDrawable(ImageUtils.tintDrawable(ResUtils.getDrawable(R.drawable.uix_eye_close_48), Color.GREEN))
-        binding.btn.setOnClickListener {
+        binding.etPsd.setVisibleDrawable(drawableOf(R.drawable.uix_eye_open_48).tint(Color.BLUE))
+        binding.etPsd.setInvisibleDrawable(drawableOf(R.drawable.uix_eye_close_48).tint(Color.GREEN))
+        binding.btn.onDebouncedClick {
             binding.btn.setState(LoadingButtonState.LOADING_STATE_LOADING)
             binding.btn.setText("加载中，长按试一下……")
         }
-        binding.btn.setOnLongClickListener {
+        binding.btn.onDebouncedClick {
             binding.btn.setText("已禁用")
             binding.btn.setState(LoadingButtonState.LOADING_STATE_DISABLE)
             true
         }
         binding.cv.mTips = "发送验证码"
         binding.cv.mTotalSecond = 10
-        binding.cv.setOnClickListener {
+        binding.cv.onDebouncedClick {
             binding.cv.start()
             if (it.tag != null) {
                 it.tag = null
@@ -64,6 +68,10 @@ class WidgetActivity : CommonActivity<EmptyViewModel, ActivityWidgetsBinding>() 
             binding.card.viewGradient.background = gradientDrawable
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+        binding.fab.onDebouncedClick {
+            logd("Fab Clicked")
+            binding.fab.isExpanded = !binding.fab.isEnabled
         }
     }
 }

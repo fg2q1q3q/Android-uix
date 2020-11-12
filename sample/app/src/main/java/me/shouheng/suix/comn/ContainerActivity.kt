@@ -2,7 +2,10 @@ package me.shouheng.suix.comn
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -10,8 +13,11 @@ import android.widget.ImageView
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityContainerBinding
 import me.shouheng.uix.common.bean.TextStyleBean
+import me.shouheng.uix.common.utils.UColor
+import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.pages.about.*
 import me.shouheng.utils.app.ResUtils
+import me.shouheng.utils.ui.BarUtils
 import me.shouheng.vmlib.base.CommonActivity
 import me.shouheng.vmlib.comn.EmptyViewModel
 
@@ -41,6 +47,18 @@ class ContainerActivity : CommonActivity<EmptyViewModel, ActivityContainerBindin
     override fun loadImage(id: Int, iv: ImageView) {
         if (id == 2) iv.setImageResource(R.drawable.fat_ass)
         else if (id == 4) iv.setImageResource(R.drawable.mark_note)
+    }
+
+    private var offHeight = 0
+    private var toolbarHeight = UView.dp2px(80f)
+
+    override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
+        offHeight += dy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val alpha = (offHeight * 1f / toolbarHeight).coerceAtMost(1f)
+            window.statusBarColor = UColor.computeColor(Color.LTGRAY, Color.WHITE, alpha)
+            BarUtils.setStatusBarLightMode(this, alpha > .5f)
+        }
     }
 
     override fun doCreateView(savedInstanceState: Bundle?) {

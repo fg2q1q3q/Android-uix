@@ -112,6 +112,7 @@ class AboutFragment : Fragment() {
             private var titleShowed = false
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                (activity as? FragmentInteraction)?.onScrolled(recyclerView, dx, dy)
                 offHeight += dy
                 toolbar.setBackgroundColor(UColor.setColorAlpha(foregroundColor!!,
                         (offHeight * 1f / toolbarHeight).coerceAtMost(1f), true))
@@ -158,6 +159,9 @@ class AboutFragment : Fragment() {
          * 图片加载事件
          */
         fun loadImage(id: Int, iv: ImageView)
+
+        /** Callback when the recyclerview is scrolled */
+        fun onScrolled(rv: RecyclerView, dx: Int, dy: Int)
     }
 
     class Builder {

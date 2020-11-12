@@ -12,6 +12,7 @@
             android:gravity="center_horizontal"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:paddingBottom="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -114,6 +115,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <android.support.design.widget.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="this is the hint">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </android.support.design.widget.TextInputLayout>
+
             <me.shouheng.uix.widget.button.LoadingButton
                 android:id="@+id/btn"
                 app:loading_button_text="点我试一下"
@@ -167,6 +180,26 @@
                 android:layout_width="120dp"
                 android:layout_height="35dp"/>
 
+            <android.support.design.button.MaterialButton
+                android:text="Material Button"
+                app:icon="@drawable/uix_eye_open_48"
+                app:iconSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <android.support.design.button.MaterialButton
+                android:text="Material Button"
+                app:cornerRadius="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:src="@drawable/uix_eye_open_48"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
             <me.shouheng.uix.widget.image.CircleImageView
                 android:src="@drawable/fat_ass"
                 app:border_width="1dp"
@@ -189,6 +222,40 @@
                 android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 layout="@layout/layout_scene_card_item"/>
+
+            <android.support.design.card.MaterialCardView
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="8dp"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
+
+            <android.support.design.chip.ChipGroup
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.chip.Chip
+                    android:text="Chip1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <android.support.design.chip.Chip
+                    android:text="Chip2"
+                    app:chipIconTint="@color/white"
+                    app:chipIcon="@drawable/uix_eye_open_48"
+                    app:chipIconSize="20dp"
+                    android:textColor="@color/white"
+                    app:chipBackgroundColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </android.support.design.chip.ChipGroup>
+
+            <android.support.design.circularreveal.CircularRevealFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"/>
 
         </LinearLayout>
 

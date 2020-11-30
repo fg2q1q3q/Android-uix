@@ -31,7 +31,7 @@ class CustomList private constructor(): IDialogContent {
         val container = layout.findViewById<ViewGroup>(R.id.fl_container)
         if (emptyView != null) {
             container.addView(emptyView!!.getView(), ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
-            rv.setEmptyView(emptyView!!)
+            rv.setEmptyView(emptyView!!.getView())
         }
         rv.adapter = adapter
         rv.layoutManager = LinearLayoutManager(ctx)

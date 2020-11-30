@@ -9,8 +9,6 @@ class EmptySupportRecyclerView : RecyclerView {
 
     private var emptyView: View? = null
 
-    private var iEmptyView: IEmptyView? = null
-
     private var emptyCount = 0
 
     private val observer = object : RecyclerView.AdapterDataObserver() {
@@ -39,10 +37,8 @@ class EmptySupportRecyclerView : RecyclerView {
         if (adapter != null) {
             if (adapter.itemCount == emptyCount) {
                 emptyView?.visibility = View.VISIBLE
-                iEmptyView?.show()
             } else {
                 emptyView?.visibility = View.GONE
-                iEmptyView?.hide()
             }
         }
     }
@@ -61,11 +57,6 @@ class EmptySupportRecyclerView : RecyclerView {
      */
     fun setEmptyView(emptyView: View, emptyCount: Int = 0) {
         this.emptyView = emptyView
-        this.emptyCount = emptyCount
-    }
-
-    fun setEmptyView(iEmptyView: IEmptyView, emptyCount: Int = 0) {
-        this.iEmptyView = iEmptyView
         this.emptyCount = emptyCount
     }
 }

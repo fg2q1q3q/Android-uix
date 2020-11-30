@@ -38,7 +38,7 @@ class SettingFragment : CommonFragment<EmptyViewModel, FragmentSettingBinding>()
         (activity as AppCompatActivity).title = "设置列表展示"
 
         binding.rv.adapter = adapter
-        binding.rv.setEmptyView(binding.ev as IEmptyView)
+        binding.rv.setEmptyView(binding.ev)
 
         binding.ev.showLoading()
         Handler().postDelayed({

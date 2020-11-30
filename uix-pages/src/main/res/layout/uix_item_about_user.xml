@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/AboutPage.Item.Card">
 
-    <me.shouheng.uix.widget.image.CircleImageView
+    <android.support.v7.widget.AppCompatImageView
         style="@style/AboutPage.ContributorAvatar"
         android:scaleType="centerCrop"
         android:id="@+id/avatar"

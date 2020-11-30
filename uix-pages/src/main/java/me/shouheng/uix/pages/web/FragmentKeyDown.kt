@@ -13,3 +13,9 @@ interface FragmentKeyDown {
      */
     fun onFragmentKeyDown(keyCode: Int, event: KeyEvent?): Boolean
 }
+
+/** On Webview scroll change listener. */
+interface OnScrollChangeCallback {
+
+    fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int)
+}

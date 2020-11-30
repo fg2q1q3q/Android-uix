@@ -41,6 +41,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     private var openOtherPageWays: DefaultWebClient.OpenOtherPageWays? = null
     private var securityType: AgentWeb.SecurityType = AgentWeb.SecurityType.STRICT_CHECK
     private var showOptionsMenu: Boolean = true
+    private var onScrollChangeCallback: OnScrollChangeCallback? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (root == null) root = inflater.inflate(R.layout.uix_fragment_web, null, false)
@@ -55,7 +56,9 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
             ev.findViewById<TextView>(R.id.tv_error_title).setTextColor(URes.getColor(R.color.dark_theme_text_color_primary))
             ev.findViewById<TextView>(R.id.tv_error_tips).setTextColor(URes.getColor(R.color.dark_theme_text_color_primary))
         }
-        mAgentWeb = getAgentWeb(web, ev)
+        val webView = UIXWebView(context)
+        webView.callback = onScrollChangeCallback
+        mAgentWeb = getAgentWeb(web, ev, webView)
         ev.findViewById<View>(R.id.btn_retry).setOnClickListener { mAgentWeb.urlLoader.reload() }
         return root
     }
@@ -63,9 +66,9 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
     /**
      * 获取 AgentWeb 对象，可以通过重写这个方法来实现自己的 AgentWeb
      */
-    protected open fun getAgentWeb(container: ViewGroup, errorView: View): AgentWeb {
+    protected open fun getAgentWeb(container: ViewGroup, errorView: View, webView: WebView? = null): AgentWeb {
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        return AgentWeb.with(this)
+        val builder = AgentWeb.with(this)
                 .setAgentWebParent(container, -1, params)
                 .useDefaultIndicator(indicatorColor, indicatorHeightDp)
                 .setWebChromeClient(getWebChromeClient())
@@ -75,7 +78,8 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
                 .useMiddlewareWebClient(getMiddlewareWebClient())
                 .setMainFrameErrorView(errorView)
                 .setOpenOtherPageWays(openOtherPageWays)
-                .interceptUnkownUrl()
+        if (webView != null) builder.setWebView(webView)
+        return builder.interceptUnkownUrl()
                 .createAgentWeb()
                 .ready()
                 .go(url)
@@ -158,6 +162,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
         private var url: String? = null
         private var openOtherPageWays: DefaultWebClient.OpenOtherPageWays? = null
         private var securityType: AgentWeb.SecurityType = AgentWeb.SecurityType.STRICT_CHECK
+        private var onScrollChangeCallback: OnScrollChangeCallback? = null
         private var showOptionsMenu: Boolean = true
 
         fun setDarkTheme(isDarkTheme: Boolean): Builder {
@@ -195,6 +200,11 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
             return this
         }
 
+        fun setOnScrollChangeCallback(onScrollChangeCallback: OnScrollChangeCallback): Builder {
+            this.onScrollChangeCallback = onScrollChangeCallback
+            return this
+        }
+
         fun build(): WebviewFragment {
             val fragment = WebviewFragment()
             fragment.isDarkTheme = isDarkTheme
@@ -204,6 +214,7 @@ open class WebviewFragment : Fragment(), FragmentKeyDown {
             fragment.openOtherPageWays = openOtherPageWays
             fragment.securityType = securityType
             fragment.showOptionsMenu = showOptionsMenu
+            fragment.onScrollChangeCallback = onScrollChangeCallback
             return fragment
         }
     }

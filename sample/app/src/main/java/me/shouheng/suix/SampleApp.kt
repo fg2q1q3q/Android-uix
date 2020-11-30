@@ -12,6 +12,7 @@ import me.shouheng.uix.common.anno.UIXConfiguration
 import me.shouheng.uix.common.bean.TextStyleBean
 import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.pages.CrashReportActivity
+import me.shouheng.uix.pages.web.OnScrollChangeCallback
 import me.shouheng.uix.pages.web.WebviewFragment
 import me.shouheng.uix.widget.button.NormalButton
 import me.shouheng.utils.app.ResUtils
@@ -74,6 +75,11 @@ class SampleApp: Application() {
                 COMMAND_LAUNCH_WEBVIEW -> {
                     val fragment = WebviewFragment.Builder()
                             .setDarkTheme(true)
+                            .setOnScrollChangeCallback(object : OnScrollChangeCallback {
+                                override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
+                                    L.d("onScrollChanged: $t")
+                                }
+                            })
                             .setIndicatorColor(Color.BLUE)
                             .setUrl("https://weibo.com/5401152113/profile?rightmod=1&wvr=6&mod=personinfo")
                             .build()

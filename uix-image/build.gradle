@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -39,12 +39,12 @@ dependencies {
     api project(path: ':uix-common')
 }
 
-publish {
-    userOrg = 'easymark'
-    groupId = 'me.shouheng.ui'
-    artifactId = 'uix-image'
-    repoName = 'Android'
-    publishVersion = rootProject.ext.releaseVersion
-    desc = 'Ui component, the image process subset for Android.'
-    website = 'https://github.com/Shouheng88/Android-uix'
-}
+//publish {
+//    userOrg = 'easymark'
+//    groupId = 'me.shouheng.ui'
+//    artifactId = 'uix-image'
+//    repoName = 'Android'
+//    publishVersion = rootProject.ext.releaseVersion
+//    desc = 'Ui component, the image process subset for Android.'
+//    website = 'https://github.com/Shouheng88/Android-uix'
+//}

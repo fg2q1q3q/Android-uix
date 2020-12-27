@@ -15,6 +15,7 @@ import me.shouheng.suix.tools.ToolsActivity
 import me.shouheng.suix.widget.LayoutActivity
 import me.shouheng.suix.widget.LayoutActivity2
 import me.shouheng.suix.widget.WidgetActivity
+import me.shouheng.utils.ktx.start
 import me.shouheng.vmlib.base.CommonActivity
 import me.shouheng.vmlib.comn.ContainerActivity
 import me.shouheng.vmlib.comn.EmptyViewModel
@@ -32,21 +33,21 @@ class MainActivity : CommonActivity<EmptyViewModel, ActivityMainBinding>() {
     override fun getLayoutResId(): Int = R.layout.activity_main
 
     override fun doCreateView(savedInstanceState: Bundle?) {
-        binding.btnTools.setOnClickListener { startActivity(ToolsActivity::class.java) }
-        binding.btnDialogs.setOnClickListener { startActivity(DialogActivity::class.java) }
-        binding.btnTips.setOnClickListener { startActivity(TipsActivity::class.java) }
-        binding.btnPops.setOnClickListener { startActivity(PopActivity::class.java) }
-        binding.btnMatisse.setOnClickListener { startActivity(ImageSampleActivity::class.java) }
+        binding.btnTools.setOnClickListener { start(ToolsActivity::class.java) }
+        binding.btnDialogs.setOnClickListener { start(DialogActivity::class.java) }
+        binding.btnTips.setOnClickListener { start(TipsActivity::class.java) }
+        binding.btnPops.setOnClickListener { start(PopActivity::class.java) }
+        binding.btnMatisse.setOnClickListener { start(ImageSampleActivity::class.java) }
         binding.btnWeb.setOnClickListener {
             ContainerActivity.open(COMMAND_LAUNCH_WEBVIEW).launch(this)
         }
-        binding.btnWidgets.setOnClickListener { startActivity(WidgetActivity::class.java) }
-        binding.btnLayout.setOnClickListener { startActivity(LayoutActivity::class.java) }
-        binding.btnLayout2.setOnClickListener { startActivity(LayoutActivity2::class.java) }
+        binding.btnWidgets.setOnClickListener { start(WidgetActivity::class.java) }
+        binding.btnLayout.setOnClickListener { start(LayoutActivity::class.java) }
+        binding.btnLayout2.setOnClickListener { start(LayoutActivity2::class.java) }
         binding.btnSetting.setOnClickListener {
             ContainerActivity.open(SettingFragment::class.java).launch(this)
         }
-        binding.btnAbout.setOnClickListener { startActivity(me.shouheng.suix.comn.ContainerActivity::class.java) }
+        binding.btnAbout.setOnClickListener { start(me.shouheng.suix.comn.ContainerActivity::class.java) }
         binding.btnCrash.setOnClickListener { produceException2() }
     }
 

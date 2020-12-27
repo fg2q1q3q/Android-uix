@@ -3,8 +3,8 @@ package me.shouheng.suix.tools
 import android.os.Bundle
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityToolsBinding
-import me.shouheng.uix.common.listener.onContinuousClick
-import me.shouheng.uix.common.listener.onDebouncedClick
+import me.shouheng.utils.ktx.onContinuousClick
+import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.vmlib.base.CommonActivity
 import me.shouheng.vmlib.comn.EmptyViewModel
 

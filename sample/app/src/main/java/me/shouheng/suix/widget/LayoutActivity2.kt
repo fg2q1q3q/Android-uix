@@ -4,6 +4,7 @@ import android.os.Bundle
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityLayout2Binding
 import me.shouheng.suix.layout.SlidingActivity
+import me.shouheng.utils.ktx.start
 import me.shouheng.vmlib.base.CommonActivity
 import me.shouheng.vmlib.comn.EmptyViewModel
 
@@ -13,7 +14,7 @@ class LayoutActivity2 : CommonActivity<EmptyViewModel, ActivityLayout2Binding>()
 
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnSpl.setOnClickListener {
-            startActivity(SlidingActivity::class.java)
+            start(SlidingActivity::class.java)
         }
     }
 }

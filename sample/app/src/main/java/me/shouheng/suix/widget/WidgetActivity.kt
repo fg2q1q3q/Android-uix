@@ -10,12 +10,10 @@ import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityWidgetsBinding
 import me.shouheng.uix.common.anno.LoadingButtonState
 import me.shouheng.uix.common.glide.CornersTransformation
-import me.shouheng.uix.common.listener.onDebouncedClick
-import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ktx.drawableOf
-import me.shouheng.utils.ktx.logd
+import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.utils.ktx.tint
-import me.shouheng.utils.ui.ImageUtils
+import me.shouheng.utils.stability.L
 import me.shouheng.utils.ui.ViewUtils
 import me.shouheng.vmlib.base.CommonActivity
 import me.shouheng.vmlib.comn.EmptyViewModel
@@ -70,7 +68,7 @@ class WidgetActivity : CommonActivity<EmptyViewModel, ActivityWidgetsBinding>() 
             e.printStackTrace()
         }
         binding.fab.onDebouncedClick {
-            logd("Fab Clicked")
+            L.d("Fab Clicked")
             binding.fab.isExpanded = !binding.fab.isEnabled
         }
     }

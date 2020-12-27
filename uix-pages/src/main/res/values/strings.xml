@@ -28,4 +28,8 @@
     <string name="uix_rating_market_confirm">去评分</string>
     <string name="uix_rating_market_cancel">狠心拒绝</string>
     <string name="uix_rating_feedback_page_title">意见反馈</string>
+
+    <string name="uix_camera_voice_enable">快门声</string>
+    <string name="uix_camera_show_grid">对齐网格</string>
+    <string name="uix_camera_show_ray">扫描线</string>
 </resources>

@@ -7,19 +7,118 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".image.TakePhotoActivity">
 
-    <me.shouheng.icamera.CameraView
-        android:id="@+id/cv"
-        app:scaleRate="10"
-        app:mediaType="picture"
-        app:cameraFace="rear"
-        android:adjustViewBounds="true"
-        app:clipScreen="false"
-        app:aspectRatio="4:3"
+    <FrameLayout
         android:layout_gravity="center"
-        app:cameraAdjustType="heightFirst"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <me.shouheng.icamera.CameraView
+            android:id="@+id/cv"
+            app:scaleRate="10"
+            app:mediaType="picture"
+            app:cameraFace="rear"
+            android:adjustViewBounds="true"
+            app:clipScreen="false"
+            app:aspectRatio="4:3"
+            app:cameraAdjustType="heightFirst"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <me.shouheng.uix.widget.layout.RatioFrameLayout
+            android:id="@+id/fl_ray"
+            app:sizeRatio="0.74"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_ray"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/uix_scan_ray" />
+
+        </me.shouheng.uix.widget.layout.RatioFrameLayout>
+
+        <me.shouheng.uix.widget.layout.RatioFrameLayout
+            android:id="@+id/fl_h_line"
+            app:sizeRatio="0.74"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
+
+                <View android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"/>
+
+                <View android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
+
+                <View android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"/>
+
+                <View android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
+
+                <View android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"/>
+
+                <View android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
+
+            </LinearLayout>
+
+        </me.shouheng.uix.widget.layout.RatioFrameLayout>
+
+        <me.shouheng.uix.widget.layout.RatioFrameLayout
+            android:id="@+id/fl_v_line"
+            app:sizeRatio="0.74"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"/>
+
+                <View android:background="@color/white"
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"/>
+
+                <View android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"/>
+
+                <View android:background="@color/white"
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"/>
+
+                <View android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"/>
+
+            </LinearLayout>
+
+        </me.shouheng.uix.widget.layout.RatioFrameLayout>
+
+    </FrameLayout>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -45,14 +144,14 @@
                 android:src="@drawable/uix_flash_auto_white_24dp" />
 
             <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_voice"
+                android:id="@+id/iv_setting"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_gravity="end|center_vertical"
-                android:src="@drawable/uix_volume_up_white_24dp"
+                android:src="@drawable/uix_settings_24"
                 android:padding="8dp"
-                android:onClick="onVoice"
+                android:onClick="onSetting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

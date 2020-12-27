@@ -20,7 +20,6 @@ import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.anno.EmptyViewState
 import me.shouheng.uix.common.anno.LoadingStyle
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.common.listener.onDebouncedClick
 import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.pages.rate.RatingManager
 import me.shouheng.uix.widget.dialog.BeautyDialog
@@ -33,6 +32,7 @@ import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.image.CircleImageView
 import me.shouheng.uix.widget.rv.EmptyView
 import me.shouheng.utils.app.ResUtils
+import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.utils.ui.ViewUtils
 import me.shouheng.vmlib.base.CommonActivity
 import me.shouheng.vmlib.comn.EmptyViewModel

@@ -1,12 +1,10 @@
 package me.shouheng.uix.pages.utils
 
+import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.text.TextUtils
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
-import android.view.animation.ScaleAnimation
 import com.zhihu.matisse.internal.utils.PathUtils.getPath
 import me.shouheng.uix.common.utils.ULog
 import me.shouheng.uix.common.utils.URes
@@ -53,16 +51,6 @@ object UPage {
             val extension = getFileExtension(realPath?:uri.toString())
             getThumbnailUri(context, uri, extension)
         }
-    }
-
-    fun scaleUpDown(view: View, duration: Long): ScaleAnimation? {
-        val animation = ScaleAnimation(1.0f, 1.0f, 0.0f, 1.0f)
-        animation.repeatCount = -1
-        animation.repeatMode = Animation.RESTART
-        animation.interpolator = LinearInterpolator()
-        animation.duration = duration
-        view.startAnimation(animation)
-        return animation
     }
 
     private fun isFromNetwork(uri: Uri) = uri.scheme?.startsWith("http") == true

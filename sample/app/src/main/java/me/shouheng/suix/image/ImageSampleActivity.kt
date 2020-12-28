@@ -42,9 +42,9 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
             // 增加一个网络图片显示实例
             urls.add(Uri.parse("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"))
             GalleryActivity.launch(context, ArrayList(urls), 0)
-        } else if (requestCode == 0x0002 && resultCode == Activity.RESULT_OK) {
-            val path = data!!.getStringExtra(TakePhotoActivity.EXTRA_FILE_PATH)
-            val url = PalmUtils.getUriFromFile(this, File(path))
+        } else if (requestCode == REQ_CAMERA_SINGLE_MODE && resultCode == Activity.RESULT_OK) {
+            L.d("Paths: ${TakePhotoActivity.obtainPathResult(data!!)}")
+            val url = TakePhotoActivity.obtainResult(data) { path -> PalmUtils.getUriFromFile(this, File(path)) }[0]
             ActivityUtils.open(GalleryActivity::class.java)
                     .put(GalleryActivity.EXTRA_GALLERY_IMAGES, ArrayList<Uri>(listOf(url)))
                     .launch(this)
@@ -54,6 +54,10 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
         } else if (requestCode == 0x0004 && resultCode == Activity.RESULT_OK) {
             val url = Matisse.obtainResult(data)[0]
             startActivity(Intent(this, ImageProcessActivity::class.java).putExtra("image", url))
+        } else if (requestCode == REQ_CAMERA_MULTIPLE_MODE && resultCode == Activity.RESULT_OK) {
+            L.d("Paths: ${TakePhotoActivity.obtainPathResult(data!!)}")
+            val uris = TakePhotoActivity.obtainResult(data!!) { path -> PalmUtils.getUriFromFile(this, File(path)) }
+            GalleryActivity.launch(context, ArrayList(uris), 0)
         }
     }
 
@@ -113,7 +117,21 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
         val fileName = "${System.currentTimeMillis()}.jpg"
         val filePath = File(appDir, fileName).path
         PermissionUtils.checkPermissions(this, OnGetPermissionCallback {
-            TakePhotoActivity.launch(this@ImageSampleActivity, filePath, 0x0002)
+            TakePhotoActivity.launch(this@ImageSampleActivity, filePath, REQ_CAMERA_SINGLE_MODE)
+        }, Permission.STORAGE, Permission.CAMERA)
+    }
+
+    @SuppressLint("MissingPermission")
+    fun onMultiple(v: View) {
+        val appDir = PathUtils.getExternalAppPicturesPath()
+        FileUtils.createOrExistsDir(appDir)
+        PermissionUtils.checkPermissions(this, OnGetPermissionCallback {
+            TakePhotoActivity.open()
+                    .setFileDir(appDir)
+                    .setShowFlash(true)
+                    .setShowRay(true)
+                    .setShowGrid(true)
+                    .build().launch(activity, REQ_CAMERA_MULTIPLE_MODE)
         }, Permission.STORAGE, Permission.CAMERA)
     }
 
@@ -143,5 +161,10 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
                 .maxOriginalSize(10)
                 .imageEngine(Glide4Engine())
                 .forResult(0x0004)
+    }
+
+    companion object {
+        const val REQ_CAMERA_SINGLE_MODE            = 0x0002
+        const val REQ_CAMERA_MULTIPLE_MODE          = 0x0005
     }
 }

@@ -2,6 +2,7 @@ package me.shouheng.uix.common
 
 import android.app.Application
 import me.shouheng.uix.common.utils.ULog
+import me.shouheng.utils.UtilsApp
 
 /**
  * 用来初始化 UI 库，主要用来初始化 application 对象
@@ -34,6 +35,11 @@ object UIX {
 
     fun init(app: Application) {
         UIX.app = app
+    }
+
+    fun init(app: Application, initUtils: Boolean = true) {
+        UIX.app = app
+        if (initUtils) UtilsApp.init(app)
     }
 
     fun setDebug(debug: Boolean) {

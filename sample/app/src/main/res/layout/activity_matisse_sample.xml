@@ -72,8 +72,13 @@
                 android:layout_height="wrap_content"/>
 
             <me.shouheng.uix.widget.button.NormalButton
-                android:text="去拍照"
+                android:text="单拍模式"
                 android:onClick="onPhoto"
+                style="@style/MenuItemButton"/>
+
+            <me.shouheng.uix.widget.button.NormalButton
+                android:text="多拍模式"
+                android:onClick="onMultiple"
                 style="@style/MenuItemButton"/>
 
             <me.shouheng.uix.widget.text.NormalTextView

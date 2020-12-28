@@ -1,0 +1,38 @@
+<resources>
+    <string name="uix_retry">重試</string>
+    <string name="uix_offline_title">網頁打開失敗</string>
+    <string name="uix_offline_sub_title">請檢查網路連接並重新嘗試</string>
+
+    <string name="uix_not_allow_gif">不允許選擇 Gif</string>
+    <string name="uix_error_gif">Gif 的長和寬至少 %1$dpx 並且不小於 %2$sM</string>
+
+    <string name="uix_crash_restart">重啟應用</string>
+    <string name="uix_crash_log">錯誤日誌</string>
+    <string name="uix_crash_error_details">錯誤詳情</string>
+    <string name="uix_crash_error_info">錯誤資訊</string>
+    <string name="uix_crash_copy_log">複製日誌</string>
+    <string name="uix_crash_close">關閉</string>
+
+    <string name="uix_open_in_browser">在流覽器中打開</string>
+    <string name="uix_copy_link">複製鏈接</string>
+
+    <string name="uix_rating_dialog_title">為應用打分</string>
+    <string name="uix_rating_confirm">確定</string>
+    <string name="uix_rating_cancel">取消</string>
+    <string name="uix_rating_feedback_title">很抱歉，沒能讓你滿意</string>
+    <string name="uix_rating_feedback_content">你願意為我們提供一些回饋來幫助我們優化應用嗎？</string>
+    <string name="uix_rating_feedback_confirm">去回饋</string>
+    <string name="uix_rating_feedback_cancel">狠心拒絕</string>
+    <string name="uix_rating_market_title">很高興你喜歡我們的應用</string>
+    <string name="uix_rating_market_content">你願意到應用商店來評分來鼓勵開發者嗎？</string>
+    <string name="uix_rating_market_confirm">去評分</string>
+    <string name="uix_rating_market_cancel">狠心拒絕</string>
+    <string name="uix_rating_feedback_page_title">意見回饋</string>
+
+    <string name="uix_camera_voice_enable">快門聲</string>
+    <string name="uix_camera_show_grid">對齊網格</string>
+    <string name="uix_camera_show_ray">掃描線</string>
+    <string name="uix_camera_back_tip">若現在返回將無法獲取拍攝結果，確定返回？</string>
+    <string name="uix_camera_back_confirm">確定</string>
+    <string name="uix_camera_back_cancel">取消</string>
+</resources>

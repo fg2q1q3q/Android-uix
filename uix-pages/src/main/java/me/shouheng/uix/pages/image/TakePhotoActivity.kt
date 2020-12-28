@@ -21,12 +21,18 @@ import me.shouheng.icamera.enums.MediaType
 import me.shouheng.icamera.listener.CameraOpenListener
 import me.shouheng.icamera.listener.CameraPhotoListener
 import me.shouheng.icamera.listener.CameraVideoListener
+import me.shouheng.uix.common.anno.BottomButtonPosition
+import me.shouheng.uix.common.anno.DialogStyle
 import me.shouheng.uix.common.bean.TextStyleBean
 import me.shouheng.uix.common.utils.ULog
 import me.shouheng.uix.common.utils.f
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.widget.dialog.BeautyDialog
+import me.shouheng.uix.widget.dialog.content.IDialogContent
+import me.shouheng.uix.widget.dialog.content.SimpleContent
 import me.shouheng.uix.widget.dialog.content.SimpleList
+import me.shouheng.uix.widget.dialog.footer.SimpleFooter
+import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.utils.app.ActivityUtils
 import me.shouheng.utils.constant.ActivityDirection
 import me.shouheng.utils.ktx.*
@@ -295,8 +301,36 @@ class TakePhotoActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        ActivityUtils.overridePendingTransition(this, ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP)
+        val doBack = {
+            super.onBackPressed()
+            ActivityUtils.overridePendingTransition(this, ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP)
+        }
+        if (results.isEmpty()) {
+            doBack()
+        } else {
+            BeautyDialog.Builder()
+                    .setDialogStyle(DialogStyle.STYLE_WRAP)
+                    .setDarkDialog(true)
+                    .setDialogContent(SimpleContent.Builder()
+                            .setContentColor(Color.WHITE)
+                            .setContent(stringOf(R.string.uix_camera_back_tip))
+                            .build())
+                    .setDialogBottom(SimpleFooter.Builder()
+                            .setLeftText(stringOf(R.string.uix_camera_back_cancel))
+                            .setLeftTextStyle(TextStyleBean(Color.WHITE, 16f))
+                            .setRightText(stringOf(R.string.uix_camera_back_confirm))
+                            .setRightTextStyle(TextStyleBean(Color.WHITE, 16f))
+                            .setOnClickListener(object : SimpleFooter.OnClickListener {
+                                override fun onClick(dialog: BeautyDialog, buttonPos: Int, dialogTitle: IDialogTitle?, dialogContent: IDialogContent?) {
+                                    if (buttonPos == BottomButtonPosition.BUTTON_POS_RIGHT) {
+                                        doBack()
+                                    }
+                                    dialog.dismiss()
+                                }
+                            })
+                            .build())
+                    .build().show(supportFragmentManager, "back-options")
+        }
     }
 
     override fun onDestroy() {

@@ -1,35 +1,38 @@
 <resources>
-    <string name="uix_retry">重试</string>
-    <string name="uix_offline_title">网页打开失败</string>
-    <string name="uix_offline_sub_title">请检查网络连接并重新尝试</string>
+    <string name="uix_retry">Retry</string>
+    <string name="uix_offline_title">Offline</string>
+    <string name="uix_offline_sub_title">Check your network and try again</string>
 
-    <string name="uix_not_allow_gif">不允许选择 Gif</string>
-    <string name="uix_error_gif">Gif 的长和宽至少 %1$dpx 并且不小于 %2$sM</string>
+    <string name="uix_not_allow_gif">Gif is not allowed</string>
+    <string name="uix_error_gif">The size of Gif should be at lease %1$dpx and smaller than %2$sM</string>
 
-    <string name="uix_crash_restart">重启应用</string>
-    <string name="uix_crash_log">错误日志</string>
-    <string name="uix_crash_error_details">错误详情</string>
-    <string name="uix_crash_error_info">错误信息</string>
-    <string name="uix_crash_copy_log">复制日志</string>
-    <string name="uix_crash_close">关闭</string>
+    <string name="uix_crash_restart">Restart</string>
+    <string name="uix_crash_log">Crash log</string>
+    <string name="uix_crash_error_details">Error details</string>
+    <string name="uix_crash_error_info">Error message</string>
+    <string name="uix_crash_copy_log">Copy log</string>
+    <string name="uix_crash_close">Close</string>
 
-    <string name="uix_open_in_browser">在浏览器中打开</string>
-    <string name="uix_copy_link">复制链接</string>
+    <string name="uix_open_in_browser">Open in browser</string>
+    <string name="uix_copy_link">Copy link</string>
 
-    <string name="uix_rating_dialog_title">为应用打分</string>
-    <string name="uix_rating_confirm">确定</string>
-    <string name="uix_rating_cancel">取消</string>
-    <string name="uix_rating_feedback_title">很抱歉，没能让你满意</string>
-    <string name="uix_rating_feedback_content">你愿意为我们提供一些反馈来帮助我们优化应用吗？</string>
-    <string name="uix_rating_feedback_confirm">去反馈</string>
-    <string name="uix_rating_feedback_cancel">狠心拒绝</string>
-    <string name="uix_rating_market_title">很高兴你喜欢我们的应用</string>
-    <string name="uix_rating_market_content">你愿意到应用商店来评分来鼓励开发者吗？</string>
-    <string name="uix_rating_market_confirm">去评分</string>
-    <string name="uix_rating_market_cancel">狠心拒绝</string>
-    <string name="uix_rating_feedback_page_title">意见反馈</string>
+    <string name="uix_rating_dialog_title">Rate for App</string>
+    <string name="uix_rating_confirm">Confirm</string>
+    <string name="uix_rating_cancel">Cancel</string>
+    <string name="uix_rating_feedback_cancel">Reject</string>
+    <string name="uix_rating_feedback_confirm">Feedback</string>
+    <string name="uix_rating_feedback_content">Would you like to help us refine App by feedback?</string>
+    <string name="uix_rating_feedback_page_title">Feedback</string>
+    <string name="uix_rating_feedback_title">Sorry for not satisfying you</string>
+    <string name="uix_rating_market_cancel">Reject</string>
+    <string name="uix_rating_market_confirm">Rate</string>
+    <string name="uix_rating_market_content">Would you like to support developer by give a good rate in App store?</string>
+    <string name="uix_rating_market_title">Glad that you like our App</string>
 
     <string name="uix_camera_voice_enable">快门声</string>
     <string name="uix_camera_show_grid">对齐网格</string>
     <string name="uix_camera_show_ray">扫描线</string>
+    <string name="uix_camera_back_tip">若现在返回将无法获取拍摄结果，确定返回？</string>
+    <string name="uix_camera_back_confirm">确定</string>
+    <string name="uix_camera_back_cancel">取消</string>
 </resources>

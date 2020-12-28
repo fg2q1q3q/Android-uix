@@ -189,7 +189,8 @@ class TakePhotoActivity : AppCompatActivity() {
             val i = Intent().putStringArrayListExtra(EXTRA_FILE_PATH_OR_PATHS, paths)
             setResult(Activity.RESULT_OK, i)
         }
-        onBackPressed()
+        super.onBackPressed()
+        ActivityUtils.overridePendingTransition(this, ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP)
     }
 
     fun onSetting(v: View) {
@@ -294,7 +295,7 @@ class TakePhotoActivity : AppCompatActivity() {
                 }
                 onBackPressed()
             } catch (e: Exception) {
-                L.e(e); toast("$e")
+                ULog.e(e); toast("$e")
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

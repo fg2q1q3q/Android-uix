@@ -149,7 +149,7 @@
                 android:layout_gravity="center"
                 android:src="@drawable/uix_flip_camera_ios_24"
                 android:padding="8dp"
-                android:onClick="onSetting"
+                android:onClick="onSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

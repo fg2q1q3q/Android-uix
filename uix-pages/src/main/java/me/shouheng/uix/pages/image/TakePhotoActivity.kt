@@ -139,6 +139,8 @@ class TakePhotoActivity : AppCompatActivity() {
                             ULog.e("$e")
                         }
                     }
+                    // resume preview
+                    cv.resumePreview()
                 }
             })
         } else {
@@ -178,7 +180,7 @@ class TakePhotoActivity : AppCompatActivity() {
                 .originalEnable(true)
                 .maxOriginalSize(5)
                 .imageEngine(Glide4Engine())
-                .forResult(4567)
+                .forResult(REQ_PICK_FROM_ALBUM)
         ActivityUtils.overridePendingTransition(this, ActivityDirection.ANIMATE_FORWARD)
     }
 
@@ -280,7 +282,8 @@ class TakePhotoActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 4567 && resultCode == Activity.RESULT_OK) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQ_PICK_FROM_ALBUM && resultCode == Activity.RESULT_OK) {
             try {
                 val i = Intent().putExtras(data!!)
                 if (singleMode) {
@@ -298,7 +301,6 @@ class TakePhotoActivity : AppCompatActivity() {
                 ULog.e(e); toast("$e")
             }
         }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onBackPressed() {
@@ -340,6 +342,8 @@ class TakePhotoActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val REQ_PICK_FROM_ALBUM   = 4567
+
         private const val EXTRA_MEDIA_TYPE      = "__extra_uix_media_type"
         private const val EXTRA_SHOW_SWITCH     = "__extra_uix_show_switch"
         private const val EXTRA_SHOW_FLASH      = "__extra_uix_show_flash"
@@ -373,6 +377,10 @@ class TakePhotoActivity : AppCompatActivity() {
                 uris.addAll(paths.map(converter))
                 return uris
             }
+        }
+
+        fun isFromAlbum(data: Intent): Boolean {
+            return data.getBooleanExtra(EXTRA_FROM_ALBUM, false)
         }
 
         @RequiresPermission(allOf = [Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA])

@@ -55,8 +55,8 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
             val url = Matisse.obtainResult(data)[0]
             startActivity(Intent(this, ImageProcessActivity::class.java).putExtra("image", url))
         } else if (requestCode == REQ_CAMERA_MULTIPLE_MODE && resultCode == Activity.RESULT_OK) {
-            L.d("Paths: ${TakePhotoActivity.obtainPathResult(data!!)}")
-            val uris = TakePhotoActivity.obtainResult(data!!) { path -> PalmUtils.getUriFromFile(this, File(path)) }
+            L.d("Paths: ${TakePhotoActivity.obtainPathResult(data!!)}, From album: ${TakePhotoActivity.isFromAlbum(data)}")
+            val uris = TakePhotoActivity.obtainResult(data) { path -> PalmUtils.getUriFromFile(this, File(path)) }
             GalleryActivity.launch(context, ArrayList(uris), 0)
         }
     }

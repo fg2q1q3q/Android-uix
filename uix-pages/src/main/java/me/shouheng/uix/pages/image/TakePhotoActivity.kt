@@ -76,6 +76,7 @@ class TakePhotoActivity : AppCompatActivity() {
         cv.mediaType = mediaType
         cv.isVoiceEnable = SPUtils.get().getBoolean(SETTING_CAMERA_VOICE_ENABLED, true)
         cv.switchCamera(SPUtils.get().getInt(SETTING_CAMERA_FACE, CameraFace.FACE_REAR))
+        cv.flashMode = SPUtils.get().getInt(SETTING_CAMERA_FLASH_TYPE)
 
         val ivFlash = f<AppCompatImageView>(R.id.iv_flash)
         ivFlash.setImageResource(
@@ -249,6 +250,7 @@ class TakePhotoActivity : AppCompatActivity() {
             else -> FlashMode.FLASH_AUTO
         }
         cv.flashMode = mode
+        SPUtils.get().put(SETTING_CAMERA_FLASH_TYPE, mode)
         (v as AppCompatImageView).setImageResource(
                 when(mode) {
                     FlashMode.FLASH_AUTO -> R.drawable.uix_flash_auto_white_24dp
@@ -359,6 +361,7 @@ class TakePhotoActivity : AppCompatActivity() {
         const val SETTING_CAMERA_FACE           = "__uix_camera_face"
         const val SETTING_CAMERA_SHOW_GRID      = "__uix_camera_show_grid"
         const val SETTING_CAMERA_SHOW_RAY       = "__uix_camera_show_ray"
+        const val SETTING_CAMERA_FLASH_TYPE     = "__uix_camera_flash_type"
 
         fun obtainPathResult(data: Intent): List<String> {
             return if (data.getBooleanExtra(EXTRA_FROM_ALBUM, false)) {

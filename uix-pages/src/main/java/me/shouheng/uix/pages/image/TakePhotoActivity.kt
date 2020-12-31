@@ -81,8 +81,8 @@ class TakePhotoActivity : AppCompatActivity() {
         ivFlash.setImageResource(
                 when(cv.flashMode) {
                     FlashMode.FLASH_AUTO -> R.drawable.uix_flash_auto_white_24dp
-                    FlashMode.FLASH_OFF -> R.drawable.uix_flash_on_white_24dp
-                    FlashMode.FLASH_ON -> R.drawable.uix_flash_off_white_24dp
+                    FlashMode.FLASH_OFF -> R.drawable.uix_flash_off_white_24dp
+                    FlashMode.FLASH_ON -> R.drawable.uix_flash_on_white_24dp
                     else -> R.drawable.uix_flash_auto_white_24dp
                 }
         )
@@ -252,8 +252,8 @@ class TakePhotoActivity : AppCompatActivity() {
         (v as AppCompatImageView).setImageResource(
                 when(mode) {
                     FlashMode.FLASH_AUTO -> R.drawable.uix_flash_auto_white_24dp
-                    FlashMode.FLASH_OFF -> R.drawable.uix_flash_on_white_24dp
-                    FlashMode.FLASH_ON -> R.drawable.uix_flash_off_white_24dp
+                    FlashMode.FLASH_OFF -> R.drawable.uix_flash_off_white_24dp
+                    FlashMode.FLASH_ON -> R.drawable.uix_flash_on_white_24dp
                     else -> R.drawable.uix_flash_auto_white_24dp
                 }
         )

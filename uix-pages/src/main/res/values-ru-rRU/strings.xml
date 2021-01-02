@@ -1,0 +1,38 @@
+<resources>
+    <string name="uix_retry">Повторить</string>
+    <string name="uix_offline_sub_title">Проверьте свою сеть и попробуйте еще раз</string>
+    <string name="uix_offline_title">Не в сети</string>
+
+    <string name="uix_not_allow_gif">Gif не допускается</string>
+    <string name="uix_error_gif">"Размер Gif должен быть  %1$dpx и меньше %2$sM"</string>
+
+    <string name="uix_crash_close">Закрыть</string>
+    <string name="uix_crash_copy_log">Копировать лог</string>
+    <string name="uix_crash_error_details">Детали ошибки</string>
+    <string name="uix_crash_error_info">Сообщение об ошибке</string>
+    <string name="uix_crash_log">Лог ошибок</string>
+    <string name="uix_crash_restart">Рестарт</string>
+
+    <string name="uix_open_in_browser">Открыть в браузере</string>
+    <string name="uix_copy_link">Копировать ссылку</string>
+
+    <string name="uix_rating_cancel">Отменить</string>
+    <string name="uix_rating_confirm">Ок</string>
+    <string name="uix_rating_dialog_title">Оценить приложение</string>
+    <string name="uix_rating_feedback_cancel">Отклонить</string>
+    <string name="uix_rating_feedback_confirm">Обратная связь</string>
+    <string name="uix_rating_feedback_content">Хотите помочь нам улучшить приложение с помощью отзывов?</string>
+    <string name="uix_rating_feedback_page_title">Обратная связь</string>
+    <string name="uix_rating_feedback_title">Извините за то, что разочаровал вас</string>
+    <string name="uix_rating_market_cancel">Отклонить</string>
+    <string name="uix_rating_market_confirm">Оценить</string>
+    <string name="uix_rating_market_content">Хотите поддержать разработчика, поставив хорошую оценку в магазине приложений?</string>
+    <string name="uix_rating_market_title">Рад, что вам понравилось наше приложение</string>
+
+    <string name="uix_camera_back_cancel">отменить</string>
+    <string name="uix_camera_back_confirm">Ок</string>
+    <string name="uix_camera_back_tip">Если вы вернетесь сейчас, то не сможете получить результаты стрельбы. Вы обязательно вернетесь?</string>
+    <string name="uix_camera_show_grid">Привязки к сетке</string>
+    <string name="uix_camera_show_ray">Линия сканирования</string>
+    <string name="uix_camera_voice_enable">Звук затвора</string>
+</resources>

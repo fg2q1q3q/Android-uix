@@ -29,10 +29,10 @@
     <string name="uix_rating_market_content">Would you like to support developer by give a good rate in App store?</string>
     <string name="uix_rating_market_title">Glad that you like our App</string>
 
-    <string name="uix_camera_voice_enable">快门声</string>
-    <string name="uix_camera_show_grid">对齐网格</string>
-    <string name="uix_camera_show_ray">扫描线</string>
-    <string name="uix_camera_back_tip">若现在返回将无法获取拍摄结果，确定返回？</string>
-    <string name="uix_camera_back_confirm">确定</string>
-    <string name="uix_camera_back_cancel">取消</string>
+    <string name="uix_camera_voice_enable">Voice</string>
+    <string name="uix_camera_show_grid">Show Grid</string>
+    <string name="uix_camera_show_ray">Scan Ray</string>
+    <string name="uix_camera_back_tip">The captured images will be discard, still back?</string>
+    <string name="uix_camera_back_confirm">Confirm</string>
+    <string name="uix_camera_back_cancel">Cancel</string>
 </resources>

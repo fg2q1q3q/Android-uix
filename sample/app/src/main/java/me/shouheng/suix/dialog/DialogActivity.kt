@@ -31,6 +31,7 @@ import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.image.CircleImageView
 import me.shouheng.uix.widget.rv.EmptyView
+import me.shouheng.uix.widget.rv.onItemDebouncedClick
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.utils.ui.ViewUtils
@@ -257,7 +258,7 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .setEmptyView(ev)
                     .setAdapter(adapter)
                     .build()
-            adapter.setOnItemClickListener { _, _, pos ->
+            adapter.onItemDebouncedClick { _, _, pos ->
                 val item = adapter.data[pos]
                 toast("${item.id} : ${item.content}")
                 customList?.getDialog()?.dismiss()

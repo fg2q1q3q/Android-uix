@@ -18,6 +18,7 @@ import me.shouheng.icamera.CameraView
 import me.shouheng.icamera.enums.CameraFace
 import me.shouheng.icamera.enums.FlashMode
 import me.shouheng.icamera.enums.MediaType
+import me.shouheng.icamera.listener.CameraCloseListener
 import me.shouheng.icamera.listener.CameraOpenListener
 import me.shouheng.icamera.listener.CameraPhotoListener
 import me.shouheng.icamera.listener.CameraVideoListener
@@ -110,11 +111,11 @@ class TakePhotoActivity : AppCompatActivity() {
         if (cv.mediaType == MediaType.TYPE_PICTURE) {
             val file = if (singleMode) File(path) else File(path, "${now()}.jpg")
             cv.takePicture(file, object : CameraPhotoListener {
-                override fun onCaptureFailed(throwable: Throwable?) {
+                override fun onCaptureFailed(throwable: Throwable) {
                     ULog.e("" + throwable)
                 }
 
-                override fun onPictureTaken(data: ByteArray?, picture: File) {
+                override fun onPictureTaken(data: ByteArray, picture: File) {
                     if (singleMode) {
                         val i = Intent().putStringArrayListExtra(EXTRA_FILE_PATH_OR_PATHS, arrayListOf(path))
                         setResult(Activity.RESULT_OK, i)
@@ -150,14 +151,14 @@ class TakePhotoActivity : AppCompatActivity() {
                     recording.set(true)
                 }
 
-                override fun onVideoRecordStop(file: File?) {
+                override fun onVideoRecordStop(file: File) {
                     recording.set(false)
                     val i = Intent().putStringArrayListExtra(EXTRA_FILE_PATH_OR_PATHS, arrayListOf(path))
                     setResult(Activity.RESULT_OK, i)
                     onBackPressed()
                 }
 
-                override fun onVideoRecordError(throwable: Throwable?) {
+                override fun onVideoRecordError(throwable: Throwable) {
                     recording.set(false)
                     ULog.e("" + throwable)
                 }
@@ -269,7 +270,7 @@ class TakePhotoActivity : AppCompatActivity() {
                     ULog.d("onCameraOpened")
                 }
 
-                override fun onCameraOpenError(throwable: Throwable?) {
+                override fun onCameraOpenError(throwable: Throwable) {
                     ULog.e("" + throwable)
                 }
             })
@@ -278,9 +279,11 @@ class TakePhotoActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        cv.closeCamera {
-            ULog.d("closeCamera : $it")
-        }
+        cv.closeCamera(object : CameraCloseListener {
+            override fun onCameraClosed(cameraFace: Int) {
+                ULog.d("closeCamera : $cameraFace")
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

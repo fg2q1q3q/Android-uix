@@ -11,36 +11,31 @@ import android.view.MotionEvent
 import android.view.View
 
 /**
- * Sample:
+ * Sample code:
  *
  * ```kotlin
- * mAdapter = new FabSortAdapter(this, UserPreferences.getInstance().getFabSortResult());
- * getBinding().rvFabs.setAdapter(mAdapter);
- *
- * DragSortRecycler dragSortRecycler = new DragSortRecycler();
- * dragSortRecycler.setViewHandleId(R.id.iv_drag_handler);
- *
- * dragSortRecycler.setOnItemMovedListener((from, to) -> {
- *     saved = false;
- *     FabSortItem fabSortItem = mAdapter.getFabSortItemAt(from);
- *     mAdapter.removeFabSortItemAt(from);
- *     mAdapter.addFabSortItemTo(to, fabSortItem);
- *     mAdapter.notifyDataSetChanged();
- * });
- *
- * getBinding().rvFabs.addItemDecoration(dragSortRecycler);
- * getBinding().rvFabs.addOnItemTouchListener(dragSortRecycler);
- * getBinding().rvFabs.setLayoutManager(new LinearLayoutManager(this));
- * getBinding().rvFabs.addOnItemTouchListener(dragSortRecycler);
- * getBinding().rvFabs.addOnScrollListener(dragSortRecycler.getScrollListener());
- * getBinding().rvFabs.getLayoutManager().scrollToPosition(0);
+ * adapter = getAdapter(R.layout.item_sort, { helper, item: SortableItem -> /*...*/}, getDataList())
+ * val dragSortRecycler = DragSortRecycler()
+ * dragSortRecycler.setViewHandleId(R.id.iv_handler)
+ * dragSortRecycler.setOnItemMovedListener(object : DragSortRecycler.OnItemMovedListener {
+ *     override fun onItemMoved(from: Int, to: Int) {
+ *         try {
+ *             val project = adapter.getItem(from)!!
+ *             adapter.data.removeAt(from)
+ *             adapter.data.add(to, project)
+ *             adapter.notifyDataSetChanged()
+ *         } catch (e: Exception) {
+ *             L.e("$e")
+ *         }
+ *     }
+ * })
+ * binding.rv.addItemDecoration(dragSortRecycler)
+ * binding.rv.addOnItemTouchListener(dragSortRecycler)
+ * binding.rv.addOnScrollListener(dragSortRecycler.scrollListener)
  * ```
  */
 class DragSortRecycler : RecyclerView.ItemDecoration(), RecyclerView.OnItemTouchListener {
 
-    private val TAG = "DragSortRecycler"
-
-    private val DEBUG = false
     private var moveInterface: OnItemMovedListener? = null
     private var dragStateChangedListener: OnDragStateChangedListener? = null
     private var bgColor = Paint()
@@ -73,8 +68,7 @@ class DragSortRecycler : RecyclerView.ItemDecoration(), RecyclerView.OnItemTouch
     private var isDragging: Boolean = false
 
     private fun debugLog(log: String) {
-        if (DEBUG)
-            Log.d(TAG, log)
+        if (DEBUG) Log.d(TAG, log)
     }
 
     /*
@@ -410,5 +404,10 @@ class DragSortRecycler : RecyclerView.ItemDecoration(), RecyclerView.OnItemTouch
     interface OnDragStateChangedListener {
         fun onDragStart()
         fun onDragStop()
+    }
+
+    companion object {
+        const val TAG = "DragSortRecycler"
+        val DEBUG = false
     }
 }

@@ -2,14 +2,16 @@ package me.shouheng.uix.pages.setting
 
 import me.shouheng.uix.common.bean.TextStyleBean
 
-class SettingSwitchItem(private val id: Int,
-                        var editable: Boolean = true,
-                        var loading: Boolean = false,
-                        val lineColor: Int? = null,
-                        var title: CharSequence? = null,
-                        var enable: Boolean = false,
-                        var titleStyle: TextStyleBean = TextStyleBean(),
-                        var onCheckStateChangeListener: OnStateChangeListener? = null) : ISettingItem {
+class SettingSwitchItem(
+        private val id: Int,
+        var editable: Boolean = true,
+        var loading: Boolean = false,
+        val lineColor: Int? = null,
+        var title: CharSequence? = null,
+        var enable: Boolean = false,
+        var titleStyle: TextStyleBean = TextStyleBean(),
+        var onCheckStateChangeListener: OnStateChangeListener? = null
+) : ISettingItem {
 
     override fun getId() = id
 

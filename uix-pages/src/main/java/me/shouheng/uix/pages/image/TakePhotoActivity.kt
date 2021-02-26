@@ -213,33 +213,31 @@ class TakePhotoActivity : AppCompatActivity() {
                 .setDialogContent(SimpleList.builder()
                         .setTextStyle(TextStyleBean(textColor = Color.WHITE, textSize = 18f))
                         .setList(list)
-                        .setOnItemClickListener(object : SimpleList.OnItemClickListener {
-                            override fun onItemClick(dialog: BeautyDialog, item: SimpleList.Item) {
-                                if (item.id == 0) {
-                                    cv.isVoiceEnable = !cv.isVoiceEnable
-                                    SPUtils.get().put(SETTING_CAMERA_VOICE_ENABLED, cv.isVoiceEnable)
-                                } else if (item.id == 1) {
-                                    if (flRay.visibility == View.VISIBLE) {
-                                        flRay.visibility = View.GONE
-                                        SPUtils.get().put(SETTING_CAMERA_SHOW_RAY, false)
-                                    } else {
-                                        flRay.visibility = View.VISIBLE
-                                        SPUtils.get().put(SETTING_CAMERA_SHOW_RAY, true)
-                                    }
-                                } else if (item.id == 2) {
-                                    if (vLines.visibility == View.VISIBLE) {
-                                        vLines.visibility = View.GONE
-                                        hLines.visibility = View.GONE
-                                        SPUtils.get().put(SETTING_CAMERA_SHOW_GRID, false)
-                                    } else {
-                                        vLines.visibility = View.VISIBLE
-                                        hLines.visibility = View.VISIBLE
-                                        SPUtils.get().put(SETTING_CAMERA_SHOW_GRID, true)
-                                    }
+                        .setOnItemClickListener { dialog, item ->
+                            if (item.id == 0) {
+                                cv.isVoiceEnable = !cv.isVoiceEnable
+                                SPUtils.get().put(SETTING_CAMERA_VOICE_ENABLED, cv.isVoiceEnable)
+                            } else if (item.id == 1) {
+                                if (flRay.visibility == View.VISIBLE) {
+                                    flRay.visibility = View.GONE
+                                    SPUtils.get().put(SETTING_CAMERA_SHOW_RAY, false)
+                                } else {
+                                    flRay.visibility = View.VISIBLE
+                                    SPUtils.get().put(SETTING_CAMERA_SHOW_RAY, true)
                                 }
-                                dialog.dismiss()
+                            } else if (item.id == 2) {
+                                if (vLines.visibility == View.VISIBLE) {
+                                    vLines.visibility = View.GONE
+                                    hLines.visibility = View.GONE
+                                    SPUtils.get().put(SETTING_CAMERA_SHOW_GRID, false)
+                                } else {
+                                    vLines.visibility = View.VISIBLE
+                                    hLines.visibility = View.VISIBLE
+                                    SPUtils.get().put(SETTING_CAMERA_SHOW_GRID, true)
+                                }
                             }
-                        }).build())
+                            dialog.dismiss()
+                        }.build())
                 .build().show(supportFragmentManager, "setting")
     }
 

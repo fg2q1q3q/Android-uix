@@ -27,8 +27,6 @@ import me.shouheng.uix.common.utils.UView
 import me.shouheng.uix.widget.R
 import me.shouheng.uix.widget.dialog.content.IDialogContent
 import me.shouheng.uix.widget.dialog.footer.IDialogFooter
-import me.shouheng.uix.widget.dialog.listener.OnDismissListener
-import me.shouheng.uix.widget.dialog.listener.OnShowListener
 import me.shouheng.uix.widget.dialog.title.IDialogTitle
 
 /**
@@ -73,8 +71,8 @@ class BeautyDialog : DialogFragment() {
     private var backCancelable = GlobalConfig.backCancelable
     private var customBackground = false
 
-    private var onDismissListener: OnDismissListener? = null
-    private var onShowListener: OnShowListener? = null
+    private var onDismissListener: ((dialog: BeautyDialog) -> Unit)? = null
+    private var onShowListener: ((dialog: BeautyDialog) -> Unit)? = null
 
     private var fixedHeight = 0
     private var dialogMargin = GlobalConfig.margin
@@ -152,7 +150,7 @@ class BeautyDialog : DialogFragment() {
 
         // fix 2020-07-05 : invalid
         // dialog.setOnDismissListener { onDismissListener?.onOnDismiss(this) }
-        dialog.setOnShowListener { onShowListener?.onShow(this) }
+        dialog.setOnShowListener { onShowListener?.invoke(this) }
 
         dialog.setCanceledOnTouchOutside(outCancelable)
         dialog.setCancelable(backCancelable)
@@ -170,7 +168,7 @@ class BeautyDialog : DialogFragment() {
 
     override fun onDismiss(dialog: DialogInterface?) {
         super.onDismiss(dialog)
-        onDismissListener?.onOnDismiss(this)
+        onDismissListener?.invoke(this)
     }
 
     class Builder {
@@ -186,8 +184,8 @@ class BeautyDialog : DialogFragment() {
         private var backCancelable = GlobalConfig.backCancelable
         private var customBackground = false
 
-        private var onDismissListener: OnDismissListener? = null
-        private var onShowListener: OnShowListener? = null
+        private var onDismissListener: ((dialog: BeautyDialog) -> Unit)? = null
+        private var onShowListener: ((dialog: BeautyDialog) -> Unit)? = null
 
         private var fixedHeight = 0
         private var dialogMargin: Int = GlobalConfig.margin
@@ -229,27 +227,23 @@ class BeautyDialog : DialogFragment() {
             return this
         }
 
-        fun setOnDismissListener(onDismissListener: OnDismissListener): Builder {
+        fun onDismiss(onDismissListener: (dialog: BeautyDialog) -> Unit): Builder {
             this.onDismissListener = onDismissListener
             return this
         }
 
-        fun setOnShowListener(onShowListener: OnShowListener): Builder {
+        fun onShow(onShowListener: (dialog: BeautyDialog) -> Unit): Builder {
             this.onShowListener = onShowListener
             return this
         }
 
-        /**
-         * 对话框"内容"的固定高度，单位 px
-         */
+        /** 对话框"内容"的固定高度，单位 px */
         fun setFixedHeight(@Px fixedHeight: Int): Builder {
             this.fixedHeight = fixedHeight
             return this
         }
 
-        /**
-         * 对话框边距，单位 px
-         */
+        /** 对话框边距，单位 px */
         fun setDialogMargin(dialogMargin: Int): Builder {
             this.dialogMargin = dialogMargin
             return this
@@ -271,9 +265,7 @@ class BeautyDialog : DialogFragment() {
             return this
         }
 
-        /**
-         * 对话框的默认背景的边角的大小，单位：px
-         */
+        /** 对话框的默认背景的边角的大小，单位：px */
         fun setDialogCornerRadius(dialogCornerRadius: Int): Builder {
             this.dialogCornerRadius = dialogCornerRadius
             return this

@@ -26,8 +26,6 @@ import me.shouheng.uix.pages.rate.RatingManager
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
-import me.shouheng.uix.widget.dialog.listener.OnDismissListener
-import me.shouheng.uix.widget.dialog.listener.OnShowListener
 import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.image.CircleImageView
 import me.shouheng.uix.widget.rv.EmptyView
@@ -55,16 +53,8 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnNoBg.setOnClickListener {
             BeautyDialog.Builder()
-                    .setOnDismissListener(object : OnDismissListener {
-                        override fun onOnDismiss(dialog: BeautyDialog) {
-                            toast("Dismissed")
-                        }
-                    })
-                    .setOnShowListener(object : OnShowListener {
-                        override fun onShow(dialog: BeautyDialog) {
-                            toast("Showed")
-                        }
-                    })
+                    .onDismiss { toast("Dismissed") }
+                    .onShow { toast("Showed") }
                     .setDialogStyle(STYLE_WRAP)
                     .setDialogBackground(null)
                     .setDialogContent(UpgradeContent())

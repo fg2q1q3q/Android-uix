@@ -2,27 +2,23 @@ package me.shouheng.uix.widget.dialog.title
 
 import android.content.Context
 import android.view.Gravity
-import android.view.View
 import me.shouheng.uix.common.bean.TextStyleBean
-import me.shouheng.uix.widget.R
-import me.shouheng.uix.widget.text.NormalTextView
+import me.shouheng.uix.widget.databinding.UixDialogTitleSimpleBinding
 
 /**
- * 对话框标题的基类
+ * Simple dialog title
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 09:46
  */
-class SimpleTitle private constructor(): IDialogTitle {
+class SimpleTitle private constructor(): ViewBindingDialogTitle<UixDialogTitleSimpleBinding>() {
 
     private var title: CharSequence? = null
     private var titleStyle: TextStyleBean = GlobalConfig.titleStyle
 
-    override fun getView(ctx: Context): View {
-        val tv = View.inflate(ctx, R.layout.uix_dialog_title_simple, null) as NormalTextView
-        tv.text = title
-        tv.setStyle(titleStyle, GlobalConfig.titleStyle)
-        return tv
+    override fun doCreateView(ctx: Context) {
+        binding.tv.text = title
+        binding.tv.setStyle(titleStyle, GlobalConfig.titleStyle)
     }
 
     class Builder {
@@ -47,14 +43,14 @@ class SimpleTitle private constructor(): IDialogTitle {
         }
     }
 
+    object GlobalConfig {
+        var titleStyle = TextStyleBean().apply { gravity=Gravity.CENTER }
+    }
+
     companion object {
 
         fun get(title: CharSequence): SimpleTitle = Builder().setTitle(title).build()
 
         fun builder(): Builder = Builder()
-    }
-
-    object GlobalConfig {
-        var titleStyle = TextStyleBean().apply { gravity=Gravity.CENTER }
     }
 }

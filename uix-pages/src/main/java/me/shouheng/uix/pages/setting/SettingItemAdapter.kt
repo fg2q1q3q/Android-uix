@@ -24,14 +24,15 @@ import me.shouheng.uix.widget.text.NormalTextView
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-27 18:16
  */
-class SettingItemAdapter(list: List<ISettingItem>,
-                         /** 用来统一更换所有分割线的颜色 */
-                         private val lineColor: Int = Color.TRANSPARENT,
-                         /** 用来统一更换所有的 > 按钮的图标 */
-                         private val moreDrawable: Drawable? = null,
-                         /** 用来统一更换所有条目的背景颜色 */
-                         private val itemBackground: Int = Color.TRANSPARENT)
-    : BaseMultiItemQuickAdapter<ISettingItem, BaseViewHolder>(list) {
+class SettingItemAdapter(
+        list: List<ISettingItem>,
+        /** 用来统一更换所有分割线的颜色 */
+        private val lineColor: Int = Color.TRANSPARENT,
+        /** 用来统一更换所有的 > 按钮的图标 */
+        private val moreDrawable: Drawable? = null,
+        /** 用来统一更换所有条目的背景颜色 */
+        private val itemBackground: Int = Color.TRANSPARENT
+) : BaseMultiItemQuickAdapter<ISettingItem, BaseViewHolder>(list) {
     private val defaultMoreDrawable = URes.getDrawable(R.drawable.uix_ic_more)
     init {
         addItemType(TYPE_TEXT, R.layout.uix_item_setting_text)

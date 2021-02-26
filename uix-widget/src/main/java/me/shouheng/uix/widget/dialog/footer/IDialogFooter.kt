@@ -7,30 +7,22 @@ import me.shouheng.uix.widget.dialog.content.IDialogContent
 import me.shouheng.uix.widget.dialog.title.IDialogTitle
 
 /**
- * 对话框地步的抽象接口
+ * Dialog footer interace
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 16:15
  */
 interface IDialogFooter {
 
-    /**
-     * 获取控件
-     */
+    /** Get the dialog footer view */
     fun getView(ctx: Context): View
 
-    /**
-     * 传递 Dialog 给当前的控件，以便当前控件内部使用
-     */
+    /** Override to get the dialog */
     fun setDialog(dialog: BeautyDialog) { }
 
-    /**
-     * 设置对话框的标题
-     */
+    /** Override to get the dialog title */
     fun setDialogTitle(dialogTitle: IDialogTitle?) { }
 
-    /**
-     * 设置对话框内容
-     */
+    /** Override to get the dialog content */
     fun setDialogContent(dialogContent: IDialogContent?) { }
 }

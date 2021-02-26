@@ -2,10 +2,12 @@ package me.shouheng.uix.pages.setting
 
 import android.support.annotation.ColorInt
 
-class SettingDividerItem(private val id: Int,
-                         var editable: Boolean = false,
-                         var loading: Boolean = false,
-                         @ColorInt var bgColor: Int? = null) : ISettingItem {
+class SettingDividerItem(
+        private val id: Int,
+        var editable: Boolean = false,
+        var loading: Boolean = false,
+        @ColorInt var bgColor: Int? = null
+) : ISettingItem {
 
     override fun getId() = id
 

@@ -5,17 +5,15 @@ import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.support.annotation.Size
 import android.view.Gravity
-import android.view.View
-import android.widget.TextView
-import me.shouheng.uix.widget.R
+import me.shouheng.uix.widget.databinding.UixDialogContentSimpleBinding
 
 /**
- * 对话框内容的基类
+ * Simple dialog content for text
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-13 09:46
  */
-class SimpleContent private constructor(): IDialogContent {
+class SimpleContent private constructor(): ViewBindingDialogContent<UixDialogContentSimpleBinding>() {
 
     private var content: CharSequence? = null
     @ColorInt private var contentColor: Int? = GlobalConfig.contentTextColor
@@ -23,14 +21,12 @@ class SimpleContent private constructor(): IDialogContent {
     private var typeFace: Int = GlobalConfig.contentTypeFace
     private var gravity: Int = GlobalConfig.contentGravity
 
-    override fun getView(ctx: Context): View {
-        val tv = View.inflate(ctx, R.layout.uix_dialog_content_simple, null) as TextView
-        tv.text = content
-        tv.textSize = contentSize
-        tv.gravity = gravity
-        if (contentColor != null) tv.setTextColor(contentColor!!)
-        tv.setTypeface(null, typeFace)
-        return tv
+    override fun doCreateView(ctx: Context) {
+        binding.tv.text = content
+        binding.tv.textSize = contentSize
+        binding.tv.gravity = gravity
+        binding.tv.setTypeface(null, typeFace)
+        contentColor?.let { binding.tv.setTextColor(it) }
     }
 
     class Builder {

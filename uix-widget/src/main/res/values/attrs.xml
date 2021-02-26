@@ -174,4 +174,21 @@
     </declare-styleable>
     <!--////////////////////////////////////////////////////////////////////////////////////////-->
 
+    <declare-styleable name="MultiViewPager">
+        <!-- Child view inside a page to match the page size against. -->
+        <attr name="matchChildWidth" format="reference" />
+        <!-- Maximum size. -->
+        <attr name="android:maxWidth" />
+        <!-- Maximum size. -->
+        <attr name="android:maxHeight" />
+    </declare-styleable>
+
+    <declare-styleable name="Timeline">
+        <attr name="atom_size" format="dimension" />
+        <attr name="line_size" format="dimension" />
+        <attr name="start_line" format="color|reference" />
+        <attr name="finish_line" format="color|reference" />
+        <attr name="atom" format="color|reference" />
+    </declare-styleable>
+
 </resources>

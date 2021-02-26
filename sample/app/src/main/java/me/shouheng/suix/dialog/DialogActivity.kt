@@ -9,8 +9,9 @@ import com.chad.library.adapter.base.BaseViewHolder
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityDialogBinding
 import me.shouheng.uix.common.anno.AddressSelectLevel.Companion.LEVEL_AREA
-import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.BUTTON_POS_LEFT
-import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.isLeft
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.isMiddle
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.isRight
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_DOUBLE
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_TRIPLE
@@ -25,13 +26,12 @@ import me.shouheng.uix.pages.rate.RatingManager
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
-import me.shouheng.uix.widget.dialog.listener.OnDismissListener
-import me.shouheng.uix.widget.dialog.listener.OnShowListener
-import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.image.CircleImageView
 import me.shouheng.uix.widget.rv.EmptyView
+import me.shouheng.uix.widget.rv.getAdapter
 import me.shouheng.uix.widget.rv.onItemDebouncedClick
+import me.shouheng.uix.widget.text.NormalTextView
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.utils.ui.ViewUtils
@@ -53,16 +53,8 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
     override fun doCreateView(savedInstanceState: Bundle?) {
         binding.btnNoBg.setOnClickListener {
             BeautyDialog.Builder()
-                    .setOnDismissListener(object : OnDismissListener {
-                        override fun onOnDismiss(dialog: BeautyDialog) {
-                            toast("Dismissed")
-                        }
-                    })
-                    .setOnShowListener(object : OnShowListener {
-                        override fun onShow(dialog: BeautyDialog) {
-                            toast("Showed")
-                        }
-                    })
+                    .onDismiss { toast("Dismissed") }
+                    .onShow { toast("Showed") }
                     .setDialogStyle(STYLE_WRAP)
                     .setDialogBackground(null)
                     .setDialogContent(UpgradeContent())
@@ -86,11 +78,9 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                                 textColor = Color.RED
                                 typeFace = Typeface.BOLD
                             })
-                            .setOnClickListener(object : SimpleFooter.OnClickListener {
-                                override fun onClick(dialog: BeautyDialog, buttonPos: Int, dialogTitle: IDialogTitle?, dialogContent: IDialogContent?) {
-                                    dialog.dismiss()
-                                }
-                            }).build())
+                            .setOnClickListener { dialog, _, _, _ ->
+                                dialog.dismiss()
+                            }.build())
                     .build().show(supportFragmentManager, "normal")
         }
         binding.btnNormalTop.setOnClickListener {
@@ -150,6 +140,19 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                             .setLeftText("Left")
                             .setMiddleText("Middle")
                             .setRightText("Right")
+                            .setOnClickListener { _, p, _, _ ->
+                                when {
+                                    isLeft(p) -> {
+                                        toast("Left")
+                                    }
+                                    isRight(p) -> {
+                                        toast("Right")
+                                    }
+                                    isMiddle(p) -> {
+                                        toast("Middle")
+                                    }
+                                }
+                            }
                             .build())
                     .build().show(supportFragmentManager, "editor")
         }
@@ -175,14 +178,12 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                             .setRightTextStyle(TextStyleBean().apply {
                                 textColor = Color.RED
                             })
-                            .setOnClickListener(object : SimpleFooter.OnClickListener {
-                                override fun onClick(dialog: BeautyDialog, buttonPos: Int, dialogTitle: IDialogTitle?, dialogContent: IDialogContent?) {
-                                    if (buttonPos == BUTTON_POS_LEFT) dialog.dismiss()
-                                    else if (buttonPos == BUTTON_POS_RIGHT) {
-                                        toast((dialogContent as SimpleEditor).getContent())
-                                    }
+                            .setOnClickListener { dialog, position, _, content ->
+                                if (isLeft(position)) dialog.dismiss()
+                                else if (isRight(position)) {
+                                    toast((content as SimpleEditor).getContent())
                                 }
-                            }).build())
+                            }.build())
                     .build().show(supportFragmentManager, "editor")
         }
         binding.btnListNormal.setOnClickListener {
@@ -213,13 +214,10 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                                             ResUtils.getDrawable(R.drawable.uix_loading),
                                             Gravity.END)
                             ))
-                            .setOnItemClickListener(object : SimpleList.OnItemClickListener {
-                                override fun onItemClick(dialog: BeautyDialog, item: SimpleList.Item) {
-                                    toast("${item.id} : ${item.content}")
-                                    dialog.dismiss()
-                                }
-                            })
-                            .build())
+                            .setOnItemClickListener { dialog, item ->
+                                toast("${item.id} : ${item.content}")
+                                dialog.dismiss()
+                            }.build())
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnAddress.setOnClickListener {
@@ -229,13 +227,10 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .setDialogTitle(SimpleTitle.get("地址对话框"))
                     .setDialogContent(AddressContent.Builder()
                             .setMaxLevel(LEVEL_AREA)
-                            .setOnAddressSelectedListener(object: AddressContent.OnAddressSelectedListener {
-                                override fun onAddressSelected(dialog: BeautyDialog, province: String, city: String?, area: String?) {
-                                    toast("$province - $city - $area")
-                                    dialog.dismiss()
-                                }
-                            })
-                            .build())
+                            .setOnAddressSelectedListener { dialog: BeautyDialog, province: String, city: String?, area: String? ->
+                                toast("$province - $city - $area")
+                                dialog.dismiss()
+                            }.build())
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnContent.setOnClickListener {
@@ -247,7 +242,12 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnCustomList.setOnClickListener {
-            val adapter = SimpleList.Adapter(emptyList(), TextStyleBean().apply { textColor=Color.BLACK })
+            val adapter = getAdapter(R.layout.uix_dialog_content_list_simple_item, { helper, item: SimpleList.Item ->
+                val tv = helper.getView<NormalTextView>(me.shouheng.uix.widget.R.id.tv)
+                tv.text = item.content
+                item.gravity?.let { tv.gravity = it }
+                item.icon?.let { helper.setImageDrawable(me.shouheng.uix.widget.R.id.iv, it) }
+            }, emptyList())
             val ev = EmptyView.Builder(this)
                     .setEmptyLoadingTips("loading")
                     .setEmptyLoadingTipsColor(Color.BLUE)
@@ -312,11 +312,9 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .setDialogPosition(POS_BOTTOM)
                     .setDialogTitle(SimpleTitle.get("简单的网格"))
                     .setDialogContent(
-                            SimpleGrid.Builder(R.layout.item_tool_color, object : SimpleGrid.ViewHolderConverter<Int> {
-                                override fun convert(helper: BaseViewHolder, item: Int) {
-                                    helper.getView<CircleImageView>(R.id.iv).setFillingCircleColor(item)
-                                }
-                            }).setList(listOf(
+                            SimpleGrid.Builder(R.layout.item_tool_color) { helper: BaseViewHolder, item: Int ->
+                                helper.getView<CircleImageView>(R.id.iv).setFillingCircleColor(item)
+                            }.setList(listOf(
                                     ResUtils.getColor(R.color.tool_item_color_1),
                                     ResUtils.getColor(R.color.tool_item_color_2),
                                     ResUtils.getColor(R.color.tool_item_color_3),
@@ -329,11 +327,9 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                                     ResUtils.getColor(R.color.tool_item_color_10),
                                     ResUtils.getColor(R.color.tool_item_color_11),
                                     ResUtils.getColor(R.color.tool_item_color_12)
-                            )).setOnItemClickListener(object : SimpleGrid.OnItemClickListener<Int> {
-                                override fun onItemClick(dialog: BeautyDialog, item: Int) {
-                                    toast("$item")
-                                }
-                            }).setSpanCount(5).build()
+                            )).setOnItemClickListener { _: BeautyDialog, item: Int ->
+                                toast("$item")
+                            }.setSpanCount(5).build()
                     ).build().show(supportFragmentManager, "grid")
         }
     }

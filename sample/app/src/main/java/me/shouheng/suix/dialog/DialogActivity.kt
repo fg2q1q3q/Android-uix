@@ -9,8 +9,9 @@ import com.chad.library.adapter.base.BaseViewHolder
 import me.shouheng.suix.R
 import me.shouheng.suix.databinding.ActivityDialogBinding
 import me.shouheng.uix.common.anno.AddressSelectLevel.Companion.LEVEL_AREA
-import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.BUTTON_POS_LEFT
-import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.BUTTON_POS_RIGHT
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.isLeft
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.isMiddle
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.isRight
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_DOUBLE
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_TRIPLE
@@ -27,7 +28,6 @@ import me.shouheng.uix.widget.dialog.content.*
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
 import me.shouheng.uix.widget.dialog.listener.OnDismissListener
 import me.shouheng.uix.widget.dialog.listener.OnShowListener
-import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.image.CircleImageView
 import me.shouheng.uix.widget.rv.EmptyView
@@ -88,11 +88,9 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                                 textColor = Color.RED
                                 typeFace = Typeface.BOLD
                             })
-                            .setOnClickListener(object : SimpleFooter.OnClickListener {
-                                override fun onClick(dialog: BeautyDialog, buttonPos: Int, dialogTitle: IDialogTitle?, dialogContent: IDialogContent?) {
-                                    dialog.dismiss()
-                                }
-                            }).build())
+                            .setOnClickListener { dialog, _, _, _ ->
+                                dialog.dismiss()
+                            }.build())
                     .build().show(supportFragmentManager, "normal")
         }
         binding.btnNormalTop.setOnClickListener {
@@ -152,6 +150,19 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                             .setLeftText("Left")
                             .setMiddleText("Middle")
                             .setRightText("Right")
+                            .setOnClickListener { _, p, _, _ ->
+                                when {
+                                    isLeft(p) -> {
+                                        toast("Left")
+                                    }
+                                    isRight(p) -> {
+                                        toast("Right")
+                                    }
+                                    isMiddle(p) -> {
+                                        toast("Middle")
+                                    }
+                                }
+                            }
                             .build())
                     .build().show(supportFragmentManager, "editor")
         }
@@ -177,14 +188,12 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                             .setRightTextStyle(TextStyleBean().apply {
                                 textColor = Color.RED
                             })
-                            .setOnClickListener(object : SimpleFooter.OnClickListener {
-                                override fun onClick(dialog: BeautyDialog, buttonPos: Int, dialogTitle: IDialogTitle?, dialogContent: IDialogContent?) {
-                                    if (buttonPos == BUTTON_POS_LEFT) dialog.dismiss()
-                                    else if (buttonPos == BUTTON_POS_RIGHT) {
-                                        toast((dialogContent as SimpleEditor).getContent())
-                                    }
+                            .setOnClickListener { dialog, position, _, content ->
+                                if (isLeft(position)) dialog.dismiss()
+                                else if (isRight(position)) {
+                                    toast((content as SimpleEditor).getContent())
                                 }
-                            }).build())
+                            }.build())
                     .build().show(supportFragmentManager, "editor")
         }
         binding.btnListNormal.setOnClickListener {

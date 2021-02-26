@@ -22,22 +22,19 @@ import me.shouheng.icamera.listener.CameraCloseListener
 import me.shouheng.icamera.listener.CameraOpenListener
 import me.shouheng.icamera.listener.CameraPhotoListener
 import me.shouheng.icamera.listener.CameraVideoListener
-import me.shouheng.uix.common.anno.BottomButtonPosition
+import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.isRight
 import me.shouheng.uix.common.anno.DialogStyle
 import me.shouheng.uix.common.bean.TextStyleBean
 import me.shouheng.uix.common.utils.ULog
 import me.shouheng.uix.common.utils.f
 import me.shouheng.uix.pages.R
 import me.shouheng.uix.widget.dialog.BeautyDialog
-import me.shouheng.uix.widget.dialog.content.IDialogContent
 import me.shouheng.uix.widget.dialog.content.SimpleContent
 import me.shouheng.uix.widget.dialog.content.SimpleList
 import me.shouheng.uix.widget.dialog.footer.SimpleFooter
-import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.utils.app.ActivityUtils
 import me.shouheng.utils.constant.ActivityDirection
 import me.shouheng.utils.ktx.*
-import me.shouheng.utils.stability.L
 import me.shouheng.utils.store.SPUtils
 import me.shouheng.utils.ui.ImageUtils
 import java.io.File
@@ -326,14 +323,12 @@ class TakePhotoActivity : AppCompatActivity() {
                             .setLeftTextStyle(TextStyleBean(Color.WHITE, 16f))
                             .setRightText(stringOf(R.string.uix_camera_back_confirm))
                             .setRightTextStyle(TextStyleBean(Color.WHITE, 16f))
-                            .setOnClickListener(object : SimpleFooter.OnClickListener {
-                                override fun onClick(dialog: BeautyDialog, buttonPos: Int, dialogTitle: IDialogTitle?, dialogContent: IDialogContent?) {
-                                    if (buttonPos == BottomButtonPosition.BUTTON_POS_RIGHT) {
-                                        doBack()
-                                    }
-                                    dialog.dismiss()
+                            .setOnClickListener { dialog, pos, _, _ ->
+                                if (isRight(pos)) {
+                                    doBack()
                                 }
-                            })
+                                dialog.dismiss()
+                            }
                             .build())
                     .build().show(supportFragmentManager, "back-options")
         }

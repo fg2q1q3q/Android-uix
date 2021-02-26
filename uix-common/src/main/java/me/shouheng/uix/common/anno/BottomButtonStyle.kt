@@ -5,9 +5,6 @@ import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_DOUB
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_SINGLE
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_TRIPLE
 
-/**
- * 对话框底部的按钮的风格
- */
 @IntDef(value = [BUTTON_STYLE_SINGLE, BUTTON_STYLE_DOUBLE, BUTTON_STYLE_TRIPLE])
 @Target(allowedTargets = [AnnotationTarget.FIELD,
     AnnotationTarget.TYPE_PARAMETER,

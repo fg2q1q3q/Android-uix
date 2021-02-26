@@ -12,7 +12,7 @@ import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.utils.ktx.gone
 
 /**
- * 编辑框
+ * Simple dialog editor content
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-14 11:24

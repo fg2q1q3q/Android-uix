@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.StateListDrawable
 import android.support.annotation.ColorInt
-import android.view.View
 import me.shouheng.uix.common.anno.BottomButtonPosition
 import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.BUTTON_POS_LEFT
 import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.BUTTON_POS_MIDDLE
@@ -15,20 +14,24 @@ import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_SING
 import me.shouheng.uix.common.bean.TextStyleBean
 import me.shouheng.uix.common.utils.UColor
 import me.shouheng.uix.common.utils.UImage
-import me.shouheng.uix.widget.R
 import me.shouheng.uix.widget.button.NormalButton
+import me.shouheng.uix.widget.databinding.UixDialogFooterSimpleBinding
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.dialog.content.IDialogContent
 import me.shouheng.uix.widget.dialog.title.IDialogTitle
-import me.shouheng.uix.widget.text.NormalTextView
+import me.shouheng.utils.ktx.gone
 
 /**
- * 对话框底部按钮
+ * Simple dialog footer
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-15 11:44
  */
-class SimpleFooter private constructor(): IDialogFooter {
+class SimpleFooter private constructor(): ViewBindingDialogFooter<UixDialogFooterSimpleBinding>() {
+
+    private lateinit var dialog: BeautyDialog
+    private var dialogContent: IDialogContent? = null
+    private var dialogTitle: IDialogTitle? = null
 
     @BottomButtonStyle
     private var bottomStyle: Int? = BUTTON_STYLE_DOUBLE
@@ -41,58 +44,52 @@ class SimpleFooter private constructor(): IDialogFooter {
     private var rightTextStyle = GlobalConfig.rightTextStyle
 
     private var dividerColor: Int? = null
+    private var clickListener: ((dialog: BeautyDialog,
+                                 position: Int,
+                                 title: IDialogTitle?,
+                                 content: IDialogContent?) -> Unit)? = null
     private var onClickListener: OnClickListener? = null
 
-    private lateinit var tvLeft: NormalTextView
-    private lateinit var tvMiddle: NormalTextView
-    private lateinit var tvRight: NormalTextView
-    private lateinit var v1: View
-    private lateinit var v2: View
-    private lateinit var h: View
+    override fun doCreateView(ctx: Context) {
+        binding.tvLeft.text = leftText
+        binding.tvMiddle.text = middleText
+        binding.tvRight.text = rightText
 
-    private lateinit var dialog: BeautyDialog
-    private var dialogContent: IDialogContent? = null
-    private var dialogTitle: IDialogTitle? = null
+        binding.tvLeft.setStyle(leftTextStyle, GlobalConfig.leftTextStyle)
+        binding.tvMiddle.setStyle(middleTextStyle, GlobalConfig.middleTextStyle)
+        binding.tvRight.setStyle(rightTextStyle, GlobalConfig.rightTextStyle)
 
-    override fun getView(ctx: Context): View {
-        val layout = View.inflate(ctx, R.layout.uix_dialog_footer_simple, null)
-
-        tvLeft = layout.findViewById(R.id.tv_left)
-        tvMiddle = layout.findViewById(R.id.tv_middle)
-        tvRight = layout.findViewById(R.id.tv_right)
-        v1 = layout.findViewById(R.id.v1)
-        v2 = layout.findViewById(R.id.v2)
-        h = layout.findViewById(R.id.h)
-
-        tvLeft.text = leftText
-        tvMiddle.text = middleText
-        tvRight.text = rightText
-
-        tvLeft.setStyle(leftTextStyle, GlobalConfig.leftTextStyle)
-        tvMiddle.setStyle(middleTextStyle, GlobalConfig.middleTextStyle)
-        tvRight.setStyle(rightTextStyle, GlobalConfig.rightTextStyle)
-
-        tvLeft.setOnClickListener { onClickListener?.onClick(dialog, BUTTON_POS_LEFT, dialogTitle, dialogContent) }
-        tvMiddle.setOnClickListener { onClickListener?.onClick(dialog, BUTTON_POS_MIDDLE, dialogTitle, dialogContent) }
-        tvRight.setOnClickListener { onClickListener?.onClick(dialog, BUTTON_POS_RIGHT, dialogTitle, dialogContent) }
+        binding.tvLeft.setOnClickListener {
+            onClickListener?.onClick(dialog, BUTTON_POS_LEFT, dialogTitle, dialogContent)
+            clickListener?.invoke(dialog, BUTTON_POS_LEFT, dialogTitle, dialogContent)
+        }
+        binding.tvMiddle.setOnClickListener {
+            onClickListener?.onClick(dialog, BUTTON_POS_MIDDLE, dialogTitle, dialogContent)
+            clickListener?.invoke(dialog, BUTTON_POS_MIDDLE, dialogTitle, dialogContent)
+        }
+        binding.tvRight.setOnClickListener {
+            onClickListener?.onClick(dialog, BUTTON_POS_RIGHT, dialogTitle, dialogContent)
+            clickListener?.invoke(dialog, BUTTON_POS_RIGHT, dialogTitle, dialogContent)
+        }
 
         val cornerRadius = dialog.dialogCornerRadius.toFloat()
         val normalColor = if (dialog.dialogDarkStyle) BeautyDialog.GlobalConfig.darkBGColor else BeautyDialog.GlobalConfig.lightBGColor
         val selectedColor = UColor.computeColor(normalColor, if (dialog.dialogDarkStyle) Color.WHITE else Color.BLACK, NormalButton.GlobalConfig.fraction)
-        tvLeft.background = StateListDrawable().apply {
+
+        binding.tvLeft.background = StateListDrawable().apply {
             val normalDrawable = UImage.getGradientDrawable(normalColor, 0f, 0f, cornerRadius, 0f)
             val selectedDrawable = UImage.getGradientDrawable(selectedColor, 0f, 0f, cornerRadius, 0f)
             addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
             addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
         }
-        tvMiddle.background = StateListDrawable().apply {
+        binding.tvMiddle.background = StateListDrawable().apply {
             val radius = if (bottomStyle == BUTTON_STYLE_SINGLE) cornerRadius else 0f
             val normalDrawable = UImage.getGradientDrawable(normalColor, 0f, 0f, radius, radius)
             val selectedDrawable = UImage.getGradientDrawable(selectedColor, 0f, 0f, radius, radius)
             addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
             addState(intArrayOf(-android.R.attr.state_pressed), normalDrawable)
         }
-        tvRight.background = StateListDrawable().apply {
+        binding.tvRight.background = StateListDrawable().apply {
             val normalDrawable = UImage.getGradientDrawable(normalColor, 0f, 0f, 0f, cornerRadius)
             val selectedDrawable = UImage.getGradientDrawable(selectedColor, 0f, 0f, 0f, cornerRadius)
             addState(intArrayOf(android.R.attr.state_pressed), selectedDrawable)
@@ -105,25 +102,23 @@ class SimpleFooter private constructor(): IDialogFooter {
                     if (GlobalConfig.dividerColor == null) selectedColor
                     else GlobalConfig.dividerColor!!
                 } else dividerColor!!
-        v1.setBackgroundColor(finalDividerColor)
-        v2.setBackgroundColor(finalDividerColor)
-        h.setBackgroundColor(finalDividerColor)
+        binding.v1.setBackgroundColor(finalDividerColor)
+        binding.v2.setBackgroundColor(finalDividerColor)
+        binding.h.setBackgroundColor(finalDividerColor)
 
         when(bottomStyle) {
             BUTTON_STYLE_SINGLE -> {
-                tvLeft.visibility = View.GONE
-                tvRight.visibility = View.GONE
-                v1.visibility = View.GONE
-                v2.visibility = View.GONE
+                binding.tvLeft.gone()
+                binding.tvRight.gone()
+                binding.v1.gone()
+                binding.v2.gone()
             }
             BUTTON_STYLE_DOUBLE -> {
-                tvMiddle.visibility = View.GONE
-                v2.visibility = View.GONE
+                binding.tvMiddle.gone()
+                binding.v2.gone()
             }
             else -> { /* do nothing */ }
         }
-
-        return layout
     }
 
     override fun setDialog(dialog: BeautyDialog) {
@@ -138,14 +133,7 @@ class SimpleFooter private constructor(): IDialogFooter {
         this.dialogContent = dialogContent
     }
 
-    /**
-     * 对话框按钮的单击事件
-     */
     interface OnClickListener {
-
-        /**
-         * 对话框的按钮的单击事件
-         */
         fun onClick(dialog: BeautyDialog,
                     @BottomButtonPosition buttonPos: Int,
                     dialogTitle: IDialogTitle?,
@@ -165,6 +153,11 @@ class SimpleFooter private constructor(): IDialogFooter {
         private var rightTextStyle = GlobalConfig.rightTextStyle
 
         private var dividerColor: Int? = null
+
+        private var clickListener: ((dialog: BeautyDialog,
+                                     position: Int,
+                                     title: IDialogTitle?,
+                                     content: IDialogContent?) -> Unit)? = null
 
         private var onClickListener: OnClickListener? = null
 
@@ -209,6 +202,13 @@ class SimpleFooter private constructor(): IDialogFooter {
             return this
         }
 
+        fun setOnClickListener(
+                clickListener: (dialog: BeautyDialog, position: Int, title: IDialogTitle?, content: IDialogContent?) -> Unit
+        ): Builder {
+            this.clickListener = clickListener
+            return this
+        }
+
         fun setOnClickListener(onClickListener: OnClickListener): Builder {
             this.onClickListener = onClickListener
             return this
@@ -224,6 +224,7 @@ class SimpleFooter private constructor(): IDialogFooter {
             bottom.rightTextStyle = rightTextStyle
             bottom.bottomStyle = bottomStyle
             bottom.dividerColor = dividerColor
+            bottom.clickListener = clickListener
             bottom.onClickListener = onClickListener
             return bottom
         }
@@ -234,7 +235,6 @@ class SimpleFooter private constructor(): IDialogFooter {
         var middleTextStyle = TextStyleBean()
         var rightTextStyle = TextStyleBean()
         /** 按钮底部的分割线的颜色 */
-        @ColorInt
-        var dividerColor: Int? = null
+        @ColorInt var dividerColor: Int? = null
     }
 }

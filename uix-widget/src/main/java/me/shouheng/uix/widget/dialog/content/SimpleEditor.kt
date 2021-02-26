@@ -5,14 +5,11 @@ import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import me.shouheng.uix.widget.R
-import me.shouheng.uix.widget.dialog.BeautyDialog
+import me.shouheng.uix.widget.databinding.UixDialogContentEditSimpleBinding
 import me.shouheng.uix.widget.dialog.footer.IDialogFooter
 import me.shouheng.uix.widget.dialog.title.IDialogTitle
-import me.shouheng.uix.widget.text.ClearEditText
+import me.shouheng.utils.ktx.gone
 
 /**
  * 编辑框
@@ -20,7 +17,7 @@ import me.shouheng.uix.widget.text.ClearEditText
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-14 11:24
  */
-class SimpleEditor private constructor(): IDialogContent, TextWatcher {
+class SimpleEditor private constructor(): ViewBindingDialogContent<UixDialogContentEditSimpleBinding>(), TextWatcher {
 
     private var content: String? = null
     private var hint: String? = null
@@ -37,51 +34,41 @@ class SimpleEditor private constructor(): IDialogContent, TextWatcher {
     private var showLength = true
     private var clearDrawable: Drawable? = null
 
-    private lateinit var et: ClearEditText
-    private lateinit var tv: TextView
-
     private var dialogTitle: IDialogTitle? = null
     private var dialogFooter: IDialogFooter? = null
 
-    override fun getView(ctx: Context): View {
-        val layout = View.inflate(ctx, R.layout.uix_dialog_content_edit_simple, null)
-        et = layout.findViewById(R.id.et)
-        tv = layout.findViewById(R.id.tv)
-        val v = layout.findViewById<View>(R.id.v)
-        et.addTextChangedListener(this)
-        et.setText(content)
-        et.hint = hint
-        if (textColor != null) et.setTextColor(textColor!!)
-        if (hintTextColor != null) et.setHintTextColor(hintTextColor!!)
-        if (lengthTextColor != null) tv.setTextColor(lengthTextColor!!)
-        if (bottomLineColor != null) v.setBackgroundColor(bottomLineColor!!)
-        et.textSize = textSize
-        et.setSingleLine(singleLine)
-        if (numeric) et.addInputType(EditorInfo.TYPE_CLASS_NUMBER)
-        if (inputRegex != null) et.inputRegex = inputRegex
-        if (maxLength != null) et.addFilters(InputFilter.LengthFilter(maxLength!!))
-        if (maxLines != null) et.maxLines = maxLines!!
-        if (!showLength) tv.visibility = View.GONE
-        if (clearDrawable != null) et.setClearDrawable(clearDrawable!!)
-        return layout
+    override fun doCreateView(ctx: Context) {
+        binding.et.addTextChangedListener(this)
+        binding.et.setText(content)
+        binding.et.hint = hint
+        textColor?.let { binding.et.setTextColor(it) }
+        hintTextColor?.let { binding.et.setHintTextColor(it) }
+        lengthTextColor?.let { binding.tv.setTextColor(it) }
+        bottomLineColor?.let { binding.v.setBackgroundColor(it) }
+        binding.et.textSize = textSize
+        binding.et.setSingleLine(singleLine)
+        if (numeric) binding.et.addInputType(EditorInfo.TYPE_CLASS_NUMBER)
+        inputRegex?.let { binding.et.inputRegex = inputRegex }
+        maxLength?.let { binding.et.addFilters(InputFilter.LengthFilter(it)) }
+        maxLines?.let { binding.et.maxLines = it }
+        if (!showLength) binding.tv.gone()
+        clearDrawable?.let { binding.et.setClearDrawable(it) }
     }
 
-    override fun setDialog(dialog: BeautyDialog) {}
-
-    fun getContent(): Editable? {
-        return et.text
-    }
+    fun getContent(): Editable? = binding.et.text
 
     override fun afterTextChanged(s: Editable?) {
         if (showLength) {
-            val text = if (maxLength != null) "${et.text?.length?:0}/${maxLength}" else "${et.text?.length?:0}"
-            tv.text = text
+            val text = if (maxLength != null)
+                "${binding.et.text?.length?:0}/${maxLength}"
+            else "${binding.et.text?.length?:0}"
+            binding.tv.text = text
         }
     }
 
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { /*noop*/ }
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { /*noop*/ }
 
     override fun setDialogTitle(dialogTitle: IDialogTitle?) {
         this.dialogTitle = dialogTitle

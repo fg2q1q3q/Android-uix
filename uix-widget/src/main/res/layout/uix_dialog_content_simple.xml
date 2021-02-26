@@ -2,6 +2,7 @@
 <android.support.v7.widget.AppCompatTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv"
     tools:text="12312312313"
     android:gravity="center"
     android:padding="16dp"

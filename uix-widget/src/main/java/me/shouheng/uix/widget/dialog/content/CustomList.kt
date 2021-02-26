@@ -7,44 +7,39 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import me.shouheng.uix.widget.R
+import me.shouheng.uix.widget.databinding.UixDialogContentListCustomBinding
 import me.shouheng.uix.widget.dialog.BeautyDialog
 import me.shouheng.uix.widget.rv.EmptySupportRecyclerView
 import me.shouheng.uix.widget.rv.EmptyView
 import me.shouheng.uix.widget.rv.IEmptyView
 
 /**
- * 支持自定义的列表
+ * Custom list dialog content
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-21 13:59
  */
-class CustomList private constructor(): IDialogContent {
+class CustomList private constructor(): ViewBindingDialogContent<UixDialogContentListCustomBinding>() {
+
+    private lateinit var dialog: BeautyDialog
 
     private var emptyView: IEmptyView? = null
     private var adapter: RecyclerView.Adapter<*>? = null
 
-    private lateinit var dialog: BeautyDialog
-
-    override fun getView(ctx: Context): View {
-        val layout = View.inflate(ctx, R.layout.uix_dialog_content_list_custom, null)
-        val rv = layout.findViewById<EmptySupportRecyclerView>(R.id.rv)
-        val container = layout.findViewById<ViewGroup>(R.id.fl_container)
-        if (emptyView != null) {
-            container.addView(emptyView!!.getView(), ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
-            rv.setEmptyView(emptyView!!.getView())
+    override fun doCreateView(ctx: Context) {
+        emptyView?.getView()?.let {
+            binding.flContainer.addView(it, ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
+            binding.rv.setEmptyView(it)
         }
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(ctx)
-        return layout
+        binding.rv.adapter = adapter
+        binding.rv.layoutManager = LinearLayoutManager(ctx)
     }
 
     override fun setDialog(dialog: BeautyDialog) {
         this.dialog = dialog
     }
 
-    fun getDialog(): BeautyDialog {
-        return dialog
-    }
+    fun getDialog(): BeautyDialog = dialog
 
     fun showLoading() {
         emptyView?.show()

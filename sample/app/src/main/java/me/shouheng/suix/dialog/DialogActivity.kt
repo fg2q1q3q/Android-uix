@@ -31,7 +31,9 @@ import me.shouheng.uix.widget.dialog.title.IDialogTitle
 import me.shouheng.uix.widget.dialog.title.SimpleTitle
 import me.shouheng.uix.widget.image.CircleImageView
 import me.shouheng.uix.widget.rv.EmptyView
+import me.shouheng.uix.widget.rv.getAdapter
 import me.shouheng.uix.widget.rv.onItemDebouncedClick
+import me.shouheng.uix.widget.text.NormalTextView
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.utils.ui.ViewUtils
@@ -213,13 +215,10 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                                             ResUtils.getDrawable(R.drawable.uix_loading),
                                             Gravity.END)
                             ))
-                            .setOnItemClickListener(object : SimpleList.OnItemClickListener {
-                                override fun onItemClick(dialog: BeautyDialog, item: SimpleList.Item) {
-                                    toast("${item.id} : ${item.content}")
-                                    dialog.dismiss()
-                                }
-                            })
-                            .build())
+                            .setOnItemClickListener { dialog, item ->
+                                toast("${item.id} : ${item.content}")
+                                dialog.dismiss()
+                            }.build())
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnAddress.setOnClickListener {
@@ -229,13 +228,10 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .setDialogTitle(SimpleTitle.get("地址对话框"))
                     .setDialogContent(AddressContent.Builder()
                             .setMaxLevel(LEVEL_AREA)
-                            .setOnAddressSelectedListener(object: AddressContent.OnAddressSelectedListener {
-                                override fun onAddressSelected(dialog: BeautyDialog, province: String, city: String?, area: String?) {
-                                    toast("$province - $city - $area")
-                                    dialog.dismiss()
-                                }
-                            })
-                            .build())
+                            .setOnAddressSelectedListener { dialog: BeautyDialog, province: String, city: String?, area: String? ->
+                                toast("$province - $city - $area")
+                                dialog.dismiss()
+                            }.build())
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnContent.setOnClickListener {
@@ -247,7 +243,12 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .build().show(supportFragmentManager, "list")
         }
         binding.btnCustomList.setOnClickListener {
-            val adapter = SimpleList.Adapter(emptyList(), TextStyleBean().apply { textColor=Color.BLACK })
+            val adapter = getAdapter(R.layout.uix_dialog_content_list_simple_item, { helper, item: SimpleList.Item ->
+                val tv = helper.getView<NormalTextView>(me.shouheng.uix.widget.R.id.tv)
+                tv.text = item.content
+                item.gravity?.let { tv.gravity = it }
+                item.icon?.let { helper.setImageDrawable(me.shouheng.uix.widget.R.id.iv, it) }
+            }, emptyList())
             val ev = EmptyView.Builder(this)
                     .setEmptyLoadingTips("loading")
                     .setEmptyLoadingTipsColor(Color.BLUE)
@@ -312,11 +313,9 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                     .setDialogPosition(POS_BOTTOM)
                     .setDialogTitle(SimpleTitle.get("简单的网格"))
                     .setDialogContent(
-                            SimpleGrid.Builder(R.layout.item_tool_color, object : SimpleGrid.ViewHolderConverter<Int> {
-                                override fun convert(helper: BaseViewHolder, item: Int) {
-                                    helper.getView<CircleImageView>(R.id.iv).setFillingCircleColor(item)
-                                }
-                            }).setList(listOf(
+                            SimpleGrid.Builder(R.layout.item_tool_color) { helper: BaseViewHolder, item: Int ->
+                                helper.getView<CircleImageView>(R.id.iv).setFillingCircleColor(item)
+                            }.setList(listOf(
                                     ResUtils.getColor(R.color.tool_item_color_1),
                                     ResUtils.getColor(R.color.tool_item_color_2),
                                     ResUtils.getColor(R.color.tool_item_color_3),
@@ -329,11 +328,9 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                                     ResUtils.getColor(R.color.tool_item_color_10),
                                     ResUtils.getColor(R.color.tool_item_color_11),
                                     ResUtils.getColor(R.color.tool_item_color_12)
-                            )).setOnItemClickListener(object : SimpleGrid.OnItemClickListener<Int> {
-                                override fun onItemClick(dialog: BeautyDialog, item: Int) {
-                                    toast("$item")
-                                }
-                            }).setSpanCount(5).build()
+                            )).setOnItemClickListener { _: BeautyDialog, item: Int ->
+                                toast("$item")
+                            }.setSpanCount(5).build()
                     ).build().show(supportFragmentManager, "grid")
         }
     }

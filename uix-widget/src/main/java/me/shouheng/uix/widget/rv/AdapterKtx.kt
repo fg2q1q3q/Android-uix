@@ -3,8 +3,10 @@ package me.shouheng.uix.widget.rv
 import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
 import android.view.View
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.entity.MultiItemEntity
 
 /**
  * Get a quick adapter.
@@ -36,4 +38,35 @@ fun BaseViewHolder.goneIf(@IdRes id: Int, goneIf: Boolean) {
 /** Add click listener to views group. */
 fun BaseViewHolder.addOnClickListeners(@IdRes vararg ids: Int) {
     ids.forEach { addOnClickListener(it) }
+}
+
+
+/**
+ * Get a multiple item type adapter. The first parameter is a list of triple with
+ * the first element view type, second element the layout of type, third element
+ * the converter for item.
+ */
+fun <ITEM : MultiItemEntity> getMultiItemAdapter(
+        converters: Map<Int, Pair<Int, (helper: BaseViewHolder, item: ITEM) -> Unit>>,
+        data: List<ITEM>
+): MultiItemAdapter<ITEM> = MultiItemAdapter(converters, data)
+
+/** Multiple item adapter. */
+class MultiItemAdapter<ITEM : MultiItemEntity>(
+        converters: Map<Int, Pair<Int, (helper: BaseViewHolder, item: ITEM) -> Unit>>,
+        list: List<ITEM>
+): BaseMultiItemQuickAdapter<ITEM, BaseViewHolder>(list) {
+
+    private val map = mutableMapOf<Int, (helper: BaseViewHolder, item: ITEM) -> Unit>()
+
+    init {
+        converters.forEach {
+            addItemType(it.key, it.value.first)
+            map[it.key] = it.value.second
+        }
+    }
+
+    override fun convert(helper: BaseViewHolder, item: ITEM) {
+        map[item.itemType]?.invoke(helper, item)
+    }
 }

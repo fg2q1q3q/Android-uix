@@ -13,9 +13,10 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.widget.TextView
-import kotlinx.android.synthetic.main.uix_activity_crash_report.*
 import me.shouheng.uix.common.bean.TextStyleBean
 import me.shouheng.uix.pages.CrashReportActivity.Companion.Builder
+import me.shouheng.uix.pages.databinding.UixActivityCrashReportBinding
+import me.shouheng.utils.ktx.onDebouncedClick
 import kotlin.system.exitProcess
 
 /**
@@ -120,19 +121,18 @@ class CrashReportActivity : AppCompatActivity() {
 
         if (resId != 0) setTheme(resId)
 
-        setContentView(R.layout.uix_activity_crash_report)
+        val binding = UixActivityCrashReportBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
-        tvReportTitle.text = title
-        tvReportContent.text = content
-        ivReportImage.setImageResource(image)
-        if (titleStyle != null) tvReportTitle.setStyle(titleStyle)
-        if (contentStyle != null) tvReportTitle.setStyle(contentStyle)
-        if (buttonStyle != null) {
-            btnReportRestart.setStyle(buttonStyle)
-            btnReportLog.setStyle(buttonStyle)
-        }
+        binding.tvTitle.text = title
+        binding.tvContent.text = content
+        binding.iv.setImageResource(image)
 
-        btnReportLog.setOnClickListener {
+        titleStyle?.let { binding.tvTitle.setStyle(titleStyle) }
+        contentStyle?.let { binding.tvContent.setStyle(it) }
+        buttonStyle?.let { binding.btnRestart.setStyle(it); binding.btnLog.setStyle(it) }
+
+        binding.btnLog.onDebouncedClick {
             val root = LayoutInflater.from(this).inflate(R.layout.uix_layout_crash_report_message, null, false)
             root.findViewById<TextView>(R.id.tv_report_message).text = message
             AlertDialog.Builder(this@CrashReportActivity)
@@ -143,7 +143,7 @@ class CrashReportActivity : AppCompatActivity() {
                     .show()
         }
 
-        btnReportRestart.setOnClickListener {
+        binding.btnRestart.onDebouncedClick {
             if (cls != null) {
                 val i = Intent(this, cls)
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)

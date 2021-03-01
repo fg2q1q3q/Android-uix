@@ -49,6 +49,10 @@ class ContainerActivity : CommonActivity<EmptyViewModel, ActivityContainerBindin
         else if (id == 4) iv.setImageResource(R.drawable.mark_note)
     }
 
+    override fun onNewVersionClick(v: View) {
+        toast("new version 1.3.1!!!")
+    }
+
     private var offHeight = 0
     private var toolbarHeight = UView.dp2px(80f)
 
@@ -76,6 +80,8 @@ class ContainerActivity : CommonActivity<EmptyViewModel, ActivityContainerBindin
                         "穷困潦倒的开发者啊\n" +
                         "穷困潦倒的开发者啊\n" +
                         "Poor lonely and homeless developer")
+                .setNewerVersion("新版本 1.3.1")
+                .setNewerVersionStyle(TextStyleBean(Color.RED, 12f, Typeface.ITALIC))
                 .setVersionStyle(TextStyleBean().apply {
                     typeFace = Typeface.ITALIC
                     textColor = Color.GRAY

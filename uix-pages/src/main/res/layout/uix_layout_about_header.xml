@@ -29,4 +29,10 @@
         android:id="@+id/tv_version"
         tools:text="Version 1.2.3\nVersion 1.2.3\nVersion 1.2.3"/>
 
+    <me.shouheng.uix.widget.text.NormalTextView
+        style="@style/AboutPage.Header.Version"
+        tools:textColor="@android:color/black"
+        android:id="@+id/tv_newer_version"
+        tools:text="Version 1.2.3\nVersion 1.2.3\nVersion 1.2.3"/>
+
 </LinearLayout>

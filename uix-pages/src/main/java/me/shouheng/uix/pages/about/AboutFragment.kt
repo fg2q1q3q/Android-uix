@@ -3,21 +3,20 @@ package me.shouheng.uix.pages.about
 import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.v4.app.Fragment
-import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import me.shouheng.uix.common.bean.TextStyleBean
 import me.shouheng.uix.common.utils.UColor
 import me.shouheng.uix.common.utils.UView
-import me.shouheng.uix.pages.R
 import me.shouheng.uix.pages.about.AboutFragment.FragmentInteraction
-import me.shouheng.uix.widget.text.NormalTextView
+import me.shouheng.uix.pages.databinding.UixFragmentAboutBinding
+import me.shouheng.uix.pages.databinding.UixLayoutAboutHeaderBinding
+import me.shouheng.uix.widget.rv.onItemDebouncedClick
+import me.shouheng.utils.ktx.gone
+import me.shouheng.utils.ktx.onDebouncedClick
 
 /**
  * 关于页面：作为该 Fragment 容器的 Activity 应该实现 [FragmentInteraction] 接口
@@ -28,10 +27,8 @@ import me.shouheng.uix.widget.text.NormalTextView
  */
 class AboutFragment : Fragment() {
 
-    @ColorInt
-    private var backgroundColor: Int? = null
-    @ColorInt
-    private var foregroundColor: Int? = null
+    @ColorInt private var backgroundColor: Int? = null
+    @ColorInt private var foregroundColor: Int? = null
 
     private var logo: Int? = null
     private var iconRight: Int? = null
@@ -43,6 +40,8 @@ class AboutFragment : Fragment() {
     private var sloganStyle: TextStyleBean? = null
     private var version: CharSequence? = null
     private var versionStyle: TextStyleBean? = null
+    private var newerVersion: CharSequence? = null
+    private var newerVersionStyle: TextStyleBean? = null
 
     private var aboutItems: List<IAboutItem> = emptyList()
 
@@ -56,55 +55,44 @@ class AboutFragment : Fragment() {
         slogan = arguments?.getCharSequence("slogan")
         version = arguments?.getCharSequence("version")
         title = arguments?.getCharSequence("title")
+        newerVersion = arguments?.getCharSequence("newerVersion")
         titleStyle = arguments?.getSerializable("titleStyle") as TextStyleBean?
         sloganStyle = arguments?.getSerializable("sloganStyle") as TextStyleBean?
         versionStyle = arguments?.getSerializable("versionStyle") as TextStyleBean?
+        newerVersionStyle = arguments?.getSerializable("newerVersionStyle") as TextStyleBean?
         aboutItems = arguments?.getParcelableArrayList<IAboutItem>("aboutItems") as ArrayList<IAboutItem>
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.uix_fragment_about, null, false)
+        val binding = UixFragmentAboutBinding.inflate(inflater, null, false)
+        val header = UixLayoutAboutHeaderBinding.inflate(inflater, null, false)
 
-        val header = LayoutInflater.from(context).inflate(R.layout.uix_layout_about_header, null, false)
-        val ivIcon = header.findViewById<AppCompatImageView>(R.id.iv_icon)
-        val tvSlogan = header.findViewById<NormalTextView>(R.id.tv_slogan)
-        val tvVersion = header.findViewById<NormalTextView>(R.id.tv_version)
-        val llHeader = header.findViewById<LinearLayout>(R.id.ll_header)
+        if (iconLeft == null) binding.ivLeft.gone() else binding.ivLeft.setImageResource(iconLeft!!)
+        if (iconRight == null) binding.ivRight.gone() else binding.ivRight.setImageResource(iconRight!!)
+        binding.ivLeft.onDebouncedClick { (activity as? FragmentInteraction)?.onLeftClick(it) }
+        binding.ivRight.onDebouncedClick { (activity as? FragmentInteraction)?.onRightClick(it) }
 
-        val ll = root.findViewById<FrameLayout>(R.id.ll)
-        val toolbar = root.findViewById<Toolbar>(R.id.toolbar)
-        val ivRight = root.findViewById<ImageView>(R.id.iv_right)
-        val ivLeft = root.findViewById<ImageView>(R.id.iv_left)
-        val rv = root.findViewById<RecyclerView>(R.id.rv)
-        val tvTitle = root.findViewById<NormalTextView>(R.id.tv_title)
+        binding.tvTitle.text = ""
+        header.tvSlogan.text = slogan
+        header.tvVersion.text = version
+        header.tvNewerVersion.text = newerVersion
 
-        if (iconLeft == null) ivLeft.visibility = View.GONE
-        else ivLeft.setImageResource(iconLeft!!)
-        if (iconRight == null) ivRight.visibility = View.GONE
-        else ivRight.setImageResource(iconRight!!)
-        ivLeft.setOnClickListener { (activity as? FragmentInteraction)?.onLeftClick(it) }
-        ivRight.setOnClickListener { (activity as? FragmentInteraction)?.onRightClick(it) }
+        logo?.let { header.ivIcon.setImageResource(it) }
+        titleStyle?.let { binding.tvTitle.setStyle(it) }
+        sloganStyle?.let { header.tvSlogan.setStyle(it) }
+        versionStyle?.let { header.tvVersion.setStyle(it) }
+        newerVersionStyle?.let { header.tvNewerVersion.setStyle(it) }
+        header.tvNewerVersion.onDebouncedClick { (activity as? FragmentInteraction)?.onNewVersionClick(it) }
 
-        tvTitle.text = ""
-        tvSlogan.text = slogan
-        tvVersion.text = version
-        if (logo != null) ivIcon.setImageResource(logo!!)
-        if (sloganStyle != null) tvSlogan.setStyle(sloganStyle!!)
-        if (versionStyle != null) tvVersion.setStyle(versionStyle!!)
-        if (titleStyle != null) tvTitle.setStyle(titleStyle!!)
-
-        if (backgroundColor != null) ll.setBackgroundColor(backgroundColor!!)
-        if (foregroundColor != null) {
-            toolbar.setBackgroundColor(foregroundColor!!)
-//            llHeader.setBackgroundColor(foregroundColor!!)
-        }
+        backgroundColor?.let { binding.fl.setBackgroundColor(it) }
+        foregroundColor?.let { binding.toolbar.setBackgroundColor(it) }
 
         val adapter = AboutItemAdapter(aboutItems, backgroundColor, foregroundColor, activity as? FragmentInteraction)
-        rv.adapter = adapter
-        adapter.setHeaderView(header)
-        adapter.setOnItemClickListener { _, _, p -> (activity as? FragmentInteraction)?.onItemClick(adapter.data[p], p) }
+        binding.rv.adapter = adapter
+        adapter.setHeaderView(header.root)
+        adapter.onItemDebouncedClick { _, _, p -> (activity as? FragmentInteraction)?.onItemClick(adapter.data[p], p) }
 
-        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             private var toolbarHeight = UView.dp2px(80f)
             private var titleHeight = UView.dp2px(130f)
@@ -114,54 +102,47 @@ class AboutFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 (activity as? FragmentInteraction)?.onScrolled(recyclerView, dx, dy)
                 offHeight += dy
-                toolbar.setBackgroundColor(UColor.setColorAlpha(foregroundColor!!,
+                binding.toolbar.setBackgroundColor(UColor.setColorAlpha(foregroundColor!!,
                         (offHeight * 1f / toolbarHeight).coerceAtMost(1f), true))
                 if (offHeight > titleHeight) {
                     if (!titleShowed) {
                         titleShowed = true
-                        tvTitle.text = title
+                        binding.tvTitle.text = title
                     }
                 } else {
                     if (titleShowed) {
                         titleShowed = false
-                        tvTitle.text = ""
+                        binding.tvTitle.text = ""
                     }
                 }
             }
         })
 
-        return root
+        return binding.root
     }
 
     interface FragmentInteraction {
 
-        /**
-         * 页面顶部左侧按钮被点击的事件
-         */
+        /** 页面顶部左侧按钮被点击的事件 */
         fun onLeftClick(v: View)
 
-        /**
-         * 页面顶部右侧按钮被点击的事件
-         */
+        /** 页面顶部右侧按钮被点击的事件 */
         fun onRightClick(v: View)
 
-        /**
-         * 关于列表条目被点击的回调
-         */
-        fun onItemClick(item: IAboutItem, pos: Int)
+        /** 关于列表条目被点击的回调 */
+        fun onItemClick(item: IAboutItem, pos: Int) { }
 
-        /**
-         * 为列表条目加载子控件
-         */
-        fun loadSubViews(id: Int): View?
+        /** On newer version view click callback */
+        fun onNewVersionClick(v: View) { }
 
-        /**
-         * 图片加载事件
-         */
-        fun loadImage(id: Int, iv: ImageView)
+        /** 为列表条目加载子控件 */
+        fun loadSubViews(id: Int): View? { return null }
+
+        /** 图片加载事件 */
+        fun loadImage(id: Int, iv: ImageView) { }
 
         /** Callback when the recyclerview is scrolled */
-        fun onScrolled(rv: RecyclerView, dx: Int, dy: Int)
+        fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) { }
     }
 
     class Builder {
@@ -220,6 +201,16 @@ class AboutFragment : Fragment() {
 
         fun setVersionStyle(versionStyle: TextStyleBean): Builder {
             args.putSerializable("versionStyle", versionStyle)
+            return this
+        }
+
+        fun setNewerVersion(newerVersion: CharSequence): Builder {
+            args.putCharSequence("newerVersion", newerVersion)
+            return this
+        }
+
+        fun setNewerVersionStyle(newerVersionStyle: TextStyleBean): Builder {
+            args.putSerializable("newerVersionStyle", newerVersionStyle)
             return this
         }
 

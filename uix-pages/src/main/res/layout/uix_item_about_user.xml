@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bg"
+    tools:viewBindingIgnore="true"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/AboutPage.Item.Card">
 

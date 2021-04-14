@@ -40,7 +40,8 @@ dependencies {
     // https://github.com/romandanylyk/PageIndicatorView
     api 'com.romandanylyk:pageindicatorview:1.0.2'
     api 'com.github.Shouheng88:matisse:1.2.2'
-    api project(path: ':uix-widget')
+    api "com.github.Shouheng88:uix-widget:${rootProject.ext.releaseVersion}"
+//    api project(path: ':uix-widget')
 }
 
 //publish {
@@ -96,6 +97,34 @@ publishing {
                     url = 'https://github.com/Shouheng88/Android-uix'
                     connection = 'scm:git:github.com/Shouheng88/Android-uix.git'
                     developerConnection = 'scm:git:ssh://git@github.com/Shouheng88/Android-uix.git'
+                }
+                // A slightly hacky fix so that your POM will include any transitive dependencies
+                // that your library builds upon
+                withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    project.configurations.all { configuration ->
+                        def name = configuration.name
+                        if (name != "implementation" && name != "compile" && name != "api") {
+                            return
+                        }
+                        println(configuration)
+                        configuration.dependencies.each {
+                            println(it)
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            if (it.name == "unspecified") {
+                                // 忽略无法识别的
+                                return
+                            }
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                            if (name == "api" || name == "compile") {
+                                dependencyNode.appendNode("scope", "compile")
+                            } else { // implementation
+                                dependencyNode.appendNode("scope", "runtime")
+                            }
+                        }
+                    }
                 }
             }
         }

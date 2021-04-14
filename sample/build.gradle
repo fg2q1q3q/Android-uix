@@ -14,6 +14,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://dl.bintray.com/easymark/Android" }
     }
@@ -29,7 +30,7 @@ ext {
     compileSdkVersion = 28
     buildToolsVersion = '28.0.0'
     targetSdkVersion = compileSdkVersion
-    androidUtilsVersion = '2.1.5'
+    androidUtilsVersion = '2.1.7'
     minSdkVersion = 17
     supportLibVersion = '28.0.0'
     releaseVersion = "1.7.3"

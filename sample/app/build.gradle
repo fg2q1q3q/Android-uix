@@ -53,7 +53,7 @@ dependencies {
     implementation project(path: ':uix-widget')
     implementation project(path: ':uix-pages')
 //    implementation project(path: ':uix-image')
-    implementation ("com.github.Shouheng88:uix-image:${rootProject.ext.releaseVersion}") {
+    implementation ("com.github.Shouheng88:uix-image:1.7.6") {
         exclude group: 'com.github.Shouheng88'
     }
 }

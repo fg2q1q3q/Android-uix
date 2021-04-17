@@ -21,7 +21,7 @@ import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_TOP
 import me.shouheng.uix.common.anno.DialogStyle
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_HALF
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_MATCH
-import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_ONE_THIRD
+import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_TWO_THIRD
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.utils.UImage
 import me.shouheng.uix.common.utils.URes
@@ -86,7 +86,7 @@ class BeautyDialog : DialogFragment() {
         val theme = when(dialogStyle) {
             STYLE_WRAP -> R.style.BeautyDialogWrap
             STYLE_HALF -> R.style.BeautyDialogHalf
-            STYLE_ONE_THIRD -> R.style.BeautyDialogOneThird
+            STYLE_TWO_THIRD -> R.style.BeautyDialogTwoThird
             else -> R.style.BeautyDialog
         }
         val dialog = AlertDialog.Builder(context!!, theme).create()

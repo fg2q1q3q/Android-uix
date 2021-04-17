@@ -16,9 +16,9 @@
         <item name="android:windowMinWidthMajor">50%</item>
         <item name="android:windowMinWidthMinor">50%</item>
     </style>
-    <style name="BeautyDialogOneThird" parent="BeautyDialog">
-        <item name="android:windowMinWidthMajor">33%</item>
-        <item name="android:windowMinWidthMinor">33%</item>
+    <style name="BeautyDialogTwoThird" parent="BeautyDialog">
+        <item name="android:windowMinWidthMajor">66%</item>
+        <item name="android:windowMinWidthMinor">66%</item>
     </style>
 
     <style name="DialogTopAnimation" parent="@android:style/Animation.Dialog">

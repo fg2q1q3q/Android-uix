@@ -49,86 +49,92 @@ object RatingManager {
     var marketCancelStyle: TextStyleBean = SimpleFooter.GlobalConfig.leftTextStyle
 
     /** Show rate App introduction */
-    fun rateApp(onFeedback: () -> Unit, onMarket: () -> Unit, fragmentManager: FragmentManager): BeautyDialog {
+    fun rateApp(
+        @DialogStyle dialogStyle: Int = DialogStyle.STYLE_MATCH,
+        onFeedback: () -> Unit,
+        onMarket: () -> Unit,
+        fragmentManager: FragmentManager
+    ): BeautyDialog {
         val dialog = BeautyDialog.Builder()
-                .setDarkDialog(isDarkTheme)
-                .setDialogTitle(SimpleTitle.Builder()
-                        .setTitle(title)
-                        .setTitleStyle(titleStyle).build())
-                .setDialogContent(RatingContent())
-                .setDialogBottom(SimpleFooter.Builder()
-                        .setLeftText(cancelText)
-                        .setRightText(confirmText)
-                        .setRightTextStyle(confirmTextStyle)
-                        .setLeftTextStyle(cancelTextStyle)
-                        .setOnClickListener(object : SimpleFooter.OnClickListener {
-                            override fun onClick(dialog: BeautyDialog,
-                                                 buttonPos: Int,
-                                                 dialogTitle: IDialogTitle?,
-                                                 dialogContent: IDialogContent?) {
-                                if (buttonPos == BottomButtonPosition.BUTTON_POS_RIGHT) {
-                                    val rating = (dialogContent as RatingContent).getRating()
-                                    if (rating >= 4) {
-                                        showMarketDialog(onMarket, fragmentManager)
-                                    } else {
-                                        showFeedbackDialog(onFeedback, fragmentManager)
-                                    }
-                                }
-                                dialog.dismiss()
+            .setDialogStyle(dialogStyle)
+            .setDarkDialog(isDarkTheme)
+            .setDialogTitle(SimpleTitle.Builder()
+                .setTitle(title)
+                .setTitleStyle(titleStyle).build())
+            .setDialogContent(RatingContent())
+            .setDialogBottom(SimpleFooter.Builder()
+                .setLeftText(cancelText)
+                .setRightText(confirmText)
+                .setRightTextStyle(confirmTextStyle)
+                .setLeftTextStyle(cancelTextStyle)
+                .setOnClickListener(object : SimpleFooter.OnClickListener {
+                    override fun onClick(dialog: BeautyDialog,
+                                         buttonPos: Int,
+                                         dialogTitle: IDialogTitle?,
+                                         dialogContent: IDialogContent?) {
+                        if (buttonPos == BottomButtonPosition.BUTTON_POS_RIGHT) {
+                            val rating = (dialogContent as RatingContent).getRating()
+                            if (rating >= 4) {
+                                showMarketDialog(onMarket, fragmentManager)
+                            } else {
+                                showFeedbackDialog(onFeedback, fragmentManager)
                             }
-                        }).build()).build()
+                        }
+                        dialog.dismiss()
+                    }
+                }).build()).build()
         dialog.show(fragmentManager, "rate-dialog")
         return dialog
     }
 
     fun showFeedbackDialog(onFeedback: () -> Unit = {}, manager: FragmentManager): BeautyDialog {
         val dialog = BeautyDialog.Builder()
-                .setDarkDialog(isDarkTheme)
-                .setDialogStyle(DialogStyle.STYLE_WRAP)
-                .setDialogTitle(SimpleTitle.Builder().setTitle(feedbackTitle).setTitleStyle(feedbackTitleStyle).build())
-                .setDialogContent(SimpleContent.Builder().setContent(feedbackContent).setGravity(Gravity.CENTER).build())
-                .setDialogBottom(SimpleFooter.Builder()
-                        .setLeftText(feedbackCancel)
-                        .setRightText(feedbackConfirm)
-                        .setRightTextStyle(feedbackConfirmStyle)
-                        .setLeftTextStyle(feedbackCancelStyle)
-                        .setOnClickListener(object : SimpleFooter.OnClickListener {
-                            override fun onClick(dialog: BeautyDialog,
-                                                 buttonPos: Int,
-                                                 dialogTitle: IDialogTitle?,
-                                                 dialogContent: IDialogContent?) {
-                                if (buttonPos == BottomButtonPosition.BUTTON_POS_RIGHT) {
-                                    onFeedback()
-                                }
-                                dialog.dismiss()
-                            }
-                        }).build()).build()
+            .setDarkDialog(isDarkTheme)
+            .setDialogStyle(DialogStyle.STYLE_WRAP)
+            .setDialogTitle(SimpleTitle.Builder().setTitle(feedbackTitle).setTitleStyle(feedbackTitleStyle).build())
+            .setDialogContent(SimpleContent.Builder().setContent(feedbackContent).setGravity(Gravity.CENTER).build())
+            .setDialogBottom(SimpleFooter.Builder()
+                .setLeftText(feedbackCancel)
+                .setRightText(feedbackConfirm)
+                .setRightTextStyle(feedbackConfirmStyle)
+                .setLeftTextStyle(feedbackCancelStyle)
+                .setOnClickListener(object : SimpleFooter.OnClickListener {
+                    override fun onClick(dialog: BeautyDialog,
+                                         buttonPos: Int,
+                                         dialogTitle: IDialogTitle?,
+                                         dialogContent: IDialogContent?) {
+                        if (buttonPos == BottomButtonPosition.BUTTON_POS_RIGHT) {
+                            onFeedback()
+                        }
+                        dialog.dismiss()
+                    }
+                }).build()).build()
         dialog.show(manager, "rate-feedback-dialog")
         return dialog
     }
 
     fun showMarketDialog(onMarket: () -> Unit, manager: FragmentManager): BeautyDialog {
         val dialog = BeautyDialog.Builder()
-                .setDarkDialog(isDarkTheme)
-                .setDialogStyle(DialogStyle.STYLE_WRAP)
-                .setDialogTitle(SimpleTitle.Builder().setTitle(marketTitle).setTitleStyle(marketTitleStyle).build())
-                .setDialogContent(SimpleContent.Builder().setContent(marketContent).setGravity(Gravity.CENTER).build())
-                .setDialogBottom(SimpleFooter.Builder()
-                        .setLeftText(marketCancel)
-                        .setRightText(marketConfirm)
-                        .setRightTextStyle(marketConfirmStyle)
-                        .setLeftTextStyle(marketCancelStyle)
-                        .setOnClickListener(object : SimpleFooter.OnClickListener {
-                            override fun onClick(dialog: BeautyDialog,
-                                                 buttonPos: Int,
-                                                 dialogTitle: IDialogTitle?,
-                                                 dialogContent: IDialogContent?) {
-                                if (buttonPos == BottomButtonPosition.BUTTON_POS_RIGHT) {
-                                    onMarket()
-                                }
-                                dialog.dismiss()
-                            }
-                        }).build()).build()
+            .setDarkDialog(isDarkTheme)
+            .setDialogStyle(DialogStyle.STYLE_WRAP)
+            .setDialogTitle(SimpleTitle.Builder().setTitle(marketTitle).setTitleStyle(marketTitleStyle).build())
+            .setDialogContent(SimpleContent.Builder().setContent(marketContent).setGravity(Gravity.CENTER).build())
+            .setDialogBottom(SimpleFooter.Builder()
+                .setLeftText(marketCancel)
+                .setRightText(marketConfirm)
+                .setRightTextStyle(marketConfirmStyle)
+                .setLeftTextStyle(marketCancelStyle)
+                .setOnClickListener(object : SimpleFooter.OnClickListener {
+                    override fun onClick(dialog: BeautyDialog,
+                                         buttonPos: Int,
+                                         dialogTitle: IDialogTitle?,
+                                         dialogContent: IDialogContent?) {
+                        if (buttonPos == BottomButtonPosition.BUTTON_POS_RIGHT) {
+                            onMarket()
+                        }
+                        dialog.dismiss()
+                    }
+                }).build()).build()
         dialog.show(manager, "rate-market-dialog")
         return dialog
     }

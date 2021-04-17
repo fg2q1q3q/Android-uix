@@ -20,7 +20,7 @@ annotation class DialogStyle {
         const val STYLE_MATCH                       = 1
         /** Half of window */
         const val STYLE_HALF                        = 2
-        /** One third of window */
-        const val STYLE_ONE_THIRD                   = 3
+        /** Two third of window */
+        const val STYLE_TWO_THIRD                   = 3
     }
 }

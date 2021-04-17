@@ -17,9 +17,8 @@ import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_SING
 import me.shouheng.uix.common.anno.BottomButtonStyle.Companion.BUTTON_STYLE_TRIPLE
 import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_BOTTOM
 import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_TOP
-import me.shouheng.uix.common.anno.DialogStyle
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_HALF
-import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_ONE_THIRD
+import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_TWO_THIRD
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.anno.EmptyViewState
 import me.shouheng.uix.common.anno.LoadingStyle
@@ -93,7 +92,7 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
                 .build().show(supportFragmentManager, "normal")
         }
         binding.btnNoBgOneThird.onDebouncedClick {
-            builder.setDialogStyle(STYLE_ONE_THIRD)
+            builder.setDialogStyle(STYLE_TWO_THIRD)
                 .build().show(supportFragmentManager, "normal")
         }
         binding.btnNoBgHalf.onDebouncedClick {
@@ -199,6 +198,7 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
         }
         binding.btnEditorNumeric.setOnClickListener {
             BeautyDialog.Builder()
+                .setDialogStyle(STYLE_TWO_THIRD)
                 .setDialogTitle(SimpleTitle.get("编辑对话框（数字|单行|长度10）"))
                 .setDialogContent(SimpleEditor.Builder()
                     .setSingleLine(true)
@@ -276,7 +276,7 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
         }
         binding.btnContent.setOnClickListener {
             BeautyDialog.Builder()
-                .setDialogStyle(STYLE_ONE_THIRD)
+                .setDialogStyle(STYLE_TWO_THIRD)
                 .setOutCancelable(true)
                 .setDialogPosition(POS_BOTTOM)
                 .setDialogTitle(SimpleTitle.get("简单内容对话框"))
@@ -346,7 +346,7 @@ class DialogActivity : CommonActivity<EmptyViewModel, ActivityDialogBinding>() {
         }
         binding.btnRateIntro.onDebouncedClick {
             RatingManager.marketTitle = "测试修改标题"
-            RatingManager.rateApp({ toast("跳转到反馈页") }, { toast("跳转到应用市场评分") }, supportFragmentManager)
+            RatingManager.rateApp(STYLE_WRAP, { toast("跳转到反馈页") }, { toast("跳转到应用市场评分") }, supportFragmentManager)
         }
         binding.btnSimpleGrid.onDebouncedClick {
             BeautyDialog.Builder()

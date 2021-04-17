@@ -22,7 +22,7 @@
 
             <me.shouheng.uix.widget.button.NormalButton
                 android:id="@+id/btn_no_bg_one_third"
-                android:text="无背景对话框 | ONE THIRD"
+                android:text="无背景对话框 | TWO THIRD"
                 style="@style/MenuItemButton"/>
 
             <me.shouheng.uix.widget.button.NormalButton
@@ -42,12 +42,12 @@
 
             <me.shouheng.uix.widget.button.NormalButton
                 android:id="@+id/btn_editor_normal"
-                android:text="编辑对话框 [边角4dp|内容无限制]"
+                android:text="编辑对话框 [边角4dp|内容无限制] | HALF"
                 style="@style/MenuItemButton"/>
 
             <me.shouheng.uix.widget.button.NormalButton
                 android:id="@+id/btn_editor_numeric"
-                android:text="编辑对话框 [数字|单行|长度10]"
+                android:text="编辑对话框 [数字|单行|长度10] | TWO THIRD"
                 style="@style/MenuItemButton"/>
 
             <me.shouheng.uix.widget.button.NormalButton

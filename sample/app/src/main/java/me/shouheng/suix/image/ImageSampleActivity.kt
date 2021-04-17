@@ -72,7 +72,7 @@ class ImageSampleActivity : CommonActivity<EmptyViewModel, ActivityMatisseSample
                 .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                 // 如果指定了 gridExpectedSize，将优先使用 gridExpectedSize 而不是 spanCount
                 .spanCount(4)
-                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+//                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                 .thumbnailScale(0.85f)
                 // .imageEngine(new GlideEngine())  // for glide-V3
                 .imageEngine(Glide4Engine())    // for glide-V4

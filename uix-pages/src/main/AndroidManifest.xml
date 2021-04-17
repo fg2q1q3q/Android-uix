@@ -9,13 +9,11 @@
             android:name=".image.GalleryActivity"
             android:theme="@style/PictureViewTheme"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".CrashReportActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:process=":crash"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 

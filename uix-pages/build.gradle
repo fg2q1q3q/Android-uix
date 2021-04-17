@@ -39,7 +39,7 @@ dependencies {
     implementation 'com.github.Shouheng88:icamera:0.1.5-beta'
     // https://github.com/romandanylyk/PageIndicatorView
     api 'com.romandanylyk:pageindicatorview:1.0.2'
-    api 'com.github.Shouheng88:matisse:1.2.2'
+    api 'com.github.Shouheng88:matisse:1.2.3'
     api "com.github.Shouheng88:uix-widget:${rootProject.ext.releaseVersion}"
 //    api project(path: ':uix-widget')
 }

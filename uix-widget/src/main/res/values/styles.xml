@@ -12,6 +12,14 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+    <style name="BeautyDialogHalf" parent="BeautyDialog">
+        <item name="android:windowMinWidthMajor">50%</item>
+        <item name="android:windowMinWidthMinor">50%</item>
+    </style>
+    <style name="BeautyDialogOneThird" parent="BeautyDialog">
+        <item name="android:windowMinWidthMajor">33%</item>
+        <item name="android:windowMinWidthMinor">33%</item>
+    </style>
 
     <style name="DialogTopAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/uix_dialog_translate_enter_top</item>

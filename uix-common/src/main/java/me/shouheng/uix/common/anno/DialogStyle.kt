@@ -1,6 +1,7 @@
 package me.shouheng.uix.common.anno
 
 import android.support.annotation.IntDef
+import me.shouheng.uix.common.R
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_MATCH
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 
@@ -17,5 +18,9 @@ annotation class DialogStyle {
         const val STYLE_WRAP                        = 0
         /** 对话框风格：对话框宽度填充屏幕 */
         const val STYLE_MATCH                       = 1
+        /** Half of window */
+        const val STYLE_HALF                        = 2
+        /** One third of window */
+        const val STYLE_ONE_THIRD                   = 3
     }
 }

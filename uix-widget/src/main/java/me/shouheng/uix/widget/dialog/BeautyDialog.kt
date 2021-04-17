@@ -19,7 +19,9 @@ import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_BOTTOM
 import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_CENTER
 import me.shouheng.uix.common.anno.DialogPosition.Companion.POS_TOP
 import me.shouheng.uix.common.anno.DialogStyle
+import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_HALF
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_MATCH
+import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_ONE_THIRD
 import me.shouheng.uix.common.anno.DialogStyle.Companion.STYLE_WRAP
 import me.shouheng.uix.common.utils.UImage
 import me.shouheng.uix.common.utils.URes
@@ -81,7 +83,12 @@ class BeautyDialog : DialogFragment() {
         private set
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val theme = if (dialogStyle == STYLE_WRAP) R.style.BeautyDialogWrap else R.style.BeautyDialog
+        val theme = when(dialogStyle) {
+            STYLE_WRAP -> R.style.BeautyDialogWrap
+            STYLE_HALF -> R.style.BeautyDialogHalf
+            STYLE_ONE_THIRD -> R.style.BeautyDialogOneThird
+            else -> R.style.BeautyDialog
+        }
         val dialog = AlertDialog.Builder(context!!, theme).create()
 
         val content = View.inflate(context, R.layout.uix_dialog_layout, null)

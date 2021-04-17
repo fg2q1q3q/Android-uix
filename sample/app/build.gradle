@@ -36,7 +36,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:multidex:1.0.3"
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation "me.shouheng.vmlib:vmlib-core:1.5.5"
+    implementation ("com.github.Shouheng88:vmlib:1.6.2") {
+        exclude group: 'com.github.Shouheng88', module: "uix-core"
+    }
     implementation "com.github.Shouheng88:utils-ktx:2.1.7"
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -50,5 +52,8 @@ dependencies {
     // uix
     implementation project(path: ':uix-widget')
     implementation project(path: ':uix-pages')
-    implementation project(path: ':uix-image')
+//    implementation project(path: ':uix-image')
+    implementation ("com.github.Shouheng88:uix-image:${rootProject.ext.releaseVersion}") {
+        exclude group: 'com.github.Shouheng88'
+    }
 }

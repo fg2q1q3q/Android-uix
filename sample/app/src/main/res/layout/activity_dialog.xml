@@ -12,7 +12,17 @@
 
             <me.shouheng.uix.widget.button.NormalButton
                 android:id="@+id/btn_no_bg"
-                android:text="无背景对话框"
+                android:text="无背景对话框 | WRAP"
+                style="@style/MenuItemButton"/>
+
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_no_bg_half"
+                android:text="无背景对话框 | HALF"
+                style="@style/MenuItemButton"/>
+
+            <me.shouheng.uix.widget.button.NormalButton
+                android:id="@+id/btn_no_bg_one_third"
+                android:text="无背景对话框 | ONE THIRD"
                 style="@style/MenuItemButton"/>
 
             <me.shouheng.uix.widget.button.NormalButton

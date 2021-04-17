@@ -3,11 +3,13 @@ package me.shouheng.uix.pages.image
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.RequiresPermission
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
@@ -18,10 +20,7 @@ import me.shouheng.icamera.CameraView
 import me.shouheng.icamera.enums.CameraFace
 import me.shouheng.icamera.enums.FlashMode
 import me.shouheng.icamera.enums.MediaType
-import me.shouheng.icamera.listener.CameraCloseListener
-import me.shouheng.icamera.listener.CameraOpenListener
-import me.shouheng.icamera.listener.CameraPhotoListener
-import me.shouheng.icamera.listener.CameraVideoListener
+import me.shouheng.icamera.listener.*
 import me.shouheng.uix.common.anno.BottomButtonPosition.Companion.isRight
 import me.shouheng.uix.common.anno.DialogStyle
 import me.shouheng.uix.common.bean.TextStyleBean
@@ -35,6 +34,7 @@ import me.shouheng.uix.widget.dialog.footer.SimpleFooter
 import me.shouheng.utils.app.ActivityUtils
 import me.shouheng.utils.constant.ActivityDirection
 import me.shouheng.utils.ktx.*
+import me.shouheng.utils.stability.L
 import me.shouheng.utils.store.SPUtils
 import me.shouheng.utils.ui.ImageUtils
 import java.io.File
@@ -86,7 +86,8 @@ class TakePhotoActivity : AppCompatActivity() {
                 }
         )
         ivFlash.gone(!showFlash)
-        f<AppCompatImageView>(R.id.iv_switch).gone(!showSwitch)
+        val ivSwitch = f<AppCompatImageView>(R.id.iv_switch)
+        ivSwitch.gone(!showSwitch)
 
         hLines = f(R.id.fl_h_line)
         vLines = f(R.id.fl_v_line)
@@ -101,6 +102,18 @@ class TakePhotoActivity : AppCompatActivity() {
         ivAlbum.gone(!showAlbum)
         ivClose = f(R.id.iv_close)
         tvNum = f(R.id.tv_num)
+
+        val ivSetting = f<View>(R.id.iv_setting)
+        val flAlbum = f<View>(R.id.fl_album)
+        cv.addOrientationChangedListener(object : OnOrientationChangedListener {
+            override fun onOrientationChanged(degree: Int) {
+                ViewCompat.setRotation(ivFlash, degree.toFloat())
+                ViewCompat.setRotation(ivSwitch, degree.toFloat())
+                ViewCompat.setRotation(ivSetting, degree.toFloat())
+                ViewCompat.setRotation(flAlbum, degree.toFloat())
+                ViewCompat.setRotation(ivClose, degree.toFloat())
+            }
+        })
     }
 
     fun onShot(v: View) {
@@ -279,6 +292,11 @@ class TakePhotoActivity : AppCompatActivity() {
                 ULog.d("closeCamera : $cameraFace")
             }
         })
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        L.d("CameraActivity", "onConfigurationChanged")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

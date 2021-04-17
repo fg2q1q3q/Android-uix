@@ -4,6 +4,7 @@
 
     <application>
         <activity android:name=".image.TakePhotoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/PictureViewTheme" />
         <activity
             android:name=".image.GalleryActivity"

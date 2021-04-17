@@ -180,6 +180,7 @@
         android:layout_height="wrap_content">
 
         <FrameLayout
+            android:id="@+id/fl_album"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content">

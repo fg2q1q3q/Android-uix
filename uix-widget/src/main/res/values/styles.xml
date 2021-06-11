@@ -5,8 +5,8 @@
         <item name="android:windowNoTitle">true</item>
         <!-- 背景透明 -->
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowMinWidthMajor">100%</item>
-        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="android:windowMinWidthMajor">@dimen/common_dialog_max_width_minor</item>
+        <item name="android:windowMinWidthMinor">@dimen/common_dialog_min_width_minor</item>
     </style>
     <style name="BeautyDialogWrap" parent="Theme.AppCompat.Dialog">
         <item name="android:windowNoTitle">true</item>

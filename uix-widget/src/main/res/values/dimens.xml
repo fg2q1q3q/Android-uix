@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="common_dialog_min_width_minor" type="dimen">100%</item>
+    <item name="common_dialog_max_width_minor" type="dimen">100%</item>
+</resources>
